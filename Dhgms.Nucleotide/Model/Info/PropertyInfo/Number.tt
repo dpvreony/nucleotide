@@ -1,0 +1,300 @@
+﻿<#@ template language="C#" #>
+<#@ output extension=".cs" #>
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Number1.cs" company="DHGMS Solutions">
+//   Licensed under GNU General Public License version 2 (GPLv2)
+// </copyright>
+// <summary>
+//   Property Information classes
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+<#
+ClassInfo[] classes =
+{
+    new ClassInfo(
+        "ClrChar",
+        "char",
+        "Char",
+        "Dhgms.DataManager.Model.SearchFilter.Char",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "ClrDecimal",
+        "decimal",
+        "Decimal",
+        "Dhgms.DataManager.Model.SearchFilter.Decimal",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "ClrDouble",
+        "double",
+        "Double",
+        "Dhgms.DataManager.Model.SearchFilter.Double",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "ClrSingle",
+        "float",
+        "Float",
+        "Dhgms.DataManager.Model.SearchFilter.Single",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "Integer16",
+        "short",
+        "Int16",
+        "Dhgms.DataManager.Model.SearchFilter.Integer16",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "Integer32",
+        "int",
+        "Int32",
+        "Dhgms.DataManager.Model.SearchFilter.Integer32",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "Integer64",
+        "long",
+        "Int64",
+        "Dhgms.DataManager.Model.SearchFilter.Integer64",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "UnsignedInteger8",
+        "byte",
+        "UInt8",
+        "Dhgms.DataManager.Model.SearchFilter.UnsignedInteger8",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "UnsignedInteger16",
+        "ushort",
+        "UInt16",
+        "Dhgms.DataManager.Model.SearchFilter.UnsignedInteger16",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "UnsignedInteger32",
+        "uint",
+        "UInt32",
+        "Dhgms.DataManager.Model.SearchFilter.UnsignedInteger32",
+        false,
+        "0"
+        ),
+    new ClassInfo(
+        "UnsignedInteger64",
+        "ulong",
+        "UInt64",
+        "Dhgms.DataManager.Model.SearchFilter.UnsignedInteger64",
+        false,
+        "0"
+        )
+};
+#>
+
+namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+{
+<#
+bool initialClass = true;
+foreach(ClassInfo ci in classes)
+{
+	if (initialClass)
+	{
+		initialClass = false;
+	}
+	else
+	{
+	#>
+
+<#
+	}
+#>
+    /// <summary>
+    /// Property Information for <#=ci.ClassName#>
+    /// </summary>
+    public class <#=ci.ClassName#>
+        : Base
+    {
+        #region fields
+        /// <summary>
+        /// The minimum allowed value, if any
+        /// </summary>
+        private readonly <#=ci.NetType#>? minimumValue;
+
+        /// <summary>
+        /// The maximum allowed value, if any
+        /// </summary>
+        private readonly <#=ci.NetType#>? maximumValue;
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<#=ci.ClassName#>"/> class. 
+        /// </summary>
+        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="name">Name of the field</param>
+        /// <param name="description">Description for the field, used for commenting</param>
+        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="minimumValue">The minimum acceptable value for this property</param>
+        /// <param name="maximumValue">The maximum acceptable value for this property</param>
+        /// <param name="isKey">
+        /// Whether the property is the primary key
+        /// </param>
+        /// <param name="alternativeDatabaseColumnName">
+        /// Name of the database column name, if it's different from the .NET property name.
+        /// </param>
+        public <#=ci.ClassName#>(
+            CollectionType collection,
+            string name,
+            string description,
+            bool optional,
+            <#=ci.NetType#>? minimumValue,
+            <#=ci.NetType#>? maximumValue,
+            bool isKey,
+            string alternativeDatabaseColumnName)
+            : base(
+                collection,
+                name,
+                description,
+                optional,
+                "<#=ci.NetType#>",
+                "<#=ci.SearchFilterType#>",
+                "<#=ci.SqlReaderDataType#>",
+                <#=ci.RequiresSqlMapping.ToString().ToLower()#>,
+                "<#=ci.DefaultValue#>",
+                false,
+                isKey,
+                true,
+                typeof(<#=ci.NetType#>),
+                alternativeDatabaseColumnName)
+        {
+            this.minimumValue = minimumValue;
+            this.maximumValue = maximumValue;
+        }
+
+        /// <summary>
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns></returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Whether to generate an auto property, or a property that uses a field
+        /// </summary>
+        public override bool GenerateAutoProperty
+        {
+            get
+            {
+                return this.maximumValue == null && this.minimumValue == null;
+            }
+        }
+
+        /// <summary>
+        /// Whether the type is disposable
+        /// </summary>
+        public override bool DisposableType
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the code used for outputting a value as part of a string array
+        /// </summary>
+        public override string ToStringArrayCode
+        {
+            get
+            {
+                return "ToString(System.Globalization.CultureInfo.InvariantCulture)";
+            }
+        }
+
+        /// <summary>
+        /// Gets the mutator code for a poperty
+        /// </summary>
+        /// <returns>C# code</returns>
+        public override string GetMutator()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            sb.AppendLine("            set");
+            sb.AppendLine("        {");
+
+            if (this.minimumValue != null)
+            {
+                sb.Append("            if(");
+                if (Optional)
+                {
+                    sb.Append("value != null && ");
+                }
+
+                sb.AppendLine("value < " + this.minimumValue + ")");
+                sb.AppendLine("            {");
+                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLow<#=ci.ClassName#>Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+                sb.AppendLine("            }");
+            }
+
+            if (this.maximumValue != null)
+            {
+                sb.AppendLine("            if(value > " + this.maximumValue + ")");
+                sb.AppendLine("            {");
+                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHigh<#=ci.ClassName#>Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+                sb.AppendLine("            }");
+            }
+
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+
+            sb.AppendLine("        }");
+            return sb.ToString();
+        }
+    }
+<#
+}
+#>
+}
+<#+
+class ClassInfo
+{
+    public String ClassName;
+    public String NetType;
+    public String SqlReaderDataType;
+    public String SearchFilterType;
+    public bool RequiresSqlMapping;
+    public String DefaultValue;
+
+    public ClassInfo(
+        String className,
+        String netType,
+        String sqlReaderDataType,
+        String searchFilterType,
+        bool requiresSqlMapping,
+        String defaultValue
+        )
+    {
+        ClassName = className;
+        NetType = netType;
+        SqlReaderDataType = sqlReaderDataType;
+        SearchFilterType = searchFilterType;
+        RequiresSqlMapping = requiresSqlMapping;
+        DefaultValue = defaultValue;
+    }
+}
+#>
