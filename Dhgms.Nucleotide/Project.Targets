@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Taken from: http://lessisthenewmore.wordpress.com/2010/05/25/source-control-and-t4-msbuild-integration/
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="Microsoft.TextTemplating.targets" />
+    <PropertyGroup>
+    <BeforeTransform>CheckOutFiles</BeforeTransform>
+  </PropertyGroup>
+    <!--
+  ================================================================
+  CheckOutFiles
+  ================================================================
+  Description: Checks out the files to be transformed.
+  -->
+  <Target Name="CheckOutFiles" DependsOnTargets="CreateT4ItemLists">
+    <ItemGroup>
+      <FilesToCheckout Include="&quot;%(T4TransformInputs.RootDir)%(T4TransformInputs.Directory)%(T4TransformInputs.LastGenOutput)&quot;" />
+    </ItemGroup>
+    <Exec Command="&quot;$(DevEnvDir)tf.exe&quot; checkout @(FilesToCheckout, ' ')" Condition="@(FilesToCheckout) != '&quot;&quot;'" />
+  </Target>
+</Project>
