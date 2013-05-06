@@ -136,8 +136,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
+    <AfterTransform>PostTransformation;$(AfterTransform)</AfterTransform>
     <TransformOnBuild>true</TransformOnBuild>
+    <OverwriteReadOnlyOuputFiles>true</OverwriteReadOnlyOuputFiles>
   </PropertyGroup>
+  <Target Name="PostTransformation">
+    <!--Condition=" %(GeneratedFiles.ReadOnlyFileOverwritten) == true " -->
+    <!--Need to check the file out -->
+  </Target>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
