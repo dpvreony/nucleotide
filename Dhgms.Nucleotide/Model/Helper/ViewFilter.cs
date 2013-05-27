@@ -45,6 +45,24 @@ namespace Dhgms.Nucleotide.Model.Helper
         }
 
         /// <summary>
+        /// Gets a collection of namespaces used by the code.
+        /// </summary>
+        /// <returns>Collection of namespaces</returns>
+        protected override IEnumerable<string> GetUsingNamespaces()
+        {
+            return new[]
+                       {
+                        "System",
+                        "System.ComponentModel.DataAnnotations",
+                        "System.Diagnostics",
+                        "System.Diagnostics.CodeAnalysis",
+                        "System.Runtime.Serialization",
+                        "System.Xml",
+                        "System.Xml.Linq"
+                       };
+        }
+
+        /// <summary>
         /// Produces code for class specific methods
         /// </summary>
         /// <param name="sb">
