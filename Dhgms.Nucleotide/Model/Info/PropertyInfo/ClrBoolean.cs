@@ -53,7 +53,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 "Boolean", 
                 false, 
                 "false", 
-                true,
+                false,
                 isKey,
                 true,
                 typeof(bool),

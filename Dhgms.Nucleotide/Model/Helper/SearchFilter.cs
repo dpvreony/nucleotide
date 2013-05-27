@@ -8,6 +8,7 @@
 namespace Dhgms.Nucleotide.Model.Helper
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
@@ -40,6 +41,25 @@ namespace Dhgms.Nucleotide.Model.Helper
         protected override string GetClassSuffix()
         {
             return "SearchFilter";
+        }
+
+        /// <summary>
+        /// Gets a collection of namespaces used by the code.
+        /// </summary>
+        /// <returns>Collection of namespaces</returns>
+        protected override IEnumerable<string> GetUsingNamespaces()
+        {
+            return new[]
+                       {
+                        "System",
+                        "System.ComponentModel.DataAnnotations",
+                        "System.Data.Entity",
+                        "System.Diagnostics",
+                        "System.Diagnostics.CodeAnalysis",
+                        "System.Runtime.Serialization",
+                        "System.Xml",
+                        "System.Xml.Linq"
+                       };
         }
 
         /// <summary>
