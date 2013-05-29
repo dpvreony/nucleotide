@@ -145,39 +145,82 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("            set");
-            sb.AppendLine("        {");
+            var tabCount = 3;
+            sb.AppendLine(string.Format("{0}set", Common.GetTabs(tabCount)));
+            sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
+            tabCount++;
 
-            if (this.MinimumLength != null)
+            if (!this.Optional)
             {
-                sb.Append("            if(value ");
-                sb.Append(!this.Optional ? " != null && " : " == null || ");
+#if CODECONTRACTS
+                sb.AppendLine("            Contract.Requires<ArgumentNullException>(string.IsNullOrWhitespace(value), \"value\")");
+#else
+                sb.AppendLine(string.Format("{0}if (string.IsNullOrWhitespace(value))", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
 
-                sb.AppendLine("value.Length < " + this.MinimumLength + ")");
-                sb.AppendLine("            {");
-                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine(
-                    "                throw new Dhgms.DataManager.Model.Exception.StringTooShortException(" + this.MinimumLength
-                    + ", value.Length);");
-                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
-                sb.AppendLine("            }");
+                tabCount++;
+                sb.AppendLine(string.Format("{0}throw new ArgumentNullException(\"value\");", Common.GetTabs(tabCount)));
+                tabCount--;
+
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
+#endif
+            }
+            else if (this.MinimumLength != null || this.MaximumLength != null)
+            {
+                sb.AppendLine(string.Format("{0}if (value != null)", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
+                tabCount++;
             }
 
-            if (this.MaximumLength != null)
+            if (this.MinimumLength != null || this.MaximumLength != null)
             {
-                sb.AppendLine("            if(value != null && value.Length > " + this.MaximumLength + ")");
-                sb.AppendLine("            {");
-                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine(
-                    "                throw new Dhgms.DataManager.Model.Exception.StringTooLongException(" + this.MaximumLength
-                    + ", value.Length);");
-                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
-                sb.AppendLine("            }");
+                sb.AppendLine();
             }
 
-            sb.AppendLine("            this." + Common.GetVariableName(this.Name) + " = value;");
+            if (this.MinimumLength.HasValue)
+            {
+                sb.AppendLine(string.Format("{0}if (value.Length < {1})", Common.GetTabs(tabCount), this.MinimumLength));
+                sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
 
-            sb.AppendLine("        }");
+                tabCount++;
+                sb.AppendLine(string.Format("{0}// ReSharper disable RedundantNameQualifier", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}throw new Dhgms.DataManager.Model.Exception.StringTooShortException({1}, value.Length);", Common.GetTabs(tabCount), this.MinimumLength.Value));
+                sb.AppendLine(string.Format("{0}// ReSharper restore RedundantNameQualifier", Common.GetTabs(tabCount)));
+                tabCount--;
+
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
+            }
+
+            if (this.MinimumLength != null && this.MaximumLength != null)
+            {
+                sb.AppendLine();
+            }
+
+            if (this.MaximumLength.HasValue)
+            {
+                sb.AppendLine(string.Format("{0}if (value.Length > {1})", Common.GetTabs(tabCount), this.MaximumLength));
+                sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
+
+                tabCount++;
+                sb.AppendLine(string.Format("{0}// ReSharper disable RedundantNameQualifier", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}throw new Dhgms.DataManager.Model.Exception.StringTooLongException({1}, value.Length);", Common.GetTabs(tabCount), this.MaximumLength.Value));
+                sb.AppendLine(string.Format("{0}// ReSharper restore RedundantNameQualifier", Common.GetTabs(tabCount)));
+                tabCount--;
+
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
+            }
+
+            if (this.MinimumLength != null || this.MaximumLength != null)
+            {
+                tabCount--;
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
+            }
+
+            sb.AppendLine();
+            sb.AppendLine(string.Format("{0}this.{1} = value;", Common.GetTabs(tabCount), Common.GetVariableName(this.Name)));
+
+            tabCount--;
+            sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
             return sb.ToString();
         }
 
@@ -194,15 +237,15 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
 
             if (this.MinimumLength != null && this.MaximumLength == null)
             {
-                return "[MinLength(" + this.MinimumLength + ", ErrorMessage=\"Must be at least " + this.MinimumLength + " characters in length\")]";
+                return string.Format("{0}[MinLength({1}, ErrorMessage = \"Must be at least {1} characters in length\")]", Common.GetTabs(2), this.MinimumLength);
             }
 
             if (this.MinimumLength == null && this.MaximumLength != null)
             {
-                return "[MaxLength(" + this.MaximumLength + ", ErrorMessage=\"Must be " + this.MaximumLength + " or less characters in length\")]";
+                return string.Format("{0}[MaxLength({1}, ErrorMessage = \"Must be {1} or less characters in length\")]", Common.GetTabs(2), this.MaximumLength);
             }
 
-            return "[MinLength(" + this.MinimumLength + ", ErrorMessage=\"Must be between " + this.MinimumLength + " and" + this.MaximumLength + " characters in length\"), MaxLength(" + this.MaximumLength + ", ErrorMessage=\"Must be between " + this.MinimumLength + " and" + this.MaximumLength + " characters in length\")]";
+            return string.Format("{0}[MinLength({1}, ErrorMessage = \"Must be between {1} and {2} characters in length\"), MaxLength({2}, ErrorMessage = \"Must be between {1} and {2}  characters in length\")]", Common.GetTabs(2), this.MinimumLength, this.MaximumLength);
         }
 
         /// <summary>

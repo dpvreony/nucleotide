@@ -364,7 +364,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                         sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                     }
 
-                    sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + " = checkResult != 0;");
+                    sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                     sb.AppendLine(string.Empty);
 
                     if (!checkResultDeclared)
@@ -393,7 +393,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                     sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                 }
 
-                sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + " = checkResult != 0;");
+                sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                 sb.AppendLine(string.Empty);
 
                 if (!checkResultDeclared)
@@ -408,25 +408,32 @@ namespace Dhgms.Nucleotide.Model.Helper
                 + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null) + "." + className + "Difference(");
             sb.AppendLine("// ReSharper restore RedundantNameQualifier");
 
-            int counter = 1;
+            var counter = 0;
             if (baseClassProperties != null && baseClassProperties.Count > 0)
             {
-                sb.AppendLine("                " + Common.GetVariableName(baseClassProperties[0].Name));
-
                 while (counter < baseClassProperties.Count)
                 {
-                    sb.AppendLine("                ," + Common.GetVariableName(baseClassProperties[counter].Name));
+                    sb.Append("                " + Common.GetVariableName(baseClassProperties[counter].Name + "Different"));
+
+                    if (properties.Count > 0)
+                    {
+                        sb.AppendLine(",");
+                    }
+                    else
+                    {
+                        sb.AppendLine(counter < baseClassProperties.Count - 1 ? "," : ")");
+                    }
+
                     counter++;
                 }
             }
 
             counter = 1;
-            string comma = (baseClassProperties != null && baseClassProperties.Count > 0) ? "," : null;
 
-            sb.AppendLine("                " + comma + Common.GetVariableName(properties[0].Name));
             while (counter < properties.Count)
             {
-                sb.AppendLine("                ," + Common.GetVariableName(properties[counter].Name));
+                sb.Append("                " + Common.GetVariableName(properties[counter].Name + "Different"));
+                sb.AppendLine(counter < properties.Count - 1 ? "," : ")");
                 counter++;
             }
 

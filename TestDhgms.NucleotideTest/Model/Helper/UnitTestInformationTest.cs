@@ -147,9 +147,15 @@ namespace TestDhgms.NucleotideTest.Model.Helper
                     null)
             };
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public class BaseTest
         {
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <exception cref="Exception"></exception>
             [TestFixtureSetUp]
             public static void ClassInit()
             {
@@ -173,9 +179,15 @@ namespace TestDhgms.NucleotideTest.Model.Helper
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TestFixture]
         public class GenerateMethod : BaseTest
         {
+            /// <summary>
+            /// 
+            /// </summary>
             [Test]
             public void ShouldSucceed()
             {
