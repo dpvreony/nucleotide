@@ -154,7 +154,6 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             this.DoFieldsRegion(sb, properties);
             this.DoConstructorMethod(sb, className, properties, baseClassName, baseClassProperties);
-            this.DoDisposeMethod(sb, properties, baseClassName);
             this.DoPropertiesRegion(sb, properties, baseClassProperties);
             this.DoIComparableRegion(sb, className, properties, baseClassName, baseClassProperties);
 
@@ -162,6 +161,8 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             this.DoOurMethodsRegion(
                 sb, mainNamespaceName, subNamespace, className, properties, baseClassName, baseClassProperties);
+
+            this.DoDisposeMethod(sb, properties, baseClassName);
 
             sb.AppendLine("    }");
             sb.AppendLine("}");
@@ -887,7 +888,7 @@ namespace Dhgms.Nucleotide.Model.Helper
 
                 // WCF Data Member Information
                 string required = "IsRequired = " + (!pi.Optional).ToString().ToLower();
-                string order = ",Order = " + i++;
+                string order = ", Order = " + i++;
 
                 string dataMemberAttributes = "(" + required + order + ")";
                 sb.AppendLine("        [DataMember" + dataMemberAttributes + "]");
@@ -898,7 +899,11 @@ namespace Dhgms.Nucleotide.Model.Helper
                     sb.AppendLine("        [Required]");
                 }
 
-                sb.AppendLine(pi.GetDataAnnotations());
+                var propertySpecificAnnotations = pi.GetDataAnnotations();
+                if (!string.IsNullOrWhiteSpace(propertySpecificAnnotations))
+                {
+                    sb.AppendLine(propertySpecificAnnotations);
+                }
 
                 sb.AppendLine("        public " + this.GetPropertyType(pi) + " " + pi.Name);
                 sb.AppendLine("        {");

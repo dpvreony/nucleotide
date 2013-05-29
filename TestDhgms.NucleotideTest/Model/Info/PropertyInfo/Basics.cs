@@ -21,9 +21,6 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Method checks to see if unit tests can take place
         /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
         [TestFixtureSetUp]
         public static void ClassInit()
         {
