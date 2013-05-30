@@ -428,7 +428,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 }
             }
 
-            counter = 1;
+            counter = 0;
 
             while (counter < properties.Count)
             {
