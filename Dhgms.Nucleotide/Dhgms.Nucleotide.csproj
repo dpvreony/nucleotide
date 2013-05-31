@@ -148,7 +148,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not $(ConfigurationName) == Debug nuget pack $(ProjectPath) -Prop Configuration=Release -Symbols</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
     <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
