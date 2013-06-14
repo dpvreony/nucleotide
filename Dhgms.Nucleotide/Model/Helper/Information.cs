@@ -421,7 +421,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                     }
                     else
                     {
-                        sb.AppendLine(counter < baseClassProperties.Count - 1 ? "," : ")");
+                        sb.AppendLine(counter < baseClassProperties.Count - 1 ? "," : ");");
                     }
 
                     counter++;
@@ -433,11 +433,9 @@ namespace Dhgms.Nucleotide.Model.Helper
             while (counter < properties.Count)
             {
                 sb.Append("                " + Common.GetVariableName(properties[counter].Name + "Different"));
-                sb.AppendLine(counter < properties.Count - 1 ? "," : ")");
+                sb.AppendLine(counter < properties.Count - 1 ? "," : ");");
                 counter++;
             }
-
-            sb.AppendLine("                );");
             sb.AppendLine("        }");
             sb.AppendLine(string.Empty);
         }

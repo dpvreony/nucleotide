@@ -108,6 +108,7 @@
       <LastGenOutput>Number1.cs</LastGenOutput>
     </None>
     <Compile Include="Model\Info\PropertyInfo\ClrDateTime.cs" />
+    <Compile Include="Model\Info\PropertyInfo\ClrGuid.cs" />
     <Compile Include="Model\Info\PropertyInfo\Number1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

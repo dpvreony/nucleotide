@@ -155,7 +155,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
 #if CODECONTRACTS
                 sb.AppendLine("            Contract.Requires<ArgumentNullException>(string.IsNullOrWhitespace(value), \"value\")");
 #else
-                sb.AppendLine(string.Format("{0}if (string.IsNullOrWhitespace(value))", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}if (string.IsNullOrWhiteSpace(value))", Common.GetTabs(tabCount)));
                 sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
 
                 tabCount++;
@@ -210,7 +210,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
             }
 
-            if (this.MinimumLength != null || this.MaximumLength != null)
+            if (this.Optional && (this.MinimumLength != null || this.MaximumLength != null))
             {
                 tabCount--;
                 sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
