@@ -664,7 +664,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             {
                 if (this.NullableType)
                 {
-                    sb.AppendLine("            if (" + this.Name + " != null)");
+                    if (!checkResultDeclared)
+                    {
+                        sb.Append("var checkResult = 0;");
+                    }
+
+                    sb.AppendLine("            if (this." + this.Name + " != null)");
                     sb.AppendLine("            {");
                     sb.AppendLine("                if (other." + this.Name + " == null)");
                     sb.AppendLine("                {");
@@ -673,7 +678,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                     sb.AppendLine("                else");
                     sb.AppendLine("                {");
                     sb.AppendLine(
-                        "                    checkResult = this." + this.Name + ".CompareTo(other." + this.Name
+                        "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name
                         + ");");
                     sb.AppendLine("                }");
                     sb.AppendLine("            }");
@@ -695,46 +700,13 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             }
             else
             {
-                if (this.NullableType)
+                sb.Append("            ");
+                if (!checkResultDeclared)
                 {
-                    sb.AppendLine("            if (" + this.Name + " != null)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                if (other." + this.Name + " == null)");
-                    sb.AppendLine("                {");
-                    sb.AppendLine("                    checkResult = -1;");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("                else");
-                    sb.AppendLine("                {");
-                    sb.AppendLine(
-                        "                    checkResult = this." + this.Name + ".CompareTo(other." + this.Name
-                        + ");");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("            }");
-                    sb.AppendLine("            else if (other." + this.Name + " != null)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                checkResult = 1;");
-                    sb.AppendLine("            }");
+                    sb.Append("var ");
                 }
-                else
-                {
-                    sb.AppendLine("            if (" + this.Name + ".HasValue)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                if (!other." + this.Name + ".HasValue)");
-                    sb.AppendLine("                {");
-                    sb.AppendLine("                    checkResult = -1;");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("                else");
-                    sb.AppendLine("                {");
-                    sb.AppendLine(
-                        "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name
-                        + ".Value);");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("            }");
-                    sb.AppendLine("            else if (other." + this.Name + ".HasValue)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                checkResult = 1;");
-                    sb.AppendLine("            }");
-                }
+
+                sb.AppendLine("checkResult = this." + this.Name + ".CompareTo(other." + this.Name + ");");
             }
 
             return sb.ToString();
