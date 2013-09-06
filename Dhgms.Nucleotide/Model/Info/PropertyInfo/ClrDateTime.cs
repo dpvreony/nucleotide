@@ -60,7 +60,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 "DateTime",
                 false,
                 "System.DateTime.MinValue",
-                true,
+                false,
                 isKey,
                 true,
                 typeof(System.DateTime),

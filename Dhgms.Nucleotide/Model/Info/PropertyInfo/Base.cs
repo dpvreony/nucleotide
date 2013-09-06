@@ -660,9 +660,9 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         {
             var sb = new StringBuilder();
 
-            if (!this.Optional)
+            if (this.Optional)
             {
-                if (this.NullableType)
+                if (!this.NullableType)
                 {
                     if (!checkResultDeclared)
                     {
@@ -678,8 +678,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                     sb.AppendLine("                else");
                     sb.AppendLine("                {");
                     sb.AppendLine(
-                        "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name
-                        + ");");
+                        "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name + ".Value);");
                     sb.AppendLine("                }");
                     sb.AppendLine("            }");
                     sb.AppendLine("            else if (other." + this.Name + " != null)");

@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 "Guid", 
                 false, 
                 "Guid.Empty", 
-                true,
+                false,
                 isKey,
                 false,
                 typeof(Guid),
@@ -75,7 +75,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         {
             get
             {
-                return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
+                return "ToString().ToLower()";
             }
         }
 

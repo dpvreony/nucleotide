@@ -710,11 +710,6 @@ namespace Dhgms.Nucleotide.Model.Helper
 
                 checkResultDeclared = true;
             }
-            else
-            {
-                sb.AppendLine("        var checkResult = 0;");
-                checkResultDeclared = true;
-            }
 
             this.OnDoCompareToProperties(sb, properties, baseClassProperties, checkResultDeclared);
 
