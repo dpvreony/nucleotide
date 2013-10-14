@@ -11,6 +11,7 @@
 namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
@@ -542,8 +543,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                         return "new System.Collections.Generic.List<" + this.NetDataType + ">()";
                     case CollectionType.GenericLinkedList:
                         return "new System.Collections.Generic.LinkedList<" + this.NetDataType + ">()";
-                    default:
+                    case CollectionType.Array:
+                        return "new " + this.NetDataType + "[]()";
+                    case CollectionType.None:
                         return this.defaultValue;
+                    default:
+                        throw new InvalidEnumArgumentException("CollectionType not recognised");
                 }
             }
 
@@ -643,6 +648,11 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         /// </summary>
         public string AlternativeDatabaseColumnName { get; set; }
 
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public abstract string RandomUnitTestValue { get; }
+
         #endregion
 
         #region Public Methods and Operators
@@ -725,8 +735,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                     return "System.Collections.Generic.List<" + this.NetDataType + ">";
                 case CollectionType.GenericLinkedList:
                     return "System.Collections.Generic.LinkedList<" + this.NetDataType + ">";
-                default:
+                case CollectionType.Array:
+                    return this.NetDataType + "[]";
+                case CollectionType.None:
                     return this.NetDataType;
+                default:
+                    throw new InvalidEnumArgumentException("ColletionType not matched.");
             }
         }
 

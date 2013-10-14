@@ -107,6 +107,13 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             return null;
         }
 
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                return new System.Random().Next(1) == 1 ? "true" : "false";
+            }
+        }
         #endregion
     }
 }

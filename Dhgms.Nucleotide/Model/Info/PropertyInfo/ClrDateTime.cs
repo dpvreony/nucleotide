@@ -162,5 +162,17 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 return false;
             }
         }
+
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > System.DateTime.MinValue ? this.minimumValue.Value : System.DateTime.MinValue;
+                var max32bitDate = new System.DateTime(int.MaxValue);
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32bitDate ? this.maximumValue.Value : max32bitDate;
+                var randomTicks = new System.DateTime(new System.Random().Next((int)minValue.Ticks, (int)maxValue.Ticks));
+                return string.Format("new System.DateTime({0})", randomTicks);
+            }
+        }
     }
 }

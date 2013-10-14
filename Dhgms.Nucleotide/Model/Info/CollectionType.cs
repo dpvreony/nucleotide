@@ -25,6 +25,11 @@ namespace Dhgms.Nucleotide.Model.Info
         /// <summary>
         /// A generic linked list is used
         /// </summary>
-        GenericLinkedList
-    }
+        GenericLinkedList,
+
+        /// <summary>
+        /// An array is used
+        /// </summary>
+        Array
+}
 }
