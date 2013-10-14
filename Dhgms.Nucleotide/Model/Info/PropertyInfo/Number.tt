@@ -12,6 +12,14 @@
 ClassInfo[] classes =
 {
     new ClassInfo(
+        "ClrByte",
+        "byte",
+        "Byte",
+        "Dhgms.DataManager.Model.SearchFilter.Byte",
+        false,
+        "0"
+        ),
+    new ClassInfo(
         "ClrChar",
         "char",
         "Char",

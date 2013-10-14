@@ -10,6 +10,154 @@
 namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
 {
     /// <summary>
+    /// Property Information for ClrByte
+    /// </summary>
+    public class ClrByte
+        : Base
+    {
+        #region fields
+        /// <summary>
+        /// The minimum allowed value, if any
+        /// </summary>
+        private readonly byte? minimumValue;
+
+        /// <summary>
+        /// The maximum allowed value, if any
+        /// </summary>
+        private readonly byte? maximumValue;
+        #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClrByte"/> class. 
+        /// </summary>
+        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="name">Name of the field</param>
+        /// <param name="description">Description for the field, used for commenting</param>
+        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="minimumValue">The minimum acceptable value for this property</param>
+        /// <param name="maximumValue">The maximum acceptable value for this property</param>
+        /// <param name="isKey">
+        /// Whether the property is the primary key
+        /// </param>
+        /// <param name="alternativeDatabaseColumnName">
+        /// Name of the database column name, if it's different from the .NET property name.
+        /// </param>
+        public ClrByte(
+            CollectionType collection,
+            string name,
+            string description,
+            bool optional,
+            byte? minimumValue,
+            byte? maximumValue,
+            bool isKey,
+            string alternativeDatabaseColumnName)
+            : base(
+                collection,
+                name,
+                description,
+                optional,
+                "byte",
+                "Dhgms.DataManager.Model.SearchFilter.Byte",
+                "Byte",
+                false,
+                "0",
+                false,
+                isKey,
+                true,
+                typeof(byte),
+                alternativeDatabaseColumnName)
+        {
+            this.minimumValue = minimumValue;
+            this.maximumValue = maximumValue;
+        }
+
+        /// <summary>
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns></returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Whether to generate an auto property, or a property that uses a field
+        /// </summary>
+        public override bool GenerateAutoProperty
+        {
+            get
+            {
+                return this.maximumValue == null && this.minimumValue == null;
+            }
+        }
+
+        /// <summary>
+        /// Whether the type is disposable
+        /// </summary>
+        public override bool DisposableType
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the code used for outputting a value as part of a string array
+        /// </summary>
+        public override string ToStringArrayCode
+        {
+            get
+            {
+                return "ToString(System.Globalization.CultureInfo.InvariantCulture)";
+            }
+        }
+
+        /// <summary>
+        /// Gets the mutator code for a poperty
+        /// </summary>
+        /// <returns>C# code</returns>
+        public override string GetMutator()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            sb.AppendLine("            set");
+            sb.AppendLine("        {");
+
+            if (this.minimumValue != null)
+            {
+                sb.Append("            if(");
+                if (Optional)
+                {
+                    sb.Append("value != null && ");
+                }
+
+                sb.AppendLine("value < " + this.minimumValue + ")");
+                sb.AppendLine("            {");
+                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrByteException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+                sb.AppendLine("            }");
+            }
+
+            if (this.maximumValue != null)
+            {
+                sb.AppendLine("            if(value > " + this.maximumValue + ")");
+                sb.AppendLine("            {");
+                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrByteException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+                sb.AppendLine("            }");
+            }
+
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+
+            sb.AppendLine("        }");
+            return sb.ToString();
+        }
+    }
+
+    /// <summary>
     /// Property Information for ClrChar
     /// </summary>
     public class ClrChar

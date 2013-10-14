@@ -98,5 +98,13 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         {
             return null;
         }
+
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                return Guid.NewGuid().ToString();
+            }
+        }
     }
 }
