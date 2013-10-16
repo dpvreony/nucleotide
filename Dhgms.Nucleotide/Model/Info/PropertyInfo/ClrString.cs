@@ -6,6 +6,7 @@
 
 namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
 {
+    using System;
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Helper;
@@ -110,6 +111,20 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         #endregion
 
         #region Public Methods and Operators
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minLength = this.MinimumLength.HasValue ? this.MinimumLength.Value : 1;
+                var maxLength = this.MaximumLength.HasValue ? this.MaximumLength.Value : 2048;
+                var length = new Random((int)DateTime.Now.Ticks).Next(minLength, maxLength);
+                return Common.GetRandomString(length);
+            }
+        }
 
         /// <summary>
         /// Gets the C# for carrying out a compare.

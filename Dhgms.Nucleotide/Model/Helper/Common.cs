@@ -18,6 +18,11 @@ namespace Dhgms.Nucleotide.Model.Helper
     /// </summary>
     public static class Common
     {
+        /// <summary>
+        /// The lazy randomizer.
+        /// </summary>
+        private static readonly Lazy<Random> LazyRandomizer = new Lazy<Random>(() => new Random((int)DateTime.Now.Ticks));
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -163,6 +168,23 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
         }
+
+        /// <summary>
+        /// Generate a random string.
+        /// </summary>
+        /// <param name="size">The length of the string.</param>
+        /// <returns>A random string</returns>
+        public static string GetRandomString(int size)
+        {
+            var builder = new StringBuilder();
+            for (var i = 0; i < size; i++)
+            {
+                builder.Append((char)LazyRandomizer.Value.Next(65, 90));
+            }
+
+            return builder.ToString();
+        }
+
 
         #endregion
     }
