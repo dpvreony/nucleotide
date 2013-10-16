@@ -1,5 +1,7 @@
 ﻿<#@ template language="C#" #>
 <#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Number1.cs" company="DHGMS Solutions">
 //   Licensed under GNU General Public License version 2 (GPLv2)
@@ -196,6 +198,23 @@ foreach(ClassInfo ci in classes)
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+<#
+var typesTooBig = new[] { "int64", "uint64" };
+var minType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "uint" : ci.NetType;
+var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
+#>                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > <#=minType#>.MinValue ? this.minimumValue.Value : <#=minType#>.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < <#=maxType#>.MaxValue ? this.maximumValue.Value : <#=maxType#>.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>

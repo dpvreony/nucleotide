@@ -163,13 +163,16 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             }
         }
 
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
         public override string RandomUnitTestValue
         {
             get
             {
                 var minValue = this.minimumValue.HasValue && this.minimumValue.Value > System.DateTime.MinValue ? this.minimumValue.Value : System.DateTime.MinValue;
-                var max32bitDate = new System.DateTime(int.MaxValue);
-                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32bitDate ? this.maximumValue.Value : max32bitDate;
+                var max32BitDate = new System.DateTime(int.MaxValue);
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32BitDate ? this.maximumValue.Value : max32BitDate;
                 var randomTicks = new System.DateTime(new System.Random().Next((int)minValue.Ticks, (int)maxValue.Ticks));
                 return string.Format("new System.DateTime({0})", randomTicks);
             }

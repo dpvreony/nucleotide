@@ -81,6 +81,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > byte.MinValue ? this.minimumValue.Value : byte.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < byte.MaxValue ? this.maximumValue.Value : byte.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -226,6 +239,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(char), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > char.MinValue ? this.minimumValue.Value : char.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < char.MaxValue ? this.maximumValue.Value : char.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -377,6 +403,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > decimal.MinValue ? this.minimumValue.Value : decimal.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < decimal.MaxValue ? this.maximumValue.Value : decimal.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -522,6 +561,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(double), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > double.MinValue ? this.minimumValue.Value : double.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < double.MaxValue ? this.maximumValue.Value : double.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -673,6 +725,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > float.MinValue ? this.minimumValue.Value : float.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < float.MaxValue ? this.maximumValue.Value : float.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -818,6 +883,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(short), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > short.MinValue ? this.minimumValue.Value : short.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < short.MaxValue ? this.maximumValue.Value : short.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -969,6 +1047,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > int.MinValue ? this.minimumValue.Value : int.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < int.MaxValue ? this.maximumValue.Value : int.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -1114,6 +1205,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(long), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > long.MinValue ? this.minimumValue.Value : long.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < long.MaxValue ? this.maximumValue.Value : long.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -1265,6 +1369,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > byte.MinValue ? this.minimumValue.Value : byte.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < byte.MaxValue ? this.maximumValue.Value : byte.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -1410,6 +1527,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(ushort), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > ushort.MinValue ? this.minimumValue.Value : ushort.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < ushort.MaxValue ? this.maximumValue.Value : ushort.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>
@@ -1561,6 +1691,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         }
 
         /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > uint.MinValue ? this.minimumValue.Value : uint.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < uint.MaxValue ? this.maximumValue.Value : uint.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
+        /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
         public override bool GenerateAutoProperty
@@ -1706,6 +1849,19 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
         public override string GetDataAnnotations()
         {
             return "[Range(typeof(ulong), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
+        public override string RandomUnitTestValue
+        {
+            get
+            {
+                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > ulong.MinValue ? this.minimumValue.Value : ulong.MinValue;
+                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < ulong.MaxValue ? this.maximumValue.Value : ulong.MaxValue;
+                return new System.Random((int)System.DateTime.Now.Ticks).Next((int)minValue, (int)maxValue).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
         }
 
         /// <summary>

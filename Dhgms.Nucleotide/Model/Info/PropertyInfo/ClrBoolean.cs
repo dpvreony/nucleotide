@@ -107,6 +107,9 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             return null;
         }
 
+        /// <summary>
+        /// Gets a random value for use in a unit test.
+        /// </summary>
         public override string RandomUnitTestValue
         {
             get

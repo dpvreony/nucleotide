@@ -84,7 +84,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             var sb = new StringBuilder();
             var tabCount = 2;
 
-            sb.AppendLine(string.Format("namespace {0}.Model.{1}{2}", mainNamespaceName, this.ClassTypeName, ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null)));
+            sb.AppendLine(string.Format("namespace {0}.Model.{1}{2}", mainNamespaceName, this.ClassTypeName, (!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null));
             sb.AppendLine("{");
             sb.AppendLine("        using System;");
             sb.AppendLine("        using System.ComponentModel.DataAnnotations;");
@@ -131,6 +131,12 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("#endif");
         }
 
+        /// <summary>
+        /// Generate the unit test code for the property region
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="properties"></param>
+        /// <param name="baseClassProperties"></param>
         protected void DoPropertiesRegion(StringBuilder sb, Base[] properties, Base[] baseClassProperties)
         {
             var tabCount = 2;
@@ -149,7 +155,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 tabCount++;
                 this.DoUnitTestMethodAttributes(sb, tabCount);
                 sb.AppendLine(string.Format("{0}public void NormalOperation()", Common.GetTabs(tabCount)));
-                sb.AppendLine(string.Format("{0}{", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}{{", Common.GetTabs(tabCount)));
 
                 tabCount++;
                 sb.AppendLine(string.Format("{0}var instance = new {1}();", Common.GetTabs(tabCount)));
@@ -159,10 +165,10 @@ namespace Dhgms.Nucleotide.Model.Helper
                 sb.AppendLine(string.Format("{0}Assert.AreEqual(testValue, instance.{1});", Common.GetTabs(tabCount), pi.Name));
                 tabCount--;
 
-                sb.AppendLine(string.Format("{0}}", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
                 tabCount--;
 
-                sb.AppendLine(string.Format("{0}}", Common.GetTabs(tabCount)));
+                sb.AppendLine(string.Format("{0}}}", Common.GetTabs(tabCount)));
 
                 /*
                 sb.AppendLine(
@@ -261,7 +267,11 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// The properties of the base class
         /// </param>
         protected virtual void DoConstructorMethod(
-            StringBuilder sb, string className, Base[] properties, string baseClassName, Base[] baseClassProperties)
+            StringBuilder sb,
+            string className,
+            Base[] properties,
+            string baseClassName,
+            Base[] baseClassProperties)
         {
             // Default Constructor
             sb.AppendLine("            [TestFixture]");
@@ -299,7 +309,20 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("                }");
             sb.AppendLine("            }");
             sb.AppendLine(string.Empty);
+
+            // Constructor with parameters
+            this.DoConstructorWithParameters(sb, className, properties, baseClassName, baseClassProperties);
         }
+
+        /// <summary>
+        /// Generate the unit test code for the constructor that takes parameters
+        /// </summary>
+        /// <param name="sb">string build to append the code to</param>
+        /// <param name="className">name of the class</param>
+        /// <param name="properties">collection of properties</param>
+        /// <param name="baseClassName">name of the base class</param>
+        /// <param name="baseClassProperties">collection of base class properties</param>
+        protected abstract void DoConstructorWithParameters(StringBuilder sb, string className, Base[] properties, string baseClassName, Base[] baseClassProperties);
 
         private void DoDummyTest(StringBuilder sb, int indentCount)
         {

@@ -18,8 +18,32 @@ namespace Dhgms.Nucleotide.Model.Helper
     /// </summary>
     public sealed class UnitTestInformation : UnitTestBase
     {
-        protected virtual void DoPropertiesRegion(StringBuilder sb, Base[] properties, Base[] baseClassProperties)
+        /// <summary>
+        /// Generate the unit test code for the constructor that takes parameters
+        /// </summary>
+        /// <param name="sb">string build to append the code to</param>
+        /// <param name="className">name of the class</param>
+        /// <param name="properties">collection of properties</param>
+        /// <param name="baseClassName">name of the base class</param>
+        /// <param name="baseClassProperties">collection of base class properties</param>
+        protected override void DoConstructorWithParameters(
+            StringBuilder sb,
+            string className,
+            Base[] properties,
+            string baseClassName,
+            Base[] baseClassProperties)
         {
+        }
+
+        /// <summary>
+        ///     Gets the class suffix
+        /// </summary>
+        /// <returns>
+        ///     the class suffix
+        /// </returns>
+        protected override string GetClassSuffix()
+        {
+            return null;
         }
     }
 }
