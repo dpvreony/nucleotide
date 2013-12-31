@@ -307,7 +307,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("        /// </returns>");
             sb.AppendLine(
                 "        public override " + fullyQualifiedClassName + classSuffix
-                + " GetStronglyTypedObjectFromDataReaderRow(System.Data.Common.DbDataReader dataReader)");
+                + " GetStronglyTypedObjectFromDataReaderRow(System.Data.IDataReader dataReader)");
             sb.AppendLine("        {");
 
             if (baseClassProperties != null && baseClassProperties.Length > 0)
@@ -393,7 +393,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 sb.AppendLine("    /// <summary>");
                 sb.AppendLine("    /// Helper methods for using POCO and low level ADO.NET");
                 sb.AppendLine("    /// </summary>");
-                sb.AppendLine("    public class " + classInfo.ClassName);
+                sb.AppendLine("    public class " + classInfo.ClassName + "AdoNetHelper");
                 sb.AppendLine("                : Dhgms.DataManager.Model.Helper.AdoNet.Base<" + fullyQualifiedClassName + ">");
                 sb.AppendLine("    {");
 
