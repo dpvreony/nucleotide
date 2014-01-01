@@ -17,28 +17,48 @@ namespace Dhgms.Nucleotide.Model.Info.Interface
     public interface IClassGenerationParameters
     {
         /// <summary>
-        /// Gets or sets the main namespace
+        /// Gets the main namespace.
         /// </summary>
-        string MainNamespaceName { get; set; }
+        string MainNamespaceName { get; }
 
         /// <summary>
-        /// Gets or sets the sub namespace, if any
+        /// Gets the sub namespace, if any.
         /// </summary>
-        string SubNamespace { get; set; }
+        string SubNamespace { get; }
 
         /// <summary>
-        /// Gets or sets name of the information class.
+        /// Gets the name of the information class.
         /// </summary>
-        string ClassName { get; set; }
+        string ClassName { get; }
 
         /// <summary>
-        /// Gets or sets collection of properties for the class.
+        /// Gets the collection of properties for the class.
         /// </summary>
-        Base[] Properties { get; set; }
+        Base[] Properties { get; }
 
         /// <summary>
-        /// Gets or sets collection of properties for the inherited base class, if any.
+        /// Gets the collection of properties for the inherited base class, if any.
         /// </summary>
-        Base[] BaseClassProperties { get; set; }
+        Base[] BaseClassProperties { get; }
+
+        /// <summary>
+        /// Gets the company name.
+        /// </summary>
+        string CompanyName { get; }
+
+        /// <summary>
+        /// Gets the copyright banner.
+        /// </summary>
+        string[] CopyrightBanner { get; }
+
+        /// <summary>
+        /// Gets the copyright start year.
+        /// </summary>
+        int CopyrightStartYear { get; }
+
+        /// <summary>
+        /// Gets name of the base information class.
+        /// </summary>
+        string BaseClassName { get; }
     }
 }

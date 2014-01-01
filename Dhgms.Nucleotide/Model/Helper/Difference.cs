@@ -25,7 +25,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// Constructor
         /// </summary>
         public Difference()
-            : base("Dhgms.DataManager.Model.Info.Difference", "Difference")
+            : base("Dhgms.DataManager.Model.Info.DifferenceBase", "Difference")
         {
         }
 
