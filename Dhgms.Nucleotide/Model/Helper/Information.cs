@@ -24,7 +24,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// Initializes a new instance of the <see cref="Information"/> class. 
         /// </summary>
         public Information()
-            : base("Dhgms.DataManager.Model.Info.Base", "Info")
+            : base("Dhgms.DataManager.Model.Info.InfoBase", "Info")
         {
         }
 

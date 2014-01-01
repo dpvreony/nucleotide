@@ -6,8 +6,10 @@
 namespace Dhgms.Nucleotide.Model.Helper
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -59,57 +61,42 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <summary>
         /// Entry point for generating the code
         /// </summary>
-        /// <param name="mainNamespaceName">
-        /// The main namespace
-        /// </param>
-        /// <param name="subNamespace">
-        /// The sub namespace, if any
-        /// </param>
-        /// <param name="className">
-        /// The class name
-        /// </param>
-        /// <param name="classRemarks">
-        /// Remarks for the class
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassName">
-        /// The name of the base class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(
-            string mainNamespaceName, 
-            string subNamespace, 
-            string className, 
-            string classRemarks, 
-            Base[] properties, 
-            string baseClassName, 
-            Base[] baseClassProperties)
+        public string Generate(Model.Info.ClassGenerationParameters cgp)
         {
+            if (cgp == null)
+            {
+                throw new ArgumentNullException("cgp");
+            }
+
+            var mainNamespaceName = cgp.MainNamespaceName;
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
-                throw new ArgumentNullException("mainNamespaceName");
+                throw new ArgumentException("MainNamespaceName", "cgp");
             }
 
+            var className = cgp.ClassName;
             if (string.IsNullOrWhiteSpace(className))
             {
-                throw new ArgumentNullException("className");
+                throw new ArgumentException("ClassName", "cgp");
             }
 
+            var companyName = cgp.CompanyName;
+            var copyrightBanner = cgp.CopyrightBanner;
+            var copyrightStartYear = cgp.CopyrightStartYear;
+
+            var classRemarks = cgp.ClassRemarks;
             if (string.IsNullOrWhiteSpace(classRemarks))
             {
-                throw new ArgumentNullException("classRemarks");
+                throw new ArgumentException("ClassRemarks", "cgp");
             }
 
+            var properties = cgp.Properties;
             if (properties == null)
             {
-                throw new ArgumentNullException("properties");
+                throw new ArgumentException("Properties", "cgp");
             }
 
             if (properties.Count(p => p.IsKey) > 1)
@@ -119,6 +106,9 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             var sb = new StringBuilder();
 
+            this.DoCopyrightHeader(sb, companyName, copyrightBanner, copyrightStartYear, className, classRemarks);
+
+            var subNamespace = cgp.SubNamespace;
             sb.AppendLine(
                 "namespace " + mainNamespaceName + ".Model." + this.ClassTypeName
                 + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null));
@@ -138,6 +128,9 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("        [DataContract]");
             sb.AppendLine("        public class " + className + this.GetClassSuffix());
             sb.AppendLine("// ReSharper disable RedundantNameQualifier");
+
+            var baseClassName = cgp.BaseClassName;
+            var baseClassProperties = cgp.BaseClassProperties;
             if (string.IsNullOrWhiteSpace(baseClassName) == false && baseClassProperties != null
                 && baseClassProperties.Length > 0)
             {
@@ -168,6 +161,30 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("}");
 
             return sb.ToString();
+        }
+
+        private void DoCopyrightHeader(StringBuilder sb, string companyName, IEnumerable<string> copyrightBanner, int copyrightStartYear, string className, string classRemarks)
+        {
+            sb.AppendLine("// --------------------------------------------------------------------------------------------------------------------");
+
+            sb.AppendLine(string.Format("// <copyright file=\"{0}.cs\" company=\"{1}\">", className, companyName));
+            var thisYear = DateTime.Now.Year;
+            var yearDetails = copyrightStartYear < thisYear ? string.Format("{0}-{1}", copyrightStartYear, thisYear) : copyrightStartYear.ToString(CultureInfo.InvariantCulture);
+            sb.AppendLine(string.Format("//   Copyright {0} {1}", yearDetails, companyName));
+            sb.AppendLine("//   ");
+
+            foreach (var line in copyrightBanner)
+            {
+                sb.AppendLine(string.Format("//   {0}", line));
+            }
+
+            sb.AppendLine("// </copyright>");
+
+            sb.AppendLine("// <summary>");
+            sb.AppendLine(string.Format("//   {0}", classRemarks));
+            sb.AppendLine("// </summary>");
+            sb.AppendLine("// --------------------------------------------------------------------------------------------------------------------");
+            sb.AppendLine(string.Empty);
         }
 
         /// <summary>

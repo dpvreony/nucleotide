@@ -17,31 +17,56 @@ namespace Dhgms.Nucleotide.Model.Info
     /// <summary>
     /// Represents the parameters for generating an data manager classes
     /// </summary>
-    public class ClassGenerationParameters : IClassGenerationParameters
+    public abstract class ClassGenerationParameters : IClassGenerationParameters
     {
         /// <summary>
-        /// Gets or sets the main namespace
+        /// Gets the main namespace.
         /// </summary>
-        public string MainNamespaceName { get; set; }
+        public abstract string MainNamespaceName { get; }
 
         /// <summary>
-        /// Gets or sets the sub namespace, if any
+        /// Gets the sub namespace, if any
         /// </summary>
-        public string SubNamespace { get; set; }
+        public abstract string SubNamespace { get; }
 
         /// <summary>
-        /// Gets or sets name of the information class.
+        /// Gets name of the information class.
         /// </summary>
-        public string ClassName { get; set; }
+        public abstract string ClassName { get; }
 
         /// <summary>
-        /// Gets or sets collection of properties for the class.
+        /// Gets name of the information class.
         /// </summary>
-        public Base[] Properties { get; set; }
+        public abstract string ClassRemarks { get; }
 
         /// <summary>
-        /// Gets or sets collection of properties for the inherited base class, if any.
+        /// Gets the collection of properties for the class.
         /// </summary>
-        public Base[] BaseClassProperties { get; set; }
+        public abstract Base[] Properties { get; }
+
+        /// <summary>
+        /// Gets the collection of properties for the inherited base class, if any.
+        /// </summary>
+        public abstract Base[] BaseClassProperties { get; }
+
+        /// <summary>
+        /// Gets the company name.
+        /// </summary>
+        public abstract string CompanyName { get; }
+
+        /// <summary>
+        /// Gets the copyright banner.
+        /// </summary>
+        public abstract string[] CopyrightBanner { get; }
+
+        /// <summary>
+        /// Gets the copyright start year.
+        /// </summary>
+        public abstract int CopyrightStartYear { get; }
+
+        /// <summary>
+        /// Gets name of the base information class.
+        /// </summary>
+        public abstract string BaseClassName { get; }
     }
 }
