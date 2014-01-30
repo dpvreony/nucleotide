@@ -394,7 +394,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 sb.AppendLine("    /// Helper methods for using POCO and low level ADO.NET");
                 sb.AppendLine("    /// </summary>");
                 sb.AppendLine("    public class " + classInfo.ClassName + "AdoNetHelper");
-                sb.AppendLine("                : Dhgms.DataManager.Model.Helper.AdoNet.Base<" + fullyQualifiedClassName + ">");
+                sb.AppendLine("                : Dhgms.DataManager.Model.Helper.AdoNet.AdoNetBase<" + fullyQualifiedClassName + ">");
                 sb.AppendLine("    {");
 
                 sb.AppendLine("        #region our methods");
