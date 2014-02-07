@@ -145,7 +145,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("/// The table Name in the database");
             sb.AppendLine("/// </param>");
             sb.AppendLine(
-                "public override void DoEntityFrameworkModel(DbModelBuilder modelBuilder, string schemaName, string tableName)");
+                "public void DoEntityFrameworkModel(DbModelBuilder modelBuilder, string schemaName, string tableName)");
             sb.AppendLine("{");
             sb.AppendLine("    if (modelBuilder == null)");
             sb.AppendLine("    {");
@@ -203,7 +203,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 sb.AppendLine("    /// Helper methods for using POCO and Entity Framework");
                 sb.AppendLine("    /// </summary>");
                 sb.AppendLine("    public class " + classInfo.ClassName);
-                sb.AppendLine("                : Dhgms.DataManager.Model.Helper.EntityFramework.Base<" + fullyQualifiedClassName + ">");
+                sb.AppendLine("                : Dhgms.DataManager.Model.IEntityFramework<" + fullyQualifiedClassName + ">");
                 sb.AppendLine("    {");
 
                 DoEntityFrameworkModelMethod(sb, classInfo);
