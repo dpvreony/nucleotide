@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DHGMS Solutions")]
 [assembly: AssemblyProduct("Dhgms.Nucleotide")]
-[assembly: AssemblyCopyright("Copyright © DHGMS Solutions 2004-2013")]
+[assembly: AssemblyCopyright("Copyright © DHGMS Solutions 2004-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(false)]
@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1309.24.0")]
-[assembly: AssemblyFileVersion("0.1309.24.0")]
+[assembly: AssemblyVersion("0.1403.06.2")]
+[assembly: AssemblyFileVersion("0.1403.06.2")]

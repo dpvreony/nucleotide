@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
-<package >
+<package>
 	<metadata>
 		<id>$id$</id>
 		<version>$version$</version>
 		<title>Nucleotide</title>
-		<authors>DHGMS Solutions</authors>
-		<owners>DHGMS Solutions</owners>
+		<authors>DHGMSSolutions dpvreony</authors>
+		<owners>DHGMSSolutions dpvreony</owners>
 		<projectUrl>http://nucleotide.codeplex.com</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
 			T4 (Text Template Transformation Toolkit) Library used by other DHGMS open source projects.
 		</description>
-		<copyright>Copyright 2004-2012 DHGMS Solutions</copyright>
-		<tags>T4 DHGMS</tags>
+		<copyright>Copyright 2004-2014 DHGMS Solutions</copyright>
+		<tags>T4 Transform CodeGen</tags>
 	</metadata>
 </package>
