@@ -36,7 +36,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(string mainNamespaceName, string subNamespace, List<IClassGenerationParameters> classes)
+        public string Generate(string mainNamespaceName, string subNamespace, List<Tuple<IClassGenerationParameters, string>> classes)
         {
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
@@ -46,14 +46,14 @@ namespace Dhgms.Nucleotide.Model.Helper
             var sb = new StringBuilder();
 
             var noSubNamespace = from c in classes
-                                where string.IsNullOrWhiteSpace(c.SubNamespace)
+                                where string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
                                 select c;
 
-            DoSubNamespace(sb, mainNamespaceName, null, noSubNamespace.ToList());
+            DoSubNamespace(sb, mainNamespaceName, null, noSubNamespace);
 
             var subNamespaces = from c in classes
-                                where !string.IsNullOrWhiteSpace(c.SubNamespace)
-                                group c by c.SubNamespace
+                                where !string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
+                                group c by c.Item1.SubNamespace
                                     into g
                                     select g;
 
@@ -65,7 +65,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             return sb.ToString();
         }
 
-        private void DoSubNamespace(StringBuilder sb, string mainNamespaceName, string subNamespace, IEnumerable<IClassGenerationParameters> classes)
+        private void DoSubNamespace(StringBuilder sb, string mainNamespaceName, string subNamespace, IEnumerable<Tuple<IClassGenerationParameters, string>> classes)
         {
             var fullyQualifiedNamespace = mainNamespaceName + ".Model.Helper.EntityFramework"
                                              + (!string.IsNullOrWhiteSpace(subNamespace)
@@ -97,7 +97,10 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <param name="classInfo">
         ///     The information relating to the generation of the class
         /// </param>
-        private static void DoEntityFrameworkModelMethod(StringBuilder sb, IClassGenerationParameters classInfo)
+        /// <param name="inheritingFullyQualifiedClass">
+        /// The fully qualified class name for the EF inheriting class
+        /// </param>
+        private static void DoEntityFrameworkModelMethod(StringBuilder sb, IClassGenerationParameters classInfo, string inheritingFullyQualifiedClass)
         {
             if (classInfo == null)
             {
@@ -157,7 +160,6 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("        throw new ArgumentNullException(\"tableName\");");
             sb.AppendLine("    }");
             sb.AppendLine(string.Empty);
-            sb.AppendLine("    modelBuilder.Entity<" + fullyQualifiedClassName + ">().ToTable(tableName, schemaName);");
 
             foreach (Base p in classInfo.Properties.Where(p => p.IsKey))
             {
@@ -180,6 +182,19 @@ namespace Dhgms.Nucleotide.Model.Helper
                     + ").HasColumnName(\"" + p.AlternativeDatabaseColumnName + "\");");
             }
 
+            if (string.IsNullOrWhiteSpace(inheritingFullyQualifiedClass))
+            {
+                sb.AppendLine("    modelBuilder.Entity<" + fullyQualifiedClassName + ">().ToTable(tableName, schemaName);");
+            }
+            else
+            {
+                sb.AppendLine("    modelBuilder.Entity<" + inheritingFullyQualifiedClass + ">().Map(m =>");
+                sb.AppendLine("    {");
+                sb.AppendLine("        m.MapInheritedProperties();");
+                sb.AppendLine("        m.ToTable(tableName, schemaName);");
+                sb.AppendLine("    });");
+            }
+
             sb.AppendLine("}");
             sb.AppendLine(string.Empty);
         }
@@ -193,20 +208,20 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <param name="classes">
         /// Collection of classes to generate helpers for
         /// </param>
-        private void DoOurMethodsRegion(StringBuilder sb, IEnumerable<IClassGenerationParameters> classes)
+        private void DoOurMethodsRegion(StringBuilder sb, IEnumerable<Tuple<IClassGenerationParameters, string>> classes)
         {
-            foreach (IClassGenerationParameters classInfo in classes)
+            foreach (var classInfo in classes)
             {
-                var fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model.Info." + (!string.IsNullOrWhiteSpace(classInfo.SubNamespace) ? classInfo.SubNamespace + "." : null) + classInfo.ClassName;
+                var fullyQualifiedClassName = classInfo.Item1.MainNamespaceName + ".Model.Info." + (!string.IsNullOrWhiteSpace(classInfo.Item1.SubNamespace) ? classInfo.Item1.SubNamespace + "." : null) + classInfo.Item1.ClassName;
 
                 sb.AppendLine("    /// <summary>");
                 sb.AppendLine("    /// Helper methods for using POCO and Entity Framework");
                 sb.AppendLine("    /// </summary>");
-                sb.AppendLine("    public class " + classInfo.ClassName);
+                sb.AppendLine("    public class " + classInfo.Item1.ClassName);
                 sb.AppendLine("                : Dhgms.DataManager.Model.IEntityFramework<" + fullyQualifiedClassName + ">");
                 sb.AppendLine("    {");
 
-                DoEntityFrameworkModelMethod(sb, classInfo);
+                DoEntityFrameworkModelMethod(sb, classInfo.Item1, classInfo.Item2);
 
                 sb.AppendLine("    }");
             }
