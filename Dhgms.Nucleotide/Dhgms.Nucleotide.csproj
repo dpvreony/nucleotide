@@ -90,11 +90,14 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Helper\AdoNetHelpers.cs" />
     <Compile Include="Model\Helper\BaseClassGenerator.cs" />
+    <Compile Include="Model\Helper\BaseInterfaceGenerator.cs" />
     <Compile Include="Model\Helper\Common.cs" />
     <Compile Include="Model\Helper\Configuration.cs" />
     <Compile Include="Model\Helper\Difference.cs" />
+    <Compile Include="Model\Helper\DifferenceInterfaceGenerator.cs" />
     <Compile Include="Model\Helper\EntityFrameworkHelpers.cs" />
     <Compile Include="Model\Helper\Information.cs" />
+    <Compile Include="Model\Helper\InformationInterfaceGenerator.cs" />
     <Compile Include="Model\Helper\ProviderProxy.cs" />
     <Compile Include="Model\Helper\SearchFilter.cs" />
     <Compile Include="Model\Helper\UnitTestBase.cs" />
