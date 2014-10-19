@@ -10,12 +10,13 @@ namespace TestDhgms.NucleotideTest.Model.Helper
     using Dhgms.Nucleotide.Model.Info;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using TestDhgms.NucleotideMocking;
+
+    using Xunit;
 
     /// <summary>
     /// The information.
     /// </summary>
-    [TestClass]
     public class Information
     {
         #region Constants
@@ -149,45 +150,33 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         #region Public Methods and Operators
 
         /// <summary>
-        /// Method checks to see if unit tests can take place
+        /// The generate method.
         /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        public class GenerateMethod
         {
-            string assemblyInfo;
-            try
+            /// <summary>
+            /// The throws argument null exception.
+            /// </summary>
+            public void ThrowsArgumentNullException()
             {
-                assemblyInfo = AssemblyCache.QueryAssemblyInfo("Dhgms.Nucleotide");
-            }
-                
-                
-                // ReSharper disable EmptyGeneralCatchClause
-            catch
-            {
-                // ReSharper restore EmptyGeneralCatchClause
-                return;
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo))
-            {
-                throw new Exception("Library is installed in the GAC.  Uninstall before performing unit tests.");
+                var instance = new Dhgms.Nucleotide.Model.Helper.Information();
+                var cgp = new MockClassGenerationParameters(null, null, null, null, null, null, null, 2010, null, null);
+                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(cgp));
+                Assert.Equal("cgp", ex.ParamName);
             }
         }
 
+        /*
         /// <summary>
         /// The test information all arguments null.
         /// </summary>
         [TestMethod]
         public void TestInformationAllArgumentsNull()
         {
-            var instance = new Dhgms.Nucleotide.Model.Helper.Information();
 
             try
             {
-                instance.Generate(null, null, null, null, null, null, null);
+                instance.Generate(cgp);
             }
             catch (ArgumentNullException e)
             {
@@ -350,6 +339,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
 
             Assert.Fail("Expected System.ArgumentNullException");
         }
+         * */
 
         #endregion
     }

@@ -1,0 +1,3409 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dhgms.DataManager</name>
+    </assembly>
+    <members>
+        <member name="T:Dhgms.DataManager.Model.CommandLineBase`1">
+            <summary>
+            Base class for parsing command line arguments
+            </summary>
+            <typeparam name="TCommandLineSettings">
+            The settings class that represents the command line arguments
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.CommandLineBase`1.Parse(System.String[])">
+            <summary>
+            Entry point for parsing the command line arguments
+            </summary>
+            <param name="args">
+            Collection of command line arguments
+            </param>
+            <returns>
+            A POCO representing the command line settings.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.CommandLineBase`1.GetArePairArgumentsSpecified(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            The get are pair arguments specified.
+            </summary>
+            <param name="argCollection">
+            The argument Collection.
+            </param>
+            <param name="parameter">
+            The parameter.
+            </param>
+            <returns>
+            whether the switch has been specified
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.CommandLineBase`1.GetIsSingleArgumentSpecified(System.Collections.Generic.IList{System.String},System.String)">
+            <summary>
+            Checks if a switch has been specified on the command line
+            </summary>
+            <param name="argCollection">
+            command line arguments
+            </param>
+            <param name="parameter">
+            The switch to check for
+            </param>
+            <returns>
+            whether the switch has been specified
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.CommandLineBase`1.WantsHelp">
+            <summary>
+            Gets a value indicating whether /? has been specified on the command line
+            </summary>
+            <returns>whether /? has been specified</returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.CommandLineBase`1.CommandLineSettings">
+            <summary>
+            Gets or sets the Command Line Settings
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ApplicationSetting`2">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ApplicationSetting`2.#ctor(System.String,System.String,System.Action{`1},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="target"></param>
+            <param name="enforcementLevel"></param>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ApplicationSetting`2.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ApplicationSetting`2.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ApplicationSetting`2.Target">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ApplicationSetting`2.EnforcementLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElementCollection.BaseConfigurationElementCollection`1">
+            <summary>
+            Base class for a Collection of Elements in a Config file
+            </summary>
+            <typeparam name="TConfigElement">
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElementCollection.BaseConfigurationElementCollection`1.Add(System.Configuration.ConfigurationElement)">
+            <summary>
+            Adds an element to a collection
+            </summary>
+            <param name="element">
+            element to add
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElementCollection.BaseConfigurationElementCollection`1.CreateNewElement">
+            <summary>
+            Creates a new Element
+            </summary>
+            <returns>
+            ConfigElement
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElementCollection.BaseConfigurationElementCollection`1.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key
+            </summary>
+            <param name="element">
+            element
+            </param>
+            <returns>
+            key
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElementCollection.BaseConfigurationElementCollection`1.Item(System.Int32)">
+            <summary>
+            Returns a element from the collection
+            </summary>
+            <param name="index">0 based position in list</param>
+            <returns></returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElementCollection.EmailRecipientCollection">
+            <summary>
+            Represents a collection of Email Recipients in a Config File
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElementCollection.EmailRecipientCollection.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key
+            </summary>
+            <param name="element">
+            element
+            </param>
+            <returns>
+            key
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElementCollection.IRunSetCollection`1">
+            <summary>
+            Used for a xml config that supports run sets
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElementCollection.IRunSetCollection`1.RunSets">
+            <summary>
+            Gets the run sets in the config file.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElementCollection.RunSetCollection`1">
+            <summary>
+            Represents a collection of run sets in the app config
+            </summary>
+            <remarks>
+            based upon http://blog.newslacker.net/2008/02/net-20-custom-configuration-sections.html
+            </remarks>
+            <typeparam name="TRunSetElementClass">
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElementCollection.RunSetCollection`1.GetElementKey(System.Configuration.ConfigurationElement)">
+            <summary>
+            Gets the element key
+            </summary>
+            <param name="element">
+            element
+            </param>
+            <returns>
+            key
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElement.EmailRecipient">
+            <summary>
+            Represents an Email Recipient in a config file
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElement.EmailRecipient.IsReadOnly">
+            <summary>
+            Gets a flag indicating whether the config is read only.
+            </summary>
+            <returns>
+            true or false
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.EmailRecipient.Name">
+            <summary>
+            Gets or sets the name of the email recipient.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.EmailRecipient.Value">
+            <summary>
+            Gets or sets the email address of the recipient.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElement.InternetServer">
+            <summary>
+            Configuration Element Representing the connection to a server
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.IsReadOnly">
+            <summary>
+            Gets or sets a value indicating whether the config is read only
+            </summary>
+            <returns>
+            true or false
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.HostName">
+            <summary>
+            Gets or sets the hostname of the server
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.Password">
+            <summary>
+            Gets or sets the password for the connection, if needed
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.Port">
+            <summary>
+            Gets or sets the port of the server, if not using the protocol default
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.RequestPath">
+            <summary>
+            Gets or sets the path of the request
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.InternetServer.UserName">
+            <summary>
+            Gets or sets the username for the connection, if needed
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationElement.RunSet`1">
+            <summary>
+            Represents a run set inside the app config
+            one of them will match the argument on the command line
+            A run set is a set of rules specific to an invidiual run of the program
+            i.e. a runset of "monday" for a mondays scheduled run
+            or "england" for english machines
+            </summary>
+            <typeparam name="TRunSetClass">
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationElement.RunSet`1.IsReadOnly">
+            <summary>
+            Dictates whether the config is read only
+            </summary>
+            <returns>
+            true or false
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.ConfigurationElement.RunSet`1.Name">
+            <summary>
+            The name of the run set
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationLoader.BaseConfigurationLoader`1">
+            <summary>
+            The base configuration loader.
+            </summary>
+            <typeparam name="TApplicationConfiguration">
+            The application configuration type.
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationLoader.BaseConfigurationLoader`1.GetSettings">
+            <summary>
+            Gets the settings
+            </summary>
+            <returns>
+            The Application Settings.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationLoader.CodeConfigurationLoader`1">
+            <summary>
+            The code configuration loader.
+            </summary>
+            <typeparam name="TApplicationConfiguration">
+            The application configuration type.
+            </typeparam>
+        </member>
+        <member name="F:Dhgms.DataManager.Model.ConfigurationLoader.CodeConfigurationLoader`1.LazyApplicationConfig">
+            <summary>
+            The lazy loading application config.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationLoader.CodeConfigurationLoader`1.GetSettings">
+            <summary>
+            Gets the settings
+            </summary>
+            <returns>
+            The Application Settings.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationLoader.GroupPolicyConfigurationLoader`1">
+            <summary>
+            The group policy configuration loader.
+            </summary>
+            <typeparam name="TApplicationConfiguration">
+            The application configuration type.
+            </typeparam>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationLoader.XmlAppConfigConfigurationLoader`1">
+            <summary>
+            The xml app config configuration loader.
+            </summary>
+            <typeparam name="TApplicationConfiguration">
+            The application configuration type.
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.ConfigurationLoader.XmlAppConfigConfigurationLoader`1.GetSettings">
+            <summary>
+            Gets the settings
+            </summary>
+            <returns>
+            The <see>
+                <cref>TApplicationConfiguration</cref>
+            </see>
+                .
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.ConfigurationSection.BaseConfigurationSection">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference">
+            <summary>
+            Represents the base command line settings
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.DifferenceBase`1">
+            <summary>
+            Class for listing differences between 2 objects of the same information class
+            </summary>
+            <typeparam name="TInheritingType">
+            </typeparam>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.InfoBase`1">
+            <summary>
+            Base class for all information classes
+            Required in order for them to work with the DataManager
+            </summary>
+            <typeparam name="TInheritingType">
+            The type that is inheriting from this base class
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.op_Equality(Dhgms.DataManager.Model.Info.InfoBase{`0},Dhgms.DataManager.Model.Info.InfoBase{`0})">
+            <summary>
+            Check if 2 object are equal
+            </summary>
+            <param name="first">first object to compare</param>
+            <param name="other">the other object to compare</param>
+            <returns>true if equal, otherwise false</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.op_GreaterThan(Dhgms.DataManager.Model.Info.InfoBase{`0},Dhgms.DataManager.Model.Info.InfoBase{`0})">
+            <summary>
+            Checks if an object is greater than another
+            </summary>
+            <param name="first">first object to compare</param>
+            <param name="other">the other object to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.op_Inequality(Dhgms.DataManager.Model.Info.InfoBase{`0},Dhgms.DataManager.Model.Info.InfoBase{`0})">
+            <summary>
+            Checks if 2 objects are NOT equal
+            </summary>
+            <param name="first">first object to compare</param>
+            <param name="other">the other object to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.op_LessThan(Dhgms.DataManager.Model.Info.InfoBase{`0},Dhgms.DataManager.Model.Info.InfoBase{`0})">
+            <summary>
+            Checks if an object is less than another
+            </summary>
+            <param name="first">first object to compare</param>
+            <param name="other">the other object to compare</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.CompareTo(`0)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="other">
+            The other.
+            </param>
+            <return>
+            0 if equal, otherwise non zero
+            </return>
+            <returns>
+            The compare to.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object
+            </summary>
+            <param name="obj">
+            other object to compare
+            </param>
+            <returns>
+            0 if equal, otherwise non-0, depending on the rules of the CompareTo logic in the inheriting class
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.DoTableValidation">
+            <summary>
+            Checks a table to make sure it meets the required schema
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.DoXmlElement(System.Xml.XmlWriter,System.String)">
+            <summary>
+            Adds an XML Element to an XML Writer
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.Equals(System.Object)">
+            <summary>
+            Checks if an object matches this one
+            </summary>
+            <param name="obj">
+            An object
+            </param>
+            <returns>
+            The equals.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.Equals(`0)">
+            <summary>
+            Checks if the values of two objects are the same
+            </summary>
+            <param name="other">
+            The other object to compare
+            </param>
+            <returns>
+            True if they match, otherwise false
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.GetHashCode">
+            <summary>
+            Gets the hash code for the object
+            </summary>
+            <returns>
+            hash code
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.ToStringArray">
+            <summary>
+            Gets a collection of string data for use for something like a CSV file
+            </summary>
+            <returns>
+            a collection of strings representing the data record
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.DoChildXmlElement(System.Xml.XmlWriter,System.String,System.String)">
+            <summary>
+            Wrapper for adding a child XML element
+            </summary>
+            <param name="writer">
+            The XML writer to add the element to
+            </param>
+            <param name="name">
+            The name of the element.
+            </param>
+            <param name="value">
+            The value of the element.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.DoChildXmlCDataElement(System.Xml.XmlWriter,System.String,System.String)">
+            <summary>
+            Wrapper for adding a CData element
+            </summary>
+            <param name="writer">
+            The XML writer to add the element to
+            </param>
+            <param name="name">
+            The name of the element.
+            </param>
+            <param name="value">
+            The value of the element.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.Dispose(System.Boolean)">
+            <summary>
+            The dispose method
+            </summary>
+            <param name="disposing">
+            Whether we are being disposed
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.OnDisposing">
+            <summary>
+            The on disposing event
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.InfoBase`1.CompareCollection``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0})">
+            <summary>
+            Compares lists to make sure they are the same
+            </summary>
+            <typeparam name="TListDataType">
+            Data Type for the list collections
+            </typeparam>
+            <param name="first">
+            First List
+            </param>
+            <param name="other">
+            Second List
+            </param>
+            <returns>
+            0 for match, otherwise non zero
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.InfoBase`1.HeaderRecord">
+            <summary>
+            Gets a header record for use for something like a CSV file
+            </summary>
+            <returns>a collection of strings representing the header record</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.DifferenceBase`1.GetColumnNames">
+            <summary>
+            Gets a list of column names where the values are different
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.DifferenceBase`1.Count">
+            <summary>
+            Returns the number of properties in an information class that differ
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.#ctor(Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference"/> class.
+            </summary>
+            <param name="other">
+            Object to copy
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference"/> class.
+            </summary>
+            <param name="wantsHelp">a value indicating whether the user wants the help info displayed</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.CompareTo(Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="other">
+            The instance to compare to
+            </param>
+            <returns>
+            0 if equal, otherwise non zero
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.Equals(Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference)">
+            <summary>
+            Checks if the current instance matches another of the same type
+            </summary>
+            <param name="other">object to compare</param>
+            <returns>true if equal, otherwise false</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.GetHashCode">
+            <summary>
+            Gets the hash code for the object
+            </summary>
+            <returns>hash code</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.DoTableValidation">
+            <summary>
+            Checks a table to ensure it meets the required schema
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.ToStringArray">
+            <summary>
+            Gets a collection of string data for use for something like a CSV file
+            </summary>
+            <returns>a collection of strings representing the data record</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.DoXmlElement(System.Xml.XmlWriter,System.String)">
+            <summary>
+            Adds an XML Element to an XML Writer
+            </summary>
+            <param name="writer">
+            The XML writer to add the element to.
+            </param>
+            <param name="parentElementName">
+            The name for the parenet element being produced.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.GetColumnNames">
+            <summary>
+            Gets the names of the columns that are different
+            </summary>
+            <returns>
+            list of names of the columns that are different
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.GetOdataVocabularies">
+            <summary>
+            Gets the CDSL that defines the OData Vocabularies for this class
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.OnDisposing">
+            <summary>
+            The on disposing event
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.WantsHelp">
+            <summary>
+            a value indicating whether the user wants the help info displayed
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.HeaderRecord">
+            <summary>
+            Gets a header record for use for something like a CSV file
+            </summary>
+            <returns>a collection of strings representing the header record</returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Difference.CommandLineSettings.CommandLineSettingsBaseDifference.Count">
+            <summary>
+            Gets the number of properties that are different
+            </summary>
+            <return>
+            the number of properties that are different
+            </return>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException">
+            <summary>
+            The argument passed as a directory is in a bad format
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Database.EmptyResultSetException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException">
+            <summary>
+            The argument passed as a directory is in a bad format
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Directory.StringInBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException">
+            <summary>
+            Thrown when you try to send an email without passing in any recipients
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.Email.NoRecipientsException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException">
+            <summary>
+            Exception for when the enumeration value isn't supported, usually in a switch statement
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.EnumerationValueNotSupportedException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException">
+            <summary>
+            We failed to get the resource stream. Used when loading a resource file.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.FailedToGetResourceStreamException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.InvalidTableCountException">
+            <summary>
+            Exception for when an SQL table count returns the wrong number
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NoApplicationSettingSourcesException">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException">
+            <summary>
+            Exception for when the run set hasn't been specified in the command line arguments
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NullRunSetNameException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException"/> class. 
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NullRunSetNameException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException"/> class. 
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NullRunSetNameException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException"/> class. 
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NullRunSetNameException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException.#ctor(System.String,System.Char,System.Char)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException.#ctor(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException.#ctor(System.String,System.Decimal,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException.#ctor(System.String,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException.#ctor(System.String,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception.#ctor(System.String,System.Int16,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception.#ctor(System.String,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception.#ctor(System.String,System.Byte,System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="maximumValid">The maximum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.#ctor(System.String,System.Char,System.Char)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.#ctor(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.#ctor(System.String,System.Decimal,System.Decimal)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.#ctor(System.String,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.#ctor(System.String,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.#ctor(System.String,System.Int16,System.Int16)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.#ctor(System.String,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception">
+            <summary>
+            The number passed in was higher than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="message">Exception Message</param>
+            <param name="innerException">Inner Exception</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.#ctor(System.String,System.Byte,System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception"/> class. 
+            </summary>
+            <param name="parameterName">The name of the parameter causing the exception.</param>
+            <param name="minimumValid">The minimum valid value.</param>
+            <param name="actual">The actual value received.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception"/> class.
+            </summary>
+            <param name="info">The serialization information.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> object with the invalid argument value and additional exception information.
+            </summary>
+            <param name="info">The object that holds the serialized object data. </param><param name="context">An object that describes the source or destination of the serialized data. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> object is null. </exception><filterpriority>2</filterpriority><PermissionSet><IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/></PermissionSet>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.Actual">
+            <summary>
+            Gets the actual value that cause the exception.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception.MinimumValid">
+            <summary>
+            Gets the minimum valid value.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException">
+            <summary>
+            A quick and dirty check has detected that there is possibly an SQL injection attempt
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException.#ctor(System.Char)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException"/> class. 
+            Constructor
+            </summary>
+            <param name="detectedCharacter">
+            The detected Character.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PossibleSqlInjectionException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException">
+            <summary>
+            The Post Code is in a bad format
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.PostcodeBadFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.RunSetNotFoundException">
+            <summary>
+            Exception for when a requested run set was not found
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.RunSetNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.RunSetNotFoundException"/> class. 
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.RunSetNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.RunSetNotFoundException"/> class. 
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.RunSetNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.RunSetNotFoundException"/> class. 
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.RunSetNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.StringTooLongException">
+            <summary>
+            The string passed in was longer than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooLongException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooLongException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooLongException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooLongException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooLongException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooLongException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooLongException.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooLongException"/> class. 
+            Constructor
+            </summary>
+            <param name="expected">
+            The expected.
+            </param>
+            <param name="actual">
+            The actual.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooLongException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooLongException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.StringTooShortException">
+            <summary>
+            The string passed in was longer than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooShortException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooShortException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooShortException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooShortException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooShortException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooShortException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooShortException.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooShortException"/> class. 
+            Constructor
+            </summary>
+            <param name="expected">
+            The expected.
+            </param>
+            <param name="actual">
+            The actual.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.StringTooShortException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.StringTooShortException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException">
+            <summary>
+            The string passed in was longer than the allowed maximum
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="message">
+            Exception Message
+            </param>
+            <param name="innerException">
+            Inner Exception
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Exception.UnexpectedFileFormatException"/> class. 
+            Constructor
+            </summary>
+            <param name="info">
+            Serialization Info
+            </param>
+            <param name="context">
+            Context
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.GroupPolicySettings">
+            <summary>
+            The group policy settings.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.IApplicationConfiguration">
+            <summary>
+            The ApplicationConfiguration interface.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.AdoNet.AdoNetBase`1">
+            <summary>
+            Base class for ADO.NET helpers
+            </summary>
+            <typeparam name="TInformationClass">
+            The type for the information class.
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.AdoNet.AdoNetBase`1.GetDataColumns">
+            <summary>
+            Gets a collection of data columns representing the type
+            </summary>
+            <returns>a collection of strings representing the data record</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.AdoNet.AdoNetBase`1.GetStronglyTypedObjectFromDataReaderRow(System.Data.IDataReader)">
+            <summary>
+            Get Strongly Typed Object from a data reader
+            </summary>
+            <param name="dataReader">
+            The data Reader.
+            </param>
+            <returns>
+            strongly typed object.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.ApplicationHelper">
+            <summary>
+            Helper task for generic application tasks
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.BooleanExtensions">
+            <summary>
+            Helpers for the Boolean Data Type
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.BooleanExtensions.ParseYesNo(System.String)">
+            <summary>
+            Parses a Yes\No field into a boolean
+            </summary>
+            <param name="value">
+            the value to parse
+            </param>
+            <returns>
+            true \ false
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.ByteExtensions">
+            <summary>
+            Extension Methods for Bytes
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.ByteExtensions.BytesToHexString(System.Byte[])">
+            <summary>
+            Converts a byte string to hexadecimal
+            </summary>
+            <param name="value">
+            Byte String to convert
+            </param>
+            <returns>
+            The bytes to hex string.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.ConfigurationHelper">
+            <summary>
+            Helper methods for dealing with the XML Config File
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.ConfigurationHelper.GetRunSet``3(``0,``2)">
+            <summary>
+            Retrieves a run set from the config file, based upon the command line argument
+            </summary>
+            <param name="commandLine">
+            the command line arguments containing the name of the required run set
+            </param>
+            <param name="xmlConfigurationSection">
+            the xml config file containing the run set collection
+            </param>
+            <typeparam name="TCommandLine">
+            The type for the command line object
+            </typeparam>
+            <typeparam name="TRunSet">
+            The type for the run set class
+            </typeparam>
+            <typeparam name="TConfigurationClass">
+            The type for the xml configuration class
+            </typeparam>
+            <returns>The required run set</returns>
+            <exception cref="T:System.ArgumentNullException">
+            One of the arguments passed in is null
+            </exception>
+            <exception cref="T:Dhgms.DataManager.Model.Exception.NullRunSetNameException">
+            No run set name is specified in the command line arguments
+            </exception>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2">
+            <summary>
+            DatabaseHelperBase class for database helper methods
+            </summary>
+            <typeparam name="TParameter">
+            The .NET Database Parameter type
+            </typeparam>
+            <typeparam name="TParameterCollection">
+            The .NET Database Parameter Collection type
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ActUponDataReader(System.String,System.String,`0[],System.Func{System.Data.IDataReader,System.Int64},System.Boolean)">
+            <summary>
+            Opens a data reader then uses an action to process it
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="dataReaderAction">
+            The method that is going to use the data reader
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            The act on data reader.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.OnActUponDataReader(System.String,System.String,`0[],System.Func{System.Data.IDataReader,System.Int64})">
+            <summary>
+            Opens a data reader then uses an action to process it
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="dataReaderAction">
+            The method that is going to use the data reader
+            </param>
+            <returns>
+            The act on data reader.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ExecuteNonQueryStoredProcedure(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Executes a Non query Stored Procedure
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="procedureName">
+            The stored procedure to call
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetRecordCount(System.String,System.String)">
+            <summary>
+            Gets the number of records in a table
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="table">
+            The table
+            </param>
+            <returns>
+            Number of records in the table
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetSingleRecord``2(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a strongly typed object that represents a record
+            </summary>
+            <typeparam name="TInfoClass">
+            The data type to convert the data to
+            </typeparam>
+            <typeparam name="TAdoNetHelperClass">
+            Type for the ADO.NET Helper class
+            </typeparam>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="sqlParameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            A strongly typed object
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetStrings(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a collection of strings from a select
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            collection of strings
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetStronglyTypedCollection``2(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a strongly typed object that represents a record
+            </summary>
+            <typeparam name="TInfoClass">
+            The data type to convert the data to
+            </typeparam>
+            <typeparam name="TAdoNetHelperClass">
+            Type for the ADO.NET Helper class
+            </typeparam>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="sqlParameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            A strongly typed object
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetTableExists(System.String,System.String,System.String,System.String)">
+            <summary>
+            Checks if a table exists.
+            </summary>
+            <param name="databaseConnectionString">
+            The database connection string.
+            </param>
+            <param name="databaseName">
+            The database name.
+            </param>
+            <param name="schema">
+            The schema.
+            </param>
+            <param name="tableName">
+            The table name.
+            </param>
+            <returns>
+            A flag indicating whether the table exists.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ProcessFunction``1(System.String,System.String,`0[],System.Boolean,System.Func{`1,``0})">
+            <summary>
+            Wrapper for processing a function and dealing with the parameter collection results
+            </summary>
+            <param name="databaseConnectionString">Database Connection String
+                        </param><param name="sqlCommand">Command to Execute
+                        </param><param name="parameters">Collection of parameters relating to the command
+                        </param><param name="assumeSqlSafe">Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the saftey check
+                        </param>
+            <param name="parameterProcessingFunction">Function for processing the parameter result collection and returning it as a POCO object.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ProcessNonQuery(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Wrapper for processing a non query SQL command
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to Execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ShrinkFile(System.String,System.String)">
+            <summary>
+            Shrinks a database file
+            </summary>
+            <param name="databaseConnectionString">
+            Database connection string
+            </param>
+            <param name="fileName">
+            file name to shrink
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.ShrinkFiles(System.String)">
+            <summary>
+            Shrink all files used for a database
+            </summary>
+            <param name="databaseConnectionString">
+            Database connection string
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.TruncateTable(System.String,System.String,System.String,System.String)">
+            <summary>
+            Truncates a table.
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="databaseName">
+            Name of the database containing the table
+            </param>
+            <param name="schema">
+            The name of the schema containing the table
+            </param>
+            <param name="tableName">
+            The name of the table to truncate
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.WipeAndReseed(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes the contents of a table and reseeds the identity index to 0.
+            Designed to be used on tables that can't be truncated due to foreign key
+            constraints.  Even if the other tables are empty.
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="databaseName">
+            Name of the database containing the table
+            </param>
+            <param name="schema">
+            The name of the schema containing the table
+            </param>
+            <param name="tableName">
+            The name of the table to wipe
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetBoolean(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a boolean from a scalar query
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relevant to the query
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            Date or null
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetDate(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a date from a scalar query without parameters
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relevant to the query
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            Date or null
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetInteger32(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets an integer from a scalar query without parameters
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relevant to the query
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            a 32-bit integer from the query
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetInteger64(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets an integer from a scalar query without parameters
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relevant to the query
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            a 64-bit integer from the query
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.CheckForPossibleSqlInjection(System.String)">
+            <summary>
+            Checks for possible SQL injection attempts. Isn't fully fool proof.  Responsibility needs to be with the caller to the library.
+            </summary>
+            <param name="sqlCommand">
+            The SQL command to parse
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.DatabaseHelperBase`2.GetScalar(System.String,System.String,`0[],System.Boolean)">
+            <summary>
+            Gets a scalar from a database query.
+            </summary>
+            <param name="databaseConnectionString">
+            The database connection string.
+            </param>
+            <param name="sqlCommand">
+            The SQL command.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to assume the SQL is safe
+            </param>
+            <returns>
+            The scalar object.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.FileHelper">
+            <summary>
+            Helper methods for dealing with File related operations
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.FileHelper.GetFormattedPath(System.String)">
+            <summary>
+            ensures a path is formatted with the \ at the end
+            </summary>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The get formatted path.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.FileHelper.GetFullyQualifiedPath(System.String,System.String)">
+            <summary>
+            The get fully qualified path.
+            </summary>
+            <param name="location">
+            </param>
+            <param name="fileName">
+            </param>
+            <returns>
+            The get fully qualified path.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.NumberExtensions">
+            <summary>
+            Helper methods for numbers
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.NumberExtensions.Between(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Wether a number is between or equal to the minimum or maximum number
+            </summary>
+            <param name="input">
+            </param>
+            <param name="min">
+            </param>
+            <param name="max">
+            </param>
+            <returns>
+            The between.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.NumberExtensions.GetOrdinalSuffix(System.Int32)">
+            <summary>
+            gets the ordinal suffix for a number
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The get ordinal suffix.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.NumberExtensions.In(System.Int32,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Checks if a number is in a list of numbers
+            </summary>
+            <param name="input">
+            number to check for
+            </param>
+            <param name="collection">
+            list of numbers to check
+            </param>
+            <returns>
+            true if found, otherwise false
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.NumberExtensions.Inside(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Wether the number is between the min and max, but not equal to one of them
+            </summary>
+            <param name="input">
+            Number to check
+            </param>
+            <param name="min">
+            Minimum Number
+            </param>
+            <param name="max">
+            Maximum Number
+            </param>
+            <returns>
+            The inside.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.PermutationSet">
+            <summary>
+            Represents a set of permutations
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.PermutationSet.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Info.PermutationSet"/> class. 
+            Constructor
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.PermutationSet.Items">
+            <summary>
+            List of items to this set of permutations
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.PermutationHelper">
+            <summary>
+            Helper for working out permutations
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.PermutationHelper.GetPermutations(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Gets the permutations of a list of items
+            </summary>
+            <param name="items">
+            List
+            </param>
+            <returns>
+            The permutations
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.CryptographyHelper">
+            <summary>
+            Helper for cryptography
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.CryptographyHelper.CreateKey(System.Int32)">
+            <summary>
+            Generates a random key
+            </summary>
+            <param name="numberOfBytes">
+            length of the key in bytes
+            </param>
+            <returns>
+            The create key.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.Database.MSSql10">
+            <summary>
+            MS SQL Server 10 (2008) Helper methods for Database connections
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.OnActUponDataReader(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Func{System.Data.IDataReader,System.Int64})">
+            <summary>
+            Opens a data reader then uses an action to process it
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="dataReaderAction">
+            The method that is going to use the data reader
+            </param>
+            <returns>
+            The act on data reader.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.ExecuteNonQueryStoredProcedure(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Executes a Non query Stored Procedure
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="procedureName">
+            The stored procedure to call
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetRecordCount(System.String,System.String)">
+            <summary>
+            Gets the number of records in a table
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="table">
+            The table
+            </param>
+            <returns>
+            Number of records in the table
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetSingleRecord``2(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Gets a strongly typed object that represents a record
+            </summary>
+            <typeparam name="TInfoClass">
+            The data type to convert the data to
+            </typeparam>
+            <typeparam name="TAdoNetHelperClass">
+            Type for the ADO.NET Helper class
+            </typeparam>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            A strongly typed object
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetStrings(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Gets a collection of strings from a select
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            collection of strings
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetStronglyTypedCollection``2(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Gets a strongly typed object that represents a record
+            </summary>
+            <typeparam name="TInfoClass">
+            The data type to convert the data to
+            </typeparam>
+            <typeparam name="TAdoNetHelperClass">
+            Type for the ADO.NET Helper class
+            </typeparam>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+            <returns>
+            A strongly typed object
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetTableExists(System.String,System.String,System.String,System.String)">
+            <summary>
+            checks if a table exists in database
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="databaseName">
+            Name of the database containing the table
+            </param>
+            <param name="schema">
+            Name of the schema containing the table
+            </param>
+            <param name="tableName">
+            Name of the table
+            </param>
+            <returns>
+            The get table exists.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.ProcessFunction``1(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean,System.Func{System.Data.SqlClient.SqlParameterCollection,``0})">
+            <summary>
+            Wrapper for processing a function and dealing with the parameter collection results
+            </summary>
+            <param name="databaseConnectionString">Database Connection String
+                        </param><param name="sqlCommand">Command to Execute
+                        </param><param name="parameters">Collection of parameters relating to the command
+                        </param><param name="assumeSqlSafe">Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the saftey check
+                        </param>
+            <param name="parameterProcessingFunction">Function for processing the parameter result collection and returning it as a POCO object.</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.ProcessNonQuery(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Wrapper for processing a non query SQL command
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="sqlCommand">
+            Command to Execute
+            </param>
+            <param name="parameters">
+            Collection of parameters relating to the command
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to skip the SQL injection safety check.  Use only if you know the code you are passing in is safe and contains a quoted string that is preventing it passing the safety check
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.ShrinkFile(System.String,System.String)">
+            <summary>
+            Shrinks a database file
+            </summary>
+            <param name="databaseConnectionString">
+            Database connection string
+            </param>
+            <param name="fileName">
+            file name to shrink
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.ShrinkFiles(System.String)">
+            <summary>
+            Shrink all files used for a database
+            </summary>
+            <param name="databaseConnectionString">
+            Database connection string
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.TruncateTable(System.String,System.String,System.String,System.String)">
+            <summary>
+            Truncates a table.
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="databaseName">
+            Name of the database containing the table
+            </param>
+            <param name="schema">
+            The name of the schema containing the table
+            </param>
+            <param name="tableName">
+            The name of the table to truncate
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.WipeAndReseed(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes the contents of a table and reseeds the identity index to 0.
+            Designed to be used on tables that can't be truncated due to foreign key
+            constraints.  Even if the other tables are empty.
+            </summary>
+            <param name="databaseConnectionString">
+            Database Connection String
+            </param>
+            <param name="databaseName">
+            Name of the database containing the table
+            </param>
+            <param name="schema">
+            The name of the schema containing the table
+            </param>
+            <param name="tableName">
+            The name of the table to wipe
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.Database.MSSql10.GetScalar(System.String,System.String,System.Data.SqlClient.SqlParameter[],System.Boolean)">
+            <summary>
+            Gets a scalar from a database query.
+            </summary>
+            <param name="databaseConnectionString">
+            The database connection string.
+            </param>
+            <param name="sqlCommand">
+            The SQL command.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+            <param name="assumeSqlSafe">
+            Whether to assume the SQL is safe
+            </param>
+            <returns>
+            The scalar object.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.DateExtensions">
+            <summary>
+            Helper methods for the Date data type
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.DateExtensions.GetDaysUpTo(System.DateTime,System.DateTime)">
+            <summary>
+            Gets all dates including and between 2 dates
+            </summary>
+            <param name="startDate">
+            The start date
+            </param>
+            <param name="endDate">
+            The end date
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.EmailExtensions">
+            <summary>
+            Helper methods for email addresses
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.EmailExtensions.GetMailAddressCollection(Dhgms.DataManager.Model.ConfigurationElementCollection.EmailRecipientCollection)">
+            <summary>
+            Gets a collection of email addresses from an email recipient collection from a config file
+            </summary>
+            <param name="recipients">
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.EmailExtensions.SendEmail(System.String,System.Net.Mail.MailAddress,System.Net.Mail.MailAddressCollection,System.Net.Mail.MailAddressCollection,System.Net.Mail.MailAddressCollection,System.String,System.String,System.Net.Mail.Attachment,System.Boolean)">
+            <summary>
+            Wrapper for sending an email with a file attachment
+            </summary>
+            <param name="hostName">
+            </param>
+            <param name="from">
+            </param>
+            <param name="to">
+            </param>
+            <param name="cc">
+            </param>
+            <param name="bcc">
+            </param>
+            <param name="subject">
+            </param>
+            <param name="body">
+            </param>
+            <param name="attachment">
+            </param>
+            <param name="isHtml">
+            Whether the email body is HTML
+            </param>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.ReflectionExtensions">
+            <summary>
+            Methods that aid in reflection
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.ReflectionExtensions.GetClassesInNamespace(System.String)">
+            <summary>
+            The get classes in namespace.
+            </summary>
+            <param name="fullyQualifiedNamespace">
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.ReflectionExtensions.GetClassesInNamespace(System.String,System.Reflection.Assembly)">
+            <summary>
+            The get classes in namespace.
+            </summary>
+            <param name="fullyQualifiedNamespace">
+            </param>
+            <param name="assembly">
+            </param>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.ReflectionExtensions.LoadStringFromResource(System.Reflection.Assembly,System.String,System.String)">
+            <summary>
+            Loads a string from an embedded resource file
+            </summary>
+            <param name="assembly">
+            The assembly containing the resource
+            </param>
+            <param name="resourceNamespace">
+            Namespace where the resource file resides. Usually the application name
+            </param>
+            <param name="resourceFileName">
+            The filename of the embedded resource
+            </param>
+            <returns>
+            string from embedded resource file
+            </returns>
+            <remarks>
+            This code is based on an answer on stack overflow
+            http://stackoverflow.com/questions/576571/where-do-you-put-sql-statements-in-your-c-sharp-projects
+            answer by: http://stackoverflow.com/users/13302/marc-s
+            </remarks>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Helper.TextExtensions">
+            <summary>
+            Text Extension Methods
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.CompareCollection(System.String[],System.String[],System.StringComparison)">
+            <summary>
+            Compares an array of strings against another
+            </summary>
+            <param name="instance">
+            first collection of strings
+            </param>
+            <param name="other">
+            collection of strings to compare against
+            </param>
+            <param name="stringComparison">
+            Type of string comparison being done
+            </param>
+            <returns>
+            0 if matches, otherswise non-0
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.Contains(System.String,System.Char)">
+            <summary>
+            Indicates if a character is contained in a string
+            </summary>
+            <param name="input">
+            </param>
+            <param name="check">
+            </param>
+            <returns>
+            The contains.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.ContainsAny(System.String,System.Char[])">
+            <summary>
+            Indicates if any of a series of characters is contained in a string
+            </summary>
+            <param name="input">
+            </param>
+            <param name="checks">
+            </param>
+            <returns>
+            The contains any.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.ContainsSymbol(System.String)">
+            <summary>
+            The contains symbol.
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The contains symbol.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.Count(System.String,System.Char)">
+            <summary>
+            Checks to find the number of times a character occurs in a string
+            </summary>
+            <param name="input">
+            </param>
+            <param name="check">
+            </param>
+            <returns>
+            The count.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.CountEquals(System.String,System.Char,System.Int32)">
+            <summary>
+            The count equals.
+            </summary>
+            <param name="input">
+            </param>
+            <param name="check">
+            </param>
+            <param name="numberExpected">
+            </param>
+            <returns>
+            The count equals.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.GetHouseNumberAndStreetMissingSpace(System.String)">
+            <summary>
+            Checks to see if there is a space missing between the house number and first word of street name
+            i.e. 1MAIN STREET
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The get house number and street missing space.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.GetNumberFromStart(System.String)">
+            <summary>
+            The get number from start.
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The get number from start.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.In(System.Char,System.Char[])">
+            <summary>
+            The in.
+            </summary>
+            <param name="input">
+            </param>
+            <param name="checks">
+            </param>
+            <returns>
+            The in.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.In(System.String,System.String[],System.StringComparison)">
+            <summary>
+            The in.
+            </summary>
+            <param name="input">
+            </param>
+            <param name="checks">
+            </param>
+            <param name="stringComparison">
+            </param>
+            <returns>
+            The in.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.IsInteger(System.String)">
+            <summary>
+            The is integer.
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The is integer.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.IsNumeralSuffix(System.Int32,System.String)">
+            <summary>
+            checks if a token matches the ordinal suffix for a number
+            </summary>
+            <param name="number">
+            </param>
+            <param name="suffix">
+            </param>
+            <returns>
+            The is numeral suffix.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.IsNumeric(System.String)">
+            <summary>
+            Returns if a string represents a number
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            The is numeric.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.IsVowel(System.Char)">
+            <summary>
+            checks if a character is a roman vowel
+            </summary>
+            <param name="input">
+            </param>
+            <returns>
+            true for vowel, otherwise false
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.Left(System.String,System.Int32)">
+            <summary>
+            Gets the first x characters of a string
+            </summary>
+            <param name="input">
+            </param>
+            <param name="count">
+            </param>
+            <returns>
+            The left.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.RemoveCharsFromStart(System.String,System.String,System.Boolean)">
+            <summary>
+            The remove chars from start.
+            </summary>
+            <param name="input">
+            </param>
+            <param name="toRemove">
+            </param>
+            <param name="ignoreWhiteSpace">
+            whether to ignore whitespace
+            </param>
+            <returns>
+            The remove chars from start.
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Helper.TextExtensions.Right(System.String,System.Int32)">
+            <summary>
+            Gets the last x characters of a string
+            </summary>
+            <param name="input">
+            </param>
+            <param name="count">
+            </param>
+            <returns>
+            The right.
+            </returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase">
+            <summary>
+            Represents the base command line settings
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase"/> class.
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.#ctor(Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase"/> class.
+            </summary>
+            <param name="other">
+            Object to copy
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase"/> class.
+            </summary>
+            <param name="wantsHelp">a value indicating whether the user wants the help info displayed</param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.CompareTo(Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="other">
+            The instance to compare to
+            </param>
+            <returns>
+            0 if equal, otherwise non zero
+            </returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.Equals(Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase)">
+            <summary>
+            Checks if the current instance matches another of the same type
+            </summary>
+            <param name="other">object to compare</param>
+            <returns>true if equal, otherwise false</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.GetHashCode">
+            <summary>
+            Gets the hash code for the object
+            </summary>
+            <returns>hash code</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.DoTableValidation">
+            <summary>
+            Checks a table to ensure it meets the required schema
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.ToStringArray">
+            <summary>
+            Gets a collection of string data for use for something like a CSV file
+            </summary>
+            <returns>a collection of strings representing the data record</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.DoXmlElement(System.Xml.XmlWriter,System.String)">
+            <summary>
+            Adds an XML Element to an XML Writer
+            </summary>
+            <param name="writer">
+            The XML writer to add the element to.
+            </param>
+            <param name="parentElementName">
+            The name for the parenet element being produced.
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.GetDifferences(Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase)">
+            <summary>
+            Checks this instance against another to see where there are differences
+            </summary>
+            <param name="other">other instance to compare</param>
+            <returns>summary of where there are differences</returns>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.GetOdataVocabularies">
+            <summary>
+            Gets the CDSL that defines the OData Vocabularies for this class
+            </summary>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.OnDisposing">
+            <summary>
+            The on disposing event
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.WantsHelp">
+            <summary>
+            Gets or sets a value indicating whether the user wants the help info displayed
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.CommandLineSettings.CommandLineSettingsBase.HeaderRecord">
+            <summary>
+            Gets a header record for use for something like a CSV file
+            </summary>
+            <returns>a collection of strings representing the header record</returns>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.CommandLineSettings.IRunSet">
+            <summary>
+            Interface for command line settings that will allow use of /runset
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.CommandLineSettings.IRunSet.RunSet">
+            <summary>
+            Name of the required run set
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration.UseApplicationConfigFile">
+            <summary>
+            Gets a value indicating whether to use application config file.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration.UseCommandLineArguments">
+            <summary>
+            Gets a value indicating whether to use command line arguments.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration.UseCurrentUserRegistry">
+            <summary>
+            Gets a value indicating whether to use current user registry.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration.UseLocalMachineRegistry">
+            <summary>
+            Gets a value indicating whether to use local machine registry.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.IApplicationSettingsLoaderConfiguration.UseGroupPolicy">
+            <summary>
+            Gets a value indicating whether to use group policy.
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.Info.ViewFilterBase`1">
+            <summary>
+            Base class for the View Filter.
+            </summary>
+            <typeparam name="TInheritingType">
+            Class that is inheriting this base class
+            </typeparam>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.ViewFilterBase`1.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Dhgms.DataManager.Model.Info.ViewFilterBase`1"/> class. 
+            </summary>
+            <param name="pageNumber">
+            Number of the page to show
+            </param>
+            <param name="pageSize">
+            Size of the pages
+            </param>
+        </member>
+        <member name="M:Dhgms.DataManager.Model.Info.ViewFilterBase`1.GetSelectedColumnNames">
+            <summary>
+            Gets a comma separated list of column names
+            </summary>
+            <returns>
+            a comma separated list of column names
+            </returns>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.ViewFilterBase`1.PageNumber">
+            <summary>
+            The page number to be viewed
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.Info.ViewFilterBase`1.PageSize">
+            <summary>
+            Size of the pages
+            </summary>
+        </member>
+        <member name="T:Dhgms.DataManager.Model.OnceTrueLatch">
+            <summary>
+            A single set latch, used for where you need to flag something like an update flag where updates
+            can be caused by multiple sources.
+            This is designed to reduce the maintenance overhead of using a boolean flag and manually applying the logic.
+            </summary>
+        </member>
+        <member name="F:Dhgms.DataManager.Model.OnceTrueLatch.internalValue">
+            <summary>
+            A flag indicating whether the latch has been set to true.
+            </summary>
+        </member>
+        <member name="P:Dhgms.DataManager.Model.OnceTrueLatch.Value">
+            <summary>
+            Gets or Sets the value indicating whether the flag has been set, or whether it should be set if hasn't already been.
+            </summary>
+        </member>
+    </members>
+</doc>

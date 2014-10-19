@@ -14,12 +14,13 @@ namespace TestDhgms.NucleotideTest.Model.Helper
     using Dhgms.Nucleotide.Model.Info;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
-    using NUnit.Framework;
+    using TestDhgms.NucleotideMocking;
+
+    using Xunit;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [TestFixture]
     public class UnitTestInformationTest
     {
         #region Constants
@@ -150,57 +151,24 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         /// <summary>
         /// 
         /// </summary>
-        public class BaseTest
+        public class GenerateMethod : TestBase
         {
             /// <summary>
             /// 
             /// </summary>
-            /// <exception cref="Exception"></exception>
-            [TestFixtureSetUp]
-            public static void ClassInit()
-            {
-                string assemblyInfo;
-                try
-                {
-                    assemblyInfo = AssemblyCache.QueryAssemblyInfo("Dhgms.Nucleotide");
-                }
-
-                    // ReSharper disable EmptyGeneralCatchClause
-                catch
-                {
-                    // ReSharper restore EmptyGeneralCatchClause
-                    return;
-                }
-
-                if (!string.IsNullOrWhiteSpace(assemblyInfo))
-                {
-                    throw new Exception("Library is installed in the GAC.  Uninstall before performing unit tests.");
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [TestFixture]
-        public class GenerateMethod : BaseTest
-        {
-            /// <summary>
-            /// 
-            /// </summary>
-            [Test]
+            [Fact]
             public void ShouldSucceed()
             {
                 var instance = new Dhgms.Nucleotide.Model.Helper.Information();
-                Console.Write(
-                    instance.Generate(
+                var cgp = new MockClassGenerationParameters(
                         MainNamespaceName,
                         SubNamespace,
                         ClassNameDefaultBase,
-                        ClassRemarks,
                         propertiesLists,
                         null,
-                        null));
+                        null,
+                null, 2010, null, ClassRemarks);
+                Console.Write(instance.Generate(cgp));
             }
         }
     }

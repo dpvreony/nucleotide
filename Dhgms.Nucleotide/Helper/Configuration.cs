@@ -38,7 +38,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(
+        public static string Generate(
             string mainNamespaceName,
             string subNamespace,
             string className,

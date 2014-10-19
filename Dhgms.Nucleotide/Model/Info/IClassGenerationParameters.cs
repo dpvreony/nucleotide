@@ -7,8 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info.Interface
+namespace Dhgms.Nucleotide.Model.Info
 {
+    using System.Diagnostics.Contracts;
+
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
     /// <summary>
