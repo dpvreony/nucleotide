@@ -15,7 +15,6 @@ namespace Dhgms.Nucleotide.Model.Helper
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.Interface;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
     /// <summary>
@@ -101,7 +100,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <param name="classInfo">
         /// The class Info.
         /// </param>
-        protected void DoGetDataColumnsMethod(StringBuilder sb, IClassGenerationParameters classInfo)
+        protected static void DoGetDataColumnsMethod(StringBuilder sb, IClassGenerationParameters classInfo)
         {
             sb.AppendLine("            /// <summary>");
             sb.AppendLine("            /// Gets a collection of data columns representing the type");
@@ -145,7 +144,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected void DoViewFilterGetRowData(StringBuilder sb, Base[] properties)
+        protected static void DoViewFilterGetRowData(StringBuilder sb, Base[] properties)
         {
             if (sb == null)
             {
@@ -176,7 +175,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected void DoDifferenceGetRowData(StringBuilder sb, Base[] properties)
+        protected static void DoDifferenceGetRowData(StringBuilder sb, Base[] properties)
         {
             if (sb == null)
             {
@@ -400,7 +399,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                 sb.AppendLine("        #region our methods");
                 sb.AppendLine(string.Empty);
 
-                this.DoGetDataColumnsMethod(sb, classInfo);
+                DoGetDataColumnsMethod(sb, classInfo);
                 this.DoGetStronglyTypedObjectFromDataReaderRowMethod(sb, classInfo, this.DoInformationClassGetRowData, null);
 
                 sb.AppendLine("        #endregion");

@@ -761,7 +761,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// Collection of properties for the base case, if any.
         /// </param>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        protected void DoOdataVocabulariesMethod(
+        protected static void DoOdataVocabulariesMethod(
             StringBuilder sb, 
             string mainNamespaceName, 
             string subNamespace, 
@@ -1195,8 +1195,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             this.DoClassSpecificMethods(
                 sb, mainNamespaceName, subNamespace, className, properties, baseClassName, baseClassProperties);
 
-            this.DoOdataVocabulariesMethod(
-                sb, mainNamespaceName, subNamespace, className, properties, baseClassProperties);
+            DoOdataVocabulariesMethod(sb, mainNamespaceName, subNamespace, className, properties, baseClassProperties);
 
             sb.AppendLine("        #endregion");
         }

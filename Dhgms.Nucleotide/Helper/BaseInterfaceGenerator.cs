@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
-using Dhgms.Nucleotide.Model.Info.Interface;
+
 using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
 namespace Dhgms.Nucleotide.Model.Helper
 {
+    using Dhgms.Nucleotide.Model.Info;
+
     /// <summary>
     /// String Builder Extensions
     /// </summary>
@@ -150,7 +152,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("{0}}", Common.GetTabs(tabCount));
         }
 
-        private void DoProperties(StringBuilder sb, int tabCount, Base[] properties)
+        private static void DoProperties(StringBuilder sb, int tabCount, Base[] properties)
         {
             var position = 0;
             while (position < properties.Length)

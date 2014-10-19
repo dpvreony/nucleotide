@@ -3,9 +3,26 @@
 //   2004-2012 DHGMS Solutions. Some Rights Reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SingleSimple.cs" company="DHGMS Solutions">
+//   Copyright 2008-2014 DHGMS Solutions
+//   
+//   bleh
+// </copyright>
+// <summary>
+//   Represents a class containing properties that are simple
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
 namespace TestDhgms.NucleotideMocking.Model.Info
 {
+        using System;
+        using System.ComponentModel.DataAnnotations;
+        using System.Diagnostics;
         using System.Diagnostics.CodeAnalysis;
+        using System.Runtime.Serialization;
+        using System.Xml;
+        using System.Xml.Linq;
 
         // ********** WARNING **********
         // This code is automatically generated! Any Changes you make to this file will be lost!
@@ -14,9 +31,10 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         /// <summary>
         /// Represents a class containing properties that are simple
         /// </summary>
+        [DataContract]
         public class SingleSimple
 // ReSharper disable RedundantNameQualifier
-            : Dhgms.DataManager.Model.Info.Base<SingleSimple>
+            : Dhgms.DataManager.Model.Info.InfoBase<SingleSimple>
 // ReSharper restore RedundantNameQualifier
         {
         #region fields
@@ -33,6 +51,23 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleSimple"/> class.
+        /// </summary>
+        /// <param name="other">
+        /// Object to copy
+        /// </param>
+        public SingleSimple(SingleSimple other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
+            this.Id = other.Id;
+            this.Name = other.Name;
+        }
+
         // ********** WARNING **********
         // This code is automatically generated! Any Changes you make to this file will be lost!
         // To make changes edit the corresponding .tt file!
@@ -43,12 +78,11 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         /// <param name="id">Unique Id</param>
         /// <param name="name">Name</param>
         public SingleSimple(
-            System.Int32 id,
-            string name
-                )
+            int id,
+            string name)
             {
-            Id = id;
-            Name = name;
+            this.Id = id;
+            this.Name = name;
         }
 
         #region properties
@@ -56,7 +90,10 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         /// Gets or sets Unique Id
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:UseBuiltInTypeAlias", Justification = "Reviewed. Suppression is OK here.")]
-        public System.Int32 Id
+        [DataMember(IsRequired = true, Order = 1)]
+        [Required]
+[Range(typeof(int), "", "")]
+        public int Id
         {
             get;
             set;
@@ -66,11 +103,31 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         /// Gets or sets Name
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1121:UseBuiltInTypeAlias", Justification = "Reviewed. Suppression is OK here.")]
+        [DataMember(IsRequired = true, Order = 2)]
+        [Required]
         public string Name
         {
             get;
             set;
         }
+
+            /// <summary>
+            /// Gets a header record for use for something like a CSV file
+            /// </summary>
+            /// <returns>a collection of strings representing the header record</returns>
+            public override System.Collections.Generic.IList<string> HeaderRecord
+            {
+                get
+                {
+                    var result = new System.Collections.Generic.List<string>
+                    {
+                        "Id",
+                        "Name"
+                    };
+
+                    return result;
+                }
+            }
 
         #endregion
 
@@ -93,7 +150,7 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         {
             if (other == null)
             {
-                throw new System.ArgumentNullException("other");
+                throw new ArgumentNullException("other");
             }
 
             // Id
@@ -138,609 +195,155 @@ namespace TestDhgms.NucleotideMocking.Model.Info
         public override int GetHashCode()
         {
             return
-                Id.GetHashCode()
-                ^ Name.GetHashCode()
-                ;
-        }
-
-        /// <summary>
-        /// Get Strongly Typed Object from a data reader
-        /// </summary>
-        public override SingleSimple GetStronglyTypedObjectFromDataReaderRow(
-            System.Data.Common.DbDataReader dataReader
-            )
-        {
-            if(dataReader == null)
-            {
-                throw new System.ArgumentNullException("dataReader");
-            }
-
-            //get ordinals
-            int idOrdinal = dataReader.GetOrdinal("Id");
-            int nameOrdinal = dataReader.GetOrdinal("Name");
-
-            //get row data
-            System.Int32 id = 0;
-            if(idOrdinal > -1)
-            {
-                id = dataReader.GetInt32(idOrdinal);
-            }
-
-            string name = null;
-            if(nameOrdinal > -1)
-            {
-                name = dataReader.GetString(nameOrdinal);
-            }
-
-
-            return new SingleSimple(
-                id
-                ,name
-                );
+                this.Id.GetHashCode()
+                ^ (this.Name != null ? this.Name.GetHashCode() : 0);
         }
 
         /// <summary>
         /// Checks a table to ensure it meets the required schema
         /// </summary>
-        public override void DoTableValidation(
-            )
+        public override void DoTableValidation()
         {
-            //Id
-
-            //Name
-
         }
-            /// <summary>
-            /// Gets a header record for use for something like a CSV file
-            /// </summary>
-            /// <returns>a collection of strings representing the header record</returns>
-            public override System.Collections.Generic.IList<System.String> HeaderRecord
-            {
-                get
-                {
-                    System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
-                    {
-                        "Id"
-                        ,"Name"
-                    };
 
-                    return result;
-                }
-            }
             /// <summary>
             /// Gets a collection of string data for use for something like a CSV file
             /// </summary>
             /// <returns>a collection of strings representing the data record</returns>
-            public override System.Collections.Generic.IList<System.String> ToStringArray()
+            public override System.Collections.Generic.IList<string> ToStringArray()
             {
-                System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
+                var result = new System.Collections.Generic.List<string>
                 {
-                    Id.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                    ,Name.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    this.Id.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    this.Name
                 };
 
                 return result;
             }
+
             /// <summary>
-            /// Gets a collection of data columns representing the type
+            /// Adds an XML Element to an XML Writer
             /// </summary>
-            /// <returns>a collection of strings representing the data record</returns>
-            public override System.Data.DataColumn[] GetDataColumns()
+            /// <param name="writer">
+            /// The XML writer to add the element to.
+            /// </param>
+            /// <param name="parentElementName">
+            /// The name for the parenet element being produced.
+            /// </param>
+            public override void DoXmlElement(
+                    System.Xml.XmlWriter writer,
+                    string parentElementName)
             {
-
-                System.Collections.Generic.List<System.Data.DataColumn> result =
-                    new System.Collections.Generic.List<System.Data.DataColumn>
-                {
-                    new System.Data.DataColumn("Id", typeof(System.Int32))
-                    ,new System.Data.DataColumn("Name", typeof(string))
-                };
-
-                return result.ToArray();
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
             }
+
+            if (string.IsNullOrEmpty(parentElementName) || parentElementName.Trim().Length == 0)
+            {
+            throw new ArgumentNullException("parentElementName");
+            }
+
+                writer.WriteStartElement(parentElementName);
+
+                // Id
+                this.DoChildXmlCDataElement(writer, "Id", this.Id.ToString(System.Globalization.CultureInfo.InvariantCulture));
+
+                // Name
+                this.DoChildXmlElement(writer, "Name", this.Name);
+
+                writer.WriteEndElement();
+            }
+
         /// <summary>
         /// Checks this instance against another to see where there are differences
         /// </summary>
         /// <param name="other">other instance to compare</param>
         /// <returns>summary of where there are differences</returns>
 // ReSharper disable RedundantNameQualifier
-        public TestDhgms.NucleotideMocking.Model.Difference.SingleSimple GetDifferences(
+        public TestDhgms.NucleotideMocking.Model.Difference.SingleSimpleDifference GetDifferences(SingleSimple other)
 // ReSharper restore RedundantNameQualifier
-            SingleSimple other
-            )
         {
             if (other == null)
             {
                 throw new System.ArgumentNullException("other");
             }
 
-            //Id
+            // Id
             var checkResult = this.Id.CompareTo(other.Id);
 
-            var id = checkResult != 0;
+            var idDifferent = checkResult != 0;
 
-            //Name
+            // Name
             checkResult = string.CompareOrdinal(this.Name, other.Name);
 
-            var name = checkResult != 0;
+            var nameDifferent = checkResult != 0;
 
 // ReSharper disable RedundantNameQualifier
-            return new TestDhgms.NucleotideMocking.Model.Difference.SingleSimple(
+            return new TestDhgms.NucleotideMocking.Model.Difference.SingleSimpleDifference(
 // ReSharper restore RedundantNameQualifier
-                id
-                ,name
-                );
+                idDifferent,
+                nameDifferent);
         }
 
+        /// <summary>
+        /// Gets the CDSL that defines the OData Vocabularies for this class
+        /// </summary>
+        public static XmlReader GetOdataVocabularies()
+        {
+            // Id
+
+            // Name
+
+        var schema = new XElement(
+            "Schema",
+            new XAttribute("Namespace", "TestDhgms.NucleotideMocking"),
+            new XAttribute("xmlns", "http://schemas.microsoft.com/ado/2009/11/edm"),
+            // using directive
+            new XElement(
+                "Using",
+                new XAttribute("Namespace", "Org.OData.Validation.V1"),
+                new XAttribute("Alias", "Validation"),
+                new XElement(
+                    "Annotations",
+                    new XAttribute("Target", "TestDhgms.NucleotideMocking.SingleSimple/Id")),
+                new XElement(
+                    "Annotations",
+                    new XAttribute("Target", "TestDhgms.NucleotideMocking.SingleSimple/Name"))));
+
+        Debug.Assert(schema.Document != null, "schema.Document != null");
+        return schema.Document.CreateReader();
+        }
         #endregion
+            /// <summary>
+            /// The on disposing event
+            /// </summary>
+            protected override void OnDisposing()
+            {
+            }
     }
 }
 
-namespace TestDhgms.NucleotideMocking.Model.SearchFilter
-{
-        using System.Diagnostics.CodeAnalysis;
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Represents a class containing properties that are simple
-        /// </summary>
-        public class SingleSimple
-// ReSharper disable RedundantNameQualifier
-            : Dhgms.DataManager.Model.Info.SearchFilter.Base<SingleSimple>
-// ReSharper restore RedundantNameQualifier
-        {
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SingleSimple"/> class.
-        /// </summary>
-        public SingleSimple()
-        {
-        }
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SingleSimple"/> class.
-        /// </summary>
-        /// <param name="id">Unique Id</param>
-        /// <param name="name">Name</param>
-        public SingleSimple(
-            Dhgms.DataManager.Model.SearchFilterComparison.Base id,
-            Dhgms.DataManager.Model.SearchFilterComparison.Base name
-                )
-            {
-            Id = id;
-            Name = name;
-        }
-
-		#region properties
-		/// <summary>
-		/// Unique Id
-		/// </summary>
-		public Dhgms.DataManager.Model.SearchFilterComparison.Base Id
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public Dhgms.DataManager.Model.SearchFilterComparison.Base Name
-		{
-			get;
-			set;
-		}
-
-		#endregion
-
-        #region IComparable methods
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="other">
-        /// The instance to compare to
-        /// </param>
-        /// <returns>
-        /// 0 if equal, otherwise non zero
-        /// </returns>
-        public override int CompareTo(SingleSimple other)
-        {
-            if (other == null)
-            {
-                throw new System.ArgumentNullException("other");
-            }
-
-			int 			checkResult = Id.CompareTo(other.Id);
-			if(checkResult != 0)
-			{
-				return (checkResult > 0) ? 1 : -1;
-			}
-
-						checkResult = Name.CompareTo(other.Name);
-			if(checkResult != 0)
-			{
-				return (checkResult > 0) ? 2 : -2;
-			}
-
-            return 0;
-        }
-
-        #endregion
-#region IEquatable methods
-            /// <summary>
-            /// Checks if the current instance matches another of the same type
-            /// </summary>
-            /// <param name="other">object to compare</param>
-            /// <returns>true if equal, otherwise false</returns>
-            public override bool Equals(SingleSimple other)
-            {
-                return this.CompareTo(other) == 0;
-            }
-
-#endregion
-
-    #region our methods
-
-        /// <summary>
-        /// Gets the hash code for the object
-        /// </summary>
-        /// <returns>hash code</returns>
-        public override int GetHashCode()
-        {
-            return
-                Id.GetHashCode()
-                ^ Name.GetHashCode()
-                ;
-        }
-
-		/// <summary>
-		/// Get Strongly Typed Object from a data reader
-		/// </summary>
-		public override SingleSimple GetStronglyTypedObjectFromDataReaderRow(
-			System.Data.Common.DbDataReader dataReader
-			)
-		{
-			throw new System.NotImplementedException();
-		}
-
-        /// <summary>
-        /// Checks a table to ensure it meets the required schema
-        /// </summary>
-        public override void DoTableValidation(
-            )
-        {
-            //Id
-
-            //Name
-
-        }
-            /// <summary>
-            /// Gets a header record for use for something like a CSV file
-            /// </summary>
-            /// <returns>a collection of strings representing the header record</returns>
-            public override System.Collections.Generic.IList<System.String> HeaderRecord
-            {
-                get
-                {
-                    System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
-                    {
-                        "Id"
-                        ,"Name"
-                    };
-
-                    return result;
-                }
-            }
-			/// <summary>
-			/// Gets a collection of string data for use for something like a CSV file
-			/// </summary>
-			/// <returns>a collection of strings representing the data record</returns>
-			public override System.Collections.Generic.IList<System.String> ToStringArray()
-			{
-				throw new System.NotImplementedException();
-			}
-			/// <summary>
-			/// Gets a collection of data columns representing the type
-			/// </summary>
-			/// <returns>a collection of strings representing the data record</returns>
-			public override System.Data.DataColumn[] GetDataColumns()
-			{
-				throw new System.NotImplementedException();
-			}
-        #endregion
-    }
-}
-
-namespace TestDhgms.NucleotideMocking.Model.ViewFilter
-{
-        using System.Diagnostics.CodeAnalysis;
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Represents a class containing properties that are simple
-        /// </summary>
-        public class SingleSimple
-// ReSharper disable RedundantNameQualifier
-            : Dhgms.DataManager.Model.Info.ViewFilter<SingleSimple>
-// ReSharper restore RedundantNameQualifier
-        {
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		public SingleSimple() : base(1,0)
-		{
-		}
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-		/// <summary>
-		/// Constructor
-		/// </summary>
-        /// <param name="id">Unique Id</param>
-        /// <param name="name">Name</param>
-		/// <param name="pageNumber">The number of the page being retrieved</param>
-		/// <param name="pageSize">The size of pages being retrieved</param>
-		public SingleSimple(
-            bool id,
-            bool name
-			,System.Int32 pageNumber
-			,System.Int32 pageSize
-			) : base(
-				pageNumber
-				,pageSize
-				)
-			{
-			Id = id;
-			Name = name;
-		}
-
-		#region properties
-		/// <summary>
-		/// Unique Id
-		/// </summary>
-		public bool Id
-		{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Name
-		/// </summary>
-		public bool Name
-		{
-			get;
-			set;
-		}
-
-		#endregion
-
-        #region IComparable methods
-
-        // ********** WARNING **********
-        // This code is automatically generated! Any Changes you make to this file will be lost!
-        // To make changes edit the corresponding .tt file!
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="other">
-        /// The instance to compare to
-        /// </param>
-        /// <returns>
-        /// 0 if equal, otherwise non zero
-        /// </returns>
-        public override int CompareTo(SingleSimple other)
-        {
-            if (other == null)
-            {
-                throw new System.ArgumentNullException("other");
-            }
-
-			int checkResult = Id.CompareTo(other.Id);
-			if(checkResult != 0)
-			{
-				return (checkResult > 0) ? 1 : -1;
-			}
-
-			checkResult = Name.CompareTo(other.Name);
-			if(checkResult != 0)
-			{
-				return (checkResult > 0) ? 2 : -2;
-			}
-
-            return 0;
-        }
-
-        #endregion
-#region IEquatable methods
-            /// <summary>
-            /// Checks if the current instance matches another of the same type
-            /// </summary>
-            /// <param name="other">object to compare</param>
-            /// <returns>true if equal, otherwise false</returns>
-            public override bool Equals(SingleSimple other)
-            {
-                return this.CompareTo(other) == 0;
-            }
-
-#endregion
-
-    #region our methods
-
-        /// <summary>
-        /// Gets the hash code for the object
-        /// </summary>
-        /// <returns>hash code</returns>
-        public override int GetHashCode()
-        {
-            return
-                Id.GetHashCode()
-                ^ Name.GetHashCode()
-                ;
-        }
-
-		/// <summary>
-		/// Get Strongly Typed Object from a data reader
-		/// </summary>
-		public override SingleSimple GetStronglyTypedObjectFromDataReaderRow(
-			System.Data.Common.DbDataReader dataReader
-			)
-		{
-			if(dataReader == null)
-			{
-				throw new System.ArgumentNullException("dataReader");
-			}
-
-			//get ordinals
-            int idOrdinal = dataReader.GetOrdinal("Id");
-            int nameOrdinal = dataReader.GetOrdinal("Name");
-			int pageNumberOrdinal = dataReader.GetOrdinal("pageNumber");
-			int pageSizeOrdinal = dataReader.GetOrdinal("pageSize");
-
-			//get row data
-			bool id =
-				(idOrdinal > -1) && (dataReader.GetBoolean(idOrdinal));
-
-			bool name =
-				(nameOrdinal > -1) && (dataReader.GetBoolean(nameOrdinal));
-
-			System.Int32 pageNumber = 0;
-			if(pageNumberOrdinal > -1)
-			{
-				pageNumber = dataReader.GetInt32(pageNumberOrdinal);
-			}
-
-			System.Int32 pageSize = 0;
-			if(pageSizeOrdinal > -1)
-			{
-				pageSize = dataReader.GetInt32(pageSizeOrdinal);
-			}
-
-
-			return new SingleSimple(
-				id
-				,name
-				,pageNumber
-				,pageSize
-				);
-		}
-
-        /// <summary>
-        /// Checks a table to ensure it meets the required schema
-        /// </summary>
-        public override void DoTableValidation(
-            )
-        {
-            //Id
-
-            //Name
-
-        }
-            /// <summary>
-            /// Gets a header record for use for something like a CSV file
-            /// </summary>
-            /// <returns>a collection of strings representing the header record</returns>
-            public override System.Collections.Generic.IList<System.String> HeaderRecord
-            {
-                get
-                {
-                    System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
-                    {
-                        "Id"
-                        ,"Name"
-                    };
-
-                    return result;
-                }
-            }
-            /// <summary>
-            /// Gets a collection of string data for use for something like a CSV file
-            /// </summary>
-            /// <returns>a collection of strings representing the data record</returns>
-            public override System.Collections.Generic.IList<System.String> ToStringArray()
-            {
-                System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
-                {
-                    Id? "1" : "0"
-                    ,Name? "1" : "0"
-                };
-
-                return result;
-            }
-            /// <summary>
-            /// Gets a collection of data columns representing the type
-            /// </summary>
-            /// <returns>a collection of strings representing the data record</returns>
-            public override System.Data.DataColumn[] GetDataColumns()
-            {
-
-                System.Collections.Generic.List<System.Data.DataColumn> result =
-                    new System.Collections.Generic.List<System.Data.DataColumn>
-                {
-                    new System.Data.DataColumn("Id", typeof(System.Int32))
-                    ,new System.Data.DataColumn("Name", typeof(string))
-                };
-
-                return result.ToArray();
-            }
-		/// <summary>
-		/// Gets a comma separated list of column names
-		/// </summary>
-		/// <returns>a comma separated list of column names</returns>
-		public override System.String GetSelectedColumnNames()
-		{
-			System.Text.StringBuilder sb = new System.Text.StringBuilder();
-			System.String comma = null;
-			//Id
-			if(Id)
-			{
-				sb.AppendLine("Id");
-
-				comma = ",";
-			}
-			//Name
-			if(Name)
-			{
-				sb.AppendLine(comma + "Name");
-
-				if(comma == null)
-				{
-					comma = ",";
-				}
-			}
-			return sb.ToString();
-		}
-
-        #endregion
-    }
-}
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SingleSimple.cs" company="DHGMS Solutions">
+//   Copyright 2008-2014 DHGMS Solutions
+//   
+//   bleh
+// </copyright>
+// <summary>
+//   Represents a class containing properties that are simple
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TestDhgms.NucleotideMocking.Model.Difference
 {
+        using System;
+        using System.ComponentModel.DataAnnotations;
+        using System.Diagnostics;
         using System.Diagnostics.CodeAnalysis;
+        using System.Runtime.Serialization;
+        using System.Xml;
+        using System.Xml.Linq;
 
         // ********** WARNING **********
         // This code is automatically generated! Any Changes you make to this file will be lost!
@@ -749,9 +352,10 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
         /// <summary>
         /// Represents a class containing properties that are simple
         /// </summary>
-        public class SingleSimple
+        [DataContract]
+        public class SingleSimpleDifference
 // ReSharper disable RedundantNameQualifier
-            : Dhgms.DataManager.Model.Info.Difference<SingleSimple>
+            : Dhgms.DataManager.Model.Info.DifferenceBase<SingleSimpleDifference>
 // ReSharper restore RedundantNameQualifier
         {
         // ********** WARNING **********
@@ -759,10 +363,27 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
         // To make changes edit the corresponding .tt file!
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SingleSimple"/> class.
+        /// Initializes a new instance of the <see cref="SingleSimpleDifference"/> class.
         /// </summary>
-        public SingleSimple()
+        public SingleSimpleDifference()
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingleSimpleDifference"/> class.
+        /// </summary>
+        /// <param name="other">
+        /// Object to copy
+        /// </param>
+        public SingleSimpleDifference(SingleSimpleDifference other)
+        {
+            if (other == null)
+            {
+                throw new ArgumentNullException("other");
+            }
+
+            this.Id = other.Id;
+            this.Name = other.Name;
         }
 
         // ********** WARNING **********
@@ -770,17 +391,16 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
         // To make changes edit the corresponding .tt file!
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SingleSimple"/> class.
+        /// Initializes a new instance of the <see cref="SingleSimpleDifference"/> class.
         /// </summary>
         /// <param name="id">Unique Id</param>
         /// <param name="name">Name</param>
-        public SingleSimple(
+        public SingleSimpleDifference(
             bool id,
-            bool name
-                )
+            bool name)
             {
-            Id = id;
-            Name = name;
+            this.Id = id;
+            this.Name = name;
         }
 
         #region properties
@@ -801,6 +421,24 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
             get;
             set;
         }
+
+            /// <summary>
+            /// Gets a header record for use for something like a CSV file
+            /// </summary>
+            /// <returns>a collection of strings representing the header record</returns>
+            public override System.Collections.Generic.IList<string> HeaderRecord
+            {
+                get
+                {
+                    var result = new System.Collections.Generic.List<string>
+                    {
+                        "Id",
+                        "Name"
+                    };
+
+                    return result;
+                }
+            }
 
             /// <summary>
             /// Gets the number of properties that are different
@@ -836,11 +474,11 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
         /// <returns>
         /// 0 if equal, otherwise non zero
         /// </returns>
-        public override int CompareTo(SingleSimple other)
+        public override int CompareTo(SingleSimpleDifference other)
         {
             if (other == null)
             {
-                throw new System.ArgumentNullException("other");
+                throw new ArgumentNullException("other");
             }
 
             int             checkResult = Id.CompareTo(other.Id);
@@ -865,7 +503,7 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
             /// </summary>
             /// <param name="other">object to compare</param>
             /// <returns>true if equal, otherwise false</returns>
-            public override bool Equals(SingleSimple other)
+            public override bool Equals(SingleSimpleDifference other)
             {
                 return this.CompareTo(other) == 0;
             }
@@ -881,121 +519,82 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
         public override int GetHashCode()
         {
             return
-                Id.GetHashCode()
-                ^ Name.GetHashCode()
-                ;
-        }
-
-        /// <summary>
-        /// Get Strongly Typed Object from a data reader
-        /// </summary>
-        public override SingleSimple GetStronglyTypedObjectFromDataReaderRow(
-            System.Data.Common.DbDataReader dataReader
-            )
-        {
-            if(dataReader == null)
-            {
-                throw new System.ArgumentNullException("dataReader");
-            }
-
-            //get ordinals
-            int idOrdinal = dataReader.GetOrdinal("Id");
-            int nameOrdinal = dataReader.GetOrdinal("Name");
-
-            //get row data
-            bool id = false;
-            if(idOrdinal > -1)
-            {
-                id = dataReader.GetBoolean(idOrdinal);
-            }
-
-            bool name = false;
-            if(nameOrdinal > -1)
-            {
-                name = dataReader.GetBoolean(nameOrdinal);
-            }
-
-
-            return new SingleSimple(
-                id
-                ,name
-                );
+                this.Id.GetHashCode()
+                ^ this.Name.GetHashCode();
         }
 
         /// <summary>
         /// Checks a table to ensure it meets the required schema
         /// </summary>
-        public override void DoTableValidation(
-            )
+        public override void DoTableValidation()
         {
-            //Id
-
-            //Name
-
         }
-            /// <summary>
-            /// Gets a header record for use for something like a CSV file
-            /// </summary>
-            /// <returns>a collection of strings representing the header record</returns>
-            public override System.Collections.Generic.IList<System.String> HeaderRecord
-            {
-                get
-                {
-                    System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
-                    {
-                        "Id"
-                        ,"Name"
-                    };
 
-                    return result;
-                }
-            }
             /// <summary>
             /// Gets a collection of string data for use for something like a CSV file
             /// </summary>
             /// <returns>a collection of strings representing the data record</returns>
-            public override System.Collections.Generic.IList<System.String> ToStringArray()
+            public override System.Collections.Generic.IList<string> ToStringArray()
             {
-                System.Collections.Generic.List<System.String> result = new System.Collections.Generic.List<System.String>
+                var result = new System.Collections.Generic.List<string>
                 {
-                    Id? "1" : "0"
-                    ,Name? "1" : "0"
+                    this.Id ? "1" : "0",
+                    this.Name ? "1" : "0"
                 };
 
                 return result;
             }
+
             /// <summary>
-            /// Gets a collection of data columns representing the type
+            /// Adds an XML Element to an XML Writer
             /// </summary>
-            /// <returns>a collection of strings representing the data record</returns>
-            public override System.Data.DataColumn[] GetDataColumns()
+            /// <param name="writer">
+            /// The XML writer to add the element to.
+            /// </param>
+            /// <param name="parentElementName">
+            /// The name for the parenet element being produced.
+            /// </param>
+            public override void DoXmlElement(
+                    System.Xml.XmlWriter writer,
+                    string parentElementName)
             {
-
-                System.Collections.Generic.List<System.Data.DataColumn> result =
-                    new System.Collections.Generic.List<System.Data.DataColumn>
-                {
-                    new System.Data.DataColumn("Id", typeof(System.Int32))
-                    ,new System.Data.DataColumn("Name", typeof(string))
-                };
-
-                return result.ToArray();
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
             }
+
+            if (string.IsNullOrEmpty(parentElementName) || parentElementName.Trim().Length == 0)
+            {
+            throw new ArgumentNullException("parentElementName");
+            }
+
+                writer.WriteStartElement(parentElementName);
+
+                // Id
+                this.DoChildXmlCDataElement(writer, "Id", this.Id ? "1" : "0");
+
+                // Name
+                this.DoChildXmlElement(writer, "Name", this.Name ? "1" : "0");
+
+                writer.WriteEndElement();
+            }
+
 
         /// <summary>
         /// Gets the names of the columns that are different
         /// </summary>
-        /// <return>
+        /// <returns>
         /// list of names of the columns that are different
-        /// </return>
-        public override System.Collections.Generic.IList<System.String> GetColumnNames()
+        /// </returns>
+        public override System.Collections.Generic.IList<string> GetColumnNames()
         {
-            System.Collections.Generic.List<System.String> columns = new System.Collections.Generic.List<System.String>();
-            if(Id)
+            var columns = new System.Collections.Generic.List<string>();
+            if (this.Id)
             {
                 columns.Add("Id");
             }
 
-            if(Name)
+            if (this.Name)
             {
                 columns.Add("Name");
             }
@@ -1003,7 +602,41 @@ namespace TestDhgms.NucleotideMocking.Model.Difference
             return columns;
         }
 
+        /// <summary>
+        /// Gets the CDSL that defines the OData Vocabularies for this class
+        /// </summary>
+        public static XmlReader GetOdataVocabularies()
+        {
+            // Id
+
+            // Name
+
+        var schema = new XElement(
+            "Schema",
+            new XAttribute("Namespace", "TestDhgms.NucleotideMocking"),
+            new XAttribute("xmlns", "http://schemas.microsoft.com/ado/2009/11/edm"),
+            // using directive
+            new XElement(
+                "Using",
+                new XAttribute("Namespace", "Org.OData.Validation.V1"),
+                new XAttribute("Alias", "Validation"),
+                new XElement(
+                    "Annotations",
+                    new XAttribute("Target", "TestDhgms.NucleotideMocking.SingleSimple/Id")),
+                new XElement(
+                    "Annotations",
+                    new XAttribute("Target", "TestDhgms.NucleotideMocking.SingleSimple/Name"))));
+
+        Debug.Assert(schema.Document != null, "schema.Document != null");
+        return schema.Document.CreateReader();
+        }
         #endregion
+            /// <summary>
+            /// The on disposing event
+            /// </summary>
+            protected override void OnDisposing()
+            {
+            }
     }
 }
 

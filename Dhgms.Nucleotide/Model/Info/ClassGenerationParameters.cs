@@ -11,7 +11,6 @@ namespace Dhgms.Nucleotide.Model.Info
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info.Interface;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
     /// <summary>
@@ -20,53 +19,53 @@ namespace Dhgms.Nucleotide.Model.Info
     public abstract class ClassGenerationParameters : IClassGenerationParameters
     {
         /// <summary>
-        /// Gets the main namespace.
+        /// Gets or sets the main namespace.
         /// </summary>
-        public abstract string MainNamespaceName { get; }
+        public abstract string MainNamespaceName { get; protected set; }
 
         /// <summary>
-        /// Gets the sub namespace, if any
+        /// Gets or sets the sub namespace, if any
         /// </summary>
-        public abstract string SubNamespace { get; }
+        public abstract string SubNamespace { get; protected set; }
 
         /// <summary>
-        /// Gets name of the information class.
+        /// Gets or sets name of the information class.
         /// </summary>
-        public abstract string ClassName { get; }
+        public abstract string ClassName { get; protected set; }
 
         /// <summary>
-        /// Gets name of the information class.
+        /// Gets or sets name of the information class.
         /// </summary>
-        public abstract string ClassRemarks { get; }
+        public abstract string ClassRemarks { get; protected set; }
 
         /// <summary>
-        /// Gets the collection of properties for the class.
+        /// Gets or sets the collection of properties for the class.
         /// </summary>
-        public abstract Base[] Properties { get; }
+        public abstract Base[] Properties { get; protected set; }
 
         /// <summary>
-        /// Gets the collection of properties for the inherited base class, if any.
+        /// Gets or sets the collection of properties for the inherited base class, if any.
         /// </summary>
-        public abstract Base[] BaseClassProperties { get; }
+        public abstract Base[] BaseClassProperties { get; protected set; }
 
         /// <summary>
-        /// Gets the company name.
+        /// Gets or sets the company name.
         /// </summary>
-        public abstract string CompanyName { get; }
+        public abstract string CompanyName { get; protected set; }
 
         /// <summary>
-        /// Gets the copyright banner.
+        /// Gets or sets the copyright banner.
         /// </summary>
-        public abstract string[] CopyrightBanner { get; }
+        public abstract string[] CopyrightBanner { get; protected set; }
 
         /// <summary>
-        /// Gets the copyright start year.
+        /// Gets or sets the copyright start year.
         /// </summary>
-        public abstract int CopyrightStartYear { get; }
+        public abstract int CopyrightStartYear { get; protected set; }
 
         /// <summary>
-        /// Gets name of the base information class.
+        /// Gets or sets name of the base information class.
         /// </summary>
-        public abstract string BaseClassName { get; }
+        public abstract string BaseClassName { get; protected set; }
     }
 }

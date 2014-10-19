@@ -88,42 +88,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Model\Helper\AdoNetHelpers.cs" />
-    <Compile Include="Model\Helper\BaseClassGenerator.cs" />
-    <Compile Include="Model\Helper\BaseInterfaceGenerator.cs" />
-    <Compile Include="Model\Helper\Common.cs" />
-    <Compile Include="Model\Helper\Configuration.cs" />
-    <Compile Include="Model\Helper\Difference.cs" />
-    <Compile Include="Model\Helper\DifferenceInterfaceGenerator.cs" />
-    <Compile Include="Model\Helper\EntityFrameworkHelpers.cs" />
-    <Compile Include="Model\Helper\Information.cs" />
-    <Compile Include="Model\Helper\InformationInterfaceGenerator.cs" />
-    <Compile Include="Model\Helper\ProviderProxy.cs" />
-    <Compile Include="Model\Helper\SearchFilter.cs" />
-    <Compile Include="Model\Helper\UnitTestBase.cs" />
-    <Compile Include="Model\Helper\UnitTestInformation.cs" />
-    <Compile Include="Model\Helper\ViewFilter.cs" />
+    <Compile Include="Helper\AdoNetHelpers.cs" />
+    <Compile Include="Helper\BaseClassGenerator.cs" />
+    <Compile Include="Helper\BaseInterfaceGenerator.cs" />
+    <Compile Include="Helper\Common.cs" />
+    <Compile Include="Helper\Configuration.cs" />
+    <Compile Include="Helper\Difference.cs" />
+    <Compile Include="Helper\DifferenceInterfaceGenerator.cs" />
+    <Compile Include="Helper\EntityFrameworkHelpers.cs" />
+    <Compile Include="Helper\Information.cs" />
+    <Compile Include="Helper\InformationInterfaceGenerator.cs" />
+    <Compile Include="Helper\ProviderProxy.cs" />
+    <Compile Include="Helper\SearchFilter.cs" />
+    <Compile Include="Helper\UnitTestBase.cs" />
+    <Compile Include="Helper\UnitTestInformation.cs" />
+    <Compile Include="Helper\ViewFilter.cs" />
     <Compile Include="Model\Info\ClassGenerationParameters.cs" />
     <Compile Include="Model\Info\CollectionType.cs" />
     <Compile Include="Model\Info\ConfigurationType.cs" />
-    <Compile Include="Model\Info\Interface\IClassGenerationParameters.cs" />
-    <Compile Include="Model\Info\PropertyInfo\Base.cs" />
-    <Compile Include="Model\Info\PropertyInfo\ClrBoolean.cs" />
+    <Compile Include="Model\Info\IClassGenerationParameters.cs" />
+    <Compile Include="PropertyInfo\Base.cs" />
+    <Compile Include="PropertyInfo\ClrBoolean.cs" />
     <None Include="deploy.bat" />
     <None Include="Dhgms.Nucleotide.nuspec" />
     <None Include="dhgms.nucleotide.snk" />
-    <None Include="Model\Info\PropertyInfo\Number.tt">
+    <None Include="PropertyInfo\Number.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Number1.cs</LastGenOutput>
     </None>
-    <Compile Include="Model\Info\PropertyInfo\ClrDateTime.cs" />
-    <Compile Include="Model\Info\PropertyInfo\ClrGuid.cs" />
-    <Compile Include="Model\Info\PropertyInfo\Number1.cs">
+    <Compile Include="PropertyInfo\ClrDateTime.cs" />
+    <Compile Include="PropertyInfo\ClrGuid.cs" />
+    <Compile Include="PropertyInfo\Number1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Number.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Info\PropertyInfo\ClrString.cs" />
+    <Compile Include="PropertyInfo\ClrString.cs" />
     <Compile Include="Model\Info\ProviderProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.StyleCop" />
@@ -155,6 +155,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Info\Interface\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

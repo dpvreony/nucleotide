@@ -10,13 +10,14 @@ namespace TestDhgms.NucleotideTest.Model.Helper
     using Dhgms.Nucleotide.Model.Info;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using TestDhgms.NucleotideMocking;
+
+    using Xunit;
 
     /// <summary>
     /// The difference.
     /// </summary>
-    [TestClass]
-    public class Difference
+    public class DifferenceTests
     {
         #region Constants
 
@@ -72,102 +73,83 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         #region Public Methods and Operators
 
         /// <summary>
-        /// Method checks to see if unit tests can take place
+        /// Tests for the Generate Method
         /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        public class GenerateMethod
         {
-            string assemblyInfo;
-            try
+            /// <summary>
+            /// The test difference all arguments null.
+            /// </summary>
+            [Fact]
+            public void ThrowsExceptionCgpNull()
             {
-                assemblyInfo = AssemblyCache.QueryAssemblyInfo("Dhgms.Nucleotide");
-            }
-                
-                // ReSharper disable EmptyGeneralCatchClause
-            catch
-            {
-                // ReSharper restore EmptyGeneralCatchClause
-                return;
+                var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
+
+                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(null));
+
+                Assert.Equal("cgp", ex.ParamName);
             }
 
-            if (!string.IsNullOrWhiteSpace(assemblyInfo))
+            /// <summary>
+            /// Throws Exception because the Difference Class Name is null
+            /// </summary>
+            [Fact]
+            public void ThrowsExceptionDifferenceClassNameNull()
             {
-                throw new Exception("Library is installed in the GAC.  Uninstall before performing unit tests.");
+                var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
+
+                var cgp = new MockClassGenerationParameters(MainNamespaceName, SubNamespace, null, null, TestInputs.PropertiesDefault, null, null, 2010, null, null);
+
+                var ex = Assert.Throws<ArgumentException>(() => instance.Generate(cgp));
+
+                Assert.Equal("cgp", ex.ParamName);
             }
         }
 
-        /// <summary>
-        /// The test difference all arguments null.
-        /// </summary>
-        [TestMethod]
-        public void TestDifferenceAllArgumentsNull()
-        {
-            var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
 
-            try
-            {
-                instance.Generate(null, null, null, null, null, null, null);
-            }
-            catch (ArgumentNullException e)
-            {
-                Assert.AreEqual("mainNamespaceName", e.ParamName);
-                return;
-            }
-
-            Assert.Fail();
-        }
-
+        /*
         /// <summary>
         /// The test difference class name null.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferenceClassNameNull()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
 
-            try
-            {
-                instance.Generate(
-                    MainNamespaceName, SubNamespace, null, ClassRemarks, this.propertiesDefault, null, null);
-            }
-            catch (ArgumentNullException e)
-            {
-                Assert.AreEqual("className", e.ParamName);
-                return;
-            }
+            var cgp = new MockClassGenerationParameters(MainNamespaceName);
 
-            Assert.Fail("Expected System.NullReferenceException");
+            var ex = Assert.Throws<ArgumentException>(() => instance.Generate(cgp));
+            Assert.Equal("cgp", ex.ParamName);
         }
 
         /// <summary>
         /// The test difference class remarks null.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferenceClassRemarksNull()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
 
-            try
-            {
-                instance.Generate(
-                    MainNamespaceName, SubNamespace, ClassNameDefaultBase, null, this.propertiesDefault, null, null);
-            }
-            catch (ArgumentNullException e)
-            {
-                Assert.AreEqual("classRemarks", e.ParamName);
-                return;
-            }
+            var cgp = new MockClassGenerationParameters(
+                MainNamespaceName,
+                SubNamespace,
+                ClassNameDefaultBase,
+                this.propertiesDefault,
+                null,
+                null,
+                null,
+                2010,
+                null,
+                null);
 
-            Assert.Fail("Expected System.NullReferenceException");
+            var ex = Assert.Throws<ArgumentException>(() => instance.Generate(cgp));
+            Assert.Equal("classRemarks", ex.ParamName);
         }
 
         /// <summary>
         /// The test difference inheriting should succeed.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferenceInheritingShouldSucceed()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
@@ -184,10 +166,12 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         /// <summary>
         /// The test difference main namespace name null.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferenceMainNamespaceNameNull()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
+
+
 
             try
             {
@@ -206,7 +190,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         /// <summary>
         /// The test difference no base should succeed.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferenceNoBaseShouldSucceed()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
@@ -217,23 +201,17 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         /// <summary>
         /// The test difference properties null.
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestDifferencePropertiesNull()
         {
             var instance = new Dhgms.Nucleotide.Model.Helper.Difference();
 
-            try
-            {
-                instance.Generate(MainNamespaceName, SubNamespace, ClassNameDefaultBase, ClassRemarks, null, null, null);
-            }
-            catch (ArgumentNullException e)
-            {
-                Assert.AreEqual("properties", e.ParamName);
-                return;
-            }
+            var cgp = new MockClassGenerationParameters(MainNamespaceName, SubNamespace, ClassNameDefaultBase, null, null, null, null, 2010, null, ClassRemarks);
 
-            Assert.Fail("Expected System.NullReferenceException");
+            var ex = Assert.Throws<ArgumentException>(() => instance.Generate(cgp));
+            Assert.Equal("cgp", ex.ParamName);
         }
+         * */
 
         #endregion
     }

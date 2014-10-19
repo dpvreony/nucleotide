@@ -11,7 +11,6 @@ namespace Dhgms.Nucleotide.Model.Helper
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.Interface;
     using Dhgms.Nucleotide.Model.Info.PropertyInfo;
 
     /// <summary>
