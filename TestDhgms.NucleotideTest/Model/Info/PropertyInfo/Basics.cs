@@ -10,46 +10,19 @@
 namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
 {
     using System;
-    using NUnit.Framework;
+
+    using Xunit;
 
     /// <summary>
     /// Unit Tests for PropertyInfo classes
     /// </summary>
-    [TestFixture]
-    public class PropertyInfo
+    public class PropertyInfoTests : TestDhgms.NucleotideTest.Model.Helper.TestBase
     {
-        /// <summary>
-        /// Method checks to see if unit tests can take place
-        /// </summary>
-        /// <param name="context">
-        /// The context.
-        /// </param>
-        [TestFixtureSetUp]
-        public static void ClassInit()
-        {
-            string assemblyInfo;
-            try
-            {
-                assemblyInfo = AssemblyCache.QueryAssemblyInfo("Dhgms.Nucleotide");
-            }
-            // ReSharper disable EmptyGeneralCatchClause
-            catch
-            // ReSharper restore EmptyGeneralCatchClause
-            {
-                return;
-            }
-
-            if (!string.IsNullOrWhiteSpace(assemblyInfo))
-            {
-                throw new Exception("Library is installed in the GAC.  Uninstall before performing unit tests.");
-            }
-        }
-
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName1()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName1()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -63,8 +36,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName2()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName2()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -78,8 +51,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName3()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName3()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -93,8 +66,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName4()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName4()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -108,8 +81,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName5()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName5()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -123,8 +96,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName6()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName6()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -138,8 +111,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName7()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName7()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -153,8 +126,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName8()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName8()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -168,8 +141,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName9()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName9()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -183,8 +156,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName10()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName10()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -198,8 +171,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName11()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName11()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -213,8 +186,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName12()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName12()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -228,8 +201,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName13()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName13()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -243,8 +216,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName14()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName14()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -258,8 +231,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName15()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName15()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -273,8 +246,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName16()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName16()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -288,8 +261,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName17()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName17()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -303,8 +276,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName18()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName18()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -318,8 +291,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName19()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName19()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -333,8 +306,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName20()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName20()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -348,8 +321,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName21()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName21()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -363,8 +336,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName22()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName22()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -378,8 +351,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName23()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName23()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -393,8 +366,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName24()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName24()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -408,8 +381,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName25()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName25()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -423,8 +396,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName26()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName26()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -438,8 +411,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName27()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName27()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -453,8 +426,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName28()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName28()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -468,8 +441,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName29()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName29()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -483,8 +456,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName30()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName30()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -498,8 +471,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName31()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName31()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -513,8 +486,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName32()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName32()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -528,8 +501,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName33()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName33()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -543,8 +516,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName34()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName34()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -558,8 +531,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName35()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName35()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -573,8 +546,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName36()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName36()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -588,8 +561,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName37()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName37()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -603,8 +576,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName38()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName38()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -618,8 +591,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName39()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName39()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -633,8 +606,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName40()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName40()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -648,8 +621,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName41()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName41()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -663,8 +636,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName42()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName42()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -678,8 +651,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName43()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName43()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -693,8 +666,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName44()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName44()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -708,8 +681,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName45()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName45()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -723,8 +696,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName46()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName46()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -738,8 +711,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName47()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName47()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -753,8 +726,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName48()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName48()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -768,8 +741,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName49()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName49()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -783,8 +756,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName50()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName50()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -798,8 +771,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName51()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName51()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -813,8 +786,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName52()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName52()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -828,8 +801,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName53()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName53()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -843,8 +816,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName54()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName54()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -858,8 +831,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName55()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName55()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -873,8 +846,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName56()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName56()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -888,8 +861,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName57()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName57()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -903,8 +876,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName58()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName58()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -918,8 +891,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName59()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName59()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -933,8 +906,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName60()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName60()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -948,8 +921,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName61()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName61()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -963,8 +936,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName62()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName62()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -978,8 +951,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName63()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName63()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -993,8 +966,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName64()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName64()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1008,8 +981,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName65()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName65()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1023,8 +996,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName66()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName66()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1038,8 +1011,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName67()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName67()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1053,8 +1026,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName68()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName68()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1068,8 +1041,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName69()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName69()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1083,8 +1056,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName70()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName70()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1098,8 +1071,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName71()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName71()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1113,8 +1086,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName72()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName72()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1128,8 +1101,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName73()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName73()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1143,8 +1116,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName74()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName74()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1158,8 +1131,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName75()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName75()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1173,8 +1146,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName76()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName76()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1188,8 +1161,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName77()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName77()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1203,8 +1176,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName78()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName78()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1218,8 +1191,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName79()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName79()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1233,8 +1206,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName80()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName80()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1248,8 +1221,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName81()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName81()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1263,8 +1236,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName82()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName82()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1278,8 +1251,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName83()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName83()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1293,8 +1266,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName84()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName84()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1308,8 +1281,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName85()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName85()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1323,8 +1296,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName86()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName86()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1338,8 +1311,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName87()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName87()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1353,8 +1326,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName88()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName88()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1368,8 +1341,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName89()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName89()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1383,8 +1356,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName90()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName90()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1398,8 +1371,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName91()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName91()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1413,8 +1386,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName92()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName92()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1428,8 +1401,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName93()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName93()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1443,8 +1416,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName94()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName94()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1458,8 +1431,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName95()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName95()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1473,8 +1446,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName96()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName96()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1488,8 +1461,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName97()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName97()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1503,8 +1476,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName98()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName98()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1518,8 +1491,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName99()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName99()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1533,8 +1506,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName100()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName100()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1548,8 +1521,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName101()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName101()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1563,8 +1536,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName102()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName102()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1578,8 +1551,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName103()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName103()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1593,8 +1566,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName104()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName104()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1608,8 +1581,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName105()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName105()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1623,8 +1596,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName106()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName106()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1638,8 +1611,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName107()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName107()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1653,8 +1626,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName108()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName108()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1668,8 +1641,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName109()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName109()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1683,8 +1656,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName110()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName110()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1698,8 +1671,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName111()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName111()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1713,8 +1686,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName112()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName112()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1728,8 +1701,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName113()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName113()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1743,8 +1716,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName114()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName114()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1758,8 +1731,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName115()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName115()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1773,8 +1746,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName116()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName116()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1788,8 +1761,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName117()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName117()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1803,8 +1776,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName118()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName118()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1818,8 +1791,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName119()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName119()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1833,8 +1806,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName120()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName120()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1848,8 +1821,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName121()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName121()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1863,8 +1836,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName122()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName122()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1878,8 +1851,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName123()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName123()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1893,8 +1866,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName124()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName124()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1908,8 +1881,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName125()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName125()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1923,8 +1896,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName126()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName126()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1938,8 +1911,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName127()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName127()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1953,8 +1926,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName128()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName128()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1968,8 +1941,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName129()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName129()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1983,8 +1956,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName130()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName130()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -1998,8 +1971,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName131()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName131()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2013,8 +1986,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName132()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName132()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2028,8 +2001,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName133()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName133()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2043,8 +2016,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName134()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName134()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2058,8 +2031,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName135()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName135()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2073,8 +2046,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName136()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName136()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2088,8 +2061,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName137()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName137()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2103,8 +2076,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName138()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName138()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2118,8 +2091,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName139()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName139()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2133,8 +2106,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName140()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName140()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2148,8 +2121,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName141()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName141()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2163,8 +2136,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName142()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName142()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2178,8 +2151,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName143()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName143()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2193,8 +2166,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName144()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName144()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2208,8 +2181,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName145()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName145()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2223,8 +2196,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName146()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName146()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2238,8 +2211,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName147()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName147()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2253,8 +2226,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName148()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName148()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2268,8 +2241,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName149()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName149()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2283,8 +2256,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName150()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName150()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2298,8 +2271,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName151()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName151()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2313,8 +2286,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName152()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName152()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2328,8 +2301,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName153()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName153()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2343,8 +2316,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName154()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName154()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2358,8 +2331,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName155()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName155()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2373,8 +2346,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName156()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName156()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2388,8 +2361,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName157()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName157()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2403,8 +2376,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName158()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName158()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2418,8 +2391,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName159()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName159()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2433,8 +2406,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName160()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName160()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2448,8 +2421,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName161()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName161()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2463,8 +2436,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName162()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName162()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2478,8 +2451,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName163()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName163()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2493,8 +2466,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName164()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName164()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2508,8 +2481,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName165()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName165()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2523,8 +2496,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName166()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName166()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2538,8 +2511,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName167()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName167()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2553,8 +2526,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName168()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName168()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2568,8 +2541,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName169()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName169()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2583,8 +2556,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName170()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName170()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2598,8 +2571,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName171()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName171()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2613,8 +2586,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName172()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName172()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2628,8 +2601,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName173()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName173()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2643,8 +2616,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName174()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName174()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2658,8 +2631,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName175()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName175()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2673,8 +2646,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName176()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName176()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2688,8 +2661,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName177()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName177()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2703,8 +2676,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName178()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName178()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2718,8 +2691,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName179()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName179()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2733,8 +2706,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName180()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName180()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2748,8 +2721,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName181()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName181()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2763,8 +2736,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName182()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName182()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2778,8 +2751,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName183()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName183()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2793,8 +2766,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName184()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName184()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2808,8 +2781,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName185()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName185()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2823,8 +2796,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName186()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName186()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2838,8 +2811,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName187()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName187()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2853,8 +2826,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName188()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName188()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2868,8 +2841,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName189()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName189()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2883,8 +2856,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName190()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName190()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2898,8 +2871,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName191()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName191()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2913,8 +2886,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName192()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName192()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2928,8 +2901,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName193()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName193()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2943,8 +2916,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName194()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName194()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2958,8 +2931,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName195()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName195()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2973,8 +2946,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName196()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName196()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -2988,8 +2961,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName197()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName197()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3003,8 +2976,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName198()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName198()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3018,8 +2991,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName199()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName199()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3033,8 +3006,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName200()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName200()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3048,8 +3021,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName201()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName201()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3063,8 +3036,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName202()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName202()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3078,8 +3051,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName203()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName203()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3093,8 +3066,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName204()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName204()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3108,8 +3081,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName205()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName205()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3123,8 +3096,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName206()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName206()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3138,8 +3111,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName207()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName207()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3153,8 +3126,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName208()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName208()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3168,8 +3141,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName209()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName209()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3183,8 +3156,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName210()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName210()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3198,8 +3171,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName211()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName211()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3213,8 +3186,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName212()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName212()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3228,8 +3201,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName213()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName213()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3243,8 +3216,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName214()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName214()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3258,8 +3231,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName215()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName215()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3273,8 +3246,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName216()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName216()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3288,8 +3261,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName217()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName217()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3303,8 +3276,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName218()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName218()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3318,8 +3291,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName219()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName219()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3333,8 +3306,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName220()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName220()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3348,8 +3321,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName221()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName221()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3363,8 +3336,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName222()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName222()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3378,8 +3351,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName223()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName223()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3393,8 +3366,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName224()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName224()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3408,8 +3381,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName225()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName225()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3423,8 +3396,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName226()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName226()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3438,8 +3411,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName227()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName227()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3453,8 +3426,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName228()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName228()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3468,8 +3441,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName229()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName229()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3483,8 +3456,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName230()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName230()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3498,8 +3471,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName231()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName231()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3513,8 +3486,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName232()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName232()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3528,8 +3501,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName233()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName233()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3543,8 +3516,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName234()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName234()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3558,8 +3531,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName235()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName235()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3573,8 +3546,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName236()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName236()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3588,8 +3561,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName237()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName237()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3603,8 +3576,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName238()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName238()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3618,8 +3591,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName239()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName239()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3633,8 +3606,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName240()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName240()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3648,8 +3621,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName241()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName241()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3663,8 +3636,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName242()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName242()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3678,8 +3651,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName243()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName243()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3693,8 +3666,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName244()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName244()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3708,8 +3681,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName245()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName245()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3723,8 +3696,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName246()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName246()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3738,8 +3711,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName247()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName247()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3753,8 +3726,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName248()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName248()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3768,8 +3741,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName249()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName249()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3783,8 +3756,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName250()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName250()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3798,8 +3771,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName251()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName251()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3813,8 +3786,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName252()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName252()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3828,8 +3801,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName253()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName253()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3843,8 +3816,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName254()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName254()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3858,8 +3831,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName255()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName255()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3873,8 +3846,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName256()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName256()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3888,8 +3861,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName257()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName257()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3903,8 +3876,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName258()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName258()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3918,8 +3891,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName259()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName259()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3933,8 +3906,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName260()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName260()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3948,8 +3921,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName261()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName261()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3963,8 +3936,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName262()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName262()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3978,8 +3951,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName263()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName263()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -3993,8 +3966,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName264()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName264()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4008,8 +3981,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName265()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName265()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4023,8 +3996,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName266()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName266()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4038,8 +4011,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName267()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName267()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4053,8 +4026,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName268()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName268()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4068,8 +4041,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName269()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName269()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4083,8 +4056,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName270()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName270()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4098,8 +4071,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName271()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName271()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4113,8 +4086,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName272()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName272()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4128,8 +4101,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName273()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName273()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4143,8 +4116,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName274()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName274()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4158,8 +4131,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName275()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName275()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4173,8 +4146,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName276()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName276()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4188,8 +4161,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName277()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName277()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4203,8 +4176,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName278()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName278()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4218,8 +4191,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName279()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName279()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4233,8 +4206,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName280()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName280()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4248,8 +4221,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName281()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName281()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4263,8 +4236,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName282()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName282()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4278,8 +4251,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName283()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName283()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4293,8 +4266,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName284()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName284()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4308,8 +4281,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName285()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName285()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4323,8 +4296,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName286()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName286()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4338,8 +4311,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName287()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName287()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4353,8 +4326,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName288()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName288()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4368,8 +4341,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName289()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName289()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4383,8 +4356,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName290()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName290()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4398,8 +4371,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName291()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName291()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4413,8 +4386,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName292()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName292()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4428,8 +4401,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName293()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName293()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4443,8 +4416,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName294()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName294()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4458,8 +4431,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName295()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName295()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4473,8 +4446,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName296()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName296()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4488,8 +4461,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName297()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName297()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4503,8 +4476,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName298()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName298()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4518,8 +4491,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName299()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName299()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4533,8 +4506,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName300()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName300()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4548,8 +4521,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName301()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName301()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4563,8 +4536,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName302()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName302()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4578,8 +4551,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName303()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName303()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4593,8 +4566,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName304()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName304()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4608,8 +4581,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName305()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName305()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4623,8 +4596,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName306()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName306()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4638,8 +4611,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName307()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName307()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4653,8 +4626,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName308()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName308()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4668,8 +4641,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName309()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName309()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4683,8 +4656,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName310()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName310()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4698,8 +4671,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName311()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName311()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4713,8 +4686,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName312()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName312()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4728,8 +4701,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName313()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName313()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4743,8 +4716,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName314()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName314()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4758,8 +4731,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName315()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName315()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4773,8 +4746,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName316()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName316()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4788,8 +4761,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName317()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName317()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4803,8 +4776,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName318()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName318()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4818,8 +4791,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName319()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName319()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4833,8 +4806,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName320()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName320()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4848,8 +4821,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName321()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName321()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4863,8 +4836,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName322()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName322()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4878,8 +4851,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName323()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName323()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4893,8 +4866,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName324()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName324()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4908,8 +4881,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName325()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName325()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4923,8 +4896,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName326()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName326()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4938,8 +4911,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName327()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName327()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4953,8 +4926,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName328()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName328()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4968,8 +4941,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName329()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName329()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4983,8 +4956,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName330()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName330()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -4998,8 +4971,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName331()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName331()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5013,8 +4986,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName332()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName332()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5028,8 +5001,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName333()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName333()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5043,8 +5016,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName334()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName334()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5058,8 +5031,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName335()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName335()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5073,8 +5046,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName336()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName336()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5088,8 +5061,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName337()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName337()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5103,8 +5076,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName338()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName338()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5118,8 +5091,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName339()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName339()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5133,8 +5106,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName340()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName340()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5148,8 +5121,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName341()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName341()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5163,8 +5136,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName342()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName342()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5178,8 +5151,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName343()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName343()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5193,8 +5166,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName344()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName344()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5208,8 +5181,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName345()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName345()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5223,8 +5196,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName346()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName346()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5238,8 +5211,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName347()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName347()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5253,8 +5226,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName348()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName348()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5268,8 +5241,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName349()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName349()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5283,8 +5256,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName350()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName350()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5298,8 +5271,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName351()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName351()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5313,8 +5286,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName352()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName352()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5328,8 +5301,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName353()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName353()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5343,8 +5316,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName354()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName354()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5358,8 +5331,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName355()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName355()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5373,8 +5346,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName356()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName356()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5388,8 +5361,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName357()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName357()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5403,8 +5376,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName358()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName358()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5418,8 +5391,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName359()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName359()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5433,8 +5406,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName360()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName360()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5448,8 +5421,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName361()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName361()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5463,8 +5436,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName362()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName362()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5478,8 +5451,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName363()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName363()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5493,8 +5466,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName364()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName364()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5508,8 +5481,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
-        [Test]
-        public void TestKeywordAsName365()
+        [Fact]
+        public void ThrowExceptionsIfKeywordAsName365()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -5523,7 +5496,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrBoolean with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrBooleanConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5539,16 +5512,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a ClrChar with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5572,7 +5545,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrChar with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5596,7 +5569,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrChar with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5620,7 +5593,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrChar with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5644,7 +5617,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrChar with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5668,7 +5641,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrChar with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrCharGetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5692,7 +5665,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5716,7 +5689,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5740,7 +5713,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5764,7 +5737,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5788,7 +5761,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5812,7 +5785,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDateTime with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDateTimeGetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5836,7 +5809,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5854,16 +5827,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a ClrDecimal with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5887,7 +5860,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5911,7 +5884,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5935,7 +5908,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5959,7 +5932,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -5983,7 +5956,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDecimal with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDecimalGetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6007,7 +5980,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6025,16 +5998,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a ClrDouble with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6058,7 +6031,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6082,7 +6055,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6106,7 +6079,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6130,7 +6103,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6154,7 +6127,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrDouble with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrDoubleGetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6178,7 +6151,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6196,16 +6169,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a ClrSingle with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6229,7 +6202,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6253,7 +6226,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6277,7 +6250,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6301,7 +6274,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6325,7 +6298,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a ClrSingle with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClrSingleGetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6349,7 +6322,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6367,16 +6340,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a Integer16 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6400,7 +6373,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6424,7 +6397,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6448,7 +6421,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6472,7 +6445,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6496,7 +6469,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer16 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger16GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6520,7 +6493,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6538,16 +6511,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a Integer32 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6571,7 +6544,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6595,7 +6568,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6619,7 +6592,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6643,7 +6616,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6667,7 +6640,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer32 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger32GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6691,7 +6664,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6709,16 +6682,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a Integer64 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6742,7 +6715,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6766,7 +6739,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6790,7 +6763,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6814,7 +6787,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6838,7 +6811,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a Integer64 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestInteger64GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6862,7 +6835,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6880,16 +6853,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a UnsignedInteger8 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6913,7 +6886,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6937,7 +6910,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6961,7 +6934,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -6985,7 +6958,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7009,7 +6982,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger8 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger8GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7033,7 +7006,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7051,16 +7024,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a UnsignedInteger16 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7084,7 +7057,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7108,7 +7081,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7132,7 +7105,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7156,7 +7129,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7180,7 +7153,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger16 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger16GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7204,7 +7177,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7222,16 +7195,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a UnsignedInteger32 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7255,7 +7228,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7279,7 +7252,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7303,7 +7276,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7327,7 +7300,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7351,7 +7324,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger32 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger32GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7375,7 +7348,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with basic arguments passed into the constructor
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7393,16 +7366,16 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
                 true,
                 null);
 
-            Assert.AreEqual(CollectionType, instance.Collection);
-            Assert.AreEqual(Name, instance.Name);
-            Assert.AreEqual(Description, instance.Description);
-            Assert.AreEqual(Optional, instance.Optional);
+            Assert.Equal(CollectionType, instance.Collection);
+            Assert.Equal(Name, instance.Name);
+            Assert.Equal(Description, instance.Description);
+            Assert.Equal(Optional, instance.Optional);
         }
 
         /// <summary>
         /// Tests a UnsignedInteger64 with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7426,7 +7399,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with the min null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7450,7 +7423,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with the max null, and allows the property to be optional\ nullable
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7474,7 +7447,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with the min and max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7498,7 +7471,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with the min null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
@@ -7522,7 +7495,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         /// <summary>
         /// Tests a UnsignedInteger64 with the max null
         /// </summary>
-        [Test]
+        [Fact]
         public void TestUnsignedInteger64GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;

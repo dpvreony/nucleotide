@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -31,6 +32,11 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,38 +88,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Model\Helper\AdoNetHelpers.cs" />
-    <Compile Include="Model\Helper\BaseClassGenerator.cs" />
-    <Compile Include="Model\Helper\Common.cs" />
-    <Compile Include="Model\Helper\Configuration.cs" />
-    <Compile Include="Model\Helper\Difference.cs" />
-    <Compile Include="Model\Helper\EntityFrameworkHelpers.cs" />
-    <Compile Include="Model\Helper\Information.cs" />
-    <Compile Include="Model\Helper\ProviderProxy.cs" />
-    <Compile Include="Model\Helper\SearchFilter.cs" />
-    <Compile Include="Model\Helper\UnitTestBase.cs" />
-    <Compile Include="Model\Helper\UnitTestInformation.cs" />
-    <Compile Include="Model\Helper\ViewFilter.cs" />
+    <Compile Include="Helper\AdoNetHelpers.cs" />
+    <Compile Include="Helper\BaseClassGenerator.cs" />
+    <Compile Include="Helper\BaseInterfaceGenerator.cs" />
+    <Compile Include="Helper\Common.cs" />
+    <Compile Include="Helper\Configuration.cs" />
+    <Compile Include="Helper\Difference.cs" />
+    <Compile Include="Helper\DifferenceInterfaceGenerator.cs" />
+    <Compile Include="Helper\EntityFrameworkHelpers.cs" />
+    <Compile Include="Helper\Information.cs" />
+    <Compile Include="Helper\InformationInterfaceGenerator.cs" />
+    <Compile Include="Helper\ProviderProxy.cs" />
+    <Compile Include="Helper\SearchFilter.cs" />
+    <Compile Include="Helper\UnitTestBase.cs" />
+    <Compile Include="Helper\UnitTestInformation.cs" />
+    <Compile Include="Helper\ViewFilter.cs" />
     <Compile Include="Model\Info\ClassGenerationParameters.cs" />
     <Compile Include="Model\Info\CollectionType.cs" />
     <Compile Include="Model\Info\ConfigurationType.cs" />
-    <Compile Include="Model\Info\Interface\IClassGenerationParameters.cs" />
-    <Compile Include="Model\Info\PropertyInfo\Base.cs" />
-    <Compile Include="Model\Info\PropertyInfo\ClrBoolean.cs" />
+    <Compile Include="Model\Info\IClassGenerationParameters.cs" />
+    <Compile Include="PropertyInfo\Base.cs" />
+    <Compile Include="PropertyInfo\ClrBoolean.cs" />
     <None Include="deploy.bat" />
     <None Include="Dhgms.Nucleotide.nuspec" />
     <None Include="dhgms.nucleotide.snk" />
-    <None Include="Model\Info\PropertyInfo\Number.tt">
+    <None Include="PropertyInfo\Number.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Number1.cs</LastGenOutput>
     </None>
-    <Compile Include="Model\Info\PropertyInfo\ClrDateTime.cs" />
-    <Compile Include="Model\Info\PropertyInfo\Number1.cs">
+    <Compile Include="PropertyInfo\ClrDateTime.cs" />
+    <Compile Include="PropertyInfo\ClrGuid.cs" />
+    <Compile Include="PropertyInfo\Number1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Number.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Info\PropertyInfo\ClrString.cs" />
+    <Compile Include="PropertyInfo\ClrString.cs" />
     <Compile Include="Model\Info\ProviderProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.StyleCop" />
@@ -146,12 +156,21 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Info\Interface\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not $(ConfigurationName) == Debug nuget pack $(ProjectPath) -Prop Configuration=Release -Symbols</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
     <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="false" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
