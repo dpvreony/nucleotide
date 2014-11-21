@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="4963CD59-B76A-4A98-9732-D07DE95871BC" Name="Dhgms Nucleotide" Language="1033" Version="1.0.0.0" Manufacturer="DHGMS Solutions" UpgradeCode="e17abf05-15cd-4383-9a08-67945f46210e">
+  <Product Id="*" Name="Dhgms Nucleotide" Language="1033" Version="1.0.0.0" Manufacturer="DHGMS Solutions" UpgradeCode="e17abf05-15cd-4383-9a08-67945f46210e">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Description="DHGMS Nucleotide Code Generation Library" Manufacturer="DHGMS Solutions"  />
 
-    <MajorUpgrade AllowDowngrades="no" DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes"/>
-    <MediaTemplate />
+    <MajorUpgrade AllowDowngrades="no" DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" />
+    <MediaTemplate EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="Dhgms.Nucleotide.Setup" Level="1">
       <ComponentGroupRef Id="ProductComponents" />

@@ -35,12 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dhgms.DataManager, Version=0.1202.19.0, Culture=neutral, PublicKeyToken=9788e158d3dbc1fa, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dhgms.Nucleotide\packages\Dhgms.DataManager.0.1202.19.0\lib\net35\Dhgms.DataManager.dll</HintPath>
+    <Reference Include="Dhgms.DataManager">
+      <HintPath>..\Dhgms.Nucleotide\packages\Dhgms.DataManager.0.1403.10.0\lib\net40\Dhgms.DataManager.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockClassGenerationParameters.cs" />
     <Compile Include="Model\SingleSimple.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -55,7 +58,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj">
+      <Project>{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}</Project>
+      <Name>Dhgms.Nucleotide</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Model\SingleMaxLength.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

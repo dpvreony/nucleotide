@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -33,6 +34,11 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,12 +68,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\Dhgms.Nucleotide\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="xunit">
+      <HintPath>..\Dhgms.Nucleotide\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -77,12 +83,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\GacManagedAccess.cs" />
-    <Compile Include="Model\Helper\Difference.cs" />
+    <Compile Include="Model\Helper\DifferenceTests.cs" />
     <Compile Include="Model\Helper\Information.cs" />
     <Compile Include="Model\Helper\ProviderProxy.cs" />
-    <Compile Include="Model\Helper\SearchFilter.cs" />
+    <Compile Include="Model\Helper\TestBase.cs" />
     <Compile Include="Model\Helper\UnitTestInformationTest.cs" />
-    <Compile Include="Model\Helper\ViewFilter.cs" />
     <Compile Include="Model\Info\PropertyInfo\Basics.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,12 +95,17 @@
     </Compile>
     <Compile Include="Model\Info\ProviderProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestInputs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj">
       <Project>{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}</Project>
       <Name>Dhgms.Nucleotide</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj">
+      <Project>{06D18E16-EC37-4E16-8EE3-47607E095FE1}</Project>
+      <Name>TestDhgms.NucleotideMocking</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -134,11 +144,22 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
+    <AfterTransform>PostTransformation;$(AfterTransform)</AfterTransform>
     <TransformOnBuild>true</TransformOnBuild>
+    <OverwriteReadOnlyOuputFiles>true</OverwriteReadOnlyOuputFiles>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
+  <Target Name="PostTransformation">
+    <!--Condition=" %(GeneratedFiles.ReadOnlyFileOverwritten) == true " -->
+    <!--Need to check the file out -->
+  </Target>
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="false" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

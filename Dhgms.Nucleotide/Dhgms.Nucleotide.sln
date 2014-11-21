@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7EFBC9C-E778-4A30-AD62-5FB70B6D0754}"
 	ProjectSection(SolutionItems) = preProject
 		Dhgms.Nucleotide.vsmdi = Dhgms.Nucleotide.vsmdi
 		Local.testsettings = Local.testsettings
+		Project.Targets = Project.Targets
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
@@ -14,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideTest", 
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Help.Dhgms.Nucleotide", "..\Help.Dhgms.Nucleotide\Help.Dhgms.Nucleotide.shfbproj", "{3FAA9567-B637-4017-99CD-5415A8A94B30}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Dhgms.Nucleotide.Setup", "..\Dhgms.Nucleotide.Setup\Dhgms.Nucleotide.Setup.wixproj", "{ED5BA208-4A62-4B81-822D-79EF3E88792D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideMocking", "..\TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj", "{06D18E16-EC37-4E16-8EE3-47607E095FE1}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -30,12 +33,9 @@ Global
 		SccProjectUniqueName3 = ..\\Help.Dhgms.Nucleotide\\Help.Dhgms.Nucleotide.shfbproj
 		SccProjectName3 = ../Help.Dhgms.Nucleotide
 		SccLocalPath3 = ..\\Help.Dhgms.Nucleotide
-		SccProjectUniqueName4 = ..\\Dhgms.Nucleotide.Setup\\Dhgms.Nucleotide.Setup.wixproj
-		SccProjectName4 = ../Dhgms.Nucleotide.Setup
-		SccLocalPath4 = ..\\Dhgms.Nucleotide.Setup
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Dhgms.Nucleotide.vsmdi
+		SccProjectUniqueName4 = ..\\TestDhgms.NucleotideMocking\\TestDhgms.NucleotideMocking.csproj
+		SccProjectName4 = ../TestDhgms.NucleotideMocking
+		SccLocalPath4 = ..\\TestDhgms.NucleotideMocking
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -123,34 +123,36 @@ Global
 		{3FAA9567-B637-4017-99CD-5415A8A94B30}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{3FAA9567-B637-4017-99CD-5415A8A94B30}.SingleImage|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{3FAA9567-B637-4017-99CD-5415A8A94B30}.SingleImage|x86.ActiveCfg = Debug|Any CPU
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.CD_ROM|Any CPU.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.CD_ROM|Mixed Platforms.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.CD_ROM|Mixed Platforms.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.CD_ROM|x86.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.CD_ROM|x86.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Debug|x86.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Debug|x86.Build.0 = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.DVD-5|Any CPU.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.DVD-5|Mixed Platforms.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.DVD-5|Mixed Platforms.Build.0 = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.DVD-5|x86.ActiveCfg = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.DVD-5|x86.Build.0 = Debug|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|Any CPU.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|Any CPU.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|x86.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.Release|x86.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.SingleImage|Any CPU.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.SingleImage|Mixed Platforms.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.SingleImage|Mixed Platforms.Build.0 = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.SingleImage|x86.ActiveCfg = Release|x86
-		{ED5BA208-4A62-4B81-822D-79EF3E88792D}.SingleImage|x86.Build.0 = Release|x86
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|x86.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Dhgms.Nucleotide.vsmdi
 	EndGlobalSection
 EndGlobal
