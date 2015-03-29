@@ -84,8 +84,22 @@ namespace Dhgms.Nucleotide.Model.Helper
             }
 
             var companyName = cgp.CompanyName;
+            if (string.IsNullOrWhiteSpace(companyName))
+            {
+                throw new ArgumentException("CompanyName", "cgp");
+            }
+
             var copyrightBanner = cgp.CopyrightBanner;
+            if (copyrightBanner == null || copyrightBanner.Length < 1)
+            {
+                throw new ArgumentException("copyrightBanner", "cgp");
+            }
+
             var copyrightStartYear = cgp.CopyrightStartYear;
+            if (copyrightStartYear < 1900)
+            {
+                throw new ArgumentException("CopyrightStartYear", "cgp");
+            }
 
             var classRemarks = cgp.ClassRemarks;
             if (string.IsNullOrWhiteSpace(classRemarks))

@@ -401,7 +401,7 @@ foreach(var keyword in keywords)
         /// Tests to ensure exception is thrown when a keyword is passed as a name
         /// </summary>
         [Fact]
-        public void ThrowExceptionsIfKeywordAsName<#=i++#>()
+        public static void ThrowExceptionsIfKeywordAsName<#=i++#>()
         {
             Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
@@ -429,7 +429,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with basic arguments passed into the constructor
         /// </summary>
         [Fact]
-        public void Test<#=item#>ConstructorBasicArguments()
+        public static void Test<#=item#>ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -464,7 +464,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorBothNullsOptional()
+        public static void Test<#=complexItem.Key#>GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -488,7 +488,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the min null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorMinNullOptional()
+        public static void Test<#=complexItem.Key#>GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -512,7 +512,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the max null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorMaxNullOptional()
+        public static void Test<#=complexItem.Key#>GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -536,7 +536,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the min and max null
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorBothNulls()
+        public static void Test<#=complexItem.Key#>GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -560,7 +560,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the min null
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorMinNull()
+        public static void Test<#=complexItem.Key#>GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -584,7 +584,7 @@ foreach(System.Collections.Generic.KeyValuePair<System.String, System.String> co
         /// Tests a <#=complexItem.Key#> with the max null
         /// </summary>
         [Fact]
-        public void Test<#=complexItem.Key#>GetMutatorMaxNull()
+        public static void Test<#=complexItem.Key#>GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -628,7 +628,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with basic arguments passed into the constructor
         /// </summary>
         [Fact]
-        public void Test<#=item#>ConstructorBasicArguments()
+        public static void Test<#=item#>ConstructorBasicArguments()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -655,7 +655,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the min and max null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorBothNullsOptional()
+        public static void Test<#=item#>GetMutatorBothNullsOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -679,7 +679,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the min null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorMinNullOptional()
+        public static void Test<#=item#>GetMutatorMinNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -703,7 +703,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the max null, and allows the property to be optional\ nullable
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorMaxNullOptional()
+        public static void Test<#=item#>GetMutatorMaxNullOptional()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -727,7 +727,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the min and max null
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorBothNulls()
+        public static void Test<#=item#>GetMutatorBothNulls()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -751,7 +751,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the min null
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorMinNull()
+        public static void Test<#=item#>GetMutatorMinNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
@@ -775,7 +775,7 @@ foreach(String item in items)
         /// Tests a <#=item#> with the max null
         /// </summary>
         [Fact]
-        public void Test<#=item#>GetMutatorMaxNull()
+        public static void Test<#=item#>GetMutatorMaxNull()
         {
             const Dhgms.Nucleotide.Model.Info.CollectionType CollectionType = Dhgms.Nucleotide.Model.Info.CollectionType.GenericLinkedList;
             const string Name = "Name";
