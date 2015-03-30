@@ -1,10 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7EFBC9C-E778-4A30-AD62-5FB70B6D0754}"
 	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
 		Dhgms.Nucleotide.vsmdi = Dhgms.Nucleotide.vsmdi
 		Local.testsettings = Local.testsettings
 		Project.Targets = Project.Targets
@@ -18,6 +19,13 @@ EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Help.Dhgms.Nucleotide", "..\Help.Dhgms.Nucleotide\Help.Dhgms.Nucleotide.shfbproj", "{3FAA9567-B637-4017-99CD-5415A8A94B30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideMocking", "..\TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj", "{06D18E16-EC37-4E16-8EE3-47607E095FE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82BF3CBD-3DDB-4189-AE7C-BA3032D1D368}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
