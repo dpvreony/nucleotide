@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		build.ps1 = build.ps1
 		Dhgms.Nucleotide.vsmdi = Dhgms.Nucleotide.vsmdi
+		install.ps1 = install.ps1
 		Local.testsettings = Local.testsettings
 		Project.Targets = Project.Targets
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		uninstall.ps1 = uninstall.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhgms.Nucleotide", "Dhgms.Nucleotide.csproj", "{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}"
@@ -25,6 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82BF3C
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugetpackage", "nugetpackage", "{10B30B5D-7064-429E-A73B-BF485FC38AED}"
+	ProjectSection(SolutionItems) = preProject
+		nugetpackage\dhgmsnucleotide.targets = nugetpackage\dhgmsnucleotide.targets
 	EndProjectSection
 EndProject
 Global
