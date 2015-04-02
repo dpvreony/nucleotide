@@ -11,6 +11,8 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
 {
     using System;
 
+    using Dhgms.Nucleotide.PropertyInfo;
+
     using Xunit;
 
     /// <summary>
@@ -24,7 +26,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName1()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "abstract",
                 "Description",
@@ -39,7 +41,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName2()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "event",
                 "Description",
@@ -54,7 +56,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName3()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "new",
                 "Description",
@@ -69,7 +71,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName4()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "struct",
                 "Description",
@@ -84,7 +86,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName5()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "as",
                 "Description",
@@ -99,7 +101,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName6()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "explicit",
                 "Description",
@@ -114,7 +116,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName7()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "null",
                 "Description",
@@ -129,7 +131,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName8()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "switch",
                 "Description",
@@ -144,7 +146,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName9()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "base",
                 "Description",
@@ -159,7 +161,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName10()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "extern",
                 "Description",
@@ -174,7 +176,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName11()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "object",
                 "Description",
@@ -189,7 +191,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName12()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "this",
                 "Description",
@@ -204,7 +206,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName13()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "bool",
                 "Description",
@@ -219,7 +221,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName14()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "false",
                 "Description",
@@ -234,7 +236,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName15()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "operator",
                 "Description",
@@ -249,7 +251,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName16()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "throw",
                 "Description",
@@ -264,7 +266,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName17()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "break",
                 "Description",
@@ -279,7 +281,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName18()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "finally",
                 "Description",
@@ -294,7 +296,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName19()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "out",
                 "Description",
@@ -309,7 +311,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName20()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "true",
                 "Description",
@@ -324,7 +326,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName21()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "byte",
                 "Description",
@@ -339,7 +341,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName22()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "fixed",
                 "Description",
@@ -354,7 +356,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName23()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "override",
                 "Description",
@@ -369,7 +371,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName24()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "try",
                 "Description",
@@ -384,7 +386,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName25()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "case",
                 "Description",
@@ -399,7 +401,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName26()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "float",
                 "Description",
@@ -414,7 +416,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName27()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "params",
                 "Description",
@@ -429,7 +431,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName28()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "typeof",
                 "Description",
@@ -444,7 +446,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName29()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "catch",
                 "Description",
@@ -459,7 +461,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName30()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "for",
                 "Description",
@@ -474,7 +476,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName31()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "private",
                 "Description",
@@ -489,7 +491,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName32()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "uint",
                 "Description",
@@ -504,7 +506,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName33()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "char",
                 "Description",
@@ -519,7 +521,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName34()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "foreach",
                 "Description",
@@ -534,7 +536,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName35()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "protected",
                 "Description",
@@ -549,7 +551,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName36()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ulong",
                 "Description",
@@ -564,7 +566,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName37()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "checked",
                 "Description",
@@ -579,7 +581,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName38()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "goto",
                 "Description",
@@ -594,7 +596,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName39()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "public",
                 "Description",
@@ -609,7 +611,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName40()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "unchecked",
                 "Description",
@@ -624,7 +626,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName41()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "class",
                 "Description",
@@ -639,7 +641,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName42()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "if",
                 "Description",
@@ -654,7 +656,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName43()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "readonly",
                 "Description",
@@ -669,7 +671,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName44()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "unsafe",
                 "Description",
@@ -684,7 +686,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName45()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "const",
                 "Description",
@@ -699,7 +701,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName46()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "implicit",
                 "Description",
@@ -714,7 +716,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName47()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ref",
                 "Description",
@@ -729,7 +731,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName48()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ushort",
                 "Description",
@@ -744,7 +746,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName49()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "continue",
                 "Description",
@@ -759,7 +761,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName50()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "in",
                 "Description",
@@ -774,7 +776,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName51()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "return",
                 "Description",
@@ -789,7 +791,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName52()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "using",
                 "Description",
@@ -804,7 +806,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName53()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "decimal",
                 "Description",
@@ -819,7 +821,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName54()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "int",
                 "Description",
@@ -834,7 +836,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName55()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "sbyte",
                 "Description",
@@ -849,7 +851,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName56()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "virtual",
                 "Description",
@@ -864,7 +866,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName57()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "default",
                 "Description",
@@ -879,7 +881,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName58()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "interface",
                 "Description",
@@ -894,7 +896,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName59()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "sealed",
                 "Description",
@@ -909,7 +911,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName60()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "volatile",
                 "Description",
@@ -924,7 +926,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName61()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "delegate",
                 "Description",
@@ -939,7 +941,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName62()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "internal",
                 "Description",
@@ -954,7 +956,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName63()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "short",
                 "Description",
@@ -969,7 +971,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName64()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "void",
                 "Description",
@@ -984,7 +986,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName65()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "do",
                 "Description",
@@ -999,7 +1001,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName66()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "is",
                 "Description",
@@ -1014,7 +1016,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName67()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "sizeof",
                 "Description",
@@ -1029,7 +1031,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName68()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "while",
                 "Description",
@@ -1044,7 +1046,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName69()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "double",
                 "Description",
@@ -1059,7 +1061,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName70()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "lock",
                 "Description",
@@ -1074,7 +1076,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName71()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "stackalloc",
                 "Description",
@@ -1089,7 +1091,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName72()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "else",
                 "Description",
@@ -1104,7 +1106,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName73()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "long",
                 "Description",
@@ -1119,7 +1121,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName74()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "static",
                 "Description",
@@ -1134,7 +1136,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName75()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "enum",
                 "Description",
@@ -1149,7 +1151,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName76()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "namespace",
                 "Description",
@@ -1164,7 +1166,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName77()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "string",
                 "Description",
@@ -1179,7 +1181,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName78()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "AddHandler",
                 "Description",
@@ -1194,7 +1196,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName79()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "AddressOf",
                 "Description",
@@ -1209,7 +1211,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName80()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Alias",
                 "Description",
@@ -1224,7 +1226,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName81()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "And",
                 "Description",
@@ -1239,7 +1241,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName82()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Ansi",
                 "Description",
@@ -1254,7 +1256,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName83()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "As",
                 "Description",
@@ -1269,7 +1271,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName84()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Assembly",
                 "Description",
@@ -1284,7 +1286,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName85()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Auto",
                 "Description",
@@ -1299,7 +1301,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName86()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Base",
                 "Description",
@@ -1314,7 +1316,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName87()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Boolean",
                 "Description",
@@ -1329,7 +1331,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName88()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ByRef",
                 "Description",
@@ -1344,7 +1346,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName89()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Byte",
                 "Description",
@@ -1359,7 +1361,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName90()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ByVal",
                 "Description",
@@ -1374,7 +1376,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName91()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Call",
                 "Description",
@@ -1389,7 +1391,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName92()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Case",
                 "Description",
@@ -1404,7 +1406,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName93()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Catch",
                 "Description",
@@ -1419,7 +1421,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName94()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CBool",
                 "Description",
@@ -1434,7 +1436,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName95()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CByte",
                 "Description",
@@ -1449,7 +1451,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName96()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CChar",
                 "Description",
@@ -1464,7 +1466,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName97()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CDate",
                 "Description",
@@ -1479,7 +1481,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName98()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CDec",
                 "Description",
@@ -1494,7 +1496,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName99()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CDbl",
                 "Description",
@@ -1509,7 +1511,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName100()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Char",
                 "Description",
@@ -1524,7 +1526,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName101()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CInt",
                 "Description",
@@ -1539,7 +1541,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName102()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Class",
                 "Description",
@@ -1554,7 +1556,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName103()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CLng",
                 "Description",
@@ -1569,7 +1571,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName104()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CObj",
                 "Description",
@@ -1584,7 +1586,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName105()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Const",
                 "Description",
@@ -1599,7 +1601,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName106()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CShort",
                 "Description",
@@ -1614,7 +1616,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName107()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CSng",
                 "Description",
@@ -1629,7 +1631,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName108()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CStr",
                 "Description",
@@ -1644,7 +1646,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName109()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "CType",
                 "Description",
@@ -1659,7 +1661,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName110()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Date",
                 "Description",
@@ -1674,7 +1676,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName111()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Decimal",
                 "Description",
@@ -1689,7 +1691,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName112()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Declare",
                 "Description",
@@ -1704,7 +1706,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName113()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Default",
                 "Description",
@@ -1719,7 +1721,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName114()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Delegate",
                 "Description",
@@ -1734,7 +1736,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName115()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Dim",
                 "Description",
@@ -1749,7 +1751,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName116()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Do",
                 "Description",
@@ -1764,7 +1766,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName117()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Double",
                 "Description",
@@ -1779,7 +1781,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName118()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Each",
                 "Description",
@@ -1794,7 +1796,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName119()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Else",
                 "Description",
@@ -1809,7 +1811,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName120()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ElseIf",
                 "Description",
@@ -1824,7 +1826,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName121()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "End",
                 "Description",
@@ -1839,7 +1841,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName122()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Enum",
                 "Description",
@@ -1854,7 +1856,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName123()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Erase",
                 "Description",
@@ -1869,7 +1871,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName124()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Error",
                 "Description",
@@ -1884,7 +1886,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName125()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Event",
                 "Description",
@@ -1899,7 +1901,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName126()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Exit",
                 "Description",
@@ -1914,7 +1916,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName127()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ExternalSource",
                 "Description",
@@ -1929,7 +1931,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName128()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "False",
                 "Description",
@@ -1944,7 +1946,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName129()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Finalize",
                 "Description",
@@ -1959,7 +1961,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName130()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Finally",
                 "Description",
@@ -1974,7 +1976,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName131()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Float",
                 "Description",
@@ -1989,7 +1991,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName132()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "For",
                 "Description",
@@ -2004,7 +2006,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName133()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Friend",
                 "Description",
@@ -2019,7 +2021,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName134()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Function",
                 "Description",
@@ -2034,7 +2036,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName135()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Get",
                 "Description",
@@ -2049,7 +2051,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName136()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "GetType",
                 "Description",
@@ -2064,7 +2066,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName137()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Goto",
                 "Description",
@@ -2079,7 +2081,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName138()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Handles",
                 "Description",
@@ -2094,7 +2096,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName139()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "If",
                 "Description",
@@ -2109,7 +2111,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName140()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Implements",
                 "Description",
@@ -2124,7 +2126,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName141()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Imports",
                 "Description",
@@ -2139,7 +2141,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName142()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "In",
                 "Description",
@@ -2154,7 +2156,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName143()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Inherits",
                 "Description",
@@ -2169,7 +2171,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName144()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Integer",
                 "Description",
@@ -2184,7 +2186,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName145()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Interface",
                 "Description",
@@ -2199,7 +2201,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName146()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Is",
                 "Description",
@@ -2214,7 +2216,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName147()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Let",
                 "Description",
@@ -2229,7 +2231,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName148()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Lib",
                 "Description",
@@ -2244,7 +2246,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName149()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Like",
                 "Description",
@@ -2259,7 +2261,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName150()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Long",
                 "Description",
@@ -2274,7 +2276,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName151()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Loop",
                 "Description",
@@ -2289,7 +2291,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName152()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Me",
                 "Description",
@@ -2304,7 +2306,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName153()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Mod",
                 "Description",
@@ -2319,7 +2321,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName154()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Module",
                 "Description",
@@ -2334,7 +2336,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName155()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "MustInherit",
                 "Description",
@@ -2349,7 +2351,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName156()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "MustOverride",
                 "Description",
@@ -2364,7 +2366,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName157()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "MyBase",
                 "Description",
@@ -2379,7 +2381,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName158()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "MyClass",
                 "Description",
@@ -2394,7 +2396,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName159()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Namespace",
                 "Description",
@@ -2409,7 +2411,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName160()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "New",
                 "Description",
@@ -2424,7 +2426,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName161()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Next",
                 "Description",
@@ -2439,7 +2441,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName162()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Not",
                 "Description",
@@ -2454,7 +2456,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName163()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Nothing",
                 "Description",
@@ -2469,7 +2471,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName164()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "NotInheritable",
                 "Description",
@@ -2484,7 +2486,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName165()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "NotOverridable",
                 "Description",
@@ -2499,7 +2501,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName166()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Object",
                 "Description",
@@ -2514,7 +2516,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName167()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "On",
                 "Description",
@@ -2529,7 +2531,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName168()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Option",
                 "Description",
@@ -2544,7 +2546,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName169()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Optional",
                 "Description",
@@ -2559,7 +2561,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName170()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Or",
                 "Description",
@@ -2574,7 +2576,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName171()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Overloads",
                 "Description",
@@ -2589,7 +2591,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName172()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Overridable",
                 "Description",
@@ -2604,7 +2606,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName173()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Overrides",
                 "Description",
@@ -2619,7 +2621,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName174()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ParamArray",
                 "Description",
@@ -2634,7 +2636,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName175()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Preserve",
                 "Description",
@@ -2649,7 +2651,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName176()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Private",
                 "Description",
@@ -2664,7 +2666,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName177()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Property",
                 "Description",
@@ -2679,7 +2681,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName178()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Protected",
                 "Description",
@@ -2694,7 +2696,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName179()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Public",
                 "Description",
@@ -2709,7 +2711,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName180()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "RaiseEvent",
                 "Description",
@@ -2724,7 +2726,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName181()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ReadOnly",
                 "Description",
@@ -2739,7 +2741,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName182()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ReDim",
                 "Description",
@@ -2754,7 +2756,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName183()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Region",
                 "Description",
@@ -2769,7 +2771,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName184()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "REM",
                 "Description",
@@ -2784,7 +2786,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName185()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "RemoveHandler",
                 "Description",
@@ -2799,7 +2801,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName186()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Resume",
                 "Description",
@@ -2814,7 +2816,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName187()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Return",
                 "Description",
@@ -2829,7 +2831,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName188()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Select",
                 "Description",
@@ -2844,7 +2846,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName189()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Set",
                 "Description",
@@ -2859,7 +2861,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName190()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Shadows",
                 "Description",
@@ -2874,7 +2876,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName191()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Shared",
                 "Description",
@@ -2889,7 +2891,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName192()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Short",
                 "Description",
@@ -2904,7 +2906,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName193()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Single",
                 "Description",
@@ -2919,7 +2921,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName194()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Static",
                 "Description",
@@ -2934,7 +2936,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName195()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Step",
                 "Description",
@@ -2949,7 +2951,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName196()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Stop",
                 "Description",
@@ -2964,7 +2966,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName197()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "String",
                 "Description",
@@ -2979,7 +2981,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName198()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Structure",
                 "Description",
@@ -2994,7 +2996,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName199()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Sub",
                 "Description",
@@ -3009,7 +3011,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName200()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "SyncLock",
                 "Description",
@@ -3024,7 +3026,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName201()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Then",
                 "Description",
@@ -3039,7 +3041,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName202()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Throw",
                 "Description",
@@ -3054,7 +3056,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName203()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "To",
                 "Description",
@@ -3069,7 +3071,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName204()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "True",
                 "Description",
@@ -3084,7 +3086,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName205()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Try",
                 "Description",
@@ -3099,7 +3101,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName206()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "TypeOf",
                 "Description",
@@ -3114,7 +3116,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName207()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Unicode",
                 "Description",
@@ -3129,7 +3131,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName208()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Until",
                 "Description",
@@ -3144,7 +3146,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName209()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "volatile",
                 "Description",
@@ -3159,7 +3161,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName210()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "When",
                 "Description",
@@ -3174,7 +3176,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName211()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "While",
                 "Description",
@@ -3189,7 +3191,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName212()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "With",
                 "Description",
@@ -3204,7 +3206,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName213()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "WithEvents",
                 "Description",
@@ -3219,7 +3221,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName214()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "WriteOnly",
                 "Description",
@@ -3234,7 +3236,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName215()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "Xor",
                 "Description",
@@ -3249,7 +3251,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName216()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "eval",
                 "Description",
@@ -3264,7 +3266,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName217()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "extends",
                 "Description",
@@ -3279,7 +3281,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName218()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "instanceof",
                 "Description",
@@ -3294,7 +3296,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName219()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "package",
                 "Description",
@@ -3309,7 +3311,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName220()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "var",
                 "Description",
@@ -3324,7 +3326,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName221()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__abstract",
                 "Description",
@@ -3339,7 +3341,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName222()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__alignof",
                 "Description",
@@ -3354,7 +3356,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName223()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__asm",
                 "Description",
@@ -3369,7 +3371,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName224()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__assume",
                 "Description",
@@ -3384,7 +3386,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName225()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__based",
                 "Description",
@@ -3399,7 +3401,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName226()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__box",
                 "Description",
@@ -3414,7 +3416,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName227()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__cdecl",
                 "Description",
@@ -3429,7 +3431,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName228()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__declspec",
                 "Description",
@@ -3444,7 +3446,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName229()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__delegate",
                 "Description",
@@ -3459,7 +3461,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName230()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__event",
                 "Description",
@@ -3474,7 +3476,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName231()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__except",
                 "Description",
@@ -3489,7 +3491,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName232()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__fastcall",
                 "Description",
@@ -3504,7 +3506,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName233()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__finally",
                 "Description",
@@ -3519,7 +3521,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName234()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__forceinline",
                 "Description",
@@ -3534,7 +3536,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName235()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__gc",
                 "Description",
@@ -3549,7 +3551,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName236()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__hook",
                 "Description",
@@ -3564,7 +3566,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName237()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__identifier",
                 "Description",
@@ -3579,7 +3581,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName238()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__if_exists",
                 "Description",
@@ -3594,7 +3596,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName239()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__if_not_exists",
                 "Description",
@@ -3609,7 +3611,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName240()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__inline",
                 "Description",
@@ -3624,7 +3626,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName241()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__int16",
                 "Description",
@@ -3639,7 +3641,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName242()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__int32",
                 "Description",
@@ -3654,7 +3656,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName243()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__int64",
                 "Description",
@@ -3669,7 +3671,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName244()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__int8",
                 "Description",
@@ -3684,7 +3686,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName245()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__interface",
                 "Description",
@@ -3699,7 +3701,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName246()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__leave",
                 "Description",
@@ -3714,7 +3716,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName247()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__m128",
                 "Description",
@@ -3729,7 +3731,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName248()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__m128d",
                 "Description",
@@ -3744,7 +3746,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName249()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__m128i",
                 "Description",
@@ -3759,7 +3761,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName250()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__m64",
                 "Description",
@@ -3774,7 +3776,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName251()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__multiple_inheritance",
                 "Description",
@@ -3789,7 +3791,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName252()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__nogc",
                 "Description",
@@ -3804,7 +3806,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName253()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__noop",
                 "Description",
@@ -3819,7 +3821,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName254()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__pin",
                 "Description",
@@ -3834,7 +3836,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName255()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__property",
                 "Description",
@@ -3849,7 +3851,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName256()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__raise",
                 "Description",
@@ -3864,7 +3866,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName257()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__sealed",
                 "Description",
@@ -3879,7 +3881,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName258()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__single_inheritance",
                 "Description",
@@ -3894,7 +3896,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName259()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__stdcall",
                 "Description",
@@ -3909,7 +3911,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName260()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__super",
                 "Description",
@@ -3924,7 +3926,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName261()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__thiscall",
                 "Description",
@@ -3939,7 +3941,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName262()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__try",
                 "Description",
@@ -3954,7 +3956,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName263()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__except",
                 "Description",
@@ -3969,7 +3971,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName264()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__finally",
                 "Description",
@@ -3984,7 +3986,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName265()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__try_cast",
                 "Description",
@@ -3999,7 +4001,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName266()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__unaligned",
                 "Description",
@@ -4014,7 +4016,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName267()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__unhook",
                 "Description",
@@ -4029,7 +4031,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName268()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__uuidof",
                 "Description",
@@ -4044,7 +4046,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName269()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__value",
                 "Description",
@@ -4059,7 +4061,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName270()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__virtual_inheritance",
                 "Description",
@@ -4074,7 +4076,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName271()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__w64",
                 "Description",
@@ -4089,7 +4091,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName272()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "__wchar_t",
                 "Description",
@@ -4104,7 +4106,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName273()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "wchar_t",
                 "Description",
@@ -4119,7 +4121,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName274()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "abstract",
                 "Description",
@@ -4134,7 +4136,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName275()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "array",
                 "Description",
@@ -4149,7 +4151,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName276()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "auto",
                 "Description",
@@ -4164,7 +4166,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName277()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "bool",
                 "Description",
@@ -4179,7 +4181,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName278()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "break",
                 "Description",
@@ -4194,7 +4196,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName279()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "case",
                 "Description",
@@ -4209,7 +4211,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName280()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "catch",
                 "Description",
@@ -4224,7 +4226,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName281()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "char",
                 "Description",
@@ -4239,7 +4241,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName282()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "class",
                 "Description",
@@ -4254,7 +4256,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName283()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "const",
                 "Description",
@@ -4269,7 +4271,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName284()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "const_cast",
                 "Description",
@@ -4284,7 +4286,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName285()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "continue",
                 "Description",
@@ -4299,7 +4301,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName286()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "decltype",
                 "Description",
@@ -4314,7 +4316,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName287()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "default",
                 "Description",
@@ -4329,7 +4331,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName288()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "delegate",
                 "Description",
@@ -4344,7 +4346,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName289()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "delete",
                 "Description",
@@ -4359,7 +4361,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName290()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "deprecated",
                 "Description",
@@ -4374,7 +4376,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName291()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "dllexport",
                 "Description",
@@ -4389,7 +4391,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName292()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "dllimport",
                 "Description",
@@ -4404,7 +4406,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName293()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "do",
                 "Description",
@@ -4419,7 +4421,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName294()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "double",
                 "Description",
@@ -4434,7 +4436,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName295()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "dynamic_cast",
                 "Description",
@@ -4449,7 +4451,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName296()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "else",
                 "Description",
@@ -4464,7 +4466,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName297()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "enum",
                 "Description",
@@ -4479,7 +4481,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName298()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "event",
                 "Description",
@@ -4494,7 +4496,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName299()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "explicit",
                 "Description",
@@ -4509,7 +4511,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName300()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "extern",
                 "Description",
@@ -4524,7 +4526,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName301()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "false",
                 "Description",
@@ -4539,7 +4541,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName302()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "finally",
                 "Description",
@@ -4554,7 +4556,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName303()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "float",
                 "Description",
@@ -4569,7 +4571,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName304()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "for",
                 "Description",
@@ -4584,7 +4586,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName305()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "each",
                 "Description",
@@ -4599,7 +4601,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName306()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "in",
                 "Description",
@@ -4614,7 +4616,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName307()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "friend",
                 "Description",
@@ -4629,7 +4631,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName308()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "friend_as",
                 "Description",
@@ -4644,7 +4646,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName309()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "gcnew",
                 "Description",
@@ -4659,7 +4661,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName310()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "generic",
                 "Description",
@@ -4674,7 +4676,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName311()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "goto",
                 "Description",
@@ -4689,7 +4691,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName312()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "if",
                 "Description",
@@ -4704,7 +4706,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName313()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "initonly",
                 "Description",
@@ -4719,7 +4721,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName314()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "inline",
                 "Description",
@@ -4734,7 +4736,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName315()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "int",
                 "Description",
@@ -4749,7 +4751,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName316()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "interface",
                 "Description",
@@ -4764,7 +4766,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName317()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "interior_ptr",
                 "Description",
@@ -4779,7 +4781,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName318()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "literal",
                 "Description",
@@ -4794,7 +4796,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName319()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "long",
                 "Description",
@@ -4809,7 +4811,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName320()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "mutable",
                 "Description",
@@ -4824,7 +4826,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName321()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "naked",
                 "Description",
@@ -4839,7 +4841,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName322()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "namespace",
                 "Description",
@@ -4854,7 +4856,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName323()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "new",
                 "Description",
@@ -4869,7 +4871,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName324()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "noinline",
                 "Description",
@@ -4884,7 +4886,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName325()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "noreturn",
                 "Description",
@@ -4899,7 +4901,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName326()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "nothrow",
                 "Description",
@@ -4914,7 +4916,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName327()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "novtable",
                 "Description",
@@ -4929,7 +4931,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName328()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "nullptr",
                 "Description",
@@ -4944,7 +4946,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName329()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "operator",
                 "Description",
@@ -4959,7 +4961,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName330()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "private",
                 "Description",
@@ -4974,7 +4976,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName331()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "property",
                 "Description",
@@ -4989,7 +4991,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName332()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "protected",
                 "Description",
@@ -5004,7 +5006,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName333()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "public",
                 "Description",
@@ -5019,7 +5021,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName334()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "ref",
                 "Description",
@@ -5034,7 +5036,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName335()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "register",
                 "Description",
@@ -5049,7 +5051,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName336()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "reinterpret_cast",
                 "Description",
@@ -5064,7 +5066,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName337()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "return",
                 "Description",
@@ -5079,7 +5081,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName338()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "safecast",
                 "Description",
@@ -5094,7 +5096,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName339()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "sealed",
                 "Description",
@@ -5109,7 +5111,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName340()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "selectany",
                 "Description",
@@ -5124,7 +5126,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName341()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "short",
                 "Description",
@@ -5139,7 +5141,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName342()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "signed",
                 "Description",
@@ -5154,7 +5156,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName343()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "sizeof",
                 "Description",
@@ -5169,7 +5171,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName344()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "static",
                 "Description",
@@ -5184,7 +5186,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName345()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "static_assert",
                 "Description",
@@ -5199,7 +5201,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName346()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "static_cast",
                 "Description",
@@ -5214,7 +5216,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName347()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "struct",
                 "Description",
@@ -5229,7 +5231,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName348()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "switch",
                 "Description",
@@ -5244,7 +5246,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName349()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "template",
                 "Description",
@@ -5259,7 +5261,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName350()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "this",
                 "Description",
@@ -5274,7 +5276,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName351()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "thread",
                 "Description",
@@ -5289,7 +5291,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName352()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "true",
                 "Description",
@@ -5304,7 +5306,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName353()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "try",
                 "Description",
@@ -5319,7 +5321,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName354()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "typedef",
                 "Description",
@@ -5334,7 +5336,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName355()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "typeid",
                 "Description",
@@ -5349,7 +5351,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName356()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "typename",
                 "Description",
@@ -5364,7 +5366,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName357()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "union",
                 "Description",
@@ -5379,7 +5381,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName358()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "unsigned",
                 "Description",
@@ -5394,7 +5396,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName359()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "using",
                 "Description",
@@ -5409,7 +5411,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName360()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "uuid",
                 "Description",
@@ -5424,7 +5426,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName361()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "value",
                 "Description",
@@ -5439,7 +5441,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName362()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "virtual",
                 "Description",
@@ -5454,7 +5456,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName363()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "void",
                 "Description",
@@ -5469,7 +5471,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName364()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "volatile",
                 "Description",
@@ -5484,7 +5486,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
         [Fact]
         public static void ThrowExceptionsIfKeywordAsName365()
         {
-            Assert.Throws<ArgumentException>(() => new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            Assert.Throws<ArgumentException>(() => new ClrBoolean(
                 Dhgms.Nucleotide.Model.Info.CollectionType.None,
                 "while",
                 "Description",
@@ -5504,7 +5506,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrBoolean(
+            ClrBoolean instance = new ClrBoolean(
                 CollectionType,
                 Name,
                 Description,
@@ -5529,7 +5531,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5553,7 +5555,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5577,7 +5579,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5601,7 +5603,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5625,7 +5627,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5649,7 +5651,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrChar(
+            ClrChar instance = new ClrChar(
                 CollectionType,
                 Name,
                 Description,
@@ -5673,7 +5675,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5697,7 +5699,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5721,7 +5723,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = true;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5745,7 +5747,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5769,7 +5771,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5793,7 +5795,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDateTime(
+            ClrDateTime instance = new ClrDateTime(
                 CollectionType,
                 Name,
                 Description,
@@ -5817,7 +5819,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5844,7 +5846,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5868,7 +5870,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5892,7 +5894,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5916,7 +5918,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5940,7 +5942,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5964,7 +5966,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDecimal(
+            ClrDecimal instance = new ClrDecimal(
                 CollectionType,
                 Name,
                 Description,
@@ -5988,7 +5990,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6015,7 +6017,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6039,7 +6041,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6063,7 +6065,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6087,7 +6089,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6111,7 +6113,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6135,7 +6137,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrDouble(
+            ClrDouble instance = new ClrDouble(
                 CollectionType,
                 Name,
                 Description,
@@ -6159,7 +6161,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6186,7 +6188,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6210,7 +6212,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6234,7 +6236,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6258,7 +6260,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6282,7 +6284,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6306,7 +6308,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.ClrSingle(
+            ClrSingle instance = new ClrSingle(
                 CollectionType,
                 Name,
                 Description,
@@ -6330,7 +6332,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6357,7 +6359,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6381,7 +6383,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6405,7 +6407,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6429,7 +6431,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6453,7 +6455,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6477,7 +6479,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer16(
+            Integer16 instance = new Integer16(
                 CollectionType,
                 Name,
                 Description,
@@ -6501,7 +6503,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6528,7 +6530,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6552,7 +6554,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6576,7 +6578,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6600,7 +6602,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6624,7 +6626,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6648,7 +6650,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer32(
+            Integer32 instance = new Integer32(
                 CollectionType,
                 Name,
                 Description,
@@ -6672,7 +6674,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6699,7 +6701,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6723,7 +6725,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6747,7 +6749,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6771,7 +6773,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6795,7 +6797,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6819,7 +6821,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.Integer64(
+            Integer64 instance = new Integer64(
                 CollectionType,
                 Name,
                 Description,
@@ -6843,7 +6845,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6870,7 +6872,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6894,7 +6896,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6918,7 +6920,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6942,7 +6944,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6966,7 +6968,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -6990,7 +6992,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger8(
+            UnsignedInteger8 instance = new UnsignedInteger8(
                 CollectionType,
                 Name,
                 Description,
@@ -7014,7 +7016,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7041,7 +7043,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7065,7 +7067,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7089,7 +7091,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7113,7 +7115,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7137,7 +7139,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7161,7 +7163,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger16(
+            UnsignedInteger16 instance = new UnsignedInteger16(
                 CollectionType,
                 Name,
                 Description,
@@ -7185,7 +7187,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7212,7 +7214,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7236,7 +7238,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7260,7 +7262,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7284,7 +7286,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7308,7 +7310,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7332,7 +7334,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger32(
+            UnsignedInteger32 instance = new UnsignedInteger32(
                 CollectionType,
                 Name,
                 Description,
@@ -7356,7 +7358,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7383,7 +7385,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7407,7 +7409,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7431,7 +7433,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7455,7 +7457,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7479,7 +7481,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,
@@ -7503,7 +7505,7 @@ namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
             const string Description = "Description";
             const bool Optional = false;
 
-            Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64 instance = new Dhgms.Nucleotide.Model.Info.PropertyInfo.UnsignedInteger64(
+            UnsignedInteger64 instance = new UnsignedInteger64(
                 CollectionType,
                 Name,
                 Description,

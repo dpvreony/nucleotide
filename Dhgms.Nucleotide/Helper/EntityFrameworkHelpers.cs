@@ -3,7 +3,7 @@
 //   Licensed under GNU General Public License version 2 (GPLv2)
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Model.Helper
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     ///     Helper for generating the Entity Framework helpers
@@ -48,7 +48,7 @@ namespace Dhgms.Nucleotide.Model.Helper
                                 where string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
                                 select c;
 
-            DoSubNamespace(sb, mainNamespaceName, null, noSubNamespace);
+            this.DoSubNamespace(sb, mainNamespaceName, null, noSubNamespace);
 
             var subNamespaces = from c in classes
                                 where !string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
@@ -58,7 +58,7 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             foreach (var ns in subNamespaces)
             {
-                DoSubNamespace(sb, mainNamespaceName, ns.Key, ns);
+                this.DoSubNamespace(sb, mainNamespaceName, ns.Key, ns);
             }
 
             return sb.ToString();

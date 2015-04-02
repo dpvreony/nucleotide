@@ -4,12 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+namespace Dhgms.Nucleotide.PropertyInfo
 {
     using System;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Helper;
+    using Dhgms.Nucleotide.Helper;
+    using Dhgms.Nucleotide.Model.Info;
 
     /// <summary>
     /// Property Information for a String

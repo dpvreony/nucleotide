@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+﻿namespace Dhgms.Nucleotide.PropertyInfo
 {
+    using System;
+
+    using Dhgms.Nucleotide.Model.Info;
+
     /// <summary>
     /// Property Information for a Guid
     /// </summary>

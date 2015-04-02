@@ -7,8 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+namespace Dhgms.Nucleotide.PropertyInfo
 {
+    using Dhgms.Nucleotide.Model.Info;
+
     /// <summary>
     /// Property Information for ClrByte
     /// </summary>
@@ -140,7 +142,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -148,7 +150,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrByteException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrByteException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -158,12 +160,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrByteException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrByteException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -301,7 +303,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -309,7 +311,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrCharException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -319,12 +321,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrCharException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -462,7 +464,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -470,7 +472,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDecimalException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -480,12 +482,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDecimalException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -623,7 +625,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -631,7 +633,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDoubleException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -641,12 +643,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDoubleException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -784,7 +786,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -792,7 +794,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrSingleException(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -802,12 +804,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrSingleException(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -945,7 +947,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -953,7 +955,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger16Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -963,12 +965,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger16Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1106,7 +1108,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1114,7 +1116,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger32Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1124,12 +1126,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger32Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1267,7 +1269,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1275,7 +1277,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowInteger64Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1285,12 +1287,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighInteger64Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1428,7 +1430,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1436,7 +1438,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger8Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1446,12 +1448,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger8Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1589,7 +1591,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1597,7 +1599,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger16Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger16Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1607,12 +1609,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger16Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger16Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1750,7 +1752,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1758,7 +1760,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger32Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger32Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1768,12 +1770,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger32Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger32Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1911,7 +1913,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -1919,7 +1921,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger64Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowUnsignedInteger64Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -1929,12 +1931,12 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger64Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighUnsignedInteger64Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

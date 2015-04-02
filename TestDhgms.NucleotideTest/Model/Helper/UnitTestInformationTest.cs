@@ -12,7 +12,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     using TestDhgms.NucleotideMocking;
 
@@ -159,7 +159,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
             [Fact]
             public void ShouldSucceed()
             {
-                var instance = new Dhgms.Nucleotide.Model.Helper.Information();
+                var instance = new Dhgms.Nucleotide.Helper.Information();
                 var cgp = new MockClassGenerationParameters(
                         MainNamespaceName,
                         SubNamespace,

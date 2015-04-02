@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-
-using Dhgms.Nucleotide.Model.Info.PropertyInfo;
-
-namespace Dhgms.Nucleotide.Model.Helper
+﻿namespace Dhgms.Nucleotide.Helper
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Linq;
+    using System.Text;
+
     using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// String Builder Extensions
@@ -83,7 +82,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         {
             try
             {
-                return DoGeneration(classes);
+                return this.DoGeneration(classes);
             }
             catch (Exception e)
             {
@@ -110,7 +109,7 @@ namespace Dhgms.Nucleotide.Model.Helper
 
             foreach (var sortedClass in sortedClasses)
             {
-                DoGeneration(sb, sortedClass);
+                this.DoGeneration(sb, sortedClass);
             }
 
             return sb.ToString();
@@ -130,7 +129,7 @@ namespace Dhgms.Nucleotide.Model.Helper
 
                 foreach (var cgp in cgps)
                 {
-                    DoGenerateClass(sb, cgp);
+                    this.DoGenerateClass(sb, cgp);
                 }
 
                 sb.AppendLine("}");

@@ -16,6 +16,11 @@
     <tags>T4 Transform CodeGen</tags>
     <developmentDependency>true</developmentDependency>
   </metadata>
+  <dependencies>
+    <group>
+      <dependency id="MSBuild.Extension.Pack" version="1.6.0" />
+    </group>
+  </dependencies>
   <files>
     <!--
     <file src="content*" target="content" />

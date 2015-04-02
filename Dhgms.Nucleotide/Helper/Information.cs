@@ -4,14 +4,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// Helper for generating an information class

@@ -10,7 +10,7 @@
 namespace TestDhgms.NucleotideMocking
 {
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// The mock class generation parameters.

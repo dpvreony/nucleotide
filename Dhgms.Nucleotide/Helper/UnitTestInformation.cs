@@ -4,14 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// Unit Test Generator for an Information Class

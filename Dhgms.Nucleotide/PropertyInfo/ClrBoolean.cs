@@ -5,8 +5,10 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+namespace Dhgms.Nucleotide.PropertyInfo
 {
+    using Dhgms.Nucleotide.Model.Info;
+
     /// <summary>
     /// Property Information for the Boolean Data Type
     /// </summary>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Model.Helper
+﻿namespace Dhgms.Nucleotide.Helper
 {
     class DifferenceInterfaceGenerator
     {

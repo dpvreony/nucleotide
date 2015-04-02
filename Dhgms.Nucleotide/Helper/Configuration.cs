@@ -7,10 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
     using System.Collections.Generic;
     using System.Text;
+
+    using Dhgms.Nucleotide.Model.Info;
 
     /// <summary>
     /// Class for handling configuration class generation
@@ -43,7 +45,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             string subNamespace,
             string className,
             string classRemarks,
-            IEnumerable<Info.ConfigurationProperty> properties)
+            IEnumerable<ConfigurationProperty> properties)
         {
             var sb = new StringBuilder();
 
@@ -66,7 +68,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// </param>
         private static void DoConfigurationProperty(
             StringBuilder sb,
-            Info.ConfigurationProperty property)
+            Model.Info.ConfigurationProperty property)
         {
             sb.AppendLine("		/// <summary>");
             sb.AppendLine("		/// " + property.Description);

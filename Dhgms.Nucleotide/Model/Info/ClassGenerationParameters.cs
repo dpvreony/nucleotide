@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Model.Info
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// Represents the parameters for generating an data manager classes

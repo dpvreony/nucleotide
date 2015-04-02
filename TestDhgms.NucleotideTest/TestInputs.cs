@@ -6,7 +6,7 @@ using System.Text;
 namespace TestDhgms.NucleotideTest
 {
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// The test inputs.

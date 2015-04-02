@@ -3,10 +3,9 @@
 //   Licensed under GNU General Public License version 2 (GPLv2)
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
     using System;
-    using System.CodeDom;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -14,7 +13,7 @@ namespace Dhgms.Nucleotide.Model.Helper
     using System.Text;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     ///     Base Class for Code Generated Classes

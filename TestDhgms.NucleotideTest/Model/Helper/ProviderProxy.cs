@@ -58,7 +58,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
 
             try
             {
-                Dhgms.Nucleotide.Model.Helper.ProviderProxy.Generate(null, objectNames);
+                Dhgms.Nucleotide.Helper.ProviderProxy.Generate(null, objectNames);
             }
             catch (ArgumentNullException e)
             {
@@ -77,7 +77,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
         {
             try
             {
-                Dhgms.Nucleotide.Model.Helper.ProviderProxy.Generate("ProjectName", null);
+                Dhgms.Nucleotide.Helper.ProviderProxy.Generate("ProjectName", null);
             }
             catch (ArgumentNullException e)
             {
@@ -99,7 +99,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
                 new Dhgms.Nucleotide.Model.Info.ProviderProxy("Name", "InfoClass")
             };
 
-            Dhgms.Nucleotide.Model.Helper.ProviderProxy.Generate("ProjectName", objectNames);
+            Dhgms.Nucleotide.Helper.ProviderProxy.Generate("ProjectName", objectNames);
         }
 
         #endregion

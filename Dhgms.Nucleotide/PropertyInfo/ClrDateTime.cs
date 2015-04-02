@@ -4,9 +4,11 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+namespace Dhgms.Nucleotide.PropertyInfo
 {
     using System.Text;
+
+    using Dhgms.Nucleotide.Model.Info;
 
     /// <summary>
     /// Property Information for ClrDateTime
@@ -84,7 +86,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.minimumValue != null)
             {
                 sb.Append("            if (");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -92,7 +94,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException(" + this.minimumValue + ", value" + (Optional ? ".Value" : "") + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException(" + this.minimumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
                 sb.AppendLine(string.Empty);
@@ -101,7 +103,7 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
             if (this.maximumValue != null)
             {
                 sb.Append("            if (");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -109,13 +111,13 @@ namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
                 sb.AppendLine("value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException(" + this.maximumValue + ", value" + (Optional ? ".Value" : "") + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException(" + this.maximumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
                 sb.AppendLine(string.Empty);
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

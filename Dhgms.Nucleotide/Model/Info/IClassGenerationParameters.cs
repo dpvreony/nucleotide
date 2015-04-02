@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Model.Info
 {
     using System.Diagnostics.Contracts;
 
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// Interface for the class generation parameters.

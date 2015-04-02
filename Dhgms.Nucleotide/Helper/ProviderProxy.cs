@@ -5,7 +5,7 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Helper
+namespace Dhgms.Nucleotide.Helper
 {
     using System;
     using System.Text;
@@ -29,7 +29,7 @@ namespace Dhgms.Nucleotide.Model.Helper
         /// <returns>
         /// The C# code
         /// </returns>
-        public static string Generate(string projectName, Info.ProviderProxy[] objectNames)
+        public static string Generate(string projectName, Model.Info.ProviderProxy[] objectNames)
         {
             if (projectName == null || string.IsNullOrWhiteSpace(projectName))
             {
@@ -60,7 +60,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("#region our methods");
             sb.AppendLine(Common.GetTabs(tabs) + "protected " + projectName + "(){}");
 
-            foreach (Info.ProviderProxy objectName in objectNames)
+            foreach (Model.Info.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
                     Common.GetTabs(tabs)
@@ -135,7 +135,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine("        }");
             sb.AppendLine(string.Empty);
 
-            foreach (Info.ProviderProxy objectName in objectNames)
+            foreach (Model.Info.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
                     Common.GetTabs(tabs)
@@ -204,7 +204,7 @@ namespace Dhgms.Nucleotide.Model.Helper
             sb.AppendLine(Common.GetTabs(tabs) + "{");
             sb.AppendLine("#region our methods");
 
-            foreach (Info.ProviderProxy objectName in objectNames)
+            foreach (Model.Info.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
                     Common.GetTabs(tabs)

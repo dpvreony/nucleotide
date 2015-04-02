@@ -8,7 +8,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
     using System;
 
     using Dhgms.Nucleotide.Model.Info;
-    using Dhgms.Nucleotide.Model.Info.PropertyInfo;
+    using Dhgms.Nucleotide.PropertyInfo;
 
     using TestDhgms.NucleotideMocking;
 
@@ -159,7 +159,7 @@ namespace TestDhgms.NucleotideTest.Model.Helper
             /// </summary>
             public void ThrowsArgumentNullException()
             {
-                var instance = new Dhgms.Nucleotide.Model.Helper.Information();
+                var instance = new Dhgms.Nucleotide.Helper.Information();
                 var cgp = new MockClassGenerationParameters(null, null, null, null, null, null, null, 2010, null, null);
                 var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(cgp));
                 Assert.Equal("cgp", ex.ParamName);
