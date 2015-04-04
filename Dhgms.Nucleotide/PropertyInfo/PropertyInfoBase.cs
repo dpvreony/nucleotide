@@ -17,13 +17,13 @@ namespace Dhgms.Nucleotide.PropertyInfo
     using System.Text;
 
     using Dhgms.Nucleotide.Helper;
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// base class for property information types. used for defining properties
     /// in information, search filter and view filter classes
     /// </summary>
-    public abstract class Base
+    public abstract class PropertyInfoBase
     {
         #region Constants and Fields
 
@@ -424,7 +424,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Base"/> class. 
+        /// Initializes a new instance of the <see cref="PropertyInfoBase"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -470,7 +470,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        protected Base(
+        protected PropertyInfoBase(
             CollectionType collection, 
             string name, 
             string description, 

@@ -1,6 +1,9 @@
 ﻿namespace Dhgms.Nucleotide.Helper
 {
-    class InformationInterfaceGenerator
+    /// <summary>
+    /// Code Generation for an Information Interface.
+    /// </summary>
+    public class InformationInterfaceGenerator : BaseInterfaceGenerator
     {
     }
 }

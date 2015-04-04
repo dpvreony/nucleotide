@@ -98,7 +98,7 @@ namespace Dhgms.Nucleotide.Helper
         /// C# Code
         /// </returns>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        public static string GetIEquatableRegion(string className, string baseClassName, Base[] baseClassProperties)
+        public static string GetIEquatableRegion(string className, string baseClassName, PropertyInfoBase[] baseClassProperties)
         {
             var sb = new StringBuilder();
 

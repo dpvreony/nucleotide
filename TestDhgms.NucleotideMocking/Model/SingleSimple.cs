@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SingleSimple.cs" company="DHGMS Solutions">
-//   Copyright 2008-2014 DHGMS Solutions
+//   Copyright 2008-2015 DHGMS Solutions
 //   
 //   bleh
 // </copyright>
@@ -326,7 +326,7 @@ namespace TestDhgms.NucleotideMocking.Model.Info
 
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SingleSimple.cs" company="DHGMS Solutions">
-//   Copyright 2008-2014 DHGMS Solutions
+//   Copyright 2008-2015 DHGMS Solutions
 //   
 //   bleh
 // </copyright>

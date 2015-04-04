@@ -5,7 +5,7 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info
+namespace Dhgms.Nucleotide.Model
 {
     /// <summary>
     /// Provider Proxy Information Class

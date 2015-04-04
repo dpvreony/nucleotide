@@ -89,9 +89,9 @@ namespace Dhgms.Nucleotide.Helper
             string mainNamespaceName, 
             string subNamespace, 
             string className, 
-            Base[] properties, 
+            PropertyInfoBase[] properties, 
             string baseClassName, 
-            Base[] baseClassProperties)
+            PropertyInfoBase[] baseClassProperties)
         {
             OnGetColumnNamesMethod(sb, properties, baseClassName, baseClassProperties);
         }
@@ -105,7 +105,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected override void DoFieldsRegion(StringBuilder sb, Base[] properties)
+        protected override void DoFieldsRegion(StringBuilder sb, PropertyInfoBase[] properties)
         {
         }
 
@@ -121,11 +121,11 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="baseClassProperties">
         /// The properties of the base class
         /// </param>
-        protected override void DoPropertiesRegion(StringBuilder sb, Base[] properties, Base[] baseClassProperties)
+        protected override void DoPropertiesRegion(StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties)
         {
             sb.AppendLine("        #region properties");
 
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 sb.AppendLine("        /// <summary>");
                 sb.AppendLine("        /// " + pi.Description);
@@ -156,7 +156,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <returns>
         /// The parameter type used in a constructor
         /// </returns>
-        protected override string GetConstructorParameterType(Base propertyInfo)
+        protected override string GetConstructorParameterType(PropertyInfoBase propertyInfo)
         {
             return "bool";
         }
@@ -170,7 +170,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <returns>
         /// .NET data type
         /// </returns>
-        protected override string GetPropertyType(Base pi)
+        protected override string GetPropertyType(PropertyInfoBase pi)
         {
             return "bool";
         }
@@ -184,7 +184,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <returns>
         /// the value of the property when converting to a string array
         /// </returns>
-        protected override string GetValueForToStringArray(Base pi)
+        protected override string GetValueForToStringArray(PropertyInfoBase pi)
         {
             if (pi == null)
             {
@@ -203,7 +203,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected override void OnDoClassSpecificProperties(StringBuilder sb, Base[] properties)
+        protected override void OnDoClassSpecificProperties(StringBuilder sb, PropertyInfoBase[] properties)
         {
             if (sb == null)
             {
@@ -255,11 +255,11 @@ namespace Dhgms.Nucleotide.Helper
         /// Whether the check result variable has been declared yet
         /// </param>
         protected override void OnDoCompareToProperties(
-            StringBuilder sb, Base[] properties, Base[] baseClassProperties, bool checkResultDeclared)
+            StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties, bool checkResultDeclared)
         {
             int returnResultCounter = (baseClassProperties == null) ? 1 : baseClassProperties.Length + 1;
 
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 sb.Append("            ");
                 if (!checkResultDeclared)
@@ -294,7 +294,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="pi">
         /// The property to generate a field for
         /// </param>
-        protected override void OnDoFieldItem(StringBuilder sb, Base pi)
+        protected override void OnDoFieldItem(StringBuilder sb, PropertyInfoBase pi)
         {
             if (sb == null)
             {
@@ -318,7 +318,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="pi">
         /// The property to generate the mutator for
         /// </param>
-        protected override void OnDoPropertyMutator(StringBuilder sb, Base pi)
+        protected override void OnDoPropertyMutator(StringBuilder sb, PropertyInfoBase pi)
         {
             if (sb == null)
             {
@@ -342,7 +342,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="sb">string builder to add the code to</param>
         /// <param name="properties">list of properties belonging to the class</param>
         /// <param name="baseClassName">the name of the base class, if different from normal</param>
-        protected override void DoDisposeMethod(StringBuilder sb, IEnumerable<Base> properties, string baseClassName)
+        protected override void DoDisposeMethod(StringBuilder sb, IEnumerable<PropertyInfoBase> properties, string baseClassName)
         {
             sb.AppendLine("            /// <summary>");
             sb.AppendLine("            /// The on disposing event");
@@ -369,7 +369,7 @@ namespace Dhgms.Nucleotide.Helper
         /// The properties of the base class
         /// </param>
         private static void OnGetColumnNamesMethod(
-            StringBuilder sb, IEnumerable<Base> properties, string baseClassName, ICollection<Base> baseClassProperties)
+            StringBuilder sb, IEnumerable<PropertyInfoBase> properties, string baseClassName, ICollection<PropertyInfoBase> baseClassProperties)
         {
             sb.AppendLine(string.Empty);
             sb.AppendLine("        /// <summary>");
@@ -389,7 +389,7 @@ namespace Dhgms.Nucleotide.Helper
                 sb.AppendLine("            columns.AddRange(base.GetColumnNames());");
             }
 
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 sb.AppendLine("            if (this." + pi.Name + ")");
                 sb.AppendLine("            {");
@@ -417,7 +417,7 @@ namespace Dhgms.Nucleotide.Helper
         /// The properties of the base class
         /// </param>
         protected override void DoGetHashCodeMethod(
-            StringBuilder sb, IList<Base> properties, ICollection<Base> baseClassProperties)
+            StringBuilder sb, IList<PropertyInfoBase> properties, ICollection<PropertyInfoBase> baseClassProperties)
         {
             sb.AppendLine("        /// <summary>");
             sb.AppendLine("        /// Gets the hash code for the object");

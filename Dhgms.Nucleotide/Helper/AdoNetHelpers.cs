@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Helper
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
@@ -78,9 +78,9 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// Properties of the info class
         /// </param>
-        protected static void DoGetOrdinals(StringBuilder generatedCode, Base[] properties)
+        protected static void DoGetOrdinals(StringBuilder generatedCode, PropertyInfoBase[] properties)
         {
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 var name = !string.IsNullOrWhiteSpace(pi.AlternativeDatabaseColumnName)
                                ? pi.AlternativeDatabaseColumnName
@@ -154,7 +154,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected static void DoViewFilterGetRowData(StringBuilder generatedCode, Base[] properties)
+        protected static void DoViewFilterGetRowData(StringBuilder generatedCode, PropertyInfoBase[] properties)
         {
             if (generatedCode == null)
             {
@@ -166,7 +166,7 @@ namespace Dhgms.Nucleotide.Helper
                 throw new ArgumentNullException("properties");
             }
 
-            foreach (Base pi in properties.Where(pi => pi.SqlDataReaderType != null))
+            foreach (PropertyInfoBase pi in properties.Where(pi => pi.SqlDataReaderType != null))
             {
                 generatedCode.AppendLine("            bool " + Common.GetVariableName(pi.Name) + " =");
                 generatedCode.AppendLine(
@@ -185,7 +185,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected static void DoDifferenceGetRowData(StringBuilder generatedCode, Base[] properties)
+        protected static void DoDifferenceGetRowData(StringBuilder generatedCode, PropertyInfoBase[] properties)
         {
             if (generatedCode == null)
             {
@@ -219,7 +219,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">
         /// The collection of properties for the class
         /// </param>
-        protected void DoInformationClassGetRowData(StringBuilder generatedCode, Base[] properties)
+        protected void DoInformationClassGetRowData(StringBuilder generatedCode, PropertyInfoBase[] properties)
         {
             if (generatedCode == null)
             {
@@ -231,7 +231,7 @@ namespace Dhgms.Nucleotide.Helper
                 throw new ArgumentNullException("properties");
             }
 
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 if (pi.SqlDataReaderType == null)
                 {
@@ -292,7 +292,7 @@ namespace Dhgms.Nucleotide.Helper
         protected virtual void DoGetStronglyTypedObjectFromDataReaderRowMethod(
             StringBuilder generatedCode,
             IClassGenerationParameters classInfo,
-            Action<StringBuilder, Base[]> doGetRowDataMethod,
+            Action<StringBuilder, PropertyInfoBase[]> doGetRowDataMethod,
             string classSuffix)
         {
             if (generatedCode == null)

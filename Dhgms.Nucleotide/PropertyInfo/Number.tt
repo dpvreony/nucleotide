@@ -112,8 +112,14 @@ ClassInfo[] classes =
 };
 #>
 
-namespace Dhgms.Nucleotide.Model.Info.PropertyInfo
+#region Designer generated code
+
+namespace Dhgms.Nucleotide.PropertyInfo
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    using Dhgms.Nucleotide.Model;
+
 <#
 bool initialClass = true;
 foreach(ClassInfo ci in classes)
@@ -132,8 +138,10 @@ foreach(ClassInfo ci in classes)
     /// <summary>
     /// Property Information for <#=ci.ClassName#>
     /// </summary>
-    public class <#=ci.ClassName#>
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class <#=ci.ClassName#>PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -148,12 +156,12 @@ foreach(ClassInfo ci in classes)
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="<#=ci.ClassName#>"/> class. 
+        /// Initializes a new instance of the <see cref="<#=ci.ClassName#>PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -162,7 +170,7 @@ foreach(ClassInfo ci in classes)
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public <#=ci.ClassName#>(
+        public <#=ci.ClassName#>PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -189,15 +197,6 @@ foreach(ClassInfo ci in classes)
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -251,7 +250,16 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -264,7 +272,7 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
             if (this.minimumValue != null)
             {
                 sb.Append("            if(");
-                if (Optional)
+                if (this.Optional)
                 {
                     sb.Append("value != null && ");
                 }
@@ -272,7 +280,7 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
                 sb.AppendLine("value < " + this.minimumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLow<#=ci.ClassName#>Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLow<#=ci.ClassName#>Exception(\"" + this.Name + "\"," + this.minimumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
@@ -282,12 +290,12 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
                 sb.AppendLine("            if(value > " + this.maximumValue + ")");
                 sb.AppendLine("            {");
                 sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHigh<#=ci.ClassName#>Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (Optional ? ".Value" : string.Empty) + ");");
+                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHigh<#=ci.ClassName#>Exception(\"" + this.Name + "\", " + this.maximumValue + ", value" + (this.Optional ? ".Value" : string.Empty) + ");");
                 sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(Name) + " = value;");
+            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -296,6 +304,7 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
 <#
 }
 #>
+#endregion
 }
 <#+
 class ClassInfo

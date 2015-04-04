@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dhgms.Nucleotide</RootNamespace>
     <AssemblyName>Dhgms.Nucleotide</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -37,6 +37,9 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +54,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,9 +68,10 @@
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>dhgms.nucleotide.snk</AssemblyOriginatorKeyFile>
@@ -78,6 +83,9 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Splat">
+      <HintPath>packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -87,6 +95,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helper\AdoNetHelpers.cs" />
     <Compile Include="Helper\BaseClassGenerator.cs" />
@@ -103,28 +113,31 @@
     <Compile Include="Helper\UnitTestBase.cs" />
     <Compile Include="Helper\UnitTestInformation.cs" />
     <Compile Include="Helper\ViewFilter.cs" />
-    <Compile Include="Model\Info\ClassGenerationParameters.cs" />
-    <Compile Include="Model\Info\CollectionType.cs" />
-    <Compile Include="Model\Info\ConfigurationType.cs" />
-    <Compile Include="Model\Info\IClassGenerationParameters.cs" />
-    <Compile Include="PropertyInfo\Base.cs" />
-    <Compile Include="PropertyInfo\ClrBoolean.cs" />
+    <Compile Include="Model\ClassGenerationParameters.cs" />
+    <Compile Include="Model\CollectionType.cs" />
+    <Compile Include="Model\ConfigurationType.cs" />
+    <Compile Include="Model\IClassGenerationParameters.cs" />
+    <Compile Include="PropertyInfo\PropertyInfoBase.cs" />
+    <Compile Include="PropertyInfo\ClrBooleanPropertyInfo.cs" />
     <None Include="deploy.bat" />
-    <None Include="Dhgms.Nucleotide.nuspec" />
+    <None Include="Dhgms.Nucleotide.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="dhgms.nucleotide.snk" />
+    <None Include="packages.config" />
     <None Include="PropertyInfo\Number.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Number1.cs</LastGenOutput>
     </None>
-    <Compile Include="PropertyInfo\ClrDateTime.cs" />
-    <Compile Include="PropertyInfo\ClrGuid.cs" />
+    <Compile Include="PropertyInfo\ClrDateTimePropertyInfo.cs" />
+    <Compile Include="PropertyInfo\ClrGuidPropertyInfo.cs" />
     <Compile Include="PropertyInfo\Number1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Number.tt</DependentUpon>
     </Compile>
-    <Compile Include="PropertyInfo\ClrString.cs" />
-    <Compile Include="Model\Info\ProviderProxy.cs" />
+    <Compile Include="PropertyInfo\ClrStringPropertyInfo.cs" />
+    <Compile Include="Model\ProviderProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
@@ -157,7 +170,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\Info\Interface\" />
+    <Folder Include="Model\Info\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -175,6 +188,13 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -26,9 +26,9 @@ namespace Dhgms.Nucleotide.Helper
         protected override void DoConstructorWithParameters(
             StringBuilder sb,
             string className,
-            Base[] properties,
+            PropertyInfoBase[] properties,
             string baseClassName,
-            Base[] baseClassProperties)
+            PropertyInfoBase[] baseClassProperties)
         {
         }
 

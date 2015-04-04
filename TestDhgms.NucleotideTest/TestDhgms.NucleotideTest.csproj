@@ -87,6 +87,7 @@
     <Compile Include="Model\GacManagedAccess.cs" />
     <Compile Include="Model\Helper\DifferenceTests.cs" />
     <Compile Include="Model\Helper\Information.cs" />
+    <Compile Include="Model\Helper\InformationInterfaceGeneratorTests.cs" />
     <Compile Include="Model\Helper\ProviderProxy.cs" />
     <Compile Include="Model\Helper\TestBase.cs" />
     <Compile Include="Model\Helper\UnitTestInformationTest.cs" />

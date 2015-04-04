@@ -7,10 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info
+namespace Dhgms.Nucleotide.Model
 {
-    using System.Diagnostics.Contracts;
-
     using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
@@ -36,12 +34,12 @@ namespace Dhgms.Nucleotide.Model.Info
         /// <summary>
         /// Gets the collection of properties for the class.
         /// </summary>
-        Base[] Properties { get; }
+        PropertyInfoBase[] Properties { get; }
 
         /// <summary>
         /// Gets the collection of properties for the inherited base class, if any.
         /// </summary>
-        Base[] BaseClassProperties { get; }
+        PropertyInfoBase[] BaseClassProperties { get; }
 
         /// <summary>
         /// Gets the company name.
@@ -62,5 +60,10 @@ namespace Dhgms.Nucleotide.Model.Info
         /// Gets name of the base information class.
         /// </summary>
         string BaseClassName { get; }
+
+        /// <summary>
+        /// Gets the class remarks.
+        /// </summary>
+        string ClassRemarks { get; }
     }
 }

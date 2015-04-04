@@ -52,9 +52,9 @@ namespace Dhgms.Nucleotide.Helper
             string subNamespace,
             string className,
             string classRemarks,
-            Base[] properties,
+            PropertyInfoBase[] properties,
             string baseClassName,
-            Base[] baseClassProperties)
+            PropertyInfoBase[] baseClassProperties)
         {
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
@@ -137,13 +137,13 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="sb"></param>
         /// <param name="properties"></param>
         /// <param name="baseClassProperties"></param>
-        protected void DoPropertiesRegion(StringBuilder sb, Base[] properties, Base[] baseClassProperties)
+        protected void DoPropertiesRegion(StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties)
         {
             var tabCount = 2;
             sb.AppendLine(string.Format("{0}#region properties", Common.GetTabs(tabCount)));
 
             //int i = 1;
-            foreach (Base pi in properties)
+            foreach (PropertyInfoBase pi in properties)
             {
                 sb.AppendLine(string.Format("{0}/// <summary>", Common.GetTabs(tabCount)));
                 sb.AppendLine(string.Format("{0}/// Unit tests for property: {1}", Common.GetTabs(tabCount), pi.Name));
@@ -269,9 +269,9 @@ namespace Dhgms.Nucleotide.Helper
         protected virtual void DoConstructorMethod(
             StringBuilder sb,
             string className,
-            Base[] properties,
+            PropertyInfoBase[] properties,
             string baseClassName,
-            Base[] baseClassProperties)
+            PropertyInfoBase[] baseClassProperties)
         {
             // Default Constructor
             sb.AppendLine("            [TestFixture]");
@@ -322,7 +322,7 @@ namespace Dhgms.Nucleotide.Helper
         /// <param name="properties">collection of properties</param>
         /// <param name="baseClassName">name of the base class</param>
         /// <param name="baseClassProperties">collection of base class properties</param>
-        protected abstract void DoConstructorWithParameters(StringBuilder sb, string className, Base[] properties, string baseClassName, Base[] baseClassProperties);
+        protected abstract void DoConstructorWithParameters(StringBuilder sb, string className, PropertyInfoBase[] properties, string baseClassName, PropertyInfoBase[] baseClassProperties);
 
         private void DoDummyTest(StringBuilder sb, int indentCount)
         {

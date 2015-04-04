@@ -7,17 +7,17 @@
 
 namespace Dhgms.Nucleotide.PropertyInfo
 {
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Property Information for the Boolean Data Type
     /// </summary>
-    public class ClrBoolean : Base
+    public class ClrBooleanPropertyInfo : PropertyInfoBase
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrBoolean"/> class. 
+        /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -38,7 +38,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrBoolean(
+        public ClrBooleanPropertyInfo(
             CollectionType collection,
             string name,
             string description,

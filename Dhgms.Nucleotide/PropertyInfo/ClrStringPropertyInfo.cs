@@ -10,17 +10,17 @@ namespace Dhgms.Nucleotide.PropertyInfo
     using System.Text;
 
     using Dhgms.Nucleotide.Helper;
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Property Information for a String
     /// </summary>
-    public class ClrString : Base
+    public class ClrStringPropertyInfo : PropertyInfoBase
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrString"/> class. 
+        /// Initializes a new instance of the <see cref="ClrStringPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -50,7 +50,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrString(
+        public ClrStringPropertyInfo(
             CollectionType collection, 
             string name, 
             string description, 

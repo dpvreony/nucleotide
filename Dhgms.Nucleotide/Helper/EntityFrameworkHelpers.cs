@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.Helper
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
@@ -160,13 +160,13 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("    }");
             sb.AppendLine(string.Empty);
 
-            foreach (Base p in classInfo.Properties.Where(p => p.IsKey))
+            foreach (PropertyInfoBase p in classInfo.Properties.Where(p => p.IsKey))
             {
                 sb.AppendLine(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().HasKey(x => x." + p.Name + ");");
             }
 
-            foreach (Base p in classInfo.Properties)
+            foreach (PropertyInfoBase p in classInfo.Properties)
             {
                 sb.Append(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().Property(x => x." + p.Name + ").Is");
@@ -174,7 +174,7 @@ namespace Dhgms.Nucleotide.Helper
             }
 
             foreach (
-                Base p in classInfo.Properties.Where(p => !string.IsNullOrWhiteSpace(p.AlternativeDatabaseColumnName)))
+                PropertyInfoBase p in classInfo.Properties.Where(p => !string.IsNullOrWhiteSpace(p.AlternativeDatabaseColumnName)))
             {
                 sb.AppendLine(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().Property(x => x." + p.Name

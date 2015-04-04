@@ -7,15 +7,21 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+#region Designer generated code
+
 namespace Dhgms.Nucleotide.PropertyInfo
 {
-    using Dhgms.Nucleotide.Model.Info;
+    using System.Diagnostics.CodeAnalysis;
+
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Property Information for ClrByte
     /// </summary>
-    public class ClrByte
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class ClrBytePropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -30,12 +36,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrByte"/> class. 
+        /// Initializes a new instance of the <see cref="ClrBytePropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -44,7 +50,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrByte(
+        public ClrBytePropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -71,15 +77,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -129,7 +126,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -175,8 +181,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for ClrChar
     /// </summary>
-    public class ClrChar
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class ClrCharPropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -191,12 +199,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrChar"/> class. 
+        /// Initializes a new instance of the <see cref="ClrCharPropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -205,7 +213,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrChar(
+        public ClrCharPropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -232,15 +240,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(char), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -290,7 +289,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(char), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -336,8 +344,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for ClrDecimal
     /// </summary>
-    public class ClrDecimal
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class ClrDecimalPropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -352,12 +362,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrDecimal"/> class. 
+        /// Initializes a new instance of the <see cref="ClrDecimalPropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -366,7 +376,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDecimal(
+        public ClrDecimalPropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -393,15 +403,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(decimal), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -451,7 +452,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(decimal), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -497,8 +507,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for ClrDouble
     /// </summary>
-    public class ClrDouble
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class ClrDoublePropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -513,12 +525,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrDouble"/> class. 
+        /// Initializes a new instance of the <see cref="ClrDoublePropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -527,7 +539,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDouble(
+        public ClrDoublePropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -554,15 +566,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(double), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -612,7 +615,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(double), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -658,8 +670,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for ClrSingle
     /// </summary>
-    public class ClrSingle
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class ClrSinglePropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -674,12 +688,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrSingle"/> class. 
+        /// Initializes a new instance of the <see cref="ClrSinglePropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -688,7 +702,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrSingle(
+        public ClrSinglePropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -715,15 +729,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(float), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -773,7 +778,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(float), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -819,8 +833,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for Integer16
     /// </summary>
-    public class Integer16
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class Integer16PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -835,12 +851,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Integer16"/> class. 
+        /// Initializes a new instance of the <see cref="Integer16PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -849,7 +865,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public Integer16(
+        public Integer16PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -876,15 +892,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(short), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -934,7 +941,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(short), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -980,8 +996,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for Integer32
     /// </summary>
-    public class Integer32
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class Integer32PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -996,12 +1014,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Integer32"/> class. 
+        /// Initializes a new instance of the <see cref="Integer32PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1010,7 +1028,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public Integer32(
+        public Integer32PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1037,15 +1055,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(int), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1095,7 +1104,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(int), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1141,8 +1159,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for Integer64
     /// </summary>
-    public class Integer64
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class Integer64PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -1157,12 +1177,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Integer64"/> class. 
+        /// Initializes a new instance of the <see cref="Integer64PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1171,7 +1191,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public Integer64(
+        public Integer64PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1198,15 +1218,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(long), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1256,7 +1267,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(long), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1302,8 +1322,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for UnsignedInteger8
     /// </summary>
-    public class UnsignedInteger8
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class UnsignedInteger8PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -1318,12 +1340,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsignedInteger8"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger8PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1332,7 +1354,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger8(
+        public UnsignedInteger8PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1359,15 +1381,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1417,7 +1430,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1463,8 +1485,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for UnsignedInteger16
     /// </summary>
-    public class UnsignedInteger16
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class UnsignedInteger16PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -1479,12 +1503,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsignedInteger16"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger16PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1493,7 +1517,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger16(
+        public UnsignedInteger16PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1520,15 +1544,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(ushort), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1578,7 +1593,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(ushort), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1624,8 +1648,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for UnsignedInteger32
     /// </summary>
-    public class UnsignedInteger32
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class UnsignedInteger32PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -1640,12 +1666,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsignedInteger32"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger32PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1654,7 +1680,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger32(
+        public UnsignedInteger32PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1681,15 +1707,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(uint), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1739,7 +1756,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(uint), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1785,8 +1811,10 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// <summary>
     /// Property Information for UnsignedInteger64
     /// </summary>
-    public class UnsignedInteger64
-        : Base
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Generated Code.")]
+    public class UnsignedInteger64PropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -1801,12 +1829,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsignedInteger64"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger64PropertyInfo"/> class. 
         /// </summary>
-        /// <param name="collection">Wether the field is a collection</param>
+        /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
         /// <param name="description">Description for the field, used for commenting</param>
-        /// <param name="optional">Whether the field is optionable \ nullable</param>
+        /// <param name="optional">Whether the field is optional \ capable of being null</param>
         /// <param name="minimumValue">The minimum acceptable value for this property</param>
         /// <param name="maximumValue">The maximum acceptable value for this property</param>
         /// <param name="isKey">
@@ -1815,7 +1843,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger64(
+        public UnsignedInteger64PropertyInfo(
             CollectionType collection,
             string name,
             string description,
@@ -1842,15 +1870,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         {
             this.minimumValue = minimumValue;
             this.maximumValue = maximumValue;
-        }
-
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[Range(typeof(ulong), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1900,7 +1919,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets the mutator code for a poperty
+        /// Produces the data annotations specific to the property
+        /// </summary>
+        /// <returns>The data annotation, if any.</returns>
+        public override string GetDataAnnotations()
+        {
+            return "[Range(typeof(ulong), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        }
+
+        /// <summary>
+        /// Gets the mutation code for a property
         /// </summary>
         /// <returns>C# code</returns>
         public override string GetMutator()
@@ -1942,4 +1970,5 @@ namespace Dhgms.Nucleotide.PropertyInfo
             return sb.ToString();
         }
     }
+#endregion
 }

@@ -9,13 +9,13 @@
 
 namespace TestDhgms.NucleotideMocking
 {
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// The mock class generation parameters.
     /// </summary>
-    public sealed class MockClassGenerationParameters : ClassGenerationParameters
+    public sealed class MockClassGenerationParameters : IClassGenerationParameters
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MockClassGenerationParameters"/> class.
@@ -50,7 +50,7 @@ namespace TestDhgms.NucleotideMocking
         /// <param name="classRemarks">
         /// The class remarks.
         /// </param>
-        public MockClassGenerationParameters(string mainNamespaceName, string subNamespace, string className, Base[] properties, Base[] baseClassProperties, string companyName, string[] copyrightBanner, int copyrightStartYear, string baseClassName, string classRemarks)
+        public MockClassGenerationParameters(string mainNamespaceName, string subNamespace, string className, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties, string companyName, string[] copyrightBanner, int copyrightStartYear, string baseClassName, string classRemarks)
         {
             this.MainNamespaceName = mainNamespaceName;
             this.SubNamespace = subNamespace;
@@ -67,91 +67,91 @@ namespace TestDhgms.NucleotideMocking
         /// <summary>
         /// Gets the main namespace.
         /// </summary>
-        public override string MainNamespaceName
+        public string MainNamespaceName
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the sub namespace, if any
         /// </summary>
-        public override string SubNamespace
+        public string SubNamespace
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets name of the information class.
         /// </summary>
-        public override string ClassName
+        public string ClassName
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the collection of properties for the class.
         /// </summary>
-        public override Base[] Properties
+        public PropertyInfoBase[] Properties
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the collection of properties for the inherited base class, if any.
         /// </summary>
-        public override Base[] BaseClassProperties
+        public PropertyInfoBase[] BaseClassProperties
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the company name.
         /// </summary>
-        public override string CompanyName
+        public string CompanyName
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the copyright banner.
         /// </summary>
-        public override string[] CopyrightBanner
+        public string[] CopyrightBanner
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets the copyright start year.
         /// </summary>
-        public override int CopyrightStartYear
+        public int CopyrightStartYear
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
         /// Gets name of the base information class.
         /// </summary>
-        public override string BaseClassName
+        public string BaseClassName
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
-        /// Gets name of the information class.
+        /// Gets the class remarks.
         /// </summary>
-        public override string ClassRemarks
+        public string ClassRemarks
         {
             get;
-            protected set;
+            private set;
         }
     }
 }

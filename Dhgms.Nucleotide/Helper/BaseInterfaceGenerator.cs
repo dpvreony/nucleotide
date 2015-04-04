@@ -6,62 +6,9 @@
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Extensions;
+    using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
-
-    /// <summary>
-    /// String Builder Extensions
-    /// </summary>
-    public static class StringBuilderExtensions
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="format"></param>
-        /// <param name="args"></param>
-        public static void AppendLine(this StringBuilder instance, string format, params object[] args)
-        {
-            var s = string.Format(format, args);
-            instance.AppendLine(s);
-        }
-    }
-
-    /// <summary>
-    /// LINQ Extensions for the Enumerable classes
-    /// </summary>
-    public static class EnumerableExtensions
-    {
-        /// <summary>
-        /// Take items from a list which suit a predicate
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <returns></returns>
-        public static IEnumerable<TSource> Take<TSource>(this IList<TSource> instance, Func<TSource, bool> predicate)
-        {
-            Contract.Requires<ArgumentNullException>(instance != null);
-            Contract.Requires<ArgumentNullException>(predicate != null);
-
-            var result = new List<TSource>();
-
-            var position = 0;
-            while (position < instance.Count)
-            {
-                var item = instance[position];
-                if (predicate(item))
-                {
-                    result.Add(item);
-                    instance.Remove(item);
-                }
-                else
-                {
-                    position++;
-                }
-            }
-
-            return result;
-        }
-    }
 
     /// <summary>
     /// Base Class for interface generation
@@ -80,6 +27,11 @@
         public string Generate(
             IList<IClassGenerationParameters> classes)
         {
+            if (Splat.ModeDetector.InUnitTestRunner())
+            {
+                return this.DoGeneration(classes);
+            }
+
             try
             {
                 return this.DoGeneration(classes);
@@ -151,7 +103,7 @@
             sb.AppendLine("{0}}", Common.GetTabs(tabCount));
         }
 
-        private static void DoProperties(StringBuilder sb, int tabCount, Base[] properties)
+        private static void DoProperties(StringBuilder sb, int tabCount, PropertyInfoBase[] properties)
         {
             var position = 0;
             while (position < properties.Length)

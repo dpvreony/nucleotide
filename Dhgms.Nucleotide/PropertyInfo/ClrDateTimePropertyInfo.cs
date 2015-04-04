@@ -8,13 +8,13 @@ namespace Dhgms.Nucleotide.PropertyInfo
 {
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Property Information for ClrDateTime
     /// </summary>
-    public class ClrDateTime
-        : Base
+    public class ClrDateTimePropertyInfo
+        : PropertyInfoBase
     {
         #region fields
         /// <summary>
@@ -43,7 +43,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDateTime(
+        public ClrDateTimePropertyInfo(
             CollectionType collection,
             System.String name,
             System.String description,

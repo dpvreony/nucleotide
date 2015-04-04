@@ -12,7 +12,7 @@ namespace Dhgms.Nucleotide.Helper
     using System.Collections.Generic;
     using System.Text;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Class for handling configuration class generation
@@ -68,7 +68,7 @@ namespace Dhgms.Nucleotide.Helper
         /// </param>
         private static void DoConfigurationProperty(
             StringBuilder sb,
-            Model.Info.ConfigurationProperty property)
+            ConfigurationProperty property)
         {
             sb.AppendLine("		/// <summary>");
             sb.AppendLine("		/// " + property.Description);

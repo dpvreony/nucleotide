@@ -5,7 +5,7 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Model.Info
+namespace Dhgms.Nucleotide.Model
 {
     /// <summary>
     /// The type of collection the property uses, if any

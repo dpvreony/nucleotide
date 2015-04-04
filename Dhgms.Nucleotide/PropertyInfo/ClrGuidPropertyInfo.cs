@@ -2,15 +2,15 @@
 {
     using System;
 
-    using Dhgms.Nucleotide.Model.Info;
+    using Dhgms.Nucleotide.Model;
 
     /// <summary>
     /// Property Information for a Guid
     /// </summary>
-    public class ClrGuid : Base
+    public class ClrGuidPropertyInfo : PropertyInfoBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrString"/> class. 
+        /// Initializes a new instance of the <see cref="ClrStringPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -31,7 +31,7 @@
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrGuid(
+        public ClrGuidPropertyInfo(
             CollectionType collection, 
             string name, 
             string description, 
