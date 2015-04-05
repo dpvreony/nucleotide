@@ -9,12 +9,15 @@
 
 namespace TestDhgms.NucleotideMocking
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
     /// <summary>
     /// The mock class generation parameters.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public sealed class MockClassGenerationParameters : IClassGenerationParameters
     {
         /// <summary>

@@ -6,6 +6,7 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Dhgms.Nucleotide.Helper;
     using Dhgms.Nucleotide.Model;
@@ -18,6 +19,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
     /// <summary>
     /// The difference.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DifferenceTests
     {
         #region Constants

@@ -7,6 +7,8 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
 
     using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
@@ -18,6 +20,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class UnitTestInformationTest
     {
         #region Constants
@@ -163,8 +166,11 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
                         ClassNameDefaultBase,
                         propertiesLists,
                         null,
+                        "DHGMS Solutions",
+                        new[] { "Copyright DHGMS Solutions" },
+                        2010,
                         null,
-                null, 2010, null, ClassRemarks);
+                        ClassRemarks);
                 Console.Write(instance.Generate(cgp));
             }
         }

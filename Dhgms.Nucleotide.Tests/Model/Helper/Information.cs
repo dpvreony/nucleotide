@@ -6,6 +6,7 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
@@ -17,6 +18,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
     /// <summary>
     /// The information.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Information
     {
         #region Constants

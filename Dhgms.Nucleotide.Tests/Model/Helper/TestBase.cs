@@ -1,10 +1,12 @@
 ﻿namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The test base.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class TestBase
     {
         /// <summary>

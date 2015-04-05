@@ -14,12 +14,14 @@
 namespace TestDhgms.NucleotideTest.Model.Info.PropertyInfo
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Xunit;
 
     /// <summary>
     /// Unit Tests for PropertyInfo classes
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class PropertyInfoTests : Dhgms.Nucleotide.Tests.Model.Helper.TestBase
     {
 <#

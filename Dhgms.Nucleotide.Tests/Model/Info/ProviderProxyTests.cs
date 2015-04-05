@@ -7,12 +7,14 @@
 namespace Dhgms.Nucleotide.Tests.Model.Info
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Xunit;
 
     /// <summary>
     /// Test units for Provider Proxy
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ProviderProxyTests
     {
         #region Public Methods and Operators
