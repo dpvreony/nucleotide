@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Helper
+namespace Dhgms.Nucleotide.Generators
 {
     using System.Text;
 

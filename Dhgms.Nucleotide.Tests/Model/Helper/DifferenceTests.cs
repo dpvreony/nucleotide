@@ -6,9 +6,10 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using Dhgms.Nucleotide.Helper;
+    using Dhgms.Nucleotide.Generators;
     using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
@@ -86,7 +87,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
             [Fact]
             public void ThrowsExceptionCgpNull()
             {
-                var instance = new Difference();
+                var instance = new DifferenceClassGenerator();
 
                 var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(null));
 
@@ -99,11 +100,12 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
             [Fact]
             public void ThrowsExceptionDifferenceClassNameNull()
             {
-                var instance = new Difference();
+                var instance = new DifferenceClassGenerator();
 
                 var cgp = new MockClassGenerationParameters(MainNamespaceName, SubNamespace, null, null, TestInputs.PropertiesDefault, null, null, 2010, null, null);
+                var classes = new List<IClassGenerationParameters> { cgp };
 
-                var ex = Assert.Throws<ArgumentException>(() => instance.Generate(cgp));
+                var ex = Assert.Throws<ArgumentException>(() => instance.Generate(classes));
 
                 Assert.Equal("cgp", ex.ParamName);
             }

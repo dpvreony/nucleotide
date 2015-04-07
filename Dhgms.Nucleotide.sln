@@ -1,0 +1,109 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7EFBC9C-E778-4A30-AD62-5FB70B6D0754}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		Dhgms.Nucleotide.vsmdi = Dhgms.Nucleotide.vsmdi
+		install.ps1 = install.ps1
+		Local.testsettings = Local.testsettings
+		Project.Targets = Project.Targets
+		Settings.StyleCop = Settings.StyleCop
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		uninstall.ps1 = uninstall.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhgms.Nucleotide", "Dhgms.Nucleotide\Dhgms.Nucleotide.csproj", "{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Help.Dhgms.Nucleotide", "Help.Dhgms.Nucleotide\Help.Dhgms.Nucleotide.shfbproj", "{3FAA9567-B637-4017-99CD-5415A8A94B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideMocking", "TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj", "{06D18E16-EC37-4E16-8EE3-47607E095FE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82BF3CBD-3DDB-4189-AE7C-BA3032D1D368}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugetpackage", "nugetpackage", "{10B30B5D-7064-429E-A73B-BF485FC38AED}"
+	ProjectSection(SolutionItems) = preProject
+		nugetpackage\dhgmsnucleotide.targets = nugetpackage\dhgmsnucleotide.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhgms.Nucleotide.Tests", "Dhgms.Nucleotide.Tests\Dhgms.Nucleotide.Tests.csproj", "{A257886A-194D-4C15-AA6B-EDCA3AA88904}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs01
+		SccLocalPath0 = Dhgms.Nucleotide
+		SccProjectFilePathRelativizedFromConnection0 = ..\\
+		SccProjectUniqueName1 = Dhgms.Nucleotide\\Dhgms.Nucleotide.csproj
+		SccLocalPath1 = Dhgms.Nucleotide
+		SccProjectUniqueName2 = Help.Dhgms.Nucleotide\\Help.Dhgms.Nucleotide.shfbproj
+		SccProjectName2 = Help.Dhgms.Nucleotide
+		SccLocalPath2 = Help.Dhgms.Nucleotide
+		SccProjectUniqueName3 = TestDhgms.NucleotideMocking\\TestDhgms.NucleotideMocking.csproj
+		SccProjectName3 = TestDhgms.NucleotideMocking
+		SccLocalPath3 = TestDhgms.NucleotideMocking
+		SccProjectUniqueName4 = Dhgms.Nucleotide.Tests\\Dhgms.Nucleotide.Tests.csproj
+		SccProjectName4 = Dhgms.Nucleotide.Tests
+		SccLocalPath4 = Dhgms.Nucleotide.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|x86.ActiveCfg = Release|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3FAA9567-B637-4017-99CD-5415A8A94B30}.Release|x86.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|x86.ActiveCfg = Release|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Dhgms.Nucleotide.vsmdi
+	EndGlobalSection
+EndGlobal

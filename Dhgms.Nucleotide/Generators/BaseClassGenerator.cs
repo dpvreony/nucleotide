@@ -3,7 +3,7 @@
 //   Licensed under GNU General Public License version 2 (GPLv2)
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Dhgms.Nucleotide.Helper
+namespace Dhgms.Nucleotide.Generators
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Helper
     /// <summary>
     ///     Base Class for Code Generated Classes
     /// </summary>
-    public abstract class BaseClassGenerator
+    public abstract class BaseClassGenerator : GeneratorBase
     {
         #region Constructors and Destructors
 
@@ -58,58 +58,57 @@ namespace Dhgms.Nucleotide.Helper
         #region Public Methods and Operators
 
         /// <summary>
-        /// Entry point for generating the code
+        /// Carries out the generation of code for a class
         /// </summary>
-        /// <returns>
-        /// C# code
-        /// </returns>
-        public string Generate(IClassGenerationParameters cgp)
+        /// <param name="sb">The string builder to append code to.</param>
+        /// <param name="classGenerationParameters">The class generation parameters</param>
+        protected override void DoGenerationOfClass(StringBuilder sb, IClassGenerationParameters classGenerationParameters)
         {
-            if (cgp == null)
+            if (classGenerationParameters == null)
             {
-                throw new ArgumentNullException("cgp");
+                throw new ArgumentNullException("classGenerationParameters");
             }
 
-            var mainNamespaceName = cgp.MainNamespaceName;
+            var mainNamespaceName = classGenerationParameters.MainNamespaceName;
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
-                throw new ArgumentException("MainNamespaceName", "cgp");
+                throw new ArgumentException("MainNamespaceName", "classGenerationParameters");
             }
 
-            var className = cgp.ClassName;
+            var className = classGenerationParameters.ClassName;
             if (string.IsNullOrWhiteSpace(className))
             {
-                throw new ArgumentException("ClassName", "cgp");
+                throw new ArgumentException("ClassName", "classGenerationParameters");
             }
 
-            var companyName = cgp.CompanyName;
+            var companyName = classGenerationParameters.CompanyName;
             if (string.IsNullOrWhiteSpace(companyName))
             {
-                throw new ArgumentException("CompanyName", "cgp");
+                throw new ArgumentException("CompanyName", "classGenerationParameters");
             }
 
-            var copyrightBanner = cgp.CopyrightBanner;
+            var copyrightBanner = classGenerationParameters.CopyrightBanner;
             if (copyrightBanner == null || copyrightBanner.Length < 1)
             {
-                throw new ArgumentException("copyrightBanner", "cgp");
+                throw new ArgumentException("copyrightBanner", "classGenerationParameters");
             }
 
-            var copyrightStartYear = cgp.CopyrightStartYear;
+            var copyrightStartYear = classGenerationParameters.CopyrightStartYear;
             if (copyrightStartYear < 1900)
             {
-                throw new ArgumentException("CopyrightStartYear", "cgp");
+                throw new ArgumentException("CopyrightStartYear", "classGenerationParameters");
             }
 
-            var classRemarks = cgp.ClassRemarks;
+            var classRemarks = classGenerationParameters.ClassRemarks;
             if (string.IsNullOrWhiteSpace(classRemarks))
             {
-                throw new ArgumentException("ClassRemarks", "cgp");
+                throw new ArgumentException("ClassRemarks", "classGenerationParameters");
             }
 
-            var properties = cgp.Properties;
+            var properties = classGenerationParameters.Properties;
             if (properties == null)
             {
-                throw new ArgumentException("Properties", "cgp");
+                throw new ArgumentException("Properties", "classGenerationParameters");
             }
 
             if (properties.Count(p => p.IsKey) > 1)
@@ -117,33 +116,29 @@ namespace Dhgms.Nucleotide.Helper
                 throw new ArgumentException("Too many primary keys defined");
             }
 
-            var sb = new StringBuilder();
+            //var subNamespace = classGenerationParameters.SubNamespace;
+            //sb.AppendLine(
+            //    "namespace " + mainNamespaceName + ".Model." + this.ClassTypeName
+            //    + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null));
+            //sb.AppendLine("{");
 
-            this.DoCopyrightHeader(sb, companyName, copyrightBanner, copyrightStartYear, className, classRemarks);
-
-            var subNamespace = cgp.SubNamespace;
-            sb.AppendLine(
-                "namespace " + mainNamespaceName + ".Model." + this.ClassTypeName
-                + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null));
-            sb.AppendLine("{");
-
-            foreach (string ns in this.GetUsingNamespaces())
-            {
-                var indentation = Common.GetTabs(2);
-                sb.AppendLine(string.Format("{0}using {1};", indentation, ns));
-            }
+            //foreach (string ns in this.GetUsingNamespaces())
+            //{
+            //    var indentation = Helpers.GetTabs(2);
+            //    sb.AppendLine(string.Format("{0}using {1};", indentation, ns));
+            //}
 
             sb.AppendLine(string.Empty);
-            sb.AppendLine(Common.GetAutoGeneratedWarning());
+            sb.AppendLine(Helpers.GetAutoGeneratedWarning());
             sb.AppendLine("        /// <summary>");
             sb.AppendLine("        /// " + classRemarks);
             sb.AppendLine("        /// </summary>");
-            sb.AppendLine("        [DataContract]");
+            sb.AppendLine("        [System.Runtime.Serialization.DataContract]");
             sb.AppendLine("        public class " + className + this.GetClassSuffix());
             sb.AppendLine("// ReSharper disable RedundantNameQualifier");
 
-            var baseClassName = cgp.BaseClassName;
-            var baseClassProperties = cgp.BaseClassProperties;
+            var baseClassName = classGenerationParameters.BaseClassName;
+            var baseClassProperties = classGenerationParameters.BaseClassProperties;
             if (string.IsNullOrWhiteSpace(baseClassName) == false && baseClassProperties != null
                 && baseClassProperties.Length > 0)
             {
@@ -152,7 +147,7 @@ namespace Dhgms.Nucleotide.Helper
             else
             {
                 sb.AppendLine(
-                    "            : " + this.DefaultBaseNamespace + "<" + className + this.GetClassSuffix() + ">");
+                    "            : " + this.DefaultBaseNamespace + "<" + className + this.GetClassSuffix() + ">, I" + className + this.GetClassSuffix());
             }
 
             sb.AppendLine("// ReSharper restore RedundantNameQualifier");
@@ -163,41 +158,15 @@ namespace Dhgms.Nucleotide.Helper
             this.DoPropertiesRegion(sb, properties, baseClassProperties);
             this.DoIComparableRegion(sb, className, properties, baseClassName, baseClassProperties);
 
-            sb.Append(Common.GetIEquatableRegion(className + this.GetClassSuffix(), baseClassName, baseClassProperties));
+            sb.Append(Helpers.GetIEquatableRegion(className + this.GetClassSuffix(), baseClassName, baseClassProperties));
 
             this.DoOurMethodsRegion(
-                sb, mainNamespaceName, subNamespace, className, properties, baseClassName, baseClassProperties);
+                sb, mainNamespaceName, classGenerationParameters.SubNamespace, className, properties, baseClassName, baseClassProperties);
 
             this.DoDisposeMethod(sb, properties, baseClassName);
 
             sb.AppendLine("    }");
-            sb.AppendLine("}");
-
-            return sb.ToString();
-        }
-
-        private void DoCopyrightHeader(StringBuilder sb, string companyName, IEnumerable<string> copyrightBanner, int copyrightStartYear, string className, string classRemarks)
-        {
-            sb.AppendLine("// --------------------------------------------------------------------------------------------------------------------");
-
-            sb.AppendLine(string.Format("// <copyright file=\"{0}.cs\" company=\"{1}\">", className, companyName));
-            var thisYear = DateTime.Now.Year;
-            var yearDetails = copyrightStartYear < thisYear ? string.Format("{0}-{1}", copyrightStartYear, thisYear) : copyrightStartYear.ToString(CultureInfo.InvariantCulture);
-            sb.AppendLine(string.Format("//   Copyright {0} {1}", yearDetails, companyName));
-            sb.AppendLine("//   ");
-
-            foreach (var line in copyrightBanner)
-            {
-                sb.AppendLine(string.Format("//   {0}", line));
-            }
-
-            sb.AppendLine("// </copyright>");
-
-            sb.AppendLine("// <summary>");
-            sb.AppendLine(string.Format("//   {0}", classRemarks));
-            sb.AppendLine("// </summary>");
-            sb.AppendLine("// --------------------------------------------------------------------------------------------------------------------");
-            sb.AppendLine(string.Empty);
+            //sb.AppendLine("}");
         }
 
         /// <summary>
@@ -224,7 +193,7 @@ namespace Dhgms.Nucleotide.Helper
             foreach (PropertyInfoBase pi in properties)
             {
                 sb.AppendLine(
-                    "        /// <param name=\"" + Common.GetVariableName(pi.Name) + "\">" + pi.Description + "</param>");
+                    "        /// <param name=\"" + Helpers.GetVariableName(pi.Name) + "\">" + pi.Description + "</param>");
             }
         }
 
@@ -330,7 +299,7 @@ namespace Dhgms.Nucleotide.Helper
             StringBuilder sb, string className, PropertyInfoBase[] properties, string baseClassName, PropertyInfoBase[] baseClassProperties)
         {
             // Default Constructor
-            sb.AppendLine(Common.GetAutoGeneratedWarning());
+            sb.AppendLine(Helpers.GetAutoGeneratedWarning());
             sb.AppendLine("        /// <summary>");
             sb.AppendLine(
                 "        /// Initializes a new instance of the <see cref=\"" + className + this.GetClassSuffix()
@@ -356,7 +325,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("        {");
             sb.AppendLine("            if (other == null)");
             sb.AppendLine("            {");
-            sb.AppendLine("                throw new ArgumentNullException(\"other\");");
+            sb.AppendLine("                throw new System.ArgumentNullException(\"other\");");
             sb.AppendLine("            }");
             sb.AppendLine(string.Empty);
 
@@ -369,7 +338,7 @@ namespace Dhgms.Nucleotide.Helper
 
             // Constructor
             sb.AppendLine(string.Empty);
-            sb.AppendLine(Common.GetAutoGeneratedWarning());
+            sb.AppendLine(Helpers.GetAutoGeneratedWarning());
             sb.AppendLine("        /// <summary>");
             sb.AppendLine(
                 "        /// Initializes a new instance of the <see cref=\"" + className + this.GetClassSuffix()
@@ -396,7 +365,7 @@ namespace Dhgms.Nucleotide.Helper
                 int counter = 0;
                 while (counter < baseClassProperties.Length)
                 {
-                    sb.Append("                " + Common.GetVariableName(baseClassProperties[counter].Name));
+                    sb.Append("                " + Helpers.GetVariableName(baseClassProperties[counter].Name));
                     counter++;
                     sb.AppendLine(counter < baseClassProperties.Length ? "," : ")");
                 }
@@ -406,7 +375,7 @@ namespace Dhgms.Nucleotide.Helper
 
             foreach (PropertyInfoBase pi in properties)
             {
-                sb.AppendLine("            this." + pi.Name + " = " + Common.GetVariableName(pi.Name) + ";");
+                sb.AppendLine("            this." + pi.Name + " = " + Helpers.GetVariableName(pi.Name) + ";");
             }
 
             sb.AppendLine("        }");
@@ -439,7 +408,7 @@ namespace Dhgms.Nucleotide.Helper
                 {
                     sb.Append(
                         "            " + this.GetConstructorParameterType(baseClassProperties[counter]) + " "
-                        + Common.GetVariableName(baseClassProperties[counter].Name) + ",");
+                        + Helpers.GetVariableName(baseClassProperties[counter].Name) + ",");
                     counter++;
                 }
 
@@ -450,7 +419,7 @@ namespace Dhgms.Nucleotide.Helper
             {
                 sb.Append(
                     "            " + this.GetConstructorParameterType(properties[counter]) + " "
-                    + Common.GetVariableName(properties[counter].Name));
+                    + Helpers.GetVariableName(properties[counter].Name));
                 counter++;
                 sb.AppendLine(counter < properties.Length ? "," : ")");
             }
@@ -485,11 +454,11 @@ namespace Dhgms.Nucleotide.Helper
             {
                 if (pi.Collection != CollectionType.None || pi.Optional || pi.NullableType)
                 {
-                    sb.AppendLine("            this." + Common.GetVariableName(pi.Name) + " = null;");
+                    sb.AppendLine("            this." + Helpers.GetVariableName(pi.Name) + " = null;");
                 }
                 else if (pi.DisposableType)
                 {
-                    sb.AppendLine("            this." + Common.GetVariableName(pi.Name) + ".Dispose();");
+                    sb.AppendLine("            this." + Helpers.GetVariableName(pi.Name) + ".Dispose();");
                 }
             }
 
@@ -541,70 +510,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("                    System.Xml.XmlWriter writer,");
             sb.AppendLine("                    string parentElementName)");
             sb.AppendLine("            {");
-            if (skipMethod)
-            {
-                sb.AppendLine("            throw new NotImplementedException();");
-            }
-            else
-            {
-                sb.AppendLine("            if (writer == null)");
-                sb.AppendLine("            {");
-                sb.AppendLine("                throw new ArgumentNullException(\"writer\");");
-                sb.AppendLine("            }");
-                sb.AppendLine(string.Empty);
-                sb.AppendLine(
-                    "            if (string.IsNullOrEmpty(parentElementName) || parentElementName.Trim().Length == 0)");
-                sb.AppendLine("            {");
-                sb.AppendLine("            throw new ArgumentNullException(\"parentElementName\");");
-                sb.AppendLine("            }");
-                sb.AppendLine(string.Empty);
-
-                sb.AppendLine("                writer.WriteStartElement(parentElementName);");
-                sb.AppendLine(string.Empty);
-                if (baseClassProperties != null && baseClassProperties.Length > 0)
-                {
-                    foreach (PropertyInfoBase pi in baseClassProperties)
-                    {
-                        sb.AppendLine("                // " + pi.Name);
-
-                        if (pi.XmlIsCdataElement)
-                        {
-                            sb.AppendLine(
-                                "                this.DoChildXmlCDataElement(writer, \"" + pi.Name + "\", this."
-                                + this.GetValueForToStringArray(pi) + ");");
-                        }
-                        else
-                        {
-                            sb.AppendLine(
-                                "                this.DoChildXmlElement(writer, \"" + pi.Name + "\", this."
-                                + this.GetValueForToStringArray(pi) + ");");
-                        }
-
-                        sb.AppendLine(string.Empty);
-                    }
-                }
-
-                foreach (PropertyInfoBase pi in properties)
-                {
-                    sb.AppendLine("                // " + pi.Name);
-                    if (pi.XmlIsCdataElement)
-                    {
-                        sb.AppendLine(
-                            "                this.DoChildXmlCDataElement(writer, \"" + pi.Name + "\", this."
-                            + this.GetValueForToStringArray(pi) + ");");
-                    }
-                    else
-                    {
-                        sb.AppendLine(
-                            "                this.DoChildXmlElement(writer, \"" + pi.Name + "\", this."
-                            + this.GetValueForToStringArray(pi) + ");");
-                    }
-
-                    sb.AppendLine(string.Empty);
-                }
-
-                sb.AppendLine("                writer.WriteEndElement();");
-            }
+            sb.AppendLine("                throw new System.NotImplementedException();");
 
             sb.AppendLine("            }");
         }
@@ -628,7 +534,7 @@ namespace Dhgms.Nucleotide.Helper
                 sb.AppendLine("            /// " + pi.Description);
                 sb.AppendLine("            /// </summary>");
                 sb.AppendLine(
-                    "            [SuppressMessage(\"StyleCop.CSharp.ReadabilityRules\", \"SA1121:UseBuiltInTypeAlias\", Justification = \"Reviewed. Suppression is OK here.\")]");
+                    "            [System.Diagnostics.CodeAnalysis.SuppressMessage(\"StyleCop.CSharp.ReadabilityRules\", \"SA1121:UseBuiltInTypeAlias\", Justification = \"Reviewed. Suppression is OK here.\")]");
                 this.OnDoFieldItem(sb, pi);
                 sb.AppendLine(string.Empty);
             }
@@ -702,7 +608,7 @@ namespace Dhgms.Nucleotide.Helper
         {
             sb.AppendLine("        #region IComparable methods");
             sb.AppendLine(string.Empty);
-            sb.AppendLine(Common.GetAutoGeneratedWarning());
+            sb.AppendLine(Helpers.GetAutoGeneratedWarning());
             sb.AppendLine("        /// <summary>");
             sb.AppendLine("        /// Compares the current instance with another object of the same type.");
             sb.AppendLine("        /// </summary>");
@@ -721,7 +627,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("        {");
             sb.AppendLine("            if (other == null)");
             sb.AppendLine("            {");
-            sb.AppendLine("                throw new ArgumentNullException(\"other\");");
+            sb.AppendLine("                throw new System.ArgumentNullException(\"other\");");
             sb.AppendLine("            }");
             sb.AppendLine(string.Empty);
 
@@ -787,7 +693,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("        /// </summary>");
             sb.AppendLine(
                 "        public static " + (baseClassProperties != null ? "new " : string.Empty)
-                + "XmlReader GetOdataVocabularies()");
+                + "System.Xml.XmlReader GetOdataVocabularies()");
             sb.AppendLine("        {");
 
             string fullNamespace = mainNamespaceName
@@ -909,19 +815,19 @@ namespace Dhgms.Nucleotide.Helper
                 sb.AppendLine("        /// </summary>");
 
                 sb.AppendLine(
-                    "        [SuppressMessage(\"StyleCop.CSharp.ReadabilityRules\", \"SA1121:UseBuiltInTypeAlias\", Justification = \"Reviewed. Suppression is OK here.\")]");
+                    "        [System.Diagnostics.CodeAnalysis.SuppressMessage(\"StyleCop.CSharp.ReadabilityRules\", \"SA1121:UseBuiltInTypeAlias\", Justification = \"Reviewed. Suppression is OK here.\")]");
 
                 // WCF Data Member Information
-                string required = "IsRequired = " + (!pi.Optional).ToString().ToLower();
+                string required = "IsRequired = " + (!pi.Optional).ToString().ToLower(CultureInfo.InvariantCulture);
                 string order = ", Order = " + i++;
 
                 string dataMemberAttributes = "(" + required + order + ")";
-                sb.AppendLine("        [DataMember" + dataMemberAttributes + "]");
+                sb.AppendLine("        [System.Runtime.Serialization.DataMember" + dataMemberAttributes + "]");
 
                 // Data Annotation Information
                 if (!pi.Optional)
                 {
-                    sb.AppendLine("        [Required]");
+                    sb.AppendLine("        [System.ComponentModel.DataAnnotations.Required]");
                 }
 
                 var propertySpecificAnnotations = pi.GetDataAnnotations();
@@ -941,7 +847,7 @@ namespace Dhgms.Nucleotide.Helper
                 {
                     sb.AppendLine("            get");
                     sb.AppendLine("            {");
-                    sb.AppendLine("                return this." + Common.GetVariableName(pi.Name) + ";");
+                    sb.AppendLine("                return this." + Helpers.GetVariableName(pi.Name) + ";");
                     sb.AppendLine("            }");
                     sb.AppendLine(string.Empty);
                     this.OnDoPropertyMutator(sb, pi);
@@ -999,7 +905,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("            {");
             if (skipMethod)
             {
-                sb.AppendLine("            throw new NotImplementedException();");
+                sb.AppendLine("            throw new System.NotImplementedException();");
             }
             else
             {
@@ -1208,7 +1114,7 @@ namespace Dhgms.Nucleotide.Helper
             this.DoClassSpecificMethods(
                 sb, mainNamespaceName, subNamespace, className, properties, baseClassName, baseClassProperties);
 
-            DoOdataVocabulariesMethod(sb, mainNamespaceName, subNamespace, className, properties, baseClassProperties);
+            //DoOdataVocabulariesMethod(sb, mainNamespaceName, subNamespace, className, properties, baseClassProperties);
 
             sb.AppendLine("        #endregion");
         }

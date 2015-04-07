@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Helper
+namespace Dhgms.Nucleotide.Generators
 {
     using System.Collections.Generic;
     using System.Text;
@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Helper
     /// <summary>
     /// Class for handling configuration class generation
     /// </summary>
-    public class Configuration
+    public class ConfigurationGenerator
     {
         /// <summary>
         /// Entry point for generating the code

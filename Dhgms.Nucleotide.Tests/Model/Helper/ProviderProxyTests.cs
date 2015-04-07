@@ -9,6 +9,8 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    using Dhgms.Nucleotide.Generators;
+
     using Xunit;
 
     /// <summary>
@@ -58,7 +60,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
 
             var ex =
                 Assert.Throws<ArgumentNullException>(
-                    () => Dhgms.Nucleotide.Helper.ProviderProxy.Generate(null, objectNames));
+                    () => ProviderProxy.Generate(null, objectNames));
 
             Assert.Equal("projectName", ex.ParamName);
         }
@@ -70,7 +72,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
         public void TestProviderProxyNoObjectNames()
         {
             var ex  = Assert.Throws<ArgumentNullException>(
-                () => Dhgms.Nucleotide.Helper.ProviderProxy.Generate("ProjectName", null));
+                () => ProviderProxy.Generate("ProjectName", null));
 
             Assert.Equal("objectNames", ex.ParamName);
         }
@@ -86,7 +88,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
                 new Dhgms.Nucleotide.Model.ProviderProxy("Name", "InfoClass")
             };
 
-            var result = Dhgms.Nucleotide.Helper.ProviderProxy.Generate("ProjectName", objectNames);
+            var result = ProviderProxy.Generate("ProjectName", objectNames);
 
             Assert.True(!string.IsNullOrWhiteSpace(result));
         }

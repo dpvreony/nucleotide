@@ -6,6 +6,7 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
     using Dhgms.Nucleotide.Model;
@@ -161,9 +162,10 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
             /// </summary>
             public void ThrowsArgumentNullException()
             {
-                var instance = new Dhgms.Nucleotide.Helper.Information();
+                var instance = new Generators.InformationClassGenerator();
                 var cgp = new MockClassGenerationParameters(null, null, null, null, null, null, null, 2010, null, null);
-                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(cgp));
+                var classes = new List<IClassGenerationParameters> { cgp };
+                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(classes));
                 Assert.Equal("cgp", ex.ParamName);
             }
         }

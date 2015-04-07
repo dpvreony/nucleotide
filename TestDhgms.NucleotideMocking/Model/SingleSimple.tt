@@ -1,7 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ output extension=".cs" #>
-<#@ assembly name="$(SolutionDir)\bin\debug\Dhgms.Nucleotide.dll" #>
-<#@ import namespace="Dhgms.Nucleotide.Model" #>
+<#@ assembly name="$(SolutionDir)\Dhgms.Nucleotide\bin\debug\Dhgms.Nucleotide.dll" #>
 <#@ import namespace="Dhgms.Nucleotide.Model" #>
 <#@ import namespace="Dhgms.Nucleotide.PropertyInfo" #>
 <#@ import namespace="System.Security.Cryptography.X509Certificates" #>
@@ -12,9 +11,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 <#
 
-var interfaceGenerator = new Dhgms.Nucleotide.Helper.InformationInterfaceGenerator();
-var information = new Dhgms.Nucleotide.Helper.Information();
-var difference = new Dhgms.Nucleotide.Helper.Difference();
+var informationInterfaceGenerator = new Dhgms.Nucleotide.Generators.InformationInterfaceGenerator();
+var differenceInterfaceGenerator = new Dhgms.Nucleotide.Generators.DifferenceInterfaceGenerator();
+var information = new Dhgms.Nucleotide.Generators.InformationClassGenerator();
+var difference = new Dhgms.Nucleotide.Generators.DifferenceClassGenerator();
 //Dhgms.Nucleotide.Model.Helper.SearchFilter searchFilter = new Dhgms.Nucleotide.Model.Helper.SearchFilter();
 //Dhgms.Nucleotide.Model.Helper.ViewFilter viewFilter = new Dhgms.Nucleotide.Model.Helper.ViewFilter();
 
@@ -24,11 +24,13 @@ var classes = new System.Collections.Generic.List<IClassGenerationParameters>
                       cgp
                   };
 #>
-<#=interfaceGenerator.Generate(classes)
+<#=informationInterfaceGenerator.Generate(classes)
 #>
-<#=information.Generate(cgp)
+<#=differenceInterfaceGenerator.Generate(classes)
 #>
-<#=difference.Generate(cgp)
+<#=information.Generate(classes)
+#>
+<#=difference.Generate(classes)
 #>
 <#+
 

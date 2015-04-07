@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dhgms.DataManager">
-      <HintPath>..\Dhgms.Nucleotide\packages\Dhgms.DataManager.0.1403.10.0\lib\net40\Dhgms.DataManager.dll</HintPath>
+      <HintPath>..\packages\Dhgms.DataManager.0.1403.10.0\lib\net40\Dhgms.DataManager.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

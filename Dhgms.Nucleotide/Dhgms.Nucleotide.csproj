@@ -74,7 +74,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>dhgms.nucleotide.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -84,7 +85,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Splat">
-      <HintPath>packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -97,34 +98,36 @@
   <ItemGroup>
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
+    <Compile Include="GenerationFlags.cs" />
+    <Compile Include="Generators\ServiceInterfaceGenerator.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Helper\AdoNetHelpers.cs" />
-    <Compile Include="Helper\BaseClassGenerator.cs" />
-    <Compile Include="Helper\BaseInterfaceGenerator.cs" />
-    <Compile Include="Helper\Common.cs" />
-    <Compile Include="Helper\Configuration.cs" />
-    <Compile Include="Helper\Difference.cs" />
-    <Compile Include="Helper\DifferenceInterfaceGenerator.cs" />
-    <Compile Include="Helper\EntityFrameworkHelpers.cs" />
-    <Compile Include="Helper\Generator.cs" />
-    <Compile Include="Helper\Information.cs" />
-    <Compile Include="Helper\InformationInterfaceGenerator.cs" />
-    <Compile Include="Helper\ProviderProxy.cs" />
-    <Compile Include="Helper\SearchFilter.cs" />
-    <Compile Include="Helper\UnitTestBase.cs" />
-    <Compile Include="Helper\UnitTestInformation.cs" />
-    <Compile Include="Helper\ViewFilter.cs" />
+    <Compile Include="Generators\AdoNetGenerator.cs" />
+    <Compile Include="Generators\BaseClassGenerator.cs" />
+    <Compile Include="Generators\BaseInterfaceGenerator.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Generators\ConfigurationGenerator.cs" />
+    <Compile Include="Generators\DifferenceClassGenerator.cs" />
+    <Compile Include="Generators\DifferenceInterfaceGenerator.cs" />
+    <Compile Include="Generators\EntityFrameworkHelpers.cs" />
+    <Compile Include="Generators\CollectiveGenerator.cs" />
+    <Compile Include="Generators\GeneratorBase.cs" />
+    <Compile Include="Generators\IGenerator.cs" />
+    <Compile Include="Generators\InformationClassGenerator.cs" />
+    <Compile Include="Generators\InformationInterfaceGenerator.cs" />
+    <Compile Include="Generators\ProviderProxy.cs" />
+    <Compile Include="Generators\SearchFilter.cs" />
+    <Compile Include="Generators\UnitTestBase.cs" />
+    <Compile Include="Generators\UnitTestInformation.cs" />
+    <Compile Include="Generators\ViewFilter.cs" />
     <Compile Include="Model\ClassGenerationParameters.cs" />
     <Compile Include="Model\CollectionType.cs" />
     <Compile Include="Model\ConfigurationType.cs" />
     <Compile Include="Model\IClassGenerationParameters.cs" />
     <Compile Include="PropertyInfo\PropertyInfoBase.cs" />
     <Compile Include="PropertyInfo\ClrBooleanPropertyInfo.cs" />
-    <None Include="deploy.bat" />
     <None Include="Dhgms.Nucleotide.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="dhgms.nucleotide.snk" />
     <None Include="packages.config" />
     <None Include="PropertyInfo\Number.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -140,7 +143,6 @@
     <Compile Include="PropertyInfo\ClrStringPropertyInfo.cs" />
     <Compile Include="Model\ProviderProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -171,6 +173,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helper\" />
     <Folder Include="Model\Info\" />
   </ItemGroup>
   <PropertyGroup>

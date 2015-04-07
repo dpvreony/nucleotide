@@ -5,7 +5,7 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Helper
+namespace Dhgms.Nucleotide.Generators
 {
     using System;
     using System.Collections.Generic;
@@ -16,15 +16,15 @@ namespace Dhgms.Nucleotide.Helper
     /// <summary>
     /// Helper class for generating a difference class
     /// </summary>
-    public class Difference : BaseClassGenerator
+    public class DifferenceClassGenerator : BaseClassGenerator
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Difference"/> class. 
+        /// Initializes a new instance of the <see cref="DifferenceClassGenerator"/> class. 
         /// Constructor
         /// </summary>
-        public Difference()
+        public DifferenceClassGenerator()
             : base("Dhgms.DataManager.Model.Info.DifferenceBase", "Difference")
         {
         }
@@ -227,10 +227,10 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("                {");
             sb.AppendLine("                    return");
 
-            sb.AppendLine("                    ((" + properties[0].Name + ") ? 1 : 0)");
+            sb.AppendLine("                    (" + properties[0].Name + " ? 1 : 0)");
             for (int i = 1; i < properties.Length; i++)
             {
-                sb.AppendLine("                    + ((" + properties[i].Name + ") ? 1 : 0)");
+                sb.AppendLine("                    + (" + properties[i].Name + " ? 1 : 0)");
             }
 
             sb.AppendLine("                    ;");
@@ -306,7 +306,7 @@ namespace Dhgms.Nucleotide.Helper
                 throw new ArgumentNullException("pi");
             }
 
-            sb.AppendLine("            bool _" + Common.GetVariableName(pi.Name) + ";");
+            sb.AppendLine("            bool _" + Helpers.GetVariableName(pi.Name) + ";");
         }
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace Dhgms.Nucleotide.Helper
 
             sb.AppendLine("            set");
             sb.AppendLine("            {");
-            sb.AppendLine("                _" + Common.GetVariableName(pi.Name) + " = value;");
+            sb.AppendLine("                _" + Helpers.GetVariableName(pi.Name) + " = value;");
             sb.AppendLine("            }");
         }
 
@@ -425,23 +425,32 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("        /// <returns>hash code</returns>");
             sb.AppendLine("        public override int GetHashCode()");
             sb.AppendLine("        {");
-            sb.AppendLine("            return");
 
-            if (baseClassProperties != null && baseClassProperties.Count > 0)
+            if ((baseClassProperties != null ? baseClassProperties.Count : 0) + properties.Count > 1)
             {
-                sb.AppendLine("                base.GetHashCode() ^");
+                sb.AppendLine("            return");
+
+                if (baseClassProperties != null && baseClassProperties.Count > 0)
+                {
+                    sb.AppendLine("                base.GetHashCode() ^");
+                }
+
+                sb.AppendLine("                this." + properties[0].Name + ".GetHashCode()");
+
+                int counter = 1;
+                while (counter < properties.Count - 1)
+                {
+                    sb.AppendLine("                ^ this." + properties[counter].Name + ".GetHashCode()");
+                    counter++;
+                }
+
+                sb.AppendLine("                ^ this." + properties[properties.Count - 1].Name + ".GetHashCode();");
+            }
+            else
+            {
+                sb.AppendLine("            return this." + properties[0].Name + ".GetHashCode();");
             }
 
-            sb.AppendLine("                this." + properties[0].Name + ".GetHashCode()");
-
-            int counter = 1;
-            while (counter < properties.Count - 1)
-            {
-                sb.AppendLine("                ^ this." + properties[counter].Name + ".GetHashCode()");
-                counter++;
-            }
-
-            sb.AppendLine("                ^ this." + properties[properties.Count - 1].Name + ".GetHashCode();");
             sb.AppendLine("        }");
             sb.AppendLine(string.Empty);
         }

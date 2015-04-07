@@ -255,7 +255,7 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(<#=ci.NetType#>), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ var maxType = typesTooBig.Any(x => x.Equals(ci.NetType)) ? "int" : ci.NetType;
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

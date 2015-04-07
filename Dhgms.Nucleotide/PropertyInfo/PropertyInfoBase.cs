@@ -16,7 +16,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
     using System.Linq;
     using System.Text;
 
-    using Dhgms.Nucleotide.Helper;
     using Dhgms.Nucleotide.Model;
 
     /// <summary>
@@ -728,6 +727,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>
         /// C# for the data type declaration
         /// </returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public string GetCSharpDataTypeDeclaration()
         {
             switch (this.Collection)
@@ -758,7 +758,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
             sb.AppendLine("        set");
             sb.AppendLine("        {");
 
-            sb.AppendLine("            this." + Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

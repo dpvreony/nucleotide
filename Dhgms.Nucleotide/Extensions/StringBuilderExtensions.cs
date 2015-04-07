@@ -1,5 +1,6 @@
 ﻿namespace Dhgms.Nucleotide.Extensions
 {
+    using System.Globalization;
     using System.Text;
 
     /// <summary>
@@ -15,7 +16,7 @@
         /// <param name="args"></param>
         public static void AppendLine(this StringBuilder instance, string format, params object[] args)
         {
-            var s = string.Format(format, args);
+            var s = string.Format(CultureInfo.InvariantCulture, format, args);
             instance.AppendLine(s);
         }
     }

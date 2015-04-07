@@ -6,6 +6,7 @@
 
 namespace Dhgms.Nucleotide.PropertyInfo
 {
+    using System.Globalization;
     using System.Text;
 
     using Dhgms.Nucleotide.Model;
@@ -117,7 +118,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine(string.Empty);
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -176,7 +177,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 var max32BitDate = new System.DateTime(int.MaxValue);
                 var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32BitDate ? this.maximumValue.Value : max32BitDate;
                 var randomTicks = new System.DateTime(new System.Random().Next((int)minValue.Ticks, (int)maxValue.Ticks));
-                return string.Format("new System.DateTime({0})", randomTicks);
+                return string.Format(CultureInfo.InvariantCulture, "new System.DateTime({0})", randomTicks);
             }
         }
     }

@@ -7,6 +7,7 @@
 namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
 
@@ -159,7 +160,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
             [Fact]
             public void ShouldSucceed()
             {
-                var instance = new Dhgms.Nucleotide.Helper.Information();
+                var instance = new Generators.InformationClassGenerator();
                 var cgp = new MockClassGenerationParameters(
                         MainNamespaceName,
                         SubNamespace,
@@ -171,7 +172,8 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
                         2010,
                         null,
                         ClassRemarks);
-                Console.Write(instance.Generate(cgp));
+                var classes = new List<IClassGenerationParameters> { cgp };
+                Console.Write(instance.Generate(classes));
             }
         }
     }

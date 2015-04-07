@@ -131,7 +131,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -294,7 +294,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(char), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(char), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -457,7 +457,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(decimal), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(decimal), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -497,7 +497,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -620,7 +620,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(double), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(double), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -660,7 +660,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -783,7 +783,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(float), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(float), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -823,7 +823,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -946,7 +946,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(short), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(short), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -986,7 +986,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1109,7 +1109,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(int), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(int), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1149,7 +1149,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1272,7 +1272,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(long), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(long), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1312,7 +1312,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1435,7 +1435,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(byte), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1475,7 +1475,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1598,7 +1598,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(ushort), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(ushort), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1638,7 +1638,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1761,7 +1761,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(uint), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(uint), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1801,7 +1801,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();
@@ -1924,7 +1924,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns>The data annotation, if any.</returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(ulong), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(ulong), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>
@@ -1964,7 +1964,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine("            }");
             }
 
-            sb.AppendLine("            this." + Helper.Common.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Helper
+namespace Dhgms.Nucleotide.Generators
 {
     using System;
     using System.Collections.Generic;
@@ -16,14 +16,14 @@ namespace Dhgms.Nucleotide.Helper
     /// <summary>
     /// Helper for generating an information class
     /// </summary>
-    public class Information : BaseClassGenerator
+    public class InformationClassGenerator : BaseClassGenerator
     {
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Information"/> class. 
+        /// Initializes a new instance of the <see cref="InformationClassGenerator"/> class. 
         /// </summary>
-        public Information()
+        public InformationClassGenerator()
             : base("Dhgms.DataManager.Model.Info.InfoBase", "Info")
         {
         }
@@ -267,7 +267,7 @@ namespace Dhgms.Nucleotide.Helper
                                   : string.Empty;
             sb.AppendLine(
                 "            private " + pi.GetCSharpDataTypeDeclaration() + optional + " "
-                + Common.GetVariableName(pi.Name) + ";");
+                + Helpers.GetVariableName(pi.Name) + ";");
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace Dhgms.Nucleotide.Helper
             sb.AppendLine("        /// <returns>summary of where there are differences</returns>");
             sb.AppendLine("// ReSharper disable RedundantNameQualifier");
             sb.AppendLine(
-                "        public " + mainNamespaceName + ".Model.Difference"
+                "        public " + mainNamespaceName + ".Model"
                 + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null) + "." + className + "Difference"
                 + " GetDifferences(" + className + " other)");
             sb.AppendLine("// ReSharper restore RedundantNameQualifier");
@@ -364,7 +364,7 @@ namespace Dhgms.Nucleotide.Helper
                         sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                     }
 
-                    sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + "Different = checkResult != 0;");
+                    sb.AppendLine("            var " + Helpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                     sb.AppendLine(string.Empty);
 
                     if (!checkResultDeclared)
@@ -393,7 +393,7 @@ namespace Dhgms.Nucleotide.Helper
                     sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                 }
 
-                sb.AppendLine("            var " + Common.GetVariableName(pi.Name) + "Different = checkResult != 0;");
+                sb.AppendLine("            var " + Helpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                 sb.AppendLine(string.Empty);
 
                 if (!checkResultDeclared)
@@ -404,7 +404,7 @@ namespace Dhgms.Nucleotide.Helper
 
             sb.AppendLine("// ReSharper disable RedundantNameQualifier");
             sb.AppendLine(
-                "            return new " + mainNamespaceName + ".Model.Difference"
+                "            return new " + mainNamespaceName + ".Model"
                 + ((!string.IsNullOrEmpty(subNamespace)) ? "." + subNamespace : null) + "." + className + "Difference(");
             sb.AppendLine("// ReSharper restore RedundantNameQualifier");
 
@@ -413,7 +413,7 @@ namespace Dhgms.Nucleotide.Helper
             {
                 while (counter < baseClassProperties.Count)
                 {
-                    sb.Append("                " + Common.GetVariableName(baseClassProperties[counter].Name + "Different"));
+                    sb.Append("                " + Helpers.GetVariableName(baseClassProperties[counter].Name + "Different"));
 
                     if (properties.Count > 0)
                     {
@@ -432,7 +432,7 @@ namespace Dhgms.Nucleotide.Helper
 
             while (counter < properties.Count)
             {
-                sb.Append("                " + Common.GetVariableName(properties[counter].Name + "Different"));
+                sb.Append("                " + Helpers.GetVariableName(properties[counter].Name + "Different"));
                 sb.AppendLine(counter < properties.Count - 1 ? "," : ");");
                 counter++;
             }

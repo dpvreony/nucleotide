@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using Dhgms.Nucleotide.Helper;
+    using Dhgms.Nucleotide.Generators;
     using Dhgms.Nucleotide.Model;
     using Dhgms.Nucleotide.PropertyInfo;
 
