@@ -3,6 +3,27 @@
 //   2004-2012 DHGMS Solutions. Some Rights Reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+namespace TestDhgms.NucleotideMocking.Model
+{
+        /// <summary>
+        /// Represents a class containing properties that are simple
+        /// </summary>
+        public interface ISingleSimple : System.IComparable<ISingleSimple>, System.IEquatable<ISingleSimple>, System.IComparable, System.IDisposable
+        {
+            /// <summary>Gets Unique Id</summary>
+            int Id { get; }
+
+            /// <summary>Gets Name</summary>
+            string Name { get; }
+
+            /// <summary>
+            /// Gets a header record for use for something like a CSV file
+            /// </summary>
+            /// <returns>a collection of strings representing the header record</returns>
+            System.Collections.Generic.IList<string> HeaderRecord { get; }
+        }
+}
+
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SingleSimple.cs" company="DHGMS Solutions">
 //   Copyright 2008-2015 DHGMS Solutions

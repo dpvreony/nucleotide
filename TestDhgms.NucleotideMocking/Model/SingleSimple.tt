@@ -12,12 +12,19 @@
 // --------------------------------------------------------------------------------------------------------------------
 <#
 
+var interfaceGenerator = new Dhgms.Nucleotide.Helper.InformationInterfaceGenerator();
 var information = new Dhgms.Nucleotide.Helper.Information();
 var difference = new Dhgms.Nucleotide.Helper.Difference();
 //Dhgms.Nucleotide.Model.Helper.SearchFilter searchFilter = new Dhgms.Nucleotide.Model.Helper.SearchFilter();
 //Dhgms.Nucleotide.Model.Helper.ViewFilter viewFilter = new Dhgms.Nucleotide.Model.Helper.ViewFilter();
 
 var cgp = new Cgp();
+var classes = new System.Collections.Generic.List<IClassGenerationParameters>
+                  {
+                      cgp
+                  };
+#>
+<#=interfaceGenerator.Generate(classes)
 #>
 <#=information.Generate(cgp)
 #>

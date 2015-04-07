@@ -44,18 +44,17 @@
 
         private string DoGeneration(IList<IClassGenerationParameters> classes)
         {
-            Contract.Requires<ArgumentNullException>(classes != null);
+            if (classes == null)
+            {
+                throw new ArgumentNullException("classes");
+            }
+
+            if (classes.Count < 1)
+            {
+                throw new ArgumentException("classes must contain at least one item", "classes");
+            }
 
             var sb = new StringBuilder();
-            //sb.AppendLine("    using System;");
-            //sb.AppendLine("    using System.ComponentModel.DataAnnotations;");
-            //sb.AppendLine("    using System.Data.Entity;");
-            //sb.AppendLine("    using System.Diagnostics;");
-            //sb.AppendLine("    using System.Diagnostics.CodeAnalysis;");
-            //sb.AppendLine("    using System.Runtime.Serialization;");
-            //sb.AppendLine("    using System.Xml;");
-            //sb.AppendLine("    using System.Xml.Linq;");
-            //sb.AppendLine(string.Empty);
 
             var sortedClasses = SortMainNameSpaces(classes);
 
@@ -76,23 +75,26 @@
                 var subNamespace = !string.IsNullOrWhiteSpace(sortedSubNamspaces.Key) ? "." + sortedSubNamspaces.Key : null;
                 var cgps = sortedSubNamspaces.Value;
 
-                sb.AppendLine("namespace " + mainNamespaceName + ".Model.Helper.AdoNet" + subNamespace);
+                sb.AppendLine("namespace " + mainNamespaceName + ".Model" + subNamespace);
                 sb.AppendLine("{");
 
                 foreach (var cgp in cgps)
                 {
-                    this.DoGenerateClass(sb, cgp);
+                    DoGenerateClass(sb, cgp);
                 }
 
                 sb.AppendLine("}");
             }
         }
 
-        private void DoGenerateClass(StringBuilder sb, IClassGenerationParameters cgp)
+        private static void DoGenerateClass(StringBuilder sb, IClassGenerationParameters cgp)
         {
             var tabCount = 2;
-            sb.AppendLine("{0}public interface {1}", Common.GetTabs(tabCount), cgp.ClassName);
-            sb.AppendLine("{0}{", Common.GetTabs(tabCount));
+            sb.AppendLine("{0}/// <summary>", Common.GetTabs(tabCount));
+            sb.AppendLine("{0}/// {1}", Common.GetTabs(tabCount), cgp.ClassRemarks);
+            sb.AppendLine("{0}/// </summary>", Common.GetTabs(tabCount));
+            sb.AppendLine("{0}public interface I{1}", Common.GetTabs(tabCount), cgp.ClassName);
+            sb.AppendLine("{0}{{", Common.GetTabs(tabCount));
 
             tabCount++;
 
@@ -100,7 +102,7 @@
 
             tabCount--;
 
-            sb.AppendLine("{0}}", Common.GetTabs(tabCount));
+            sb.AppendLine("{0}}}", Common.GetTabs(tabCount));
         }
 
         private static void DoProperties(StringBuilder sb, int tabCount, PropertyInfoBase[] properties)
@@ -110,10 +112,10 @@
             {
                 var property = properties[position];
 
-                sb.AppendLine("{0}///<summary>Gets {1}</summary>", Common.GetTabs(tabCount), property.Description);
-                sb.AppendLine("{0}{1} {2} { get; }", Common.GetTabs(tabCount), property.NetDataType, property.Name);
+                sb.AppendLine("{0}/// <summary>Gets {1}</summary>", Common.GetTabs(tabCount), property.Description);
+                sb.AppendLine("{0}{1} {2} {{ get; }}", Common.GetTabs(tabCount), property.NetDataType, property.Name);
                 
-                if (position < properties.Length)
+                if (position <= properties.Length)
                 {
                     sb.AppendLine(string.Empty);
                 }
@@ -149,9 +151,16 @@
             foreach (var subNamespace in subNamespaces)
             {
                 var ns = subNamespace;
-                var classesInSubNamespace = classes.Take(x => x.MainNamespaceName.Equals(ns, StringComparison.Ordinal)).ToList();
 
-                mappings.Add(subNamespace, classesInSubNamespace);
+                var classesInSubNamespace = ns == null
+                                                ? classes.Take(
+                                                    x =>
+                                                    x.SubNamespace == null).ToList()
+                                                : classes.Take(
+                                                    x =>
+                                                    x.SubNamespace.Equals(ns, StringComparison.Ordinal)).ToList();
+
+                mappings.Add(subNamespace ?? string.Empty, classesInSubNamespace);
             }
 
             return mappings;

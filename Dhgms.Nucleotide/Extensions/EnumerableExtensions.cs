@@ -16,8 +16,15 @@
         /// <returns></returns>
         public static IEnumerable<TSource> Take<TSource>(this IList<TSource> instance, Func<TSource, bool> predicate)
         {
-            Contract.Requires<ArgumentNullException>(instance != null);
-            Contract.Requires<ArgumentNullException>(predicate != null);
+            if (instance == null)
+            {
+                throw new ArgumentNullException("instance");
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
 
             var result = new List<TSource>();
 

@@ -106,6 +106,7 @@
     <Compile Include="Helper\Difference.cs" />
     <Compile Include="Helper\DifferenceInterfaceGenerator.cs" />
     <Compile Include="Helper\EntityFrameworkHelpers.cs" />
+    <Compile Include="Helper\Generator.cs" />
     <Compile Include="Helper\Information.cs" />
     <Compile Include="Helper\InformationInterfaceGenerator.cs" />
     <Compile Include="Helper\ProviderProxy.cs" />
