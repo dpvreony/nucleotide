@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DHGMS.Nucleotide</id>
+    <version>$version$</version>
+    <title>Nucleotide</title>
+    <authors>DHGMSSolutions dpvreony</authors>
+    <owners>DHGMSSolutions dpvreony</owners>
+    <licenseUrl>http://dhgms-solutions.github.io/nucleotide/license</licenseUrl>
+    <projectUrl>http://dhgms-solutions.github.io/nucleotide</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>
+      T4 (Text Template Transformation Toolkit) Library used by other DHGMS open source projects.
+    </description>
+    <copyright>Copyright 2004-2015 DHGMS Solutions</copyright>
+    <tags>T4 Transform CodeGen</tags>
+    <developmentDependency>true</developmentDependency>
+  </metadata>
+  <dependencies>
+    <group>
+      <dependency id="MSBuild.Extension.Pack" version="1.6.0" />
+    </group>
+  </dependencies>
+  <files>
+    <!--
+    <file src="content*" target="content" />
+    <file src="content\" target="content\" />
+    -->
+    <file src="tools\*.dll" target="tools" />
+    <file src="tools\*.xml" target="tools" />
+    <!--<file src="license.txt" target="license.txt" />-->
+  </files>
+</package>
