@@ -18,9 +18,15 @@
         /// <param name="doCopyrightHeader">
         /// Flag indicating whether to add the copyright header to the top of the output. Can be used to suppress output when placing all generated code in a single file.
         /// </param>
+        /// <param name="suppressExceptionsAsCode">
+        /// If an exception occurs instead of throwing the exception, they are output as code content. This is typically more useful in a transform environment so you can see the error in the affected file.
+        /// </param>
         /// <returns>
         /// C# code
         /// </returns>
-        string Generate(IList<IClassGenerationParameters> classes, bool doCopyrightHeader = false);
+        string Generate(
+            IList<IClassGenerationParameters> classes,
+            bool doCopyrightHeader = false,
+            bool suppressExceptionsAsCode = true);
     }
 }

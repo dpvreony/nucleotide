@@ -23,25 +23,30 @@
         /// <param name="doCopyrightHeader">
         /// Flag indicating whether to add the copyright header to the top of the output. Can be used to suppress output when placing all generated code in a single file.
         /// </param>
+        /// <param name="suppressExceptionsAsCode">
+        /// If an exception occurs instead of throwing the exception, they are output as code content. This is typically more useful in a transform environment so you can see the error in the affected file.
+        /// </param>
         /// <returns>
         /// C# code
         /// </returns>
         public string Generate(
             IList<IClassGenerationParameters> classes,
-            bool doCopyrightHeader = true)
+            bool doCopyrightHeader = true,
+            bool suppressExceptionsAsCode = true)
         {
-            if (Splat.ModeDetector.InUnitTestRunner())
-            {
-                return this.DoGeneration(classes, doCopyrightHeader);
-            }
-
             try
             {
                 return this.DoGeneration(classes, doCopyrightHeader);
             }
             catch (Exception e)
             {
-                return "/*" + e + "*/";
+                if (suppressExceptionsAsCode)
+                {
+
+                    return "#error " + e.ToString().Replace(System.Environment.NewLine, string.Empty);
+                }
+
+                throw;
             }
         }
 

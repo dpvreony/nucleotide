@@ -15,11 +15,6 @@
     <copyright>Copyright 2004-2015 DHGMS Solutions</copyright>
     <tags>T4 Transform CodeGen</tags>
     <developmentDependency>true</developmentDependency>
-    <dependencies>
-      <group>
-        <dependency id="MSBuild.Extension.Pack" version="1.6.0" />
-      </group>
-    </dependencies>
   </metadata>
   <files>
     <!--
