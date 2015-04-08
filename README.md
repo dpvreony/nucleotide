@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Nucleotide is a library to aid in the T4 generation of code for manipulation POCO object.
+Nucleotide is a library to aid in the T4 generation of code for manipulation of POCO objects.
 
-This project is in an early stage so the design and \ or underlying libraries implementations may be volatile at points.
+This project came about from wanting to leverage the power of T4 whilst giving a simple way of keeping the code generation in an easy to use place.  I welcome feedback on the project including suggestions on improvement, additions, or alternative methods.
 
 ## Viewing the documentation
 

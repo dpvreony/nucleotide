@@ -15,19 +15,19 @@
     <copyright>Copyright 2004-2015 DHGMS Solutions</copyright>
     <tags>T4 Transform CodeGen</tags>
     <developmentDependency>true</developmentDependency>
+    <dependencies>
+      <group>
+        <dependency id="MSBuild.Extension.Pack" version="1.6.0" />
+      </group>
+    </dependencies>
   </metadata>
-  <dependencies>
-    <group>
-      <dependency id="MSBuild.Extension.Pack" version="1.6.0" />
-    </group>
-  </dependencies>
   <files>
     <!--
     <file src="content*" target="content" />
     <file src="content\" target="content\" />
     -->
-    <file src="tools\*.dll" target="tools" />
-    <file src="tools\*.xml" target="tools" />
+    <file src="tools\Dhgms.Nucleotide.dll" target="tools" />
+    <file src="tools\Dhgms.Nucleotide.xml" target="tools" />
     <!--<file src="license.txt" target="license.txt" />-->
   </files>
 </package>
