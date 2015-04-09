@@ -175,7 +175,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
 
                 tabCount++;
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new ArgumentNullException(\"value\");", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new System.ArgumentNullException(\"value\");", Helpers.GetTabs(tabCount)));
                 tabCount--;
 
                 sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
@@ -253,15 +253,15 @@ namespace Dhgms.Nucleotide.PropertyInfo
 
             if (this.MinimumLength != null && this.MaximumLength == null)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}[MinLength({1}, ErrorMessage = \"Must be at least {1} characters in length\")]", Helpers.GetTabs(2), this.MinimumLength);
+                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be at least {1} characters in length\")]", Helpers.GetTabs(2), this.MinimumLength);
             }
 
             if (this.MinimumLength == null && this.MaximumLength != null)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}[MaxLength({1}, ErrorMessage = \"Must be {1} or less characters in length\")]", Helpers.GetTabs(2), this.MaximumLength);
+                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MaxLength({1}, ErrorMessage = \"Must be {1} or less characters in length\")]", Helpers.GetTabs(2), this.MaximumLength);
             }
 
-            return string.Format(CultureInfo.InvariantCulture, "{0}[MinLength({1}, ErrorMessage = \"Must be between {1} and {2} characters in length\"), MaxLength({2}, ErrorMessage = \"Must be between {1} and {2}  characters in length\")]", Helpers.GetTabs(2), this.MinimumLength, this.MaximumLength);
+            return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be between {1} and {2} characters in length\"), MaxLength({2}, ErrorMessage = \"Must be between {1} and {2}  characters in length\")]", Helpers.GetTabs(2), this.MinimumLength, this.MaximumLength);
         }
 
         /// <summary>

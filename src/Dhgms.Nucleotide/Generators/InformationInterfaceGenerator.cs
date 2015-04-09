@@ -1,5 +1,6 @@
 ﻿namespace Dhgms.Nucleotide.Generators
 {
+    using System;
     using System.Text;
 
     using Dhgms.Nucleotide.Extensions;
@@ -34,7 +35,7 @@
                 var property = properties[position];
 
                 sb.AppendLine("{0}/// <summary>Gets {1}</summary>", Helpers.GetTabs(tabCount), property.Description);
-                sb.AppendLine("{0}{1} {2} {{ get; }}", Helpers.GetTabs(tabCount), property.NetDataType, property.Name);
+                sb.AppendLine("{0}{1} {2} {{ get; }}", Helpers.GetTabs(tabCount), this.GetPropertyType(property), property.Name);
 
                 if (position <= properties.Length)
                 {
@@ -43,6 +44,28 @@
 
                 position++;
             }
+        }
+
+        /// <summary>
+        /// Gets the type for a property
+        /// </summary>
+        /// <param name="pi">
+        /// The property to generate a type for
+        /// </param>
+        /// <returns>
+        /// .NET data type
+        /// </returns>
+        private string GetPropertyType(PropertyInfoBase pi)
+        {
+            if (pi == null)
+            {
+                throw new ArgumentNullException("pi");
+            }
+
+            string optional = (pi.Optional && !pi.NetDataType.Equals("string", StringComparison.Ordinal))
+                                  ? "?"
+                                  : string.Empty;
+            return pi.GetCSharpDataTypeDeclaration() + optional;
         }
     }
 }

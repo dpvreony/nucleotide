@@ -58,7 +58,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 name,
                 description,
                 optional,
-                "DateTime",
+                "System.DateTime",
                 "Dhgms.DataManager.Model.SearchFilter.DateTime",
                 "DateTime",
                 false,
@@ -130,7 +130,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <returns></returns>
         public override string GetDataAnnotations()
         {
-            return "[Range(typeof(System.DateTime), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+            return "[System.ComponentModel.DataAnnotations.Range(typeof(System.DateTime), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
         }
 
         /// <summary>

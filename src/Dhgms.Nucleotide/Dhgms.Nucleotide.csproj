@@ -84,9 +84,6 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Splat">
-      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -128,7 +125,6 @@
     <None Include="Dhgms.Nucleotide.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="PropertyInfo\Number.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Number1.cs</LastGenOutput>

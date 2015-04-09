@@ -43,7 +43,7 @@
                 name, 
                 description, 
                 optional, 
-                "Guid", 
+                "System.Guid", 
                 "Dhgms.DataManager.Model.SearchFilter.Guid", 
                 "Guid", 
                 false, 
