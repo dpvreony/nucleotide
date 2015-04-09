@@ -14,7 +14,7 @@ msbuild Dhgms.Nucleotide.sln /p:Configuration=Release /p:Platform="Any CPU"
 copy Dhgms.Nucleotide\Dhgms.Nucleotide.nuspec "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec"
 copy "Dhgms.Nucleotide\bin\Release\*.*" "$targetDir"
 
-$version = [System.Reflection.AssemblyName]::GetAssemblyName("$currentExecutingPath\Dhgms.Wcds.CodeGeneration\bin\Release\Dhgms.Wcds.CodeGeneration.dll").Version.ToString()
+$version = [System.Reflection.AssemblyName]::GetAssemblyName("$currentExecutingPath\Dhgms.Nucleotide\bin\Release\Dhgms.Nucleotide.dll").Version.ToString()
 
 .nuget\nuget.exe pack "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec" -basepath $nugetBaseDir -outputdirectory $nugetBaseDir -version $version -NoPackageAnalysis
 popd
