@@ -10,7 +10,11 @@ if(!(Test-Path -Path $targetDir ))
     New-Item -ItemType directory -Path $targetDir
 }
 
-msbuild Dhgms.Nucleotide.sln /p:OutputPath=$targetDir
+msbuild Dhgms.Nucleotide.sln /p:Configuration=Release /p:Platform="Any CPU"
 copy Dhgms.Nucleotide\Dhgms.Nucleotide.nuspec "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec"
-.nuget\nuget.exe pack "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec" -basepath $nugetBaseDir -outputdirectory $nugetBaseDir -version 0.1504.8.1 -NoPackageAnalysis
+copy "Dhgms.Nucleotide\bin\Release\*.*" "$targetDir"
+
+$version = [System.Reflection.AssemblyName]::GetAssemblyName("$currentExecutingPath\Dhgms.Wcds.CodeGeneration\bin\Release\Dhgms.Wcds.CodeGeneration.dll").Version.ToString()
+
+.nuget\nuget.exe pack "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec" -basepath $nugetBaseDir -outputdirectory $nugetBaseDir -version $version -NoPackageAnalysis
 popd
