@@ -129,7 +129,7 @@ namespace Dhgms.Nucleotide.Generators
                 return;
             }
 
-            string fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model.Info."
+            string fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model."
                                              + (!string.IsNullOrWhiteSpace(classInfo.SubNamespace)
                                                     ? classInfo.SubNamespace + "."
                                                     : null) + classInfo.ClassName;
@@ -211,7 +211,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             foreach (var classInfo in classes)
             {
-                var fullyQualifiedClassName = classInfo.Item1.MainNamespaceName + ".Model.Info." + (!string.IsNullOrWhiteSpace(classInfo.Item1.SubNamespace) ? classInfo.Item1.SubNamespace + "." : null) + classInfo.Item1.ClassName;
+                var fullyQualifiedClassName = classInfo.Item1.MainNamespaceName + ".Model." + (!string.IsNullOrWhiteSpace(classInfo.Item1.SubNamespace) ? classInfo.Item1.SubNamespace + "." : null) + classInfo.Item1.ClassName;
 
                 sb.AppendLine("    /// <summary>");
                 sb.AppendLine("    /// Helper methods for using POCO and Entity Framework");
