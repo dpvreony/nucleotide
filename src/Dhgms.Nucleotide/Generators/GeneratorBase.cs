@@ -36,13 +36,18 @@
         {
             try
             {
+                if (classes == null)
+                {
+                    throw new ArgumentNullException("classes");
+                }
+
                 return this.DoGeneration(classes, doCopyrightHeader);
             }
             catch (Exception e)
             {
+
                 if (suppressExceptionsAsCode)
                 {
-
                     return "#error " + e.ToString().Replace(System.Environment.NewLine, string.Empty);
                 }
 
@@ -91,6 +96,11 @@
             if (classes.Count < 1)
             {
                 throw new ArgumentException("classes must contain at least one item", "classes");
+            }
+
+            if (classes.Any(c => string.IsNullOrWhiteSpace(c.ClassName)))
+            {
+                throw new ArgumentException("class missing a class name", "classes");
             }
 
             // we clone because we do a grouping and sort between namespaces

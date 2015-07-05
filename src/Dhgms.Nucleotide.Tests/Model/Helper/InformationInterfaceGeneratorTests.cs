@@ -11,6 +11,7 @@
     using TestDhgms.NucleotideMocking;
 
     using Xunit;
+    using Xunit.Abstractions;
 
     [ExcludeFromCodeCoverage]
     public class InformationInterfaceGeneratorTests
@@ -120,25 +121,41 @@
                 }
             }
         }
-        
-        public class GenerateMethod
+
+        public class GenerateMethod : BaseUnitTests
         {
+            public GenerateMethod(ITestOutputHelper output)
+                : base(output)
+            {
+            }
+
             [Fact]
             public void ThrowsArgumentNullException()
             {
                 var instance = new InformationInterfaceGenerator();
-                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(null));
 
-                Assert.Equal("classes", ex.ParamName);
+                var result = instance.Generate(null);
+
+                this.OutputHelper.WriteLine(result);
+
+                Assert.True(result.StartsWith("#error"));
+                Assert.True(result.Contains("ArgumentNullException"));
             }
 
             [Fact]
             public void ThrowsArgumentException()
             {
                 var instance = new InformationInterfaceGenerator();
-                var ex = Assert.Throws<ArgumentException>(() => instance.Generate(null));
 
-                Assert.Equal("classes", ex.ParamName);
+                var cgp = new MockClassGenerationParameters(TestInputs.MainNamespaceName, TestInputs.SubNamespace, null, null, TestInputs.PropertiesDefault, null, null, 2010, null, null);
+                var classes = new List<IClassGenerationParameters> { cgp };
+
+                var result = instance.Generate(classes);
+
+                this.OutputHelper.WriteLine(result);
+
+                Assert.True(result.StartsWith("#error"));
+                Assert.True(result.Contains("ArgumentException"));
             }
 
             [Fact]
@@ -150,7 +167,7 @@
 
                 Assert.NotNull(result);
 
-                Console.WriteLine(result);
+                this.OutputHelper.WriteLine(result);
             }
         }
     }

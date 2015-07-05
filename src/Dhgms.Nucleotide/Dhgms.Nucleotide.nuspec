@@ -23,6 +23,6 @@
     -->
     <file src="tools\Dhgms.Nucleotide.dll" target="tools" />
     <file src="tools\Dhgms.Nucleotide.xml" target="tools" />
-    <!--<file src="license.txt" target="license.txt" />-->
+    <file src="tools\license.txt" target="license.txt" />
   </files>
 </package>

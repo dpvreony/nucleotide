@@ -26,16 +26,13 @@ namespace Dhgms.Nucleotide.Generators
         /// <param name="mainNamespaceName">
         /// The main namespace
         /// </param>
-        /// <param name="subNamespace">
-        /// The sub namespace, if any
-        /// </param>
         /// <param name="classes">
         /// Collection of classes to generate a helper for
         /// </param>
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(string mainNamespaceName, string subNamespace, List<Tuple<IClassGenerationParameters, string>> classes)
+        public string Generate(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes)
         {
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {

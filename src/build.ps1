@@ -13,6 +13,7 @@ if(!(Test-Path -Path $targetDir ))
 msbuild Dhgms.Nucleotide.sln /p:Configuration=Release /p:Platform="Any CPU"
 copy Dhgms.Nucleotide\Dhgms.Nucleotide.nuspec "$currentExecutingPath\build\Dhgms.Nucleotide.nuspec"
 copy "Dhgms.Nucleotide\bin\Release\*.*" "$targetDir"
+copy "..\license" "$targetDir"
 
 $version = [System.Reflection.AssemblyName]::GetAssemblyName("$currentExecutingPath\Dhgms.Nucleotide\bin\Release\Dhgms.Nucleotide.dll").Version.ToString()
 

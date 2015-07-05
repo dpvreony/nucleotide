@@ -22,8 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82BF3CBD-3DDB-4189-AE7C-BA3032D1D368}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugetpackage", "nugetpackage", "{10B30B5D-7064-429E-A73B-BF485FC38AED}"
@@ -36,24 +34,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideMocking", "TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj", "{06D18E16-EC37-4E16-8EE3-47607E095FE1}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs01
-		SccLocalPath0 = Dhgms.Nucleotide
-		SccProjectFilePathRelativizedFromConnection0 = ..\\
-		SccProjectUniqueName1 = Dhgms.Nucleotide\\Dhgms.Nucleotide.csproj
-		SccLocalPath1 = Dhgms.Nucleotide
-		SccProjectUniqueName2 = Help.Dhgms.Nucleotide\\Help.Dhgms.Nucleotide.shfbproj
-		SccProjectName2 = Help.Dhgms.Nucleotide
-		SccLocalPath2 = Help.Dhgms.Nucleotide
-		SccProjectUniqueName3 = Dhgms.Nucleotide.Tests\\Dhgms.Nucleotide.Tests.csproj
-		SccProjectName3 = Dhgms.Nucleotide.Tests
-		SccLocalPath3 = Dhgms.Nucleotide.Tests
-		SccProjectUniqueName4 = TestDhgms.NucleotideMocking\\TestDhgms.NucleotideMocking.csproj
-		SccProjectName4 = TestDhgms.NucleotideMocking
-		SccLocalPath4 = TestDhgms.NucleotideMocking
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms

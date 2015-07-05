@@ -466,56 +466,6 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         /// <summary>
-        /// Generates the DoXmlElement method.
-        /// </summary>
-        /// <param name="sb">
-        /// The String Builder to add the code to
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
-        protected virtual void DoDoXmlElementMethod(StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties)
-        {
-            bool skipMethod = false;
-            if (baseClassProperties != null && baseClassProperties.Length > 0)
-            {
-                if (baseClassProperties.Count(baseClassProperty => baseClassProperty.Collection != CollectionType.None)
-                    > 0)
-                {
-                    skipMethod = true;
-                }
-            }
-
-            if (!skipMethod)
-            {
-                if (properties.Count(property => property.Collection != CollectionType.None) > 0)
-                {
-                    skipMethod = true;
-                }
-            }
-
-            sb.AppendLine("            /// <summary>");
-            sb.AppendLine("            /// Adds an XML Element to an XML Writer");
-            sb.AppendLine("            /// </summary>");
-            sb.AppendLine("            /// <param name=\"writer\">");
-            sb.AppendLine("            /// The XML writer to add the element to.");
-            sb.AppendLine("            /// </param>");
-            sb.AppendLine("            /// <param name=\"parentElementName\">");
-            sb.AppendLine("            /// The name for the parenet element being produced.");
-            sb.AppendLine("            /// </param>");
-            sb.AppendLine("            public override void DoXmlElement(");
-            sb.AppendLine("                    System.Xml.XmlWriter writer,");
-            sb.AppendLine("                    string parentElementName)");
-            sb.AppendLine("            {");
-            sb.AppendLine("                throw new System.NotImplementedException();");
-
-            sb.AppendLine("            }");
-        }
-
-        /// <summary>
         /// Builds the Fields Region
         /// </summary>
         /// <param name="sb">
@@ -1108,7 +1058,6 @@ namespace Dhgms.Nucleotide.Generators
             this.DoToStringArrayMethod(sb, properties, baseClassProperties);
             sb.AppendLine(string.Empty);
 
-            this.DoDoXmlElementMethod(sb, properties, baseClassProperties);
             sb.AppendLine(string.Empty);
 
             this.DoClassSpecificMethods(

@@ -16,6 +16,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
     using TestDhgms.NucleotideMocking;
 
     using Xunit;
+    using Xunit.Abstractions;
 
     /// <summary>
     /// The difference.
@@ -39,16 +40,6 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
         /// The class remarks.
         /// </summary>
         private const string ClassRemarks = "Unit test for Difference class code generation";
-
-        /// <summary>
-        /// The main namespace name.
-        /// </summary>
-        private const string MainNamespaceName = "TestDhgms.Nucleotide";
-
-        /// <summary>
-        /// The sub namespace.
-        /// </summary>
-        private const string SubNamespace = "SubNamespace";
 
         #endregion
 
@@ -79,35 +70,46 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
         /// <summary>
         /// Tests for the Generate Method
         /// </summary>
-        public class GenerateMethod
+        public class GenerateMethod : BaseUnitTests
         {
+            public GenerateMethod(ITestOutputHelper output)
+                : base(output)
+            {
+            }
+
             /// <summary>
             /// The test difference all arguments null.
             /// </summary>
             [Fact]
-            public void ThrowsExceptionCgpNull()
+            public void ReturnsErrorLineStatingArgumentNullException()
             {
                 var instance = new DifferenceClassGenerator();
 
-                var ex = Assert.Throws<ArgumentNullException>(() => instance.Generate(null));
+                var result = instance.Generate(null);
 
-                Assert.Equal("cgp", ex.ParamName);
+                this.OutputHelper.WriteLine(result);
+
+                Assert.True(result.StartsWith("#error"));
+                Assert.True(result.Contains("ArgumentNullException"));
             }
 
             /// <summary>
             /// Throws Exception because the Difference Class Name is null
             /// </summary>
             [Fact]
-            public void ThrowsExceptionDifferenceClassNameNull()
+            public void ReturnsErrorLineStatingArgumentExceptionForClassName()
             {
                 var instance = new DifferenceClassGenerator();
 
-                var cgp = new MockClassGenerationParameters(MainNamespaceName, SubNamespace, null, null, TestInputs.PropertiesDefault, null, null, 2010, null, null);
+                var cgp = new MockClassGenerationParameters(TestInputs.MainNamespaceName, TestInputs.SubNamespace, null, null, TestInputs.PropertiesDefault, null, null, 2010, null, null);
                 var classes = new List<IClassGenerationParameters> { cgp };
 
-                var ex = Assert.Throws<ArgumentException>(() => instance.Generate(classes));
+                var result = instance.Generate(classes);
 
-                Assert.Equal("cgp", ex.ParamName);
+                this.OutputHelper.WriteLine(result);
+
+                Assert.True(result.StartsWith("#error"));
+                Assert.True(result.Contains("ArgumentException"));
             }
         }
 

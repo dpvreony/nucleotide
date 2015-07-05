@@ -9,6 +9,16 @@
     public static class TestInputs
     {
         /// <summary>
+        /// The main namespace name.
+        /// </summary>
+        public const string MainNamespaceName = "TestDhgms.Nucleotide";
+
+        /// <summary>
+        /// The sub namespace.
+        /// </summary>
+        public const string SubNamespace = "SubNamespace";
+
+        /// <summary>
         /// Gets the properties default.
         /// </summary>
         public static PropertyInfoBase[] PropertiesDefault
