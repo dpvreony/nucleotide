@@ -179,10 +179,9 @@
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
-    <TransformOnBuild>true</TransformOnBuild>
+    <TransformOnBuild Condition="Exists('$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets')">true</TransformOnBuild>
   </PropertyGroup>
-  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\TextTemplating\Microsoft.TextTemplating.targets" Condition="false" />
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" Condition="'$(VSToolsPath)' != '' And Exists('$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets')" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
