@@ -1,5 +1,7 @@
 # Nucleotide
 
+![Build status](https://ci.appveyor.com/api/projects/status/jk9v57hxjj0mi6t4?svg=true)
+
 ## Introduction
 
 Nucleotide is a library to aid in the T4 generation of code for manipulation of POCO objects.
