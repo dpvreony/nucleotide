@@ -1,0 +1,51 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+configuration: Release
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}{localversionsuffix}'
+init:
+- ps: >-
+    if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
+      $env:localversionsuffix = "-dev"
+    }
+before_build:
+# taken from: https://raw.githubusercontent.com/tkelman/numpy/440e81ace36d65a7b62eec1a0460467f3dc97085/appveyor.yml
+# If there's a newer build queued for the same PR, cancel this one
+- ps: >-
+    if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
+            https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
+            Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
+            throw "There are newer queued builds for this pull request, failing early." }
+    Invoke-Expression "nuget restore src\Splat.Contrib.sln"
+build:
+  project: src\Dhgms.Nucleotide.sln
+  verbosity: minimal
+after_build:
+- cmd: nuget pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.nuspec -Symbols -NonInteractive -Version %APPVEYOR_BUILD_VERSION%%localversionsuffix%
+test_script:
+- src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\Dhgms.Nucleotide.UnitTests.dll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
+- "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+- pip install codecov
+- codecov -f "DhgmsNucleotide_coverage.xml"
+artifacts:
+- path: '*.nupkg'
+  name: nuget
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/dhgms/api/v2/package
+  api_key:
+    secure: RErDVlA5kOT7ZT4maCrp4KE73pzZYaMz5T+OrDqRu2AObjUTaNNvTvRwEqlve/O+
+  symbol_server: https://www.myget.org/F/dhgms/api/v2/package
+- provider: NuGet
+  api_key:
+    secure: 8GpBZ6IHRM4AV4mP8qCqUgJi0NCHX17OlzbrEZRoDCE0s2ZwXHOeqMfIwrGaakg9
+  on:
+    APPVEYOR_REPO_BRANCH: Release
+
