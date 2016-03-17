@@ -3,16 +3,15 @@
   <metadata>
     <id>DHGMS.Nucleotide</id>
     <version>$version$</version>
-    <title>Nucleotide</title>
+    <title>DHGMS Nucleotide</title>
     <authors>DHGMSSolutions dpvreony</authors>
     <owners>DHGMSSolutions dpvreony</owners>
     <licenseUrl>http://dhgms-solutions.github.io/nucleotide/license</licenseUrl>
     <projectUrl>http://dhgms-solutions.github.io/nucleotide</projectUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>
       T4 (Text Template Transformation Toolkit) Library used by other DHGMS open source projects.
     </description>
-    <copyright>Copyright 2004-2015 DHGMS Solutions</copyright>
+    <copyright>Copyright 2004-2016 DHGMS Solutions</copyright>
     <tags>T4 Transform CodeGen</tags>
     <developmentDependency>true</developmentDependency>
   </metadata>
@@ -21,8 +20,8 @@
     <file src="content*" target="content" />
     <file src="content\" target="content\" />
     -->
-    <file src="tools\Dhgms.Nucleotide.dll" target="tools" />
-    <file src="tools\Dhgms.Nucleotide.xml" target="tools" />
-    <file src="tools\license.txt" target="license.txt" />
+    <file src="bin\release\Dhgms.Nucleotide.dll" target="tools" />
+    <file src="bin\release\Dhgms.Nucleotide.xml" target="tools" />
+    <file src="license" />
   </files>
 </package>
