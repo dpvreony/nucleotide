@@ -29,10 +29,36 @@ namespace Dhgms.Nucleotide.Generators
         /// <param name="classes">
         /// Collection of classes to generate a helper for
         /// </param>
+        /// <param name="suppressExceptionsAsCode">
+        /// If an exception occurs instead of throwing the exception, they are output as code content. This is typically more useful in a transform environment so you can see the error in the affected file.
+        /// </param>
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes)
+        public string Generate(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes, bool suppressExceptionsAsCode)
+        {
+            try
+            {
+                if (classes == null)
+                {
+                    throw new ArgumentNullException("classes");
+                }
+
+                return this.DoGeneration(mainNamespaceName, classes);
+            }
+            catch (Exception e)
+            {
+
+                if (suppressExceptionsAsCode)
+                {
+                    return "#error " + e.ToString().Replace(System.Environment.NewLine, string.Empty);
+                }
+
+                throw;
+            }
+        }
+
+        private string DoGeneration(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes)
         {
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
@@ -42,8 +68,8 @@ namespace Dhgms.Nucleotide.Generators
             var sb = new StringBuilder();
 
             var noSubNamespace = from c in classes
-                                where string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
-                                select c;
+                                 where string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
+                                 select c;
 
             this.DoSubNamespace(sb, mainNamespaceName, null, noSubNamespace);
 
@@ -51,7 +77,7 @@ namespace Dhgms.Nucleotide.Generators
                                 where !string.IsNullOrWhiteSpace(c.Item1.SubNamespace)
                                 group c by c.Item1.SubNamespace
                                     into g
-                                    select g;
+                                select g;
 
             foreach (var ns in subNamespaces)
             {

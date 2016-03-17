@@ -28,7 +28,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
             {
                 var instance = new EntityFrameworkHelpers();
 
-                var result = instance.Generate("TestDhgms", null);
+                var result = instance.Generate("TestDhgms", null, true);
 
                 this.OutputHelper.WriteLine(result);
 
@@ -47,7 +47,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
                                                                                   new Tuple<IClassGenerationParameters, string>(cgp, "SomeClassEf")
                                                                               };
 
-                var result = instance.Generate("TestDhgms", classes);
+                var result = instance.Generate("TestDhgms", classes, true);
 
                 this.OutputHelper.WriteLine(result);
                 
@@ -63,7 +63,7 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
                                                                               {
                                                                                   new Tuple<IClassGenerationParameters, string>(new InformationInterfaceGeneratorTests.Cgp(), "SomeClassEf")
                                                                               };
-                var result = instance.Generate("TestDhgms", classes);
+                var result = instance.Generate("TestDhgms", classes, true);
 
                 Assert.NotNull(result);
                 this.OutputHelper.WriteLine(result);
