@@ -22,6 +22,6 @@
     -->
     <file src="bin\release\Dhgms.Nucleotide.dll" target="tools" />
     <file src="bin\release\Dhgms.Nucleotide.xml" target="tools" />
-    <file src="license" />
+    <file src="..\..\license" />
   </files>
 </package>
