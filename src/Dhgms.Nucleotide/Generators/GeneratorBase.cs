@@ -38,7 +38,7 @@
             {
                 if (classes == null)
                 {
-                    throw new ArgumentNullException("classes");
+                    throw new ArgumentNullException(nameof(classes));
                 }
 
                 return this.DoGeneration(classes, doCopyrightHeader);

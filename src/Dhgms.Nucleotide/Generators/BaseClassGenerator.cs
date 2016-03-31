@@ -197,52 +197,52 @@ namespace Dhgms.Nucleotide.Generators
             }
         }
 
-        /// <summary>
-        /// The do get header record method.
-        /// </summary>
-        /// <param name="sb">
-        /// The String Builder to add the code to
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
-        protected static void DoGetHeaderRecordMethod(
-            StringBuilder sb, IList<PropertyInfoBase> properties, ICollection<PropertyInfoBase> baseClassProperties)
-        {
-            sb.AppendLine("            /// <summary>");
-            sb.AppendLine("            /// Gets a header record for use for something like a CSV file");
-            sb.AppendLine("            /// </summary>");
-            sb.AppendLine("            /// <returns>a collection of strings representing the header record</returns>");
-            sb.AppendLine("            public override System.Collections.Generic.IList<string> HeaderRecord");
-            sb.AppendLine("            {");
-            sb.AppendLine("                get");
-            sb.AppendLine("                {");
-            sb.Append("                    var result = new System.Collections.Generic.List<string>");
-            if (baseClassProperties != null && baseClassProperties.Count > 0)
-            {
-                sb.Append("(base.HeaderRecord)");
-            }
+        ///// <summary>
+        ///// The do get header record method.
+        ///// </summary>
+        ///// <param name="sb">
+        ///// The String Builder to add the code to
+        ///// </param>
+        ///// <param name="properties">
+        ///// Properties of the info class
+        ///// </param>
+        ///// <param name="baseClassProperties">
+        ///// The properties of the base class
+        ///// </param>
+        //protected static void DoGetHeaderRecordMethod(
+        //    StringBuilder sb, IList<PropertyInfoBase> properties, ICollection<PropertyInfoBase> baseClassProperties)
+        //{
+        //    sb.AppendLine("            /// <summary>");
+        //    sb.AppendLine("            /// Gets a header record for use for something like a CSV file");
+        //    sb.AppendLine("            /// </summary>");
+        //    sb.AppendLine("            /// <returns>a collection of strings representing the header record</returns>");
+        //    sb.AppendLine("            public override System.Collections.Generic.IList<string> HeaderRecord");
+        //    sb.AppendLine("            {");
+        //    sb.AppendLine("                get");
+        //    sb.AppendLine("                {");
+        //    sb.Append("                    var result = new System.Collections.Generic.List<string>");
+        //    if (baseClassProperties != null && baseClassProperties.Count > 0)
+        //    {
+        //        sb.Append("(base.HeaderRecord)");
+        //    }
 
-            sb.AppendLine(string.Empty);
-            sb.AppendLine("                    {");
+        //    sb.AppendLine(string.Empty);
+        //    sb.AppendLine("                    {");
 
-            for (int i = 0; i < properties.Count; i++)
-            {
-                sb.AppendLine(
-                    "                        \"" + properties[i].Name + "\""
-                    + (i < properties.Count - 1 ? "," : string.Empty));
-            }
+        //    for (int i = 0; i < properties.Count; i++)
+        //    {
+        //        sb.AppendLine(
+        //            "                        \"" + properties[i].Name + "\""
+        //            + (i < properties.Count - 1 ? "," : string.Empty));
+        //    }
 
-            sb.AppendLine("                    };");
-            sb.AppendLine(string.Empty);
-            sb.AppendLine("                    return result;");
-            sb.AppendLine("                }");
-            sb.AppendLine("            }");
-            sb.AppendLine(string.Empty);
-        }
+        //    sb.AppendLine("                    };");
+        //    sb.AppendLine(string.Empty);
+        //    sb.AppendLine("                    return result;");
+        //    sb.AppendLine("                }");
+        //    sb.AppendLine("            }");
+        //    sb.AppendLine(string.Empty);
+        //}
 
         /// <summary>
         /// Produces code for class specific methods
@@ -807,81 +807,67 @@ namespace Dhgms.Nucleotide.Generators
                 sb.AppendLine(string.Empty);
             }
 
-            DoGetHeaderRecordMethod(sb, properties, baseClassProperties);
-
             this.OnDoClassSpecificProperties(sb, properties);
 
             sb.AppendLine("        #endregion");
             sb.AppendLine(string.Empty);
         }
 
-        /// <summary>
-        /// The do to string array method.
-        /// </summary>
-        /// <param name="sb">
-        /// The String Builder to add the code to
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
-        protected virtual void DoToStringArrayMethod(StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties)
-        {
-            bool skipMethod = false;
-            if (baseClassProperties != null && baseClassProperties.Length > 0)
-            {
-                if (baseClassProperties.Count(baseClassProperty => baseClassProperty.Collection != CollectionType.None)
-                    > 0)
-                {
-                    skipMethod = true;
-                }
-            }
+        //protected virtual void DoToStringArrayMethod(StringBuilder sb, PropertyInfoBase[] properties, PropertyInfoBase[] baseClassProperties)
+        //{
+        //    bool skipMethod = false;
+        //    if (baseClassProperties != null && baseClassProperties.Length > 0)
+        //    {
+        //        if (baseClassProperties.Count(baseClassProperty => baseClassProperty.Collection != CollectionType.None)
+        //            > 0)
+        //        {
+        //            skipMethod = true;
+        //        }
+        //    }
 
-            if (!skipMethod)
-            {
-                if (properties.Count(property => property.Collection != CollectionType.None) > 0)
-                {
-                    skipMethod = true;
-                }
-            }
+        //    if (!skipMethod)
+        //    {
+        //        if (properties.Count(property => property.Collection != CollectionType.None) > 0)
+        //        {
+        //            skipMethod = true;
+        //        }
+        //    }
 
-            sb.AppendLine("            /// <summary>");
-            sb.AppendLine("            /// Gets a collection of string data for use for something like a CSV file");
-            sb.AppendLine("            /// </summary>");
-            sb.AppendLine("            /// <returns>a collection of strings representing the data record</returns>");
-            sb.AppendLine("            public override System.Collections.Generic.IList<string> ToStringArray()");
-            sb.AppendLine("            {");
-            if (skipMethod)
-            {
-                sb.AppendLine("            throw new System.NotImplementedException();");
-            }
-            else
-            {
-                sb.Append("                var result = new System.Collections.Generic.List<string>");
-                if (baseClassProperties != null && baseClassProperties.Length > 0)
-                {
-                    sb.AppendLine("(base.ToStringArray())");
-                }
+        //    sb.AppendLine("            /// <summary>");
+        //    sb.AppendLine("            /// Gets a collection of string data for use for something like a CSV file");
+        //    sb.AppendLine("            /// </summary>");
+        //    sb.AppendLine("            /// <returns>a collection of strings representing the data record</returns>");
+        //    sb.AppendLine("            public override System.Collections.Generic.IList<string> ToStringArray()");
+        //    sb.AppendLine("            {");
+        //    if (skipMethod)
+        //    {
+        //        sb.AppendLine("            throw new System.NotImplementedException();");
+        //    }
+        //    else
+        //    {
+        //        sb.Append("                var result = new System.Collections.Generic.List<string>");
+        //        if (baseClassProperties != null && baseClassProperties.Length > 0)
+        //        {
+        //            sb.AppendLine("(base.ToStringArray())");
+        //        }
 
-                sb.AppendLine(string.Empty);
-                sb.AppendLine("                {");
+        //        sb.AppendLine(string.Empty);
+        //        sb.AppendLine("                {");
 
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    sb.AppendLine(
-                        "                    this." + this.GetValueForToStringArray(properties[i])
-                        + (i < properties.Length - 1 ? "," : string.Empty));
-                }
+        //        for (int i = 0; i < properties.Length; i++)
+        //        {
+        //            sb.AppendLine(
+        //                "                    this." + this.GetValueForToStringArray(properties[i])
+        //                + (i < properties.Length - 1 ? "," : string.Empty));
+        //        }
 
-                sb.AppendLine("                };");
-                sb.AppendLine(string.Empty);
-                sb.AppendLine("                return result;");
-            }
+        //        sb.AppendLine("                };");
+        //        sb.AppendLine(string.Empty);
+        //        sb.AppendLine("                return result;");
+        //    }
 
-            sb.AppendLine("            }");
-        }
+        //    sb.AppendLine("            }");
+        //}
 
         /// <summary>
         ///     Gets the class suffix
@@ -975,44 +961,32 @@ namespace Dhgms.Nucleotide.Generators
         /// </param>
         protected abstract void OnDoPropertyMutator(StringBuilder sb, PropertyInfoBase pi);
 
-        /// <summary>
-        /// The do table validation.
-        /// </summary>
-        /// <param name="sb">
-        /// The String Builder to add the code to
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
-        private static void DoTableValidation(
-            StringBuilder sb,
-            IEnumerable<PropertyInfoBase> properties,
-            ICollection<PropertyInfoBase> baseClassProperties)
-        {
-            sb.AppendLine("        /// <summary>");
-            sb.AppendLine("        /// Checks a table to ensure it meets the required schema");
-            sb.AppendLine("        /// </summary>");
-            sb.AppendLine("        public override void DoTableValidation()");
-            sb.AppendLine("        {");
+        //private static void DoTableValidation(
+        //    StringBuilder sb,
+        //    IEnumerable<PropertyInfoBase> properties,
+        //    ICollection<PropertyInfoBase> baseClassProperties)
+        //{
+        //    sb.AppendLine("        /// <summary>");
+        //    sb.AppendLine("        /// Checks a table to ensure it meets the required schema");
+        //    sb.AppendLine("        /// </summary>");
+        //    sb.AppendLine("        public override void DoTableValidation()");
+        //    sb.AppendLine("        {");
 
-            /*
-            if (baseClassProperties != null && baseClassProperties.Count > 0)
-            {
-                sb.AppendLine("        base.DoTableValidation();");
-                sb.AppendLine(string.Empty);
-            }
+        //    /*
+        //    if (baseClassProperties != null && baseClassProperties.Count > 0)
+        //    {
+        //        sb.AppendLine("        base.DoTableValidation();");
+        //        sb.AppendLine(string.Empty);
+        //    }
 
-            foreach (Base property in properties)
-            {
-                sb.AppendLine("            // " + property.Name);
-                sb.AppendLine(string.Empty);
-            }
-             */
-            sb.AppendLine("        }");
-        }
+        //    foreach (Base property in properties)
+        //    {
+        //        sb.AppendLine("            // " + property.Name);
+        //        sb.AppendLine(string.Empty);
+        //    }
+        //     */
+        //    sb.AppendLine("        }");
+        //}
 
         /// <summary>
         /// Generates the code for the our methods region
@@ -1052,10 +1026,8 @@ namespace Dhgms.Nucleotide.Generators
 
             this.DoGetHashCodeMethod(sb, properties, baseClassProperties);
 
-            DoTableValidation(sb, properties, baseClassProperties);
             sb.AppendLine(string.Empty);
 
-            this.DoToStringArrayMethod(sb, properties, baseClassProperties);
             sb.AppendLine(string.Empty);
 
             sb.AppendLine(string.Empty);

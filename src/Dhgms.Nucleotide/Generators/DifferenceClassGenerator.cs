@@ -139,8 +139,6 @@ namespace Dhgms.Nucleotide.Generators
                 sb.AppendLine(string.Empty);
             }
 
-            DoGetHeaderRecordMethod(sb, properties, baseClassProperties);
-
             this.OnDoClassSpecificProperties(sb, properties);
 
             sb.AppendLine("        #endregion");
