@@ -26,7 +26,7 @@
         /// </returns>
         string Generate(
             IList<IClassGenerationParameters> classes,
-            bool doCopyrightHeader = false,
+            bool doCopyrightHeader = true,
             bool suppressExceptionsAsCode = true);
     }
 }

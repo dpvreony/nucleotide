@@ -239,6 +239,7 @@ namespace Dhgms.Nucleotide.Generators
                 sb.AppendLine("    /// <summary>");
                 sb.AppendLine("    /// Helper methods for using POCO and Entity Framework");
                 sb.AppendLine("    /// </summary>");
+                sb.AppendLine("    [System.CodeDom.Compiler.GeneratedCode]");
                 sb.AppendLine("    public class " + classInfo.Item1.ClassName);
                 sb.AppendLine("                : Dhgms.DataManager.Model.IEntityFramework<" + fullyQualifiedClassName + ">");
                 sb.AppendLine("    {");

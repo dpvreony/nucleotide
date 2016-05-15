@@ -118,7 +118,6 @@ namespace Dhgms.Nucleotide.Generators
             sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderBase." + projectName + ",");
             sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderCollection." + projectName + ",");
 
-            // sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.Config.Section." + projectName);
             sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.DataManager.Model.ConfigurationSection.ProviderSection");
             sb.AppendLine(Helpers.GetTabs(tabs + 2) + ">");
             sb.AppendLine(Helpers.GetTabs(tabs) + "{");

@@ -93,7 +93,6 @@ namespace Dhgms.Nucleotide.Generators
             string baseClassName, 
             PropertyInfoBase[] baseClassProperties)
         {
-            OnGetColumnNamesMethod(sb, properties, baseClassName, baseClassProperties);
         }
 
         /// <summary>
@@ -107,6 +106,7 @@ namespace Dhgms.Nucleotide.Generators
         /// </param>
         protected override void DoFieldsRegion(StringBuilder sb, PropertyInfoBase[] properties)
         {
+            // no op
         }
 
         /// <summary>
@@ -348,58 +348,6 @@ namespace Dhgms.Nucleotide.Generators
             sb.AppendLine("            protected override void OnDisposing()");
             sb.AppendLine("            {");
             sb.AppendLine("            }");
-        }
-
-
-        /// <summary>
-        /// Does the GetColumnNames method
-        /// </summary>
-        /// <param name="sb">
-        /// The String Builder to add the code to
-        /// </param>
-        /// <param name="properties">
-        /// Properties of the info class
-        /// </param>
-        /// <param name="baseClassName">
-        /// The name of the base class
-        /// </param>
-        /// <param name="baseClassProperties">
-        /// The properties of the base class
-        /// </param>
-        private static void OnGetColumnNamesMethod(
-            StringBuilder sb, IEnumerable<PropertyInfoBase> properties, string baseClassName, ICollection<PropertyInfoBase> baseClassProperties)
-        {
-            sb.AppendLine(string.Empty);
-            sb.AppendLine("        /// <summary>");
-            sb.AppendLine("        /// Gets the names of the columns that are different");
-            sb.AppendLine("        /// </summary>");
-            sb.AppendLine("        /// <returns>");
-            sb.AppendLine("        /// list of names of the columns that are different");
-            sb.AppendLine("        /// </returns>");
-            sb.AppendLine("        public override System.Collections.Generic.IList<string> GetColumnNames()");
-            sb.AppendLine("        {");
-            sb.AppendLine(
-                "            var columns = new System.Collections.Generic.List<string>();");
-
-            if (string.IsNullOrWhiteSpace(baseClassName) == false && baseClassProperties != null
-                && baseClassProperties.Count > 0)
-            {
-                sb.AppendLine("            columns.AddRange(base.GetColumnNames());");
-            }
-
-            foreach (PropertyInfoBase pi in properties)
-            {
-                sb.AppendLine("            if (this." + pi.Name + ")");
-                sb.AppendLine("            {");
-                sb.AppendLine("                columns.Add(\"" + pi.Name + "\");");
-                sb.AppendLine("            }");
-
-                sb.AppendLine(string.Empty);
-            }
-
-            sb.AppendLine("            return columns;");
-            sb.AppendLine("        }");
-            sb.AppendLine(string.Empty);
         }
 
         /// <summary>

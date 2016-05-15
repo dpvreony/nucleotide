@@ -38,6 +38,7 @@
             sb.AppendLine("{0}/// <summary>", Helpers.GetTabs(tabCount));
             sb.AppendLine("{0}/// {1}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks);
             sb.AppendLine("{0}/// </summary>", Helpers.GetTabs(tabCount));
+            sb.AppendLine("    [System.CodeDom.Compiler.GeneratedCode]");
             sb.AppendLine("{0}public interface I{1}{2} : IUnkeyed{1}{2}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
             sb.AppendLine("{0}{{", Helpers.GetTabs(tabCount));
 

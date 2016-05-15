@@ -28,18 +28,6 @@
         /// <param name="isBaseInterface">Whether this is the base interface</param>
         protected override void DoProperties(StringBuilder sb, int tabCount, PropertyInfoBase[] properties, bool isBaseInterface)
         {
-            //if (isBaseInterface)
-            //{
-            //    sb.AppendLine("{0}/// <summary>", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}/// Gets the number of properties that are different", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}/// </summary>", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}/// <return>", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}/// the number of properties that are different", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}/// </return>", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine("{0}int Count {{ get; }}", Helpers.GetTabs(tabCount));
-            //    sb.AppendLine(string.Empty);
-            //}
-
             var position = 0;
             while (position < properties.Length)
             {

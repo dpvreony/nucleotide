@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Class for handling configuration class generation
     /// </summary>
-    public class ConfigurationGenerator
+    public static class ConfigurationGenerator
     {
         /// <summary>
         /// Entry point for generating the code
