@@ -38,8 +38,10 @@ namespace Dhgms.Nucleotide.Generators
                 throw new ArgumentNullException(nameof(classGenerationParameters));
             }
 
-            var fullyQualifiedClassName = classGenerationParameters.MainNamespaceName + ".Model.Info." + (!string.IsNullOrWhiteSpace(classGenerationParameters.SubNamespace) ? classGenerationParameters.SubNamespace + "." : null) + classGenerationParameters.ClassName;
+            var fullyQualifiedClassName = classGenerationParameters.MainNamespaceName + ".Model." + (!string.IsNullOrWhiteSpace(classGenerationParameters.SubNamespace) ? classGenerationParameters.SubNamespace + "." : null) + classGenerationParameters.ClassName;
 
+            sb.AppendLine("    using System;");
+            sb.AppendLine(string.Empty);
             sb.AppendLine("    /// <summary>");
             sb.AppendLine("    /// Helper methods for using POCO and low level ADO.NET");
             sb.AppendLine("    /// </summary>");
