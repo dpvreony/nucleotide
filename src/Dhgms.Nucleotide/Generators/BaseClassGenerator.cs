@@ -125,7 +125,7 @@ namespace Dhgms.Nucleotide.Generators
             sb.AppendLine("        /// " + classRemarks);
             sb.AppendLine("        /// </summary>");
             sb.AppendLine("        [System.Runtime.Serialization.DataContract]");
-            sb.AppendLine($"        [System.CodeDom.Compiler.GeneratedCode(\"DHGMS Nucleotide\", \"{nucleotideAssembly.Version}\"]");
+            sb.AppendLine($"        [System.CodeDom.Compiler.GeneratedCode(\"DHGMS Nucleotide\", \"{nucleotideAssembly.Version}\")]");
             sb.AppendLine("        public class " + className + this.GetClassSuffix());
             sb.AppendLine("// ReSharper disable RedundantNameQualifier");
 
