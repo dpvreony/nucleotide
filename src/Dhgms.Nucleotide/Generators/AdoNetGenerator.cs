@@ -302,7 +302,7 @@ namespace Dhgms.Nucleotide.Generators
                 throw new ArgumentNullException("doGetRowDataMethod");
             }
 
-            var fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model.Info." + (!string.IsNullOrWhiteSpace(classInfo.SubNamespace) ? classInfo.SubNamespace + "." : null) + classInfo.ClassName;
+            var fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model." + (!string.IsNullOrWhiteSpace(classInfo.SubNamespace) ? classInfo.SubNamespace + "." : null) + classInfo.ClassName;
 
             var properties = classInfo.Properties;
             if (properties == null || properties.Length < 1)
