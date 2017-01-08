@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators
             var nodes = new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("EntityFramework"))
-                    .AddMembers(GetClasses())
+                    .AddMembers(GetMembers())
             };
 
             var results = SyntaxFactory.List(nodes);
@@ -50,9 +50,59 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(results);
         }
 
-        private MemberDeclarationSyntax[] GetClasses()
+        private MemberDeclarationSyntax[] GetMembers()
         {
-            return new MemberDeclarationSyntax[] { };
+            var members = GetModelClasses()
+                .Concat(GetDbContextClass())
+                .ToArray();
+
+            return members;
+        }
+
+        private MemberDeclarationSyntax[] GetModelClasses()
+        {
+            var name = "Test";
+
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Represents the Entity Framework Table for the {name} model.</summary>"),
+            };
+
+            var baseTypes = new BaseTypeSyntax[]
+            {
+                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Models.{name}Model"))
+            };
+
+
+            var tableAttributeArguments = new AttributeArgumentSyntax[]
+            {
+                SyntaxFactory.AttributeArgument(SyntaxFactory.ParseName($"\"{name}\"")),
+            };
+
+            var attributes = new []
+            {
+                SyntaxFactory.Attribute(SyntaxFactory.ParseName("System.ComponentModel.DataAnnotations.Schema.Table")).AddArgumentListArguments(tableAttributeArguments), 
+            };
+
+            var sep = SyntaxFactory.SeparatedList(attributes);
+
+            var attributeListSyntax = SyntaxFactory.AttributeList(sep);
+
+            return new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.ClassDeclaration($"{name}ModelEf")
+                .AddAttributeLists(attributeListSyntax)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBaseListTypes(baseTypes)
+                .WithLeadingTrivia(leadingTrivia)
+            };
+        }
+
+        private MemberDeclarationSyntax[] GetDbContextClass()
+        {
+            return new MemberDeclarationSyntax[]
+            {
+            };
         }
     }
 }

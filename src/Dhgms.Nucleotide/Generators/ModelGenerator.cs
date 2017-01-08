@@ -38,7 +38,7 @@ namespace Dhgms.Nucleotide.Generators
             var nodes = new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Models"))
-                    .AddMembers(GetClasses())
+                    .AddMembers(GetMembers())
             };
 
             var results = SyntaxFactory.List(nodes);
@@ -46,9 +46,132 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(results);
         }
 
-        private MemberDeclarationSyntax[] GetClasses()
+        private MemberDeclarationSyntax[] GetMembers()
         {
-            return new MemberDeclarationSyntax[] { };
+            var members = GetUnkeyedInterfaces()
+                .Concat(GetKeyedInterfaces())
+                .Concat(GetUnkeyedClasses())
+                .Concat(GetKeyedClasses())
+                .ToArray();
+
+            return members;
+        }
+
+        private MemberDeclarationSyntax[] GetKeyedClasses()
+        {
+            var name = "Test";
+
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Represents the {name} model.</summary>"),
+            };
+
+            var baseTypes = new BaseTypeSyntax[]
+            {
+                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Unkeyed{name}Model")),
+                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"I{name}Model"))
+            };
+
+            var accessor = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
+            };
+
+            var members = new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).AddAccessorListAccessors(accessor)
+            };
+
+            return new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.ClassDeclaration($"{name}Model")
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBaseListTypes(baseTypes)
+                .AddMembers(members)
+                .WithLeadingTrivia(leadingTrivia)
+            };
+        }
+
+        private MemberDeclarationSyntax[] GetUnkeyedClasses()
+        {
+            var name = "Test";
+
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Represents the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
+            };
+
+            var baseTypes = new BaseTypeSyntax[]
+            {
+                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
+            };
+
+            return new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBaseListTypes(baseTypes)
+                .WithLeadingTrivia(leadingTrivia)
+            };
+                    
+        }
+
+        private MemberDeclarationSyntax[] GetUnkeyedInterfaces()
+        {
+            var name = "Test";
+
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Interface for the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
+            };
+
+            return new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.InterfaceDeclaration($"IUnkeyed{name}Model")
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithLeadingTrivia(leadingTrivia)
+            };
+        }
+
+        private MemberDeclarationSyntax[] GetKeyedInterfaces()
+        {
+            var name = "Test";
+
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Interface for the {name} model.</summary>"),
+            };
+
+            var baseTypes = new BaseTypeSyntax[]
+            {
+                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
+            };
+
+            var accessor = new []
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                //SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    //.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                    //.AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
+            };
+
+            var members = new MemberDeclarationSyntax[]
+            {
+                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddAccessorListAccessors(accessor)
+            };
+
+            return new MemberDeclarationSyntax[]
+            {
+
+                SyntaxFactory.InterfaceDeclaration($"I{name}Model")
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                    .AddBaseListTypes(baseTypes)
+                    .AddMembers(members)
+                    .WithLeadingTrivia(leadingTrivia)
+            };
         }
     }
 }

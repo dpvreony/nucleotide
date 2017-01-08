@@ -20,7 +20,7 @@ namespace Dhgms.Nucleotide.Mocking
     {
         public TestOfGeneration()
         {
-            var x = new NucleotideA();
+            //var x = new NucleotideA();
         }
     }
 }

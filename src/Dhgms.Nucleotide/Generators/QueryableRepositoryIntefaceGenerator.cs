@@ -223,7 +223,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
 
-            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"IUnkeyed{name}Model newItem"));
+            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"Models.IUnkeyed{name}Model newItem"));
             parameters = parameters.Add(node);
             var addParams = SyntaxFactory.ParameterList(parameters);
             return addParams;
@@ -244,7 +244,7 @@ namespace Dhgms.Nucleotide.Generators
             var nodes = new[]
             {
                 SyntaxFactory.Parameter(SyntaxFactory.Identifier($"long id")),
-                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<I{name}Model, TResult>> selector"))
+                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"))
             };
 
             var parameters = SyntaxFactory.SeparatedList(nodes);
@@ -257,7 +257,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var nodes = new[]
             {
-                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<I{name}Model, TResult>> selector"))
+                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"))
             };
 
             var parameters = SyntaxFactory.SeparatedList(nodes);
@@ -270,7 +270,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
 
-            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"I{name}Model item"));
+            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"Models.I{name}Model item"));
             parameters = parameters.Add(node);
             var addParams = SyntaxFactory.ParameterList(parameters);
             return addParams;
