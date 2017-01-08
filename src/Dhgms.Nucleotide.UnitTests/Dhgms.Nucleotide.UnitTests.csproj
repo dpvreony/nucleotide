@@ -90,7 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseUnitTests.cs" />
+    <Compile Include="Generators\EntityFrameworkGeneratorTests.cs" />
     <Compile Include="Generators\ModelGeneratorTests.cs" />
+    <Compile Include="Generators\QueryableRepositoryIntefaceGeneratorTests.cs" />
     <Compile Include="Model\GacManagedAccess.cs" />
     <Compile Include="Model\Helper\AdoNetGeneratorTests.cs" />
     <Compile Include="Model\Helper\DifferenceTests.cs" />
