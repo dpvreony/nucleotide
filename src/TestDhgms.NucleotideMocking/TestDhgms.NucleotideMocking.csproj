@@ -19,6 +19,8 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Dhgms.Nucleotide\</SolutionDir>
     <TargetFrameworkProfile />
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,8 +42,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dhgms.DataManager">
-      <HintPath>..\packages\Dhgms.DataManager.0.1403.10.0\lib\net40\Dhgms.DataManager.dll</HintPath>
+    <Reference Include="Dhgms.DataManager, Version=1.0.18.0, Culture=neutral, PublicKeyToken=3f84a20e6afd39f7, processorArchitecture=MSIL">
+      <HintPath>..\packages\DHGMS.DataManager.1.0.18\lib\net4\Dhgms.DataManager.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -60,6 +63,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SingleSimple.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Nucleotide.cs">
+      <Generator>MSBuild:GenerateCodeFromAttributes</Generator>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,7 +130,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\CodeGeneration.Roslyn.BuildTime.0.1.57\build\CodeGeneration.Roslyn.BuildTime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CodeGeneration.Roslyn.BuildTime.0.1.57\build\CodeGeneration.Roslyn.BuildTime.targets'))" />
   </Target>
+  <Import Project="..\packages\CodeGeneration.Roslyn.BuildTime.0.1.57\build\CodeGeneration.Roslyn.BuildTime.targets" Condition="Exists('..\packages\CodeGeneration.Roslyn.BuildTime.0.1.57\build\CodeGeneration.Roslyn.BuildTime.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
