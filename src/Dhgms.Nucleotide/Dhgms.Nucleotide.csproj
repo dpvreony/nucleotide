@@ -111,8 +111,8 @@
     <Compile Include="Generators\InformationClassGenerator.cs" />
     <Compile Include="Generators\InformationInterfaceGenerator.cs" />
     <Compile Include="Generators\ProviderProxy.cs" />
-    <Compile Include="Generators\UnitTestBase.cs" />
-    <Compile Include="Generators\UnitTestInformation.cs" />
+    <Compile Include="Generators\BaseUnitTestGenerator.cs" />
+    <Compile Include="Generators\InformationClassUnitTestGenerator.cs" />
     <Compile Include="Generators\ViewFilter.cs" />
     <Compile Include="Model\ClassGenerationParameters.cs" />
     <Compile Include="Model\CollectionType.cs" />
