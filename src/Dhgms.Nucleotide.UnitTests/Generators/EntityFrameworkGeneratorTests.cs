@@ -8,9 +8,11 @@ using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
+    [ExcludeFromCodeCoverage]
     public static class EntityFrameworkGeneratorTests
     {
         public sealed class ConstructorMethod

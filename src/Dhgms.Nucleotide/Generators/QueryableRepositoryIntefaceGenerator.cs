@@ -39,11 +39,20 @@ namespace Dhgms.Nucleotide.Generators
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
-            var nodes = new MemberDeclarationSyntax[]
+            var nodes = new List<MemberDeclarationSyntax>();
+
+            if (applyTo.Kind() != SyntaxKind.ClassDeclaration)
             {
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Repositories"))
-                    .AddMembers(GetInterfaces())
-            };
+                // TODO : put an error message
+                //nodes.Add(SyntaxFactory.Comment($"/// <summary>Gets the {name} item from the repository.</summary>"));
+                //nodes.Add(SyntaxFactory.Comment("/// <returns>The ${name} item.</returns>"));
+            }
+            else
+            {
+                var def = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Repositories"))
+                    .AddMembers(GetInterfaces());
+                nodes.Add(def);
+            }
 
             var results = SyntaxFactory.List(nodes);
 

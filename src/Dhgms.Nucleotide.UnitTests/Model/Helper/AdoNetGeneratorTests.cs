@@ -8,12 +8,13 @@ namespace Dhgms.Nucleotide.Tests.Model.Helper
 {
     using Dhgms.Nucleotide.Generators;
     using Dhgms.Nucleotide.Model;
-
+    using System.Diagnostics.CodeAnalysis;
     using TestDhgms.NucleotideMocking;
 
     using Xunit;
     using Xunit.Abstractions;
 
+    [ExcludeFromCodeCoverage]
     public class AdoNetGeneratorTests
     {
         public class GenerateMethod : BaseUnitTests
