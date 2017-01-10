@@ -43,7 +43,14 @@ namespace Dhgms.Nucleotide.Generators
             string[] comments = null;
             MemberDeclarationSyntax[] members = null;
 
-            if (applyTo.Kind() != SyntaxKind.ClassDeclaration)
+            if (applyTo == null)
+            {
+                comments = new[]
+                {
+                    "#error Failed to work out what the attribute is attached to."
+                };
+            }
+            else if (applyTo.Kind() != SyntaxKind.ClassDeclaration)
             {
                 comments = new[]
                 {
@@ -237,8 +244,6 @@ namespace Dhgms.Nucleotide.Generators
 
             method = method.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
             method = method.WithLeadingTrivia(leadingTrivia);
-            method = method.WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
-            method = method.WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
             return method;
         }
 
