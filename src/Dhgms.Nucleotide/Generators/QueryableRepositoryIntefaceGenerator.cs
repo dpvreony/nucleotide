@@ -237,6 +237,8 @@ namespace Dhgms.Nucleotide.Generators
 
             method = method.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
             method = method.WithLeadingTrivia(leadingTrivia);
+            method = method.WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
+            method = method.WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
             return method;
         }
 
@@ -350,6 +352,11 @@ namespace Dhgms.Nucleotide.Generators
             {
                 new []
                     {
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"
+                    },
+                new []
+                    {
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, bool>> predicate",
                         $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"
                     }
             };
