@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Attributes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -39,21 +40,37 @@ namespace Dhgms.Nucleotide.Generators
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
-            var nodes = new List<MemberDeclarationSyntax>();
+            string[] comments = null;
+            MemberDeclarationSyntax[] members = null;
 
             if (applyTo.Kind() != SyntaxKind.ClassDeclaration)
             {
-                // TODO : put an error message
-                //nodes.Add(SyntaxFactory.Comment($"/// <summary>Gets the {name} item from the repository.</summary>"));
-                //nodes.Add(SyntaxFactory.Comment("/// <returns>The ${name} item.</returns>"));
+                comments = new[]
+                {
+                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a ClassDeclaration. Detected type : {applyTo.Kind()}" 
+                    
+                };
             }
             else
             {
-                var def = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Repositories"))
-                    .AddMembers(GetInterfaces());
-                nodes.Add(def);
+                members = GetInterfaces();
             }
 
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Repositories"));
+
+            if (comments != null && comments.Length > 0)
+            {
+                var leadingTrivia = comments.Select(s => SyntaxFactory.Comment(s));
+
+                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(leadingTrivia);
+            }
+
+            if (members != null && members.Length > 0)
+            {
+                namespaceDeclaration = namespaceDeclaration.AddMembers(members);
+            }
+
+            var nodes = new List<MemberDeclarationSyntax> {namespaceDeclaration};
             var results = SyntaxFactory.List(nodes);
 
             return await Task.FromResult(results);
@@ -80,47 +97,65 @@ namespace Dhgms.Nucleotide.Generators
 
         private MemberDeclarationSyntax[] GetInterfaceMethods(string name)
         {
-            var result = new []
-            {
-                GetAddMethod(name),
-                GetDeleteMethod(name),
-                GetGetMethod(name),
-                GetListMethod(name),
-                GetUpdateMethod(name),
-            };
+            var result = new List<MemberDeclarationSyntax>();
 
-            return result;
+            GetAddMethod(result, name);
+            GetDeleteMethod(result, name);
+            GetDeleteManyMethod(result, name);
+            GetGetMethod(result, name);
+            GetListMethod(result, name);
+            GetUpdateMethod(result, name);
+            GetUpdateManyMethod(result, name);
+
+            return result.ToArray();
         }
 
-        private MemberDeclarationSyntax GetUpdateMethod(string name)
+        private void GetAddMethod(List<MemberDeclarationSyntax> result, string name)
         {
             var leadingTrivia = new[]
             {
-                SyntaxFactory.Comment($"/// <summary>Gets the {name} item from the repository.</summary>"),
-                SyntaxFactory.Comment("/// <returns>The ${name} item.</returns>")
-            };
-
-            var updateParams = GetUpdateParams(name);
-
-            return GetMethod($"Update{name}Async", "Task", leadingTrivia, updateParams, null);
-        }
-
-        private MemberDeclarationSyntax GetListMethod(string name)
-        {
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Adds a {name} item to the repository.</summary>"),
+                SyntaxFactory.Comment($"/// <summary>Adds an {name} item to the repository.</summary>"),
                 SyntaxFactory.Comment("/// <returns>Unique Id of the item added.</returns>")
             };
 
-            var listParams = GetListParams(name);
-            //var listConstraintClauses = GetListConstraintClauses();
-            var listTypeParameters = GetListTypeParameters();
+            var parameterListSyntax = GetAddParams(name);
 
-            return GetMethod($"List{name}Async", "Task<IEnumerable<TResult>>", leadingTrivia, listParams, listTypeParameters);
+            var methods = parameterListSyntax.Select(GetParams)
+                .Select(actualParams => GetMethod($"Add{name}Async", "Task<long>", leadingTrivia, actualParams, null));
+            result.AddRange(methods);
         }
 
-        private MemberDeclarationSyntax GetGetMethod(string name)
+        private void GetDeleteMethod(List<MemberDeclarationSyntax> result, string name)
+        {
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Deletes the {name} item with the specified id from the repository.</summary>"),
+                SyntaxFactory.Comment("/// <returns>Asynchronous Task.</returns>")
+            };
+
+            var parameterListSyntax = GetDeleteParams();
+
+            var methods = parameterListSyntax.Select(GetParams)
+                .Select(actualParams => GetMethod($"Delete{name}Async", "Task", leadingTrivia, actualParams, null));
+            result.AddRange(methods);
+        }
+
+        private void GetDeleteManyMethod(List<MemberDeclarationSyntax> result, string name)
+        {
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Deletes many {name} item with the specified ids from the repository.</summary>"),
+                SyntaxFactory.Comment("/// <returns>Asynchronous Task.</returns>")
+            };
+
+            var parameterListSyntax = GetDeleteManyParams(name);
+
+            var methods = parameterListSyntax.Select(GetParams)
+                .Select(actualParams => GetMethod($"DeleteMany{name}Async", "Task", leadingTrivia, actualParams, null));
+            result.AddRange(methods);
+        }
+
+        private void GetGetMethod(List<MemberDeclarationSyntax> result, string name)
         {
             var leadingTrivia = new[]
             {
@@ -131,36 +166,60 @@ namespace Dhgms.Nucleotide.Generators
             var getParams = GetGetParams(name);
             var getTypeParameters = GetGetTypeParameters();
 
-            return GetMethod($"Get{name}Async", "Task", leadingTrivia, getParams, getTypeParameters);
+            var methods = getParams.Select(GetParams)
+                .Select(actualParams => GetMethod($"Get{name}Async", "Task", leadingTrivia, actualParams, getTypeParameters));
+            result.AddRange(methods);
         }
 
-        private MemberDeclarationSyntax GetAddMethod(string name)
+        private void GetListMethod(List<MemberDeclarationSyntax> result, string name)
         {
             var leadingTrivia = new[]
             {
-                SyntaxFactory.Comment($"/// <summary>Adds an {name} item to the repository.</summary>"),
+                SyntaxFactory.Comment($"/// <summary>Adds a {name} item to the repository.</summary>"),
                 SyntaxFactory.Comment("/// <returns>Unique Id of the item added.</returns>")
             };
 
-            var parameterListSyntax = GetAddParams(name);
+            //var listConstraintClauses = GetListConstraintClauses();
+            var listTypeParameters = GetListTypeParameters();
 
-            return GetMethod($"Add{name}Async", "Task<long>", leadingTrivia, parameterListSyntax, null);
+            var listParams = GetListParams(name);
+
+            var methods = listParams.Select(GetParams)
+                .Select(actualParams => GetMethod($"List{name}Async", "Task<IEnumerable<TResult>>", leadingTrivia, actualParams, listTypeParameters));
+            result.AddRange(methods);
         }
 
-        private MemberDeclarationSyntax GetDeleteMethod(string name)
+        private void GetUpdateMethod(List<MemberDeclarationSyntax> result, string name)
         {
             var leadingTrivia = new[]
             {
-                SyntaxFactory.Comment($"/// <summary>Deletes the {name} item with the specified id from the repository.</summary>"),
+                SyntaxFactory.Comment($"/// <summary>Updates the {name} item in the repository.</summary>"),
+                SyntaxFactory.Comment("/// <returns>The ${name} item.</returns>")
+            };
+
+            var updateParams = GetUpdateParams(name);
+
+            var methods = updateParams.Select(GetParams)
+                .Select(actualParams => GetMethod($"UpdateMany{name}Async", "Task", leadingTrivia, actualParams, null));
+            result.AddRange(methods);
+        }
+
+        private void GetUpdateManyMethod(List<MemberDeclarationSyntax> result, string name)
+        {
+            var leadingTrivia = new[]
+            {
+                SyntaxFactory.Comment($"/// <summary>Updates a collection of {name} items in the repository.</summary>"),
                 SyntaxFactory.Comment("/// <returns>Asynchronous Task.</returns>")
             };
 
-            var parameterListSyntax = GetDeleteParams();
+            var updateParams = GetUpdateManyParams(name);
 
-            return GetMethod($"Delete{name}Async", "Task", leadingTrivia, parameterListSyntax, null);
+            var methods = updateParams.Select(GetParams)
+                .Select(actualParams => GetMethod($"UpdateMany{name}Async", "Task", leadingTrivia, actualParams, null));
+            result.AddRange(methods);
         }
 
-        private MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
+        private static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
         {
             var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName(returnType), methodName);
 
@@ -228,61 +287,120 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        private static ParameterListSyntax GetAddParams(string name)
+        private static IEnumerable<string[]> GetAddParams(string name)
         {
-            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
-
-            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"Models.IUnkeyed{name}Model newItem"));
-            parameters = parameters.Add(node);
-            var addParams = SyntaxFactory.ParameterList(parameters);
-            return addParams;
-        }
-
-        private static ParameterListSyntax GetDeleteParams()
-        {
-            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
-
-            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier("long id"));
-            parameters = parameters.Add(node);
-            var addParams = SyntaxFactory.ParameterList(parameters);
-            return addParams;
-        }
-
-        private static ParameterListSyntax GetGetParams(string name)
-        {
-            var nodes = new[]
+            var args = new[]
             {
-                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"long id")),
-                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"))
+                new []
+                    {
+                        $"Models.IUnkeyed{name}Model newItem"
+                    }
             };
 
-            var parameters = SyntaxFactory.SeparatedList(nodes);
-
-            var addParams = SyntaxFactory.ParameterList(parameters);
-            return addParams;
+            return args;
         }
 
-        private static ParameterListSyntax GetListParams(string name)
+        private static IEnumerable<string[]> GetDeleteParams()
         {
-            var nodes = new[]
+            var args = new[]
             {
-                SyntaxFactory.Parameter(SyntaxFactory.Identifier($"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"))
+                new []
+                    {
+                        "long id"
+                    }
             };
 
-            var parameters = SyntaxFactory.SeparatedList(nodes);
-
-            var addParams = SyntaxFactory.ParameterList(parameters);
-            return addParams;
+            return args;
         }
 
-        private static ParameterListSyntax GetUpdateParams(string name)
+        private static IEnumerable<string[]> GetDeleteManyParams(string name)
+        {
+            var args = new[]
+            {
+                new []
+                    {
+                        "IEnumerable<long> ids"
+                    },
+                new []
+                    {
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, bool>> predicate"
+                    }
+            };
+
+            return args;
+        }
+
+        private static IEnumerable<string[]> GetGetParams(string name)
+        {
+            var args = new[]
+            {
+                new []
+                    {
+                        "long id",
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"
+                    }
+            };
+
+            return args;
+        }
+
+        private static IEnumerable<string[]> GetListParams(string name)
+        {
+            var args = new[]
+            {
+                new []
+                    {
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, TResult>> selector"
+                    }
+            };
+
+            return args;
+        }
+
+        private static IEnumerable<string[]> GetUpdateParams(string name)
+        {
+            var args = new[]
+            {
+                new []
+                    {
+                        $"long id",
+                        $"System.Linq.Expressions.Expression<Action<Models.IUnkeyed{name}Model>> updateAction"
+                    }
+            };
+
+            return args;
+        }
+
+        private static IEnumerable<string[]> GetUpdateManyParams(string name)
+        {
+            var args = new[]
+            {
+                new []
+                    {
+                        $"IEnumerable<long> ids",
+                        $"System.Linq.Expressions.Expression<Action<Models.IUnkeyed{name}Model>> updateAction"
+                    },
+                new []
+                    {
+                        $"System.Linq.Expressions.Expression<Func<Models.I{name}Model, bool>> predicate",
+                        $"System.Linq.Expressions.Expression<Action<Models.IUnkeyed{name}Model>> updateAction"
+                    },
+            };
+
+            return args;
+        }
+
+        private static ParameterListSyntax GetParams(string[] argCollection)
         {
             var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
 
-            var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier($"Models.I{name}Model item"));
-            parameters = parameters.Add(node);
-            var addParams = SyntaxFactory.ParameterList(parameters);
-            return addParams;
+            foreach (var s in argCollection)
+            {
+                var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier(s));
+                parameters = parameters.Add(node);
+            }
+
+            return SyntaxFactory.ParameterList(parameters);
         }
     }
 }
