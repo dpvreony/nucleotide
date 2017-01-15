@@ -188,6 +188,7 @@
     <Compile Include="Model\CollectionType.cs" />
     <Compile Include="Model\ConfigurationType.cs" />
     <Compile Include="Model\IClassGenerationParameters.cs" />
+    <Compile Include="Model\INucleotideGenerationModel.cs" />
     <Compile Include="PropertyInfo\PropertyInfoBase.cs" />
     <Compile Include="PropertyInfo\ClrBooleanPropertyInfo.cs" />
     <None Include="Dhgms.Nucleotide.nuspec">

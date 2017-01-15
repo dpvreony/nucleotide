@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Attributes;
+using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -40,34 +41,15 @@ namespace Dhgms.Nucleotide.Generators
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
-            string[] comments = null;
-            MemberDeclarationSyntax[] members = null;
-
-            if (applyTo == null)
-            {
-                comments = new[]
-                {
-                    "#error Failed to work out what the attribute is attached to."
-                };
-            }
-            else if (applyTo.Kind() != SyntaxKind.ClassDeclaration)
-            {
-                comments = new[]
-                {
-                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a ClassDeclaration. Detected type : {applyTo.Kind()}" 
-                    
-                };
-            }
-            else
-            {
-                members = GetInterfaces();
-            }
+            var namespaceDetails = GetNamespaceDetails(applyTo);
+            var comments = namespaceDetails.Item1;
+            var members = namespaceDetails.Item2;
 
             var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Repositories"));
 
             if (comments != null && comments.Length > 0)
             {
-                var leadingTrivia = comments.Select(s => SyntaxFactory.Comment(s));
+                var leadingTrivia = comments.Select(SyntaxFactory.Comment);
 
                 namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(leadingTrivia);
             }
@@ -81,6 +63,80 @@ namespace Dhgms.Nucleotide.Generators
             var results = SyntaxFactory.List(nodes);
 
             return await Task.FromResult(results);
+        }
+
+        private Tuple<string[], MemberDeclarationSyntax[]> GetNamespaceDetails(MemberDeclarationSyntax applyTo)
+        {
+            if (applyTo == null)
+            {
+                var comments = new[]
+                {
+                    "#error Failed to work out what the attribute is attached to."
+                };
+
+                return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
+            }
+
+            var classDeclaration = applyTo as ClassDeclarationSyntax;
+            if (classDeclaration == null)
+            {
+                var comments = new[]
+                {
+                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a ClassDeclaration. Detected type : {applyTo.Kind()}"
+                };
+
+                return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
+            }
+
+            var t = Type.GetType(classDeclaration.Identifier.ValueText);
+
+            //Compilation.GetTypeByMetadataName()
+            INucleotideGenerationModel instance = null;
+            try
+            {
+                instance = Activator.CreateInstance(t) as INucleotideGenerationModel;
+            }
+            catch
+            {
+                // ignored
+            }
+
+            //var baselist = classDeclaration.BaseList;
+            //var baseTypes = baselist.Types;
+            //if (baseTypes.All(bt => bt.GetType() != typeof(INucleotideGenerationModel)))
+            if (instance == null)
+            {
+                var comments = new[]
+                {
+                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a Class that inherits from {typeof(INucleotideGenerationModel).FullName} Found: {classDeclaration.Identifier}."
+                };
+
+                return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
+            }
+
+            var classes = instance.ClassGenerationParameters;
+            var members = GetInterfaces(/*classes*/);
+
+            /*
+            var properties = classDeclaration.Members.OfType<PropertyDeclarationSyntax>();
+            var classGenCollection = properties.FirstOrDefault(
+                p =>
+                    p.Identifier.Text.Equals(nameof(INucleotideGenerationModel.ClassGenerationParameters),
+                        StringComparison.Ordinal));
+
+            if (classGenCollection == null)
+            {
+                var comments = new[]
+                {
+                    $"#error Unable to find property {nameof(INucleotideGenerationModel.ClassGenerationParameters)}."
+                };
+
+                return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
+            }
+            */
+
+            //var members = GetInterfaces();
+            return new Tuple<string[], MemberDeclarationSyntax[]>(null, members);
         }
 
         private MemberDeclarationSyntax[] GetInterfaces()

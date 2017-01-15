@@ -44,17 +44,4 @@ namespace Dhgms.Nucleotide.Mocking
             new UserClassGenerationParameters()
         };
     }
-
-    public interface INucleotideGenerationModel
-    {
-        ClassGenerationParameters[] ClassGenerationParameters { get; }
-    }
-
-    public sealed class TestOfGeneration
-    {
-        public TestOfGeneration()
-        {
-            //var x = new NucleotideA();
-        }
-    }
 }
