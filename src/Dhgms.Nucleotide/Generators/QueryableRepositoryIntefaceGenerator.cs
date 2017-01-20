@@ -88,6 +88,7 @@ namespace Dhgms.Nucleotide.Generators
                 return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
             }
 
+            var typeToCreate = classDeclaration.Identifier.ValueText;
             var t = Type.GetType(classDeclaration.Identifier.ValueText);
 
             //Compilation.GetTypeByMetadataName()
@@ -108,7 +109,7 @@ namespace Dhgms.Nucleotide.Generators
             {
                 var comments = new[]
                 {
-                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a Class that inherits from {typeof(INucleotideGenerationModel).FullName} Found: {classDeclaration.Identifier}."
+                    $"#error The attribute for {nameof(GenerateQueryableRepositoryInterfaceAttribute)} must be placed on a Class that inherits from {typeof(INucleotideGenerationModel).FullName} Found: {typeToCreate}."
                 };
 
                 return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);

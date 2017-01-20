@@ -64,12 +64,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SingleSimple.tt</DependentUpon>
     </Compile>
-    <Compile Include="Nucleotide.cs">
-      <Generator>MSBuild:GenerateCodeFromAttributes</Generator>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide.MockCodeGenerator\Dhgms.Nucleotide.MockCodeGenerator.csproj">
+      <Project>{e99dc463-3cc9-4a16-b550-8b2cc1478c18}</Project>
+      <Name>Dhgms.Nucleotide.MockCodeGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj">
       <Project>{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}</Project>
       <Name>Dhgms.Nucleotide</Name>
