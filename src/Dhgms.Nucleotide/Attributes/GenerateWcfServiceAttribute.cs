@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(WcfServiceGenerator))]
-    public class GenerateWcfServiceAttribute : Attribute
+    public sealed class GenerateWcfServiceAttribute : Attribute
     {
         
     }

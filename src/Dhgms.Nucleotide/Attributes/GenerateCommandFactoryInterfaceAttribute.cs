@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +9,11 @@ using Dhgms.Nucleotide.Generators;
 namespace Dhgms.Nucleotide.Attributes
 {
     /// <summary>
-    /// Generates an Entity Framework DB Set
+    /// Generate a Command Factory Interface associated with this class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(EntityFrameworkDbSetGenerator))]
-    public sealed class GenerateEntityFrameworkDbSetAttribute : Attribute
+    [CodeGenerationAttribute(typeof(CommandFactoryInterfaceGenerator))]
+    public sealed class GenerateCommandFactoryInterfaceAttribute : Attribute
     {
-        //public GenerateEntityFrameworkDbSetAttribute()
-        //{
-            
-        //}
     }
 }

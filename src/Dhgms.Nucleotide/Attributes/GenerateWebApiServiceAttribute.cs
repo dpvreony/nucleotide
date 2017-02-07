@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(WebApiServiceGenerator))]
-    public class GenerateWebApiServiceAttribute : Attribute
+    public sealed class GenerateWebApiServiceAttribute : Attribute
     {
         
     }

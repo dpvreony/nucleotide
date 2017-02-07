@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(ModelGenerator))]
-    public class GenerateModelsAttribute : Attribute
+    public sealed class GenerateModelsAttribute : Attribute
     {
         
     }

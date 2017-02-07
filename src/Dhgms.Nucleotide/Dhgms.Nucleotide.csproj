@@ -152,18 +152,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\GenerateCommandClassAttribute.cs" />
+    <Compile Include="Attributes\GenerateCommandFactoryClassAttribute.cs" />
+    <Compile Include="Attributes\GenerateCommandFactoryInterfaceAttribute.cs" />
+    <Compile Include="Attributes\GenerateCommandInterfaceAttribute.cs" />
     <Compile Include="Attributes\GenerateEntityFrameworkDbSetAttribute.cs" />
     <Compile Include="Attributes\GenerateModelsAttribute.cs" />
     <Compile Include="Attributes\GenerateQueryableRepositoryInterfaceAttribute.cs" />
+    <Compile Include="Attributes\GenerateQueryClassAttribute.cs" />
+    <Compile Include="Attributes\GenerateQueryFactoryClassAttribute.cs" />
+    <Compile Include="Attributes\GenerateQueryFactoryInterfaceAttribute.cs" />
+    <Compile Include="Attributes\GenerateQueryInterfaceAttribute.cs" />
+    <Compile Include="Attributes\GenerateServiceInterfaceAttribute.cs" />
+    <Compile Include="Attributes\GenerateSignalRHubClassAttribute.cs" />
+    <Compile Include="Attributes\GenerateSignalRHubInterfaceAttribute.cs" />
     <Compile Include="Attributes\GenerateWcfServiceAttribute.cs" />
     <Compile Include="Attributes\GenerateWebApiServiceAttribute.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
     <Compile Include="GenerationFlags.cs" />
+    <Compile Include="Generators\CommandClassGenerator.cs" />
+    <Compile Include="Generators\CommandFactoryClassGenerator.cs" />
+    <Compile Include="Generators\CommandFactoryInterfaceGenerator.cs" />
+    <Compile Include="Generators\CommandInterfaceGenerator.cs" />
     <Compile Include="Generators\EntityFrameworkDbSetGenerator.cs" />
     <Compile Include="Generators\ModelGenerator.cs" />
     <Compile Include="Generators\QueryableRepositoryIntefaceGenerator.cs" />
+    <Compile Include="Generators\QueryClassGenerator.cs" />
+    <Compile Include="Generators\QueryFactoryGenerator.cs" />
+    <Compile Include="Generators\QueryFactoryInterfaceGenerator.cs" />
+    <Compile Include="Generators\QueryInterfaceGenerator.cs" />
     <Compile Include="Generators\ServiceInterfaceGenerator.cs" />
+    <Compile Include="Generators\SignalRHubClassGenerator.cs" />
+    <Compile Include="Generators\SignalRHubInterfaceGenerator.cs" />
     <Compile Include="Generators\WcfServiceGenerator.cs" />
     <Compile Include="Generators\WebApiServiceGenerator.cs" />
     <Compile Include="GlobalSuppressions.cs" />
