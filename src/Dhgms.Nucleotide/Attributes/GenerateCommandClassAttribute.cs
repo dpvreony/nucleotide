@@ -13,7 +13,14 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(CommandClassGenerator))]
-    public sealed class GenerateCommandClassAttribute : Attribute
+    public sealed class GenerateCommandClassAttribute : BaseCodeGeneratorAttribute
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nucleotideGenerationModel"></param>
+        public GenerateCommandClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        {
+        }
     }
 }

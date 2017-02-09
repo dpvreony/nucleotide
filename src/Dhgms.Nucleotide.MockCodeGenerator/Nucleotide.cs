@@ -32,11 +32,6 @@ namespace Dhgms.Nucleotide.Mocking
         public override string SubNamespace => null;
     }
 
-    [GenerateEntityFrameworkDbSet]
-    [GenerateModels]
-    [GenerateQueryableRepositoryInterface]
-    [GenerateWcfService]
-    [GenerateWebApiService]
     public sealed class Nucleotide : INucleotideGenerationModel
     {
         public ClassGenerationParameters[] ClassGenerationParameters => new[]

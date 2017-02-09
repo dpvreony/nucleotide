@@ -13,7 +13,14 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(ServiceInterfaceGenerator))]
-    public sealed class GenerateServiceInterfaceAttribute : Attribute
+    public sealed class GenerateServiceInterfaceAttribute : BaseCodeGeneratorAttribute
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nucleotideGenerationModel"></param>
+        public GenerateServiceInterfaceAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        {
+        }
     }
 }

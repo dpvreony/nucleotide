@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BaseCodeGeneratorAttribute.cs" />
     <Compile Include="Attributes\GenerateCommandClassAttribute.cs" />
     <Compile Include="Attributes\GenerateCommandFactoryClassAttribute.cs" />
     <Compile Include="Attributes\GenerateCommandFactoryInterfaceAttribute.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\StringBuilderExtensions.cs" />
     <Compile Include="GenerationFlags.cs" />
+    <Compile Include="Generators\BaseClassLevelCodeGenerator.cs" />
     <Compile Include="Generators\CommandClassGenerator.cs" />
     <Compile Include="Generators\CommandFactoryClassGenerator.cs" />
     <Compile Include="Generators\CommandFactoryInterfaceGenerator.cs" />

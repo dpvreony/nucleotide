@@ -64,6 +64,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SingleSimple.tt</DependentUpon>
     </Compile>
+    <Compile Include="Nucleotide.cs">
+      <Generator>MSBuild:GenerateCodeFromAttributes</Generator>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
