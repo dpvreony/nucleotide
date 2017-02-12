@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,38 +51,67 @@ namespace Dhgms.Nucleotide.Generators
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.nucleotideGenerationModel;
 
             var a = castDetails.First();
+            var namedTypeSymbols = a.Value as INamedTypeSymbol;
+            var generationModel = await this.GetModel(namedTypeSymbols, document);
 
-            var t = a.Value.GetType();
-            //var typeToCreate = Type.GetType(typ);
-            //if (typeToCreate == null)
-            //{
-                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find type: {t}"));
-            //}
-            //var instance = Activator.CreateInstance(typeToCreate);
-
-
-            /*
-            var generationModelType = this.nucleotideGenerationModel as Type;
-            if (generationModelType != typeof(INucleotideGenerationModel))
+            if (generationModel == null)
             {
-                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error DROP OUT 1: {generationModelType}"));
+                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
             }
             else
             {
-                var generationModel = (INucleotideGenerationModel)Activator.CreateInstance(generationModelType);
                 namespaceDeclaration = await this.GenerateClasses(namespaceDeclaration, generationModel.ClassGenerationParameters);
             }
-            */
 
             var nodes = new MemberDeclarationSyntax[]
             {
                 namespaceDeclaration
             };
-            
 
             var results = SyntaxFactory.List(nodes);
 
             return await Task.FromResult(results);
+        }
+
+        /// <summary>
+        /// Gets the suffix to be applied to a clas
+        /// </summary>
+        /// <returns>Class suffix</returns>
+        protected abstract string GetClassSuffix();
+
+        private async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, Document document)
+        {
+            var compilation = await document.Project.GetCompilationAsync();
+            var assembly = GetAssembly(namedTypeSymbols.ContainingAssembly, compilation);
+
+            var modelType = assembly.GetType($"{ namedTypeSymbols.ContainingNamespace}.{ namedTypeSymbols.Name}");
+            if (modelType == null)
+            {
+                throw new Exception("Unable to find model type");
+            }
+
+            var instance = Activator.CreateInstance(modelType);
+            if (instance == null)
+            {
+                throw new Exception("Unable to create instance");
+            }
+
+            // namedTypeSymbols.ContainingAssembly
+            //namedTypeSymbols.Name
+            return await Task.FromResult(instance as INucleotideGenerationModel);
+        }
+
+
+        private static Assembly GetAssembly(IAssemblySymbol symbol, Compilation compilation)
+        {
+            Requires.NotNull(symbol, "symbol");
+            Requires.NotNull(compilation, "compilation");
+
+            var matchingReferences = from reference in compilation.References.OfType<PortableExecutableReference>()
+                                     where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase) // TODO: make this more correct
+                                     select new AssemblyName(Path.GetFileNameWithoutExtension(reference.FilePath));
+
+            return Assembly.Load(matchingReferences.First());
         }
 
         private async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
@@ -93,19 +124,102 @@ namespace Dhgms.Nucleotide.Generators
 
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
+            var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
             {
-                classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter));
+                classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
             }
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        private async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(IClassGenerationParameters classDeclaration)
+        private async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
         {
-            var className = classDeclaration.ClassName;
-            var declaration = SyntaxFactory.InterfaceDeclaration($"{className}SomeSuffix");
+            var className = $"{classDeclaration.ClassName}{suffix}";
+            var members = GetMembers(className, classDeclaration.ClassName);
+            var declaration = SyntaxFactory.ClassDeclaration(className)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddMembers(members);
+
+            var baseClass = GetBaseClass();
+            if (!string.IsNullOrWhiteSpace(baseClass))
+            {
+                var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
+                declaration = declaration.AddBaseListTypes(b);
+            }
+
             return await Task.FromResult(declaration);
         }
+
+        private MemberDeclarationSyntax[] GetMembers(string className, string entityName)
+        {
+            var result = new List<MemberDeclarationSyntax>();
+
+            var constructorArguments = GetConstructorArguments();
+            if (constructorArguments != null && constructorArguments.Count > 0)
+            {
+                result.Add(GenerateConstructor(className, constructorArguments, entityName));
+            }
+
+            return result.ToArray();
+        }
+
+        private static ParameterListSyntax GetParams(string[] argCollection)
+        {
+            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
+
+            foreach (var s in argCollection)
+            {
+                var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier(s));
+                parameters = parameters.Add(node);
+            }
+
+            return SyntaxFactory.ParameterList(parameters);
+        }
+
+        private ConstructorDeclarationSyntax GenerateConstructor(string className, IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments, string entityName)
+        {
+            var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
+            var body = new StatementSyntax[0];
+
+            var declaration = SyntaxFactory.ConstructorDeclaration(className)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body);
+            return declaration;
+        }
+
+        /// <summary>
+        /// Gets arguments the constructor needs to deal with
+        /// </summary>
+        /// <returns></returns>
+        protected abstract IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments();
+
+        private static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
+        {
+            var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName(returnType), methodName);
+
+            if (parameterListSyntax != null &&
+                parameterListSyntax.Parameters.Count > 0)
+            {
+                method = method.WithParameterList(parameterListSyntax);
+            }
+
+            if (typeParameterListSyntax != null &&
+                typeParameterListSyntax.Parameters.Count > 0)
+            {
+                method = method.WithTypeParameterList(typeParameterListSyntax);
+            }
+
+            method = method.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            method = method.WithLeadingTrivia(leadingTrivia);
+            return method;
+        }
+
+        /// <summary>
+        /// Gets the base class, if any
+        /// </summary>
+        /// <returns>Base class</returns>
+        protected abstract string GetBaseClass();
     }
 }
