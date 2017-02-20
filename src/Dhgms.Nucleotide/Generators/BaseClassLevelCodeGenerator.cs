@@ -156,13 +156,54 @@ namespace Dhgms.Nucleotide.Generators
             var result = new List<MemberDeclarationSyntax>();
 
             var constructorArguments = GetConstructorArguments();
+
+            var fields = GetFieldDeclarations(constructorArguments, entityName);
+            if (fields != null && fields.Length > 0)
+            {
+                result.AddRange(fields);
+            }
+
             if (constructorArguments != null && constructorArguments.Count > 0)
             {
                 result.Add(GenerateConstructor(className, constructorArguments, entityName));
             }
 
+            var methods = GetMethodDeclarations();
+            if (methods != null && methods.Length > 0)
+            {
+                result.AddRange(methods);
+            }
+
             return result.ToArray();
         }
+
+        private MemberDeclarationSyntax[] GetFieldDeclarations(
+            IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
+            string entityName)
+        {
+            var result = new List<MemberDeclarationSyntax>();
+
+            foreach (var constructorArgument in constructorArguments)
+            {
+                var fieldType = constructorArgument.Item1(entityName);
+
+                var fieldDeclaration = SyntaxFactory.FieldDeclaration(
+                    SyntaxFactory.VariableDeclaration(
+                    SyntaxFactory.ParseTypeName(fieldType),
+                    SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{constructorArgument.Item2}")) })
+                    ))
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+                result.Add(fieldDeclaration);
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the method declarations to be generated
+        /// </summary>
+        /// <returns></returns>
+        protected abstract MemberDeclarationSyntax[] GetMethodDeclarations();
 
         private static ParameterListSyntax GetParams(string[] argCollection)
         {
@@ -180,12 +221,34 @@ namespace Dhgms.Nucleotide.Generators
         private ConstructorDeclarationSyntax GenerateConstructor(string className, IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments, string entityName)
         {
             var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
-            var body = new StatementSyntax[0];
+            var body = new List<StatementSyntax>();
+
+            foreach (var constructorArgument in constructorArguments)
+            {
+                var left = SyntaxFactory.MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    SyntaxFactory.ThisExpression(),
+                    SyntaxFactory.Token(SyntaxKind.DotToken),
+                    SyntaxFactory.IdentifierName(SyntaxFactory.Identifier($"_{constructorArgument.Item2}")));
+
+                var right = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(constructorArgument.Item2));
+
+                var assignment = SyntaxFactory.ExpressionStatement(
+                    SyntaxFactory.AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        left,
+                        SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                        right),
+                    SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    );
+                body.Add(assignment);
+
+            }
 
             var declaration = SyntaxFactory.ConstructorDeclaration(className)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body);
+                .AddBodyStatements(body.ToArray());
             return declaration;
         }
 
