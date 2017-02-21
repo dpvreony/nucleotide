@@ -223,6 +223,33 @@ namespace Dhgms.Nucleotide.Generators
             var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
             var body = new List<StatementSyntax>();
 
+            // null checks
+            foreach (var constructorArgument in constructorArguments)
+            {
+                var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(constructorArgument.Item2));
+                var condition = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, parameterIdentifier,
+                    SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+                //throw new ArgumentNullException(nameof(body));
+
+                //SyntaxFactory.InvocationExpression(SyntaxFactory.Token(SyntaxKind.NameOfKeyword), null);
+                //var nameOfExp = SyntaxFactory.Token(SyntaxKind.NameOfKeyword).;
+
+                SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+                //argsList.Add(SyntaxFactory.Argument(nameOfExp));
+
+                var objectCreationEx = SyntaxFactory.ObjectCreationExpression(
+                    SyntaxFactory.ParseTypeName(nameof(ArgumentNullException)),
+                    SyntaxFactory.ArgumentList(argsList),
+                    null);
+
+                var statement = SyntaxFactory.ThrowStatement(objectCreationEx);
+                var nullCheck = SyntaxFactory.IfStatement(condition, statement);
+
+                body.Add(nullCheck);
+            }
+
+            // assignments
             foreach (var constructorArgument in constructorArguments)
             {
                 var left = SyntaxFactory.MemberAccessExpression(
@@ -241,8 +268,8 @@ namespace Dhgms.Nucleotide.Generators
                         right),
                     SyntaxFactory.Token(SyntaxKind.SemicolonToken)
                     );
-                body.Add(assignment);
 
+                body.Add(assignment);
             }
 
             var declaration = SyntaxFactory.ConstructorDeclaration(className)
