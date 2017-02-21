@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Helpers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -50,43 +51,57 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         /// <inheritdoc />
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations()
+        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
             var result = new List<MemberDeclarationSyntax>();
 
-            result.Add(GetAddMethodDeclaration());
-            result.Add(GetDeleteMethodDeclaration());
-            result.Add(GetListMethodDeclaration());
-            result.Add(GetUpdateMethodDeclaration());
+            result.Add(GetAddMethodDeclaration(entityName));
+            result.Add(GetDeleteMethodDeclaration(entityName));
+            result.Add(GetListMethodDeclaration(entityName));
+            result.Add(GetUpdateMethodDeclaration(entityName));
+            result.Add(GetViewMethodDeclaration(entityName));
 
             return result.ToArray();
         }
 
-        private MemberDeclarationSyntax GetAddMethodDeclaration()
+        private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
-            //var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
-            var consoleWriteLine = SyntaxFactory.MemberAccessExpression(
-                  SyntaxKind.SimpleMemberAccessExpression,
-                  SyntaxFactory.IdentifierName("this"),
-                  name: SyntaxFactory.IdentifierName("_test"));
+            var methodName = "AddAsync";
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetAddCommand");
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command");
 
-            var returnDeclaration = SyntaxFactory.ReturnStatement(
-                SyntaxFactory.AwaitExpression(
-                    SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
-                    SyntaxFactory.InvocationExpression(consoleWriteLine)));
-            var body = new StatementSyntax[] { returnDeclaration };
+            var signalRNotificationExecution = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("_signalRHub", "OnAdd", new [] { "result" });
+
+            var catchDeclaration = SyntaxFactory.CatchDeclaration(SyntaxFactory.IdentifierName("Exception"),
+                    SyntaxFactory.Identifier("ex"));
+
+            var exceptionLoggingInvocation = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("Logger", "DebugException", new [] { $"\"Exception in {methodName}\"", "ex" });
+            var catchBlockStatements = new [] {exceptionLoggingInvocation};
+
+            var catchBlock = SyntaxFactory.Block(catchBlockStatements);
+            var catchClause = SyntaxFactory.CatchClause(catchDeclaration, null, catchBlock);
+                
+            var trySignalRNotification = SyntaxFactory.TryStatement(SyntaxFactory.Block(signalRNotificationExecution), new SyntaxList<CatchClauseSyntax>().Add(catchClause), null);
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result.Id"));
+
+            var body = new [] { commandLocalDeclaration, commandExecutionDeclaration, trySignalRNotification, returnStatement };
 
             var returnType = SyntaxFactory.ParseTypeName("Task<int>");
-            var declaration = SyntaxFactory.MethodDeclaration(returnType, "AddAsync")
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddBodyStatements(body);
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetDeleteMethodDeclaration()
+        private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
         {
-            var body = new StatementSyntax[0];
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetDeleteCommand");
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command");
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
+
+            var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
             var returnType = SyntaxFactory.ParseTypeName("Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "DeleteAsync")
@@ -96,11 +111,15 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetListMethodDeclaration()
+        private MemberDeclarationSyntax GetListMethodDeclaration(string entityName)
         {
-            var body = new StatementSyntax[0];
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetListQuery");
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query");
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
 
-            var returnType = SyntaxFactory.ParseTypeName("Task<IEnumerable<string>>");
+            var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<List{entityName}ResponseDto>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
@@ -108,12 +127,32 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetUpdateMethodDeclaration()
+        private MemberDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
         {
-            var body = new StatementSyntax[0];
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetUpdateCommand");
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command");
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
+
+            var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
             var returnType = SyntaxFactory.ParseTypeName("Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "UpdateAsync")
+                //.WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddBodyStatements(body);
+            return declaration;
+        }
+
+        private MemberDeclarationSyntax GetViewMethodDeclaration(string entityName)
+        {
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetViewQuery");
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query");
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
+
+            var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<View{entityName}ResponseDto>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, "ViewAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddBodyStatements(body);

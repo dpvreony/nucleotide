@@ -304,7 +304,7 @@ namespace Dhgms.Nucleotide.Generators
                 throw new ArgumentNullException("pi");
             }
 
-            sb.AppendLine("            bool _" + Helpers.GetVariableName(pi.Name) + ";");
+            sb.AppendLine("            bool _" + OldHelpers.GetVariableName(pi.Name) + ";");
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace Dhgms.Nucleotide.Generators
 
             sb.AppendLine("            set");
             sb.AppendLine("            {");
-            sb.AppendLine("                _" + Helpers.GetVariableName(pi.Name) + " = value;");
+            sb.AppendLine("                _" + OldHelpers.GetVariableName(pi.Name) + " = value;");
             sb.AppendLine("            }");
         }
 

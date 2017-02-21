@@ -123,7 +123,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 var minLength = this.MinimumLength.HasValue ? this.MinimumLength.Value : 1;
                 var maxLength = this.MaximumLength.HasValue ? this.MaximumLength.Value : 2048;
                 var length = new Random((int)DateTime.Now.Ticks).Next(minLength, maxLength);
-                return Helpers.GetRandomString(length);
+                return OldHelpers.GetRandomString(length);
             }
         }
 
@@ -162,8 +162,8 @@ namespace Dhgms.Nucleotide.PropertyInfo
             var sb = new StringBuilder();
 
             var tabCount = 3;
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}set", Helpers.GetTabs(tabCount)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
+            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}set", OldHelpers.GetTabs(tabCount)));
+            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", OldHelpers.GetTabs(tabCount)));
             tabCount++;
 
             if (!this.Optional)
@@ -171,20 +171,20 @@ namespace Dhgms.Nucleotide.PropertyInfo
 #if CODECONTRACTS
                 sb.AppendLine("            Contract.Requires<ArgumentNullException>(string.IsNullOrWhitespace(value), \"value\")");
 #else
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (string.IsNullOrWhiteSpace(value))", Helpers.GetTabs(tabCount)));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (string.IsNullOrWhiteSpace(value))", OldHelpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", OldHelpers.GetTabs(tabCount)));
 
                 tabCount++;
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new System.ArgumentNullException(\"value\");", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new System.ArgumentNullException(\"value\");", OldHelpers.GetTabs(tabCount)));
                 tabCount--;
 
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", OldHelpers.GetTabs(tabCount)));
 #endif
             }
             else if (this.MinimumLength != null || this.MaximumLength != null)
             {
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value != null)", Helpers.GetTabs(tabCount)));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value != null)", OldHelpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", OldHelpers.GetTabs(tabCount)));
                 tabCount++;
             }
 
@@ -195,16 +195,16 @@ namespace Dhgms.Nucleotide.PropertyInfo
 
             if (this.MinimumLength.HasValue)
             {
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value.Length < {1})", Helpers.GetTabs(tabCount), this.MinimumLength));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value.Length < {1})", OldHelpers.GetTabs(tabCount), this.MinimumLength));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", OldHelpers.GetTabs(tabCount)));
 
                 tabCount++;
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper disable RedundantNameQualifier", Helpers.GetTabs(tabCount)));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new Dhgms.DataManager.Model.Exception.StringTooShortException({1}, value.Length);", Helpers.GetTabs(tabCount), this.MinimumLength.Value));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper restore RedundantNameQualifier", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper disable RedundantNameQualifier", OldHelpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new Dhgms.DataManager.Model.Exception.StringTooShortException({1}, value.Length);", OldHelpers.GetTabs(tabCount), this.MinimumLength.Value));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper restore RedundantNameQualifier", OldHelpers.GetTabs(tabCount)));
                 tabCount--;
 
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", OldHelpers.GetTabs(tabCount)));
             }
 
             if (this.MinimumLength != null && this.MaximumLength != null)
@@ -214,29 +214,29 @@ namespace Dhgms.Nucleotide.PropertyInfo
 
             if (this.MaximumLength.HasValue)
             {
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value.Length > {1})", Helpers.GetTabs(tabCount), this.MaximumLength));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}if (value.Length > {1})", OldHelpers.GetTabs(tabCount), this.MaximumLength));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}{{", OldHelpers.GetTabs(tabCount)));
 
                 tabCount++;
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper disable RedundantNameQualifier", Helpers.GetTabs(tabCount)));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new Dhgms.DataManager.Model.Exception.StringTooLongException({1}, value.Length);", Helpers.GetTabs(tabCount), this.MaximumLength.Value));
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper restore RedundantNameQualifier", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper disable RedundantNameQualifier", OldHelpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}throw new Dhgms.DataManager.Model.Exception.StringTooLongException({1}, value.Length);", OldHelpers.GetTabs(tabCount), this.MaximumLength.Value));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}// ReSharper restore RedundantNameQualifier", OldHelpers.GetTabs(tabCount)));
                 tabCount--;
 
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", OldHelpers.GetTabs(tabCount)));
             }
 
             if (this.Optional && (this.MinimumLength != null || this.MaximumLength != null))
             {
                 tabCount--;
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", OldHelpers.GetTabs(tabCount)));
             }
 
             sb.AppendLine();
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}this.{1} = value;", Helpers.GetTabs(tabCount), Helpers.GetVariableName(this.Name)));
+            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}this.{1} = value;", OldHelpers.GetTabs(tabCount), OldHelpers.GetVariableName(this.Name)));
 
             tabCount--;
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", Helpers.GetTabs(tabCount)));
+            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}}}", OldHelpers.GetTabs(tabCount)));
             return sb.ToString();
         }
 
@@ -253,15 +253,15 @@ namespace Dhgms.Nucleotide.PropertyInfo
 
             if (this.MinimumLength != null && this.MaximumLength == null)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be at least {1} characters in length\")]", Helpers.GetTabs(2), this.MinimumLength);
+                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be at least {1} characters in length\")]", OldHelpers.GetTabs(2), this.MinimumLength);
             }
 
             if (this.MinimumLength == null && this.MaximumLength != null)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MaxLength({1}, ErrorMessage = \"Must be {1} or less characters in length\")]", Helpers.GetTabs(2), this.MaximumLength);
+                return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MaxLength({1}, ErrorMessage = \"Must be {1} or less characters in length\")]", OldHelpers.GetTabs(2), this.MaximumLength);
             }
 
-            return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be between {1} and {2} characters in length\"), MaxLength({2}, ErrorMessage = \"Must be between {1} and {2}  characters in length\")]", Helpers.GetTabs(2), this.MinimumLength, this.MaximumLength);
+            return string.Format(CultureInfo.InvariantCulture, "{0}[System.ComponentModel.DataAnnotations.MinLength({1}, ErrorMessage = \"Must be between {1} and {2} characters in length\"), MaxLength({2}, ErrorMessage = \"Must be between {1} and {2}  characters in length\")]", OldHelpers.GetTabs(2), this.MinimumLength, this.MaximumLength);
         }
 
         /// <summary>

@@ -78,7 +78,7 @@ namespace Dhgms.Nucleotide.Generators
                                ? pi.AlternativeDatabaseColumnName
                                : pi.Name;
                 generatedCode.AppendLine(
-                    "            var " + Helpers.GetVariableName(pi.Name) + "Ordinal = dataReader.GetOrdinal(\""
+                    "            var " + OldHelpers.GetVariableName(pi.Name) + "Ordinal = dataReader.GetOrdinal(\""
                     + name + "\");");
             }
         }
@@ -160,10 +160,10 @@ namespace Dhgms.Nucleotide.Generators
 
             foreach (PropertyInfoBase pi in properties.Where(pi => pi.SqlDataReaderType != null))
             {
-                generatedCode.AppendLine("            bool " + Helpers.GetVariableName(pi.Name) + " =");
+                generatedCode.AppendLine("            bool " + OldHelpers.GetVariableName(pi.Name) + " =");
                 generatedCode.AppendLine(
-                    "                (" + Helpers.GetVariableName(pi.Name) + "Ordinal > -1) && (dataReader.GetBoolean("
-                    + Helpers.GetVariableName(pi.Name) + "Ordinal));");
+                    "                (" + OldHelpers.GetVariableName(pi.Name) + "Ordinal > -1) && (dataReader.GetBoolean("
+                    + OldHelpers.GetVariableName(pi.Name) + "Ordinal));");
                 generatedCode.AppendLine(string.Empty);
             }
         }
@@ -191,12 +191,12 @@ namespace Dhgms.Nucleotide.Generators
 
             foreach (var pi in properties.Where(pi => pi.SqlDataReaderType != null))
             {
-                generatedCode.AppendLine("            bool " + Helpers.GetVariableName("row" + pi.Name) + " = false;");
-                generatedCode.AppendLine("            if (" + Helpers.GetVariableName(pi.Name) + "Ordinal > -1)");
+                generatedCode.AppendLine("            bool " + OldHelpers.GetVariableName("row" + pi.Name) + " = false;");
+                generatedCode.AppendLine("            if (" + OldHelpers.GetVariableName(pi.Name) + "Ordinal > -1)");
                 generatedCode.AppendLine("            {");
                 generatedCode.AppendLine(
-                    "                " + Helpers.GetVariableName("row" + pi.Name) + " = dataReader.GetBoolean("
-                    + Helpers.GetVariableName(pi.Name) + "Ordinal);");
+                    "                " + OldHelpers.GetVariableName("row" + pi.Name) + " = dataReader.GetBoolean("
+                    + OldHelpers.GetVariableName(pi.Name) + "Ordinal);");
                 generatedCode.AppendLine("            }");
                 generatedCode.AppendLine(string.Empty);
             }
@@ -238,27 +238,27 @@ namespace Dhgms.Nucleotide.Generators
 
                 generatedCode.AppendLine(
                     "            " + pi.GetCSharpDataTypeDeclaration() + optional + " "
-                    + Helpers.GetVariableName("row" + pi.Name) + " = " + (pi.Optional ? "null" : pi.DefaultValue) + ";");
-                generatedCode.AppendLine("            if (" + Helpers.GetVariableName(pi.Name) + "Ordinal > -1)");
+                    + OldHelpers.GetVariableName("row" + pi.Name) + " = " + (pi.Optional ? "null" : pi.DefaultValue) + ";");
+                generatedCode.AppendLine("            if (" + OldHelpers.GetVariableName(pi.Name) + "Ordinal > -1)");
                 generatedCode.AppendLine("            {");
                 if (pi.Optional)
                 {
                     generatedCode.AppendLine(
-                        "                if (!dataReader.IsDBNull(" + Helpers.GetVariableName(pi.Name) + "Ordinal))");
+                        "                if (!dataReader.IsDBNull(" + OldHelpers.GetVariableName(pi.Name) + "Ordinal))");
                     generatedCode.AppendLine("                {");
 
                     generatedCode.AppendLine(
-                        "                    " + Helpers.GetVariableName("row" + pi.Name) + " = "
+                        "                    " + OldHelpers.GetVariableName("row" + pi.Name) + " = "
                         + (pi.RequiresSqlMapping ? "(" + pi.GetCSharpDataTypeDeclaration() + ")" : null)
-                        + "dataReader.Get" + pi.SqlDataReaderType + "(" + Helpers.GetVariableName(pi.Name) + "Ordinal);");
+                        + "dataReader.Get" + pi.SqlDataReaderType + "(" + OldHelpers.GetVariableName(pi.Name) + "Ordinal);");
                     generatedCode.AppendLine("                }");
                 }
                 else
                 {
                     generatedCode.AppendLine(
-                        "                " + Helpers.GetVariableName("row" + pi.Name) + " = "
+                        "                " + OldHelpers.GetVariableName("row" + pi.Name) + " = "
                         + (pi.RequiresSqlMapping ? "(" + pi.GetCSharpDataTypeDeclaration() + ")" : null)
-                        + "dataReader.Get" + pi.SqlDataReaderType + "(" + Helpers.GetVariableName(pi.Name) + "Ordinal);");
+                        + "dataReader.Get" + pi.SqlDataReaderType + "(" + OldHelpers.GetVariableName(pi.Name) + "Ordinal);");
                 }
 
                 generatedCode.AppendLine("            }");
@@ -368,19 +368,19 @@ namespace Dhgms.Nucleotide.Generators
             if (baseClassProperties != null && baseClassProperties.Length > 0)
             {
                 generatedCode.AppendLine(
-                    "                " + Helpers.GetVariableName("row" + baseClassProperties[0].Name)
+                    "                " + OldHelpers.GetVariableName("row" + baseClassProperties[0].Name)
                     + (baseClassProperties.Length > 1 ? "," : string.Empty));
                 for (int i = 1; i < baseClassProperties.Length; i++)
                 {
                     generatedCode.AppendLine(
-                        "                " + Helpers.GetVariableName("row" + baseClassProperties[i].Name) + ",");
+                        "                " + OldHelpers.GetVariableName("row" + baseClassProperties[i].Name) + ",");
                 }
             }
 
             for (int i = 0; i < properties.Length; i++)
             {
                 generatedCode.AppendLine(
-                    "                " + Helpers.GetVariableName("row" + properties[i].Name)
+                    "                " + OldHelpers.GetVariableName("row" + properties[i].Name)
                     + (i < properties.Length - 1 ? "," : ");"));
             }
 

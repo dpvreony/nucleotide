@@ -193,7 +193,8 @@
     <Compile Include="Generators\AdoNetGenerator.cs" />
     <Compile Include="Generators\BaseClassGenerator.cs" />
     <Compile Include="Generators\BaseInterfaceGenerator.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\RoslynGenerationHelpers.cs" />
+    <Compile Include="OldHelpers.cs" />
     <Compile Include="Generators\ConfigurationGenerator.cs" />
     <Compile Include="Generators\DifferenceClassGenerator.cs" />
     <Compile Include="Generators\DifferenceInterfaceGenerator.cs" />
@@ -262,7 +263,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
     <Folder Include="Model\Info\" />
   </ItemGroup>
   <ItemGroup>

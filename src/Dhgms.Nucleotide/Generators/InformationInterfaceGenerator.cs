@@ -34,8 +34,8 @@
             {
                 var property = properties[position];
 
-                sb.AppendLine("{0}/// <summary>Gets {1}</summary>", Helpers.GetTabs(tabCount), property.Description);
-                sb.AppendLine("{0}{1} {2} {{ get; }}", Helpers.GetTabs(tabCount), this.GetPropertyType(property), property.Name);
+                sb.AppendLine("{0}/// <summary>Gets {1}</summary>", OldHelpers.GetTabs(tabCount), property.Description);
+                sb.AppendLine("{0}{1} {2} {{ get; }}", OldHelpers.GetTabs(tabCount), this.GetPropertyType(property), property.Name);
 
                 if (position <= properties.Length)
                 {

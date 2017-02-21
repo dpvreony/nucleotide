@@ -33,8 +33,8 @@
             {
                 var property = properties[position];
 
-                sb.AppendLine("{0}/// <summary>Gets a value indicating whether there is a difference for {1}</summary>", Helpers.GetTabs(tabCount), property.Description);
-                sb.AppendLine("{0}bool {1} {{ get; }}", Helpers.GetTabs(tabCount), property.Name);
+                sb.AppendLine("{0}/// <summary>Gets a value indicating whether there is a difference for {1}</summary>", OldHelpers.GetTabs(tabCount), property.Description);
+                sb.AppendLine("{0}bool {1} {{ get; }}", OldHelpers.GetTabs(tabCount), property.Name);
 
                 if (position <= properties.Length)
                 {

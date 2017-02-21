@@ -758,7 +758,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
             sb.AppendLine("        set");
             sb.AppendLine("        {");
 
-            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
+            sb.AppendLine("            this." + OldHelpers.GetVariableName(this.Name) + " = value;");
 
             sb.AppendLine("        }");
             return sb.ToString();

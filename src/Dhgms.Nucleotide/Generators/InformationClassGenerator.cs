@@ -267,7 +267,7 @@ namespace Dhgms.Nucleotide.Generators
                                   : string.Empty;
             sb.AppendLine(
                 "            private " + pi.GetCSharpDataTypeDeclaration() + optional + " "
-                + Helpers.GetVariableName(pi.Name) + ";");
+                + OldHelpers.GetVariableName(pi.Name) + ";");
         }
 
         /// <summary>
@@ -364,7 +364,7 @@ namespace Dhgms.Nucleotide.Generators
                         sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                     }
 
-                    sb.AppendLine("            var " + Helpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
+                    sb.AppendLine("            var " + OldHelpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                     sb.AppendLine(string.Empty);
 
                     if (!checkResultDeclared)
@@ -393,7 +393,7 @@ namespace Dhgms.Nucleotide.Generators
                     sb.AppendLine(pi.GetCSharpCompareCode(checkResultDeclared));
                 }
 
-                sb.AppendLine("            var " + Helpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
+                sb.AppendLine("            var " + OldHelpers.GetVariableName(pi.Name) + "Different = checkResult != 0;");
                 sb.AppendLine(string.Empty);
 
                 if (!checkResultDeclared)
@@ -413,7 +413,7 @@ namespace Dhgms.Nucleotide.Generators
             {
                 while (counter < baseClassProperties.Count)
                 {
-                    sb.Append("                " + Helpers.GetVariableName(baseClassProperties[counter].Name + "Different"));
+                    sb.Append("                " + OldHelpers.GetVariableName(baseClassProperties[counter].Name + "Different"));
 
                     if (properties.Count > 0)
                     {
@@ -432,7 +432,7 @@ namespace Dhgms.Nucleotide.Generators
 
             while (counter < properties.Count)
             {
-                sb.Append("                " + Helpers.GetVariableName(properties[counter].Name + "Different"));
+                sb.Append("                " + OldHelpers.GetVariableName(properties[counter].Name + "Different"));
                 sb.AppendLine(counter < properties.Count - 1 ? "," : ");");
                 counter++;
             }

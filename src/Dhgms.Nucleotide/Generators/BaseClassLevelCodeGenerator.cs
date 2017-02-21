@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -168,7 +169,7 @@ namespace Dhgms.Nucleotide.Generators
                 result.Add(GenerateConstructor(className, constructorArguments, entityName));
             }
 
-            var methods = GetMethodDeclarations();
+            var methods = GetMethodDeclarations(entityName);
             if (methods != null && methods.Length > 0)
             {
                 result.AddRange(methods);
@@ -203,7 +204,7 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MemberDeclarationSyntax[] GetMethodDeclarations();
+        protected abstract MemberDeclarationSyntax[] GetMethodDeclarations(string entityName);
 
         private static ParameterListSyntax GetParams(string[] argCollection)
         {
@@ -226,25 +227,7 @@ namespace Dhgms.Nucleotide.Generators
             // null checks
             foreach (var constructorArgument in constructorArguments)
             {
-                var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(constructorArgument.Item2));
-                var condition = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, parameterIdentifier,
-                    SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
-
-                //throw new ArgumentNullException(nameof(body));
-
-                //SyntaxFactory.InvocationExpression(SyntaxFactory.Token(SyntaxKind.NameOfKeyword), null);
-                //var nameOfExp = SyntaxFactory.Token(SyntaxKind.NameOfKeyword).;
-
-                SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
-                //argsList.Add(SyntaxFactory.Argument(nameOfExp));
-
-                var objectCreationEx = SyntaxFactory.ObjectCreationExpression(
-                    SyntaxFactory.ParseTypeName(nameof(ArgumentNullException)),
-                    SyntaxFactory.ArgumentList(argsList),
-                    null);
-
-                var statement = SyntaxFactory.ThrowStatement(objectCreationEx);
-                var nullCheck = SyntaxFactory.IfStatement(condition, statement);
+                var nullCheck = RoslynGenerationHelpers.GetNullGuardCheckSyntax(constructorArgument.Item2);
 
                 body.Add(nullCheck);
             }

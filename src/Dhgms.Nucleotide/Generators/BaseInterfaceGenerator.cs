@@ -36,13 +36,13 @@
             var classSuffix = this.GetClassSuffix();
 
             // generate the main interface
-            sb.AppendLine("{0}/// <summary>", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}/// {1}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks);
-            sb.AppendLine("{0}/// </summary>", Helpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// <summary>", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// {1}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks);
+            sb.AppendLine("{0}/// </summary>", OldHelpers.GetTabs(tabCount));
             var nucleotideAssembly = Assembly.GetExecutingAssembly().GetName();
             sb.AppendLine($"        [System.CodeDom.Compiler.GeneratedCode(\"DHGMS Nucleotide\", \"{nucleotideAssembly.Version}\")]");
-            sb.AppendLine("{0}public interface I{1}{2} : IUnkeyed{1}{2}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
-            sb.AppendLine("{0}{{", Helpers.GetTabs(tabCount));
+            sb.AppendLine("{0}public interface I{1}{2} : IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
+            sb.AppendLine("{0}{{", OldHelpers.GetTabs(tabCount));
 
             tabCount++;
 
@@ -50,18 +50,18 @@
 
             tabCount--;
 
-            sb.AppendLine("{0}}}", Helpers.GetTabs(tabCount));
+            sb.AppendLine("{0}}}", OldHelpers.GetTabs(tabCount));
             sb.AppendLine(string.Empty);
 
             // generate the unkeyed interface
-            sb.AppendLine("{0}/// <summary>", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}/// Un-keyed interface for {1}{2}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks, classSuffix);
-            sb.AppendLine("{0}/// </summary>", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}/// <remarks>", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}/// Un-keyed interfaces are used in services that allow creation of new objects.", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}/// </remarks>", Helpers.GetTabs(tabCount));
-            sb.AppendLine("{0}public interface IUnkeyed{1}{2}", Helpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
-            sb.AppendLine("{0}{{", Helpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// <summary>", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// Un-keyed interface for {1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks, classSuffix);
+            sb.AppendLine("{0}/// </summary>", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// <remarks>", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// Un-keyed interfaces are used in services that allow creation of new objects.", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}/// </remarks>", OldHelpers.GetTabs(tabCount));
+            sb.AppendLine("{0}public interface IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
+            sb.AppendLine("{0}{{", OldHelpers.GetTabs(tabCount));
 
             tabCount++;
 
@@ -69,7 +69,7 @@
 
             tabCount--;
 
-            sb.AppendLine("{0}}}", Helpers.GetTabs(tabCount));
+            sb.AppendLine("{0}}}", OldHelpers.GetTabs(tabCount));
         }
 
         /// <summary>

@@ -54,73 +54,73 @@ namespace Dhgms.Nucleotide.Generators
             sb.AppendLine("{");
 
             tabs++;
-            sb.AppendLine(Helpers.GetTabs(tabs) + "public abstract class " + projectName);
-            sb.AppendLine(Helpers.GetTabs(tabs + 1) + ": System.Configuration.Provider.ProviderBase");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "public abstract class " + projectName);
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ": System.Configuration.Provider.ProviderBase");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
             sb.AppendLine("#region our methods");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "protected " + projectName + "(){}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "protected " + projectName + "(){}");
 
             foreach (Model.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs)
+                    OldHelpers.GetTabs(tabs)
                     + "public abstract System.Collections.ObjectModel.Collection<Dhgms.Wcds.Model.Info." + projectName
                     + "." + objectName.InfoClass + "> Get" + objectName.Name + "List(");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
                     + " searchParams,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + ");");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ");");
                 sb.AppendLine(string.Empty);
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs) + "public abstract Dhgms.Wcds.Model.Info." + projectName + "."
+                    OldHelpers.GetTabs(tabs) + "public abstract Dhgms.Wcds.Model.Info." + projectName + "."
                     + objectName.InfoClass + " Get" + objectName.Name + "(");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + "int id,");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + "int id,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + ");");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ");");
                 sb.AppendLine(string.Empty);
             }
 
             sb.AppendLine("#endregion");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
             tabs--;
 
             // providerbase
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
 
-            sb.AppendLine(Helpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.ProviderCollection");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.ProviderCollection");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
 
             tabs++;
-            sb.AppendLine(Helpers.GetTabs(tabs) + "public class " + projectName);
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "public class " + projectName);
             sb.AppendLine(
-                Helpers.GetTabs(tabs + 1)
+                OldHelpers.GetTabs(tabs + 1)
                 + ": Dhgms.DataManager.Model.ProviderCollection.BaseCollection<Dhgms.Wcds.Model.ProviderBase."
                 + projectName + ">");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
             tabs--;
 
             // providercollection
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
 
-            sb.AppendLine(Helpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.ProviderProxy");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.ProviderProxy");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
 
             tabs++;
-            sb.AppendLine(Helpers.GetTabs(tabs) + "public sealed class " + projectName);
-            sb.AppendLine(Helpers.GetTabs(tabs + 1) + ": Dhgms.DataManager.Model.ProviderProxy.Base<");
-            sb.AppendLine(Helpers.GetTabs(tabs + 2) + projectName + ",");
-            sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderBase." + projectName + ",");
-            sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderCollection." + projectName + ",");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "public sealed class " + projectName);
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ": Dhgms.DataManager.Model.ProviderProxy.Base<");
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 2) + projectName + ",");
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderBase." + projectName + ",");
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 2) + "Dhgms.Wcds.Model.ProviderCollection." + projectName + ",");
 
-            sb.AppendLine(Helpers.GetTabs(tabs + 2) + "Dhgms.DataManager.Model.ConfigurationSection.ProviderSection");
-            sb.AppendLine(Helpers.GetTabs(tabs + 2) + ">");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 2) + "Dhgms.DataManager.Model.ConfigurationSection.ProviderSection");
+            sb.AppendLine(OldHelpers.GetTabs(tabs + 2) + ">");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
             tabs++;
             sb.AppendLine(string.Empty);
             sb.AppendLine("#region our methods");
@@ -137,99 +137,99 @@ namespace Dhgms.Nucleotide.Generators
             foreach (Model.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs)
+                    OldHelpers.GetTabs(tabs)
                     + "public static System.Collections.ObjectModel.Collection<Dhgms.Wcds.Model.Info." + projectName
                     + "." + objectName.InfoClass + "> Get" + objectName.Name + "List(");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
                     + " searchParams,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + ")");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "{");
-                sb.AppendLine(Helpers.GetTabs(tabs) + projectName + " instance = new " + projectName + "();");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "instance.LoadProviders();");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "if (Provider == null)");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ")");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + projectName + " instance = new " + projectName + "();");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "instance.LoadProviders();");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "if (Provider == null)");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs)
+                    OldHelpers.GetTabs(tabs)
                     + "    throw new System.Configuration.ConfigurationErrorsException(\"No providers\");");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs) + "return Provider.Get" + objectName.Name + "List(searchParams, viewParams);");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+                    OldHelpers.GetTabs(tabs) + "return Provider.Get" + objectName.Name + "List(searchParams, viewParams);");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
                 sb.AppendLine(string.Empty);
 
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs) + "public static Dhgms.Wcds.Model.Info." + projectName + "."
+                    OldHelpers.GetTabs(tabs) + "public static Dhgms.Wcds.Model.Info." + projectName + "."
                     + objectName.InfoClass + " Get" + objectName.Name + "(");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "int id,");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "int id,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs) + ")");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "{");
-                sb.AppendLine(Helpers.GetTabs(tabs) + projectName + " instance = new " + projectName + "();");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "instance.LoadProviders();");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "if (Provider == null)");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + ")");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + projectName + " instance = new " + projectName + "();");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "instance.LoadProviders();");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "if (Provider == null)");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs)
+                    OldHelpers.GetTabs(tabs)
                     + "    throw new System.Configuration.ConfigurationErrorsException(\"No providers\");");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "}");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "return Provider.Get" + objectName.Name + "(id, viewParams);");
-                sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "return Provider.Get" + objectName.Name + "(id, viewParams);");
+                sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
                 sb.AppendLine(string.Empty);
             }
 
-            sb.AppendLine(Helpers.GetTabs(tabs) + "#endregion");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "#endregion");
 
             // project name
             tabs--;
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
             tabs--;
 
             // providerproxy
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
             tabs--;
 
-            sb.AppendLine(Helpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.Provider." + projectName);
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "namespace Dhgms.Wcds.Model.Provider." + projectName);
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
 
             tabs++;
-            sb.AppendLine(Helpers.GetTabs(tabs) + "public abstract class Base");
-            sb.AppendLine(Helpers.GetTabs(tabs) + ": Dhgms.DataManager.Model.Provider.Base");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "{");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "public abstract class Base");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + ": Dhgms.DataManager.Model.Provider.Base");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "{");
             sb.AppendLine("#region our methods");
 
             foreach (Model.ProviderProxy objectName in objectNames)
             {
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs)
+                    OldHelpers.GetTabs(tabs)
                     + "public abstract System.Collections.ObjectModel.Collection<Dhgms.Wcds.Model.Info." + projectName
                     + "." + objectName.InfoClass + "> Get" + objectName.Name + "List(");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.SearchFilter." + projectName + "." + objectName.Name
                     + " searchParams,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + ");");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ");");
                 sb.AppendLine(string.Empty);
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs) + "public abstract Dhgms.Wcds.Model.Info." + projectName + "."
+                    OldHelpers.GetTabs(tabs) + "public abstract Dhgms.Wcds.Model.Info." + projectName + "."
                     + objectName.InfoClass + " Get" + objectName.Name + "(");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + "int id,");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + "int id,");
                 sb.AppendLine(
-                    Helpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
+                    OldHelpers.GetTabs(tabs + 1) + "Dhgms.Wcds.Model.ViewFilter." + projectName + "." + objectName.InfoClass
                     + " viewParams");
-                sb.AppendLine(Helpers.GetTabs(tabs + 1) + ");");
+                sb.AppendLine(OldHelpers.GetTabs(tabs + 1) + ");");
                 sb.AppendLine(string.Empty);
             }
 
             sb.AppendLine("#endregion");
-            sb.AppendLine(Helpers.GetTabs(tabs) + "}");
+            sb.AppendLine(OldHelpers.GetTabs(tabs) + "}");
 
             // dhgms
             sb.AppendLine("}");
