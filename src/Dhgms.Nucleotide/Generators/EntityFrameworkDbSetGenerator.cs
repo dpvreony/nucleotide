@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class EntityFrameworkDbSetGenerator : ICodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EntityFrameworkDbSetGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="EntityFrameworkDbSetGenerator"/> class.
         /// </summary>
         public EntityFrameworkDbSetGenerator(AttributeData attributeData)
         {
@@ -29,13 +29,13 @@ namespace Dhgms.Nucleotide.Generators
         /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
         /// </summary>
         /// <param name="applyTo">The syntax node this attribute is found on.</param>
-        /// <param name="document">The document with the semantic model in which this attribute was found.</param>
+        /// <param name="compilation">The overall compilation being generated for.</param>
         /// <param name="progress">A way to report diagnostic messages.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
         public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
             MemberDeclarationSyntax applyTo,
-            Document document,
+            CSharpCompilation compilation,
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
@@ -81,7 +81,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var attributes = new []
             {
-                SyntaxFactory.Attribute(SyntaxFactory.ParseName("System.ComponentModel.DataAnnotations.Schema.Table")).AddArgumentListArguments(tableAttributeArguments), 
+                SyntaxFactory.Attribute(SyntaxFactory.ParseName("System.ComponentModel.DataAnnotations.Schema.Table")).AddArgumentListArguments(tableAttributeArguments),
             };
 
             var sep = SyntaxFactory.SeparatedList(attributes);
