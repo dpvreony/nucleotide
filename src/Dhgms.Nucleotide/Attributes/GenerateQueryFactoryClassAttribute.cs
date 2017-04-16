@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,11 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(QueryFactoryGenerator))]
+    [Conditional("CodeGeneration")]
     public sealed class GenerateQueryFactoryClassAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
         public GenerateQueryFactoryClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)

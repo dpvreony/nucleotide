@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(CommandClassGenerator))]
+    [Conditional("CodeGeneration")]
     public sealed class GenerateCommandClassAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>

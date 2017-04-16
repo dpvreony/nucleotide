@@ -14,10 +14,11 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CodeGenerationAttribute(typeof(EntityFrameworkDbSetGenerator))]
+    [Conditional("CodeGeneration")]
     public sealed class GenerateEntityFrameworkDbSetAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
         public GenerateEntityFrameworkDbSetAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)

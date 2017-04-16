@@ -9,11 +9,11 @@ using Dhgms.Nucleotide.PropertyInfo;
 
 namespace Dhgms.Nucleotide.Mocking
 {
-    [GenerateEntityFrameworkDbSet(typeof(Nucleotide))]
-    [GenerateModels(typeof(Nucleotide))]
-    [GenerateQueryableRepositoryInterface(typeof(Nucleotide))]
-    [GenerateWcfService(typeof(Nucleotide))]
-    [GenerateWebApiService(typeof(Nucleotide))]
+    //[GenerateEntityFrameworkDbSet(typeof(Dhgms.Nucleotide.Mocking.Nucleotide))]
+    //[GenerateModels(typeof(Nucleotide))]
+    //[GenerateQueryableRepositoryInterface(typeof(Nucleotide))]
+    //[GenerateWcfService(typeof(Nucleotide))]
+    //[GenerateWebApiService(typeof(Nucleotide))]
     public class A
     {
 
