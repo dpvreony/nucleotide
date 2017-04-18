@@ -19,7 +19,7 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class WebApiServiceGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class.
         /// </summary>
         public WebApiServiceGenerator(AttributeData attributeData) : base(attributeData)
         {
@@ -91,19 +91,34 @@ namespace Dhgms.Nucleotide.Generators
 
             var catchBlock = SyntaxFactory.Block(catchBlockStatements);
             var catchClause = SyntaxFactory.CatchClause(catchDeclaration, null, catchBlock);
-                
+
             var trySignalRNotification = SyntaxFactory.TryStatement(SyntaxFactory.Block(signalRNotificationExecution), new SyntaxList<CatchClauseSyntax>().Add(catchClause), null);
 
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result.Id"));
 
             var body = new [] { commandLocalDeclaration, commandExecutionDeclaration, trySignalRNotification, returnStatement };
 
+            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpPost";
+            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<int>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
+        }
+
+        private static AttributeListSyntax GetAttributeListSyntax(string attributeName)
+        {
+            var name = SyntaxFactory.ParseName(attributeName);
+            var attribute2 = SyntaxFactory.Attribute(name);
+
+            var attributeList = new SeparatedSyntaxList<AttributeSyntax>();
+            attributeList = attributeList.Add(attribute2);
+            var list = SyntaxFactory.AttributeList(attributeList);
+            return list;
         }
 
         private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
@@ -114,10 +129,14 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
+            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpDelete";
+            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "DeleteAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
         }
@@ -130,10 +149,14 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
+            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpGet";
+            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+
             var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.List{entityName}ResponseDto>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
         }
@@ -146,10 +169,14 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
+            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpPatch";
+            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "UpdateAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
         }
@@ -162,10 +189,14 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
+            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpGet";
+            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+
             var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.View{entityName}ResponseDto>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ViewAsync")
                 //.WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
         }
