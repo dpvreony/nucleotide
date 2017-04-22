@@ -155,11 +155,20 @@ namespace Dhgms.Nucleotide.Generators
 
         protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
         {
-            var className = $"{classDeclaration.ClassName}{suffix}";
-            var members = GetMembers(className, classDeclaration.ClassName);
+            var entityName = classDeclaration.ClassName;
+            var className = $"{entityName}{suffix}";
+            var members = GetMembers(className, entityName);
+
             var declaration = SyntaxFactory.ClassDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
+
+            var classAttributes = GetClassAttributes();
+            if (classAttributes != null && classAttributes.Count > 0)
+            {
+                var attributeListSyntax = GetAttributeListSyntax(classAttributes);
+                declaration = declaration.AddAttributeLists(attributeListSyntax);
+            }
 
             var baseClass = GetBaseClass();
             if (!string.IsNullOrWhiteSpace(baseClass))
@@ -168,8 +177,20 @@ namespace Dhgms.Nucleotide.Generators
                 declaration = declaration.AddBaseListTypes(b);
             }
 
+            var implementedInterfaces = GetImplementedInterfaces(entityName);
+            if (implementedInterfaces != null)
+            {
+                foreach (var implementedInterface in implementedInterfaces)
+                {
+                    var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(implementedInterface));
+                    declaration = declaration.AddBaseListTypes().AddBaseListTypes(b);
+                }
+            }
+
             return await Task.FromResult(declaration);
         }
+
+        protected abstract List<Tuple<string, IList<string>>> GetClassAttributes();
 
         protected MemberDeclarationSyntax[] GetMembers(string className, string entityName)
         {
@@ -195,6 +216,26 @@ namespace Dhgms.Nucleotide.Generators
             }
 
             return result.ToArray();
+        }
+
+        protected static AttributeListSyntax GetAttributeListSyntax(IList<Tuple<string, IList<string>>> attributes)
+        {
+            var attributeList = new SeparatedSyntaxList<AttributeSyntax>();
+
+            foreach (var attribute in attributes)
+            {
+                var name = SyntaxFactory.ParseName(attribute.Item1);
+
+                var argumentList = GetAttributeArgumentListSyntax(attribute.Item2);
+
+
+                var attribute2 = SyntaxFactory.Attribute(name, argumentList);
+
+                attributeList = attributeList.Add(attribute2);
+            }
+
+            var list = SyntaxFactory.AttributeList(attributeList);
+            return list;
         }
 
         private MemberDeclarationSyntax[] GetFieldDeclarations(
@@ -230,7 +271,7 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns></returns>
         protected abstract MemberDeclarationSyntax[] GetMethodDeclarations(string entityName);
 
-        private static ParameterListSyntax GetParams(string[] argCollection)
+        protected static ParameterListSyntax GetParams(string[] argCollection)
         {
             var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
 
@@ -292,6 +333,25 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns></returns>
         protected abstract IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments();
 
+        private static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
+        {
+            if (attributeArguments == null || attributeArguments.Count < 1)
+            {
+                return null;
+            }
+
+            var argumentList = SyntaxFactory.AttributeArgumentList();
+
+            foreach (var attributeArgument in attributeArguments)
+            {
+                var name = SyntaxFactory.ParseName(attributeArgument);
+                var attribArgSyntax = SyntaxFactory.AttributeArgument(name);
+                argumentList = argumentList.AddArguments(attribArgSyntax);
+            }
+
+            return argumentList;
+        }
+
         private static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
         {
             var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName(returnType), methodName);
@@ -318,5 +378,11 @@ namespace Dhgms.Nucleotide.Generators
         /// </summary>
         /// <returns>Base class</returns>
         protected abstract string GetBaseClass();
+
+        /// <summary>
+        /// Gets the implemented interfaces, if any
+        /// </summary>
+        /// <returns>List of implemented interfaces</returns>
+        protected abstract IList<string> GetImplementedInterfaces(string entityName);
     }
 }

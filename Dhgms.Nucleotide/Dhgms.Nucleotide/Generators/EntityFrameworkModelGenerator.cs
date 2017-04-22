@@ -27,12 +27,22 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        {
+            return null;
+        }
+
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;
         }
 
         protected override string GetBaseClass()
+        {
+            return null;
+        }
+
+        protected override IList<string> GetImplementedInterfaces(string entityName)
         {
             return null;
         }

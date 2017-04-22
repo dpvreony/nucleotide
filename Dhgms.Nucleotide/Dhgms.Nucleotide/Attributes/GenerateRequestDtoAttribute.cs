@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Generators;
 
@@ -13,15 +11,15 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate a Response Dto class associated with this class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(ResponseDtoClassGenerator))]
+    [CodeGenerationAttribute(typeof(RequestDtoClassGenerator))]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateResponseDtoAttribute : BaseCodeGeneratorAttribute
+    public sealed class GenerateRequestDtoAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateResponseDtoAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        public GenerateRequestDtoAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
         }
     }

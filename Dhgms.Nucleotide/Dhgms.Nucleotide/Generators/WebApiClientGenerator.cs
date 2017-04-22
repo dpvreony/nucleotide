@@ -34,6 +34,14 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
+        protected override IList<string> GetImplementedInterfaces(string entityName)
+        {
+            return new List<string>
+            {
+                $"Services.I{entityName}Service"
+            };
+        }
+
         /// <inheritdoc />
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
@@ -46,6 +54,11 @@ namespace Dhgms.Nucleotide.Generators
             //};
 
             //return result;
+        }
+
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        {
+            return null;
         }
 
         /// <inheritdoc />

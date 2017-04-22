@@ -46,6 +46,14 @@ namespace Dhgms.Nucleotide.Generators
 #endif
         }
 
+        protected override IList<string> GetImplementedInterfaces(string entityName)
+        {
+            return new List<string>
+            {
+                $"Services.I{entityName}Service"
+            };
+        }
+
         /// <inheritdoc />
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
@@ -54,9 +62,18 @@ namespace Dhgms.Nucleotide.Generators
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Hubs.I{entityName}Hub", "signalRHub", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"CommandFactories.I{entityName}CommandFactory", "commandFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
             };
 
             return result;
+        }
+
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        {
+            return new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null)
+            };
         }
 
         /// <inheritdoc />
@@ -98,27 +115,23 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new [] { commandLocalDeclaration, commandExecutionDeclaration, trySignalRNotification, returnStatement };
 
-            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpPost";
-            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+            var attributes = new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Add\""}),
+            };
+
+            var attributeListSyntax = GetAttributeListSyntax(attributes);
+
+            var parameters = GetParams(new []{ $"RequestDtos.Add{entityName}RequestDto requestDto"});
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<int>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
             return declaration;
-        }
-
-        private static AttributeListSyntax GetAttributeListSyntax(string attributeName)
-        {
-            var name = SyntaxFactory.ParseName(attributeName);
-            var attribute2 = SyntaxFactory.Attribute(name);
-
-            var attributeList = new SeparatedSyntaxList<AttributeSyntax>();
-            attributeList = attributeList.Add(attribute2);
-            var list = SyntaxFactory.AttributeList(attributeList);
-            return list;
         }
 
         private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
@@ -129,12 +142,19 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
-            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpDelete";
-            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+            var attributes = new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpDelete", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Delete\""}),
+            };
+
+            var attributeListSyntax = GetAttributeListSyntax(attributes);
+
+            var parameters = GetParams(new[] { $"int {OldHelpers.GetVariableName(entityName)}Id" });
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "DeleteAsync")
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
@@ -149,12 +169,19 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
-            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpGet";
-            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+            var attributes = new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_List\""}),
+            };
+
+            var attributeListSyntax = GetAttributeListSyntax(attributes);
+
+            var parameters = GetParams(new[] { $"RequestDtos.List{entityName}RequestDto requestDto" });
 
             var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.List{entityName}ResponseDto>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
@@ -169,12 +196,22 @@ namespace Dhgms.Nucleotide.Generators
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
 
-            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpPatch";
-            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+            var attributes = new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPatch", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Update\""}),
+            };
 
+            var attributeListSyntax = GetAttributeListSyntax(attributes);
+
+            var parameters = GetParams(new[]
+            {
+                $"int {OldHelpers.GetVariableName(entityName)}Id",
+                $"RequestDtos.Update{entityName}RequestDto requestDto"
+            });
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "UpdateAsync")
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
@@ -183,18 +220,42 @@ namespace Dhgms.Nucleotide.Generators
 
         private MemberDeclarationSyntax GetViewMethodDeclaration(string entityName)
         {
+            var entityIdVariableName = $"{OldHelpers.GetVariableName(entityName)}Id";
+            const string notFoundResult = "new Microsoft.AspNetCore.Mvc.NotFoundResult()";
+            var numberTooLowCheckDeclaration =
+                RoslynGenerationHelpers.GetReturnIfLessThanSyntax(entityIdVariableName, 1, notFoundResult);
             var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetViewQueryAsync");
             var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query");
+            var nullQueryResultCheckDeclaration = RoslynGenerationHelpers.GetReturnIfNullSyntax("result", notFoundResult);
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
 
-            var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
+            // todo: https://github.com/blowdart/AspNetAuthorizationWorkshop/blob/master/src/Step_7_Resource_Based_Requirements/Controllers/DocumentController.cs
 
-            var attributeName = "Microsoft​.AspNetCore​.Mvc.HttpGet";
-            var attributeListSyntax = GetAttributeListSyntax(attributeName);
+            var body = new []
+            {
+                numberTooLowCheckDeclaration,
+                commandLocalDeclaration,
+                commandExecutionDeclaration,
+                nullQueryResultCheckDeclaration,
+                returnStatement
+            };
+
+            var attributes = new List<Tuple<string, IList<string>>>
+            {
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_View\""}),
+            };
+
+            var attributeListSyntax = GetAttributeListSyntax(attributes);
+
+            var parameters = GetParams(new[]
+            {
+                $"int {OldHelpers.GetVariableName(entityName)}Id"
+            });
 
             var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.View{entityName}ResponseDto>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ViewAsync")
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);

@@ -113,6 +113,36 @@ namespace Dhgms.Nucleotide.Helpers
         }
 
         /// <summary>
+        /// Produces a null guard check for a parameter
+        /// </summary>
+        /// <param name="parameterName">parameter name</param>
+        /// <returns>Roslyn syntax</returns>
+        public static IfStatementSyntax GetReturnIfNullSyntax(string parameterName, string returnName)
+        {
+            var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(parameterName));
+            var condition = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, parameterIdentifier,
+                SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression(returnName));
+            return SyntaxFactory.IfStatement(condition, returnStatement);
+        }
+
+        /// <summary>
+        /// Produces a null guard check for a parameter
+        /// </summary>
+        /// <param name="parameterName">parameter name</param>
+        /// <returns>Roslyn syntax</returns>
+        public static IfStatementSyntax GetReturnIfLessThanSyntax(string parameterName, int minimumValue, string returnName)
+        {
+            var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(parameterName));
+            var condition = SyntaxFactory.BinaryExpression(SyntaxKind.LessThanExpression, parameterIdentifier,
+                SyntaxFactory.ParseExpression(minimumValue.ToString()));
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression(returnName));
+            return SyntaxFactory.IfStatement(condition, returnStatement);
+        }
+
+        /// <summary>
         /// Gets syntax to create and assign a variable from invoking another variable
         /// </summary>
         /// <param name="variableToCreate"></param>
