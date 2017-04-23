@@ -16,10 +16,23 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class.
         /// </summary>
         public ResponseDtoClassGenerator(AttributeData attributeData) : base(attributeData)
         {
+        }
+
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Response DTO for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
         }
 
         protected override string GetClassSuffix()

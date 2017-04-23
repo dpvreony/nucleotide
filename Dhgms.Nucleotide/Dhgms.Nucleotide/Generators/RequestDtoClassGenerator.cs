@@ -33,6 +33,19 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Request DTO for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
+        }
+
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;

@@ -153,7 +153,9 @@ namespace Dhgms.Nucleotide.Generators
             return result;
         }
 
-        protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
+            IClassGenerationParameters classDeclaration,
+            string suffix)
         {
             var entityName = classDeclaration.ClassName;
             var className = $"{entityName}{suffix}";
@@ -187,8 +189,39 @@ namespace Dhgms.Nucleotide.Generators
                 }
             }
 
+            var summary = GetClassLevelCommentSummary(entityName);
+            declaration = DoCommentSection(declaration, summary);
+
+            var remarks = GetClassLevelCommentRemarks(entityName);
+            declaration = DoCommentSection(declaration, remarks);
+
             return await Task.FromResult(declaration);
         }
+
+        private T DoCommentSection<T>(T declaration, string[] commentLines)
+            where T : MemberDeclarationSyntax
+        {
+            if (commentLines == null || commentLines.Length < 1)
+            {
+                return declaration;
+            }
+
+            var comments = new List<SyntaxTrivia>(commentLines.Length + 2);
+            comments.Add(SyntaxFactory.Comment("///<summary>"));
+
+            foreach (var line in commentLines)
+            {
+                comments.Add(SyntaxFactory.Comment($"/// {line}"));
+            }
+
+            comments.Add(SyntaxFactory.Comment("///</summary>"));
+
+            return declaration.WithLeadingTrivia(comments);
+        }
+
+        protected abstract string[] GetClassLevelCommentSummary(string entityName);
+
+        protected abstract string[] GetClassLevelCommentRemarks(string entityName);
 
         protected abstract List<Tuple<string, IList<string>>> GetClassAttributes();
 
@@ -324,6 +357,14 @@ namespace Dhgms.Nucleotide.Generators
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddBodyStatements(body.ToArray());
+
+            var summary = new[]
+            {
+                $"Creates an instance of {className}"
+            };
+
+            declaration = this.DoCommentSection(declaration, summary);
+
             return declaration;
         }
 

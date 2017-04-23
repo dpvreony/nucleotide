@@ -68,6 +68,19 @@ namespace Dhgms.Nucleotide.Generators
             return result;
         }
 
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Web API Service for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
+        }
+
         protected override List<Tuple<string, IList<string>>> GetClassAttributes()
         {
             return new List<Tuple<string, IList<string>>>

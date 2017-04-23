@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Generators
     class WebApiClientGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class.
         /// </summary>
         public WebApiClientGenerator(AttributeData attributeData) : base(attributeData)
         {
@@ -73,6 +73,19 @@ namespace Dhgms.Nucleotide.Generators
             result.Add(GetViewMethodDeclaration(entityName));
 
             return result.ToArray();
+        }
+
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Web API Client for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
         }
 
         private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)

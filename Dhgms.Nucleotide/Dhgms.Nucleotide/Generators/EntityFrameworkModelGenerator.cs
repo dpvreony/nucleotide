@@ -27,6 +27,19 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Entity Framework Model for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
+        }
+
         protected override List<Tuple<string, IList<string>>> GetClassAttributes()
         {
             return null;
