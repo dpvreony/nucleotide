@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -12,39 +14,44 @@ using Validation;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public sealed class ModelInterfaceGenerator : ICodeGenerator
+    public sealed class ModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
         /// </summary>
-        public ModelInterfaceGenerator(AttributeData attributeData)
+        public ModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
         }
 
-        /// <summary>
-        /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
-        /// </summary>
-        /// <param name="applyTo">The syntax node this attribute is found on.</param>
-        /// <param name="compilation">The overall compilation being generated for.</param>
-        /// <param name="progress">A way to report diagnostic messages.</param>
-        /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>The generated member syntax to be added to the project.</returns>
-        public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
-            MemberDeclarationSyntax applyTo,
-            CSharpCompilation compilation,
-            IProgress<Diagnostic> progress,
-            CancellationToken cancellationToken)
+
+        protected override string GetClassSuffix()
         {
-            var nodes = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Models"))
-                    .AddMembers(GetMembers())
-            };
+            return "Model";
+        }
 
-            var results = SyntaxFactory.List(nodes);
+        protected override string GetNamespace()
+        {
+            return "Models";
+        }
 
-            return await Task.FromResult(results);
+        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        {
+            return null;
+        }
+
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        {
+            return null;
+        }
+
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        {
+            return null;
+        }
+
+        protected override string[] GetBaseInterfaces()
+        {
+            throw new NotImplementedException();
         }
 
         private MemberDeclarationSyntax[] GetMembers()

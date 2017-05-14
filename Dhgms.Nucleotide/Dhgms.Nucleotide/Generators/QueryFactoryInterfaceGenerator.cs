@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,7 +36,17 @@ namespace Dhgms.Nucleotide.Generators
             return "QueryFactories";
         }
 
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        {
+            return null;
+        }
+
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        {
+            return null;
+        }
+
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
             return null;
         }

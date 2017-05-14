@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,7 +36,17 @@ namespace Dhgms.Nucleotide.Generators
             return "Hubs";
         }
 
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        {
+            return null;
+        }
+
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        {
+            return null;
+        }
+
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
             return new []
             {
@@ -49,7 +61,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        private MemberDeclarationSyntax GetOnAddMethod()
+        private MethodDeclarationSyntax GetOnAddMethod()
         {
             var methodName = "OnAddAsync";
 
@@ -58,7 +70,7 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetOnDeleteMethod()
+        private MethodDeclarationSyntax GetOnDeleteMethod()
         {
             var methodName = "OnDeleteAsync";
 
@@ -67,7 +79,7 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetOnUpdateMethod()
+        private MethodDeclarationSyntax GetOnUpdateMethod()
         {
             var methodName = "OnUpdateAsync";
 

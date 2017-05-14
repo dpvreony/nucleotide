@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,7 +33,7 @@ namespace Dhgms.Nucleotide.Generators
             return "Commands";
         }
 
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
             return new[]
             {
@@ -40,7 +41,17 @@ namespace Dhgms.Nucleotide.Generators
             };
         }
 
-        private MemberDeclarationSyntax GetExecuteMethodDeclaration()
+        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        {
+            return null;
+        }
+
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        {
+            return null;
+        }
+
+        private MethodDeclarationSyntax GetExecuteMethodDeclaration()
         {
             var methodName = "ExecuteAsync";
 

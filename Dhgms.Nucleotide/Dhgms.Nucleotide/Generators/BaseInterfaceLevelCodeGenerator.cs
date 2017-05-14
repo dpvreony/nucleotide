@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -115,7 +116,7 @@ namespace Dhgms.Nucleotide.Generators
             Requires.NotNull(compilation, "compilation");
 
             var matchingReferences = from reference in compilation.References.OfType<PortableExecutableReference>()
-                where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase) // TODO: make this more correct
+                where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase)
                 select new AssemblyName(Path.GetFileNameWithoutExtension(reference.FilePath));
 
             return Assembly.Load(matchingReferences.First());
@@ -131,19 +132,25 @@ namespace Dhgms.Nucleotide.Generators
 
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
+            var prefix = GetClassPrefix();
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
             {
-                classDeclarations.Add(await GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(await GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
             }
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        protected virtual string GetClassPrefix()
         {
-            var className = $"I{classDeclaration.ClassName}{suffix}";
-            var members = GetMembers(classDeclaration.ClassName);
+            return string.Empty;
+        }
+
+        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string prefix, string suffix)
+        {
+            var className = $"I{prefix}{classDeclaration.ClassName}{suffix}";
+            var members = GetMembers(classDeclaration);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members);
@@ -158,29 +165,45 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(declaration);
         }
 
-        protected MemberDeclarationSyntax[] GetMembers(string entityName)
+        protected MemberDeclarationSyntax[] GetMembers(IClassGenerationParameters classGenerationParameters)
         {
             var result = new List<MemberDeclarationSyntax>();
 
-            var methods = GetMethodDeclarations(entityName);
-            if (methods != null && methods.Length > 0)
-            {
-                result.AddRange(methods);
-            }
+            var fields = GetFieldDeclarations(classGenerationParameters);
+            AddToList(result, fields);
+
+            var properties = GetPropertyDeclarations(classGenerationParameters.Properties);
+            AddToList(result, properties);
+
+            var methods = GetMethodDeclarations(classGenerationParameters.ClassName);
+            AddToList(result, methods);
 
             return result.ToArray();
         }
+
+        protected abstract FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters);
+
+        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties);
 
         /// <summary>
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MemberDeclarationSyntax[] GetMethodDeclarations(string entityName);
+        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(string entityName);
 
         /// <summary>
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
         protected abstract string[] GetBaseInterfaces();
+        private static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
+            where T : MemberDeclarationSyntax
+        {
+            if (items != null && items.Count > 0)
+            {
+                list.AddRange(items);
+            }
+        }
+
     }
 }
