@@ -26,6 +26,11 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
+        protected override string GetClassPrefix()
+        {
+            return null;
+        }
+
         protected override string GetClassSuffix()
         {
             return "QueryFactory";
@@ -51,7 +56,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string[] GetBaseInterfaces()
+        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }

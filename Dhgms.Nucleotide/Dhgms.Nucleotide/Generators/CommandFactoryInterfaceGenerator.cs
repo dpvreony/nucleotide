@@ -37,6 +37,11 @@ namespace Dhgms.Nucleotide.Generators
             return "CommandFactories";
         }
 
+        protected override string GetClassPrefix()
+        {
+            return null;
+        }
+
         protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
         {
             return null;
@@ -49,7 +54,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
-            var result = new List<MemberDeclarationSyntax>
+            var result = new List<MethodDeclarationSyntax>
             {
                 GetAddMethodDeclaration(entityName),
                 GetDeleteMethodDeclaration(entityName),
@@ -59,12 +64,12 @@ namespace Dhgms.Nucleotide.Generators
             return result.ToArray();
         }
 
-        protected override string[] GetBaseInterfaces()
+        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }
 
-        private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
             var methodName = "GetAddCommandAsync";
 
@@ -73,7 +78,7 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
         {
             var methodName = "GetDeleteCommandAsync";
 
@@ -82,7 +87,7 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
         {
             var methodName = "GetUpdateCommandAsync";
 

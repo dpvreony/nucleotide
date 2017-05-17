@@ -23,6 +23,11 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
+        protected override string GetClassPrefix()
+        {
+            return null;
+        }
+
         protected override string GetClassSuffix()
         {
             return "Command";
@@ -60,7 +65,7 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        protected override string[] GetBaseInterfaces()
+        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }
@@ -107,12 +112,12 @@ namespace Dhgms.Nucleotide.Generators
         private async Task<MemberDeclarationSyntax> GetAddCommandInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
         {
             var className = $"IAdd{classDeclaration.ClassName}{suffix}";
-            var members = GetMembers(classDeclaration.ClassName);
+            var members = GetMembers(classDeclaration);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces();
+            var baseInterfaces = GetBaseInterfaces(classDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -130,7 +135,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
             //.AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces();
+            var baseInterfaces = GetBaseInterfaces(classDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -148,7 +153,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
             //.AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces();
+            var baseInterfaces = GetBaseInterfaces(classDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();

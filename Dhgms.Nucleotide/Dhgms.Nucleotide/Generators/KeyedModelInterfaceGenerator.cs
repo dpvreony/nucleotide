@@ -14,15 +14,14 @@ using Validation;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public sealed class ModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class KeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="KeyedModelInterfaceGenerator"/> class. 
         /// </summary>
-        public ModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
+        public KeyedModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
         {
         }
-
 
         protected override string GetClassSuffix()
         {
@@ -34,6 +33,11 @@ namespace Dhgms.Nucleotide.Generators
             return "Models";
         }
 
+        protected override string GetClassPrefix()
+        {
+            return null;
+        }
+
         protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
         {
             return null;
@@ -41,7 +45,39 @@ namespace Dhgms.Nucleotide.Generators
 
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
         {
-            return null;
+            var idColumn = new Integer32PropertyInfo(
+                CollectionType.None,
+                "Id",
+                "Unique Identifier for the object",
+                false,
+                1,
+                int.MaxValue,
+                true,
+                null);
+
+            return new []
+            {
+                GetPropertyDeclaration(idColumn)
+            };
+        }
+
+        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
+        {
+            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var identifier = propertyInfo.Name;
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(new []
+                        {
+                            SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                            SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                        }
+                            )));
+
+            return result;
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
@@ -49,16 +85,19 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string[] GetBaseInterfaces()
+        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
         {
-            throw new NotImplementedException();
+            return new []
+            {
+                $"IUnkeyed{classGenerationParameters.ClassName}Model"
+            };
         }
 
         private MemberDeclarationSyntax[] GetMembers()
         {
             var members = GetUnkeyedInterfaces()
                 .Concat(GetKeyedInterfaces())
-                    .ToArray();
+                .ToArray();
 
             return members;
         }

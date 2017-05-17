@@ -142,10 +142,7 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        protected virtual string GetClassPrefix()
-        {
-            return string.Empty;
-        }
+        protected abstract string GetClassPrefix();
 
         protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string prefix, string suffix)
         {
@@ -155,7 +152,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces();
+            var baseInterfaces = GetBaseInterfaces(classDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -195,7 +192,8 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string[] GetBaseInterfaces();
+        protected abstract string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters);
+
         private static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
             where T : MemberDeclarationSyntax
         {

@@ -11,15 +11,15 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate the models interfaces associate to this class
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(ModelInterfaceGenerator))]
+    [CodeGenerationAttribute(typeof(KeyedModelInterfaceGenerator))]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateModelInterfaceAttribute : BaseCodeGeneratorAttribute
+    public sealed class GenerateKeyedModelInterfaceAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateModelInterfaceAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        public GenerateKeyedModelInterfaceAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
         }
     }
