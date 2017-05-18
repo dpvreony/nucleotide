@@ -131,10 +131,11 @@ namespace Dhgms.Nucleotide.Generators
 
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
+            var prefix = GetClassPrefix();
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
             {
-                classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
             }
 
             var usings = GetUsings();
@@ -155,14 +156,17 @@ namespace Dhgms.Nucleotide.Generators
 
         protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
             IClassGenerationParameters classDeclaration,
+            string prefix,
             string suffix)
         {
             var entityName = classDeclaration.ClassName;
-            var className = $"{entityName}{suffix}";
+            var className = $"{prefix}{entityName}{suffix}";
             var members = GetMembers(className, entityName);
 
+            // SyntaxFactory.Token(SyntaxKind.SealedKeyword)
+
             var declaration = SyntaxFactory.ClassDeclaration(className)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members);
 
             var classAttributes = GetClassAttributes();
@@ -172,7 +176,7 @@ namespace Dhgms.Nucleotide.Generators
                 declaration = declaration.AddAttributeLists(attributeListSyntax);
             }
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(entityName);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -418,12 +422,14 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string GetBaseClass();
+        protected abstract string GetBaseClass(string entityName);
 
         /// <summary>
         /// Gets the implemented interfaces, if any
         /// </summary>
         /// <returns>List of implemented interfaces</returns>
         protected abstract IList<string> GetImplementedInterfaces(string entityName);
+
+        protected abstract string GetClassPrefix();
     }
 }

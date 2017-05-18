@@ -3,8 +3,8 @@ using Dhgms.Nucleotide.ModelTests;
 
 namespace Dhgms.Nucleotide.GenerationTests
 {
-    [GenerateModelClass(typeof(ModelGenerationDetails))]
-    class ModelClassGeneration
+    [GenerateUnkeyedModelClass(typeof(UnkeyedModelGenerationDetails))]
+    class UnkeyedModelClassGeneration
     {
     }
 }

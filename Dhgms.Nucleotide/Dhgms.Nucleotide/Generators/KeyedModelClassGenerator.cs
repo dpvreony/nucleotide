@@ -15,49 +15,15 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Generates models
     /// </summary>
-    public class ModelClassGenerator : ICodeGenerator
+    public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class. 
         /// </summary>
-        public ModelClassGenerator(AttributeData attributeData)
+        public KeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
         }
 
-        /// <summary>
-        /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
-        /// </summary>
-        /// <param name="applyTo">The syntax node this attribute is found on.</param>
-        /// <param name="compilation">The overall compilation being generated for.</param>
-        /// <param name="progress">A way to report diagnostic messages.</param>
-        /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>The generated member syntax to be added to the project.</returns>
-        public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
-            MemberDeclarationSyntax applyTo,
-            CSharpCompilation compilation,
-            IProgress<Diagnostic> progress,
-            CancellationToken cancellationToken)
-        {
-            var nodes = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Models"))
-                    .AddMembers(GetMembers())
-            };
-
-            var results = SyntaxFactory.List(nodes);
-
-            return await Task.FromResult(results);
-        }
-
-        private MemberDeclarationSyntax[] GetMembers()
-        {
-            var members = GetUnkeyedClasses()
-                .Concat(GetKeyedClasses())
-                .ToArray();
-
-            return members;
-        }
 
         private MemberDeclarationSyntax[] GetKeyedClasses()
         {
@@ -90,10 +56,10 @@ namespace Dhgms.Nucleotide.Generators
             return new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.ClassDeclaration($"{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .AddMembers(members)
-                .WithLeadingTrivia(leadingTrivia)
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                    .AddBaseListTypes(baseTypes)
+                    .AddMembers(members)
+                    .WithLeadingTrivia(leadingTrivia)
             };
         }
 
@@ -114,9 +80,56 @@ namespace Dhgms.Nucleotide.Generators
             return new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .WithLeadingTrivia(leadingTrivia)
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                    .AddBaseListTypes(baseTypes)
+                    .WithLeadingTrivia(leadingTrivia)
+            };
+        }
+
+        protected override string GetClassPrefix() => "Unkeyed";
+
+        protected override string GetClassSuffix() => "Model";
+
+        protected override string GetNamespace() => "Models";
+
+        protected override string[] GetClassLevelCommentSummary(string entityName)
+        {
+            return new[]
+            {
+                $"Unkeyed Model Class for {entityName}"
+            };
+        }
+
+        protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
+        }
+
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        {
+            return null;
+        }
+
+        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        {
+            return null;
+        }
+
+        protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
+        {
+            return null;
+        }
+
+        protected override string GetBaseClass(string entityName)
+        {
+            return $"Unkeyed{entityName}Model";
+        }
+
+        protected override IList<string> GetImplementedInterfaces(string entityName)
+        {
+            return new List<string>
+            {
+                $"IKeyed{entityName}Model"
             };
         }
     }

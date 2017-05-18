@@ -12,10 +12,15 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class RequestDtoClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class. 
         /// </summary>
         public RequestDtoClassGenerator(AttributeData attributeData) : base(attributeData)
         {
+        }
+
+        protected override string GetClassPrefix()
+        {
+            return null;
         }
 
         protected override string GetClassSuffix()
@@ -51,7 +56,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string GetBaseClass()
+        protected override string GetBaseClass(string entityName)
         {
             return null;
         }
@@ -95,7 +100,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(null);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -113,7 +118,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(null);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -131,7 +136,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(null);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));

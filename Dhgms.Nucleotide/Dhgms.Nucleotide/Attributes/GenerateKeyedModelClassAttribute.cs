@@ -9,15 +9,15 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate the models associate to this class
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(ModelClassGenerator))]
+    [CodeGenerationAttribute(typeof(KeyedModelClassGenerator))]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateModelClassAttribute : BaseCodeGeneratorAttribute
+    public sealed class GenerateKeyedModelClassAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateModelClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        public GenerateKeyedModelClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
         }
     }

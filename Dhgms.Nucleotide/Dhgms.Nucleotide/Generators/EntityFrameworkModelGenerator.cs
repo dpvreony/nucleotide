@@ -50,12 +50,17 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string GetBaseClass()
+        protected override string GetBaseClass(string entityName)
         {
             return null;
         }
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
+        {
+            return null;
+        }
+
+        protected override string GetClassPrefix()
         {
             return null;
         }

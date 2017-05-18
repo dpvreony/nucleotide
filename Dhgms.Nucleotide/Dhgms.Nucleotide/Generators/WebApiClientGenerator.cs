@@ -18,6 +18,11 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         /// <inheritdoc />
+        protected override string GetClassPrefix()
+        {
+            return null;
+        }
+
         protected override string GetClassSuffix()
         {
             return "ApiClient";
@@ -29,7 +34,7 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         /// <inheritdoc />
-        protected override string GetBaseClass()
+        protected override string GetBaseClass(string entityName)
         {
             return null;
         }

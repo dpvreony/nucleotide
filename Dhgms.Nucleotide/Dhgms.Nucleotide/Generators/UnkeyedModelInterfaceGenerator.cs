@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class. 
         /// </summary>
         public UnkeyedModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
         {

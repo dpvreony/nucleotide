@@ -16,7 +16,7 @@ namespace Dhgms.Nucleotide.Generators
     public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelClassGenerator"/> class.
+        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.
         /// </summary>
         public ResponseDtoClassGenerator(AttributeData attributeData) : base(attributeData)
         {
@@ -31,6 +31,11 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         protected override string[] GetClassLevelCommentRemarks(string entityName)
+        {
+            return null;
+        }
+
+        protected override string GetClassPrefix()
         {
             return null;
         }
@@ -55,7 +60,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string GetBaseClass()
+        protected override string GetBaseClass(string entityName)
         {
             return null;
         }
@@ -98,7 +103,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(null);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -116,7 +121,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
 
-            var baseClass = GetBaseClass();
+            var baseClass = GetBaseClass(null);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
