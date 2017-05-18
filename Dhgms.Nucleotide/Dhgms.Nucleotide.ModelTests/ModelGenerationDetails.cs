@@ -14,6 +14,8 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override string ClassName => "User";
 
+        public override KeyType KeyType => KeyType.Int32;
+
         public override string ClassRemarks => "Represents a User";
 
         public override string CompanyName => "DHGMS Solutions";

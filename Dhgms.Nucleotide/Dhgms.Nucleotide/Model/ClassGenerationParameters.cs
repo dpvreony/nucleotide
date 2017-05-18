@@ -28,6 +28,8 @@ namespace Dhgms.Nucleotide.Model
         /// </summary>
         public abstract string ClassName { get; }
 
+        public abstract KeyType KeyType { get; }
+
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>

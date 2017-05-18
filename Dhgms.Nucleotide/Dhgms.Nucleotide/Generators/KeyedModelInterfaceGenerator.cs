@@ -28,6 +28,14 @@ namespace Dhgms.Nucleotide.Generators
             return "Model";
         }
 
+        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        {
+            return new[]
+            {
+                $"Keyed model for {classDeclaration.ClassName}"
+            };
+        }
+
         protected override string GetNamespace()
         {
             return "Models";
@@ -38,46 +46,51 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
         {
-            return null;
-        }
-
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
-        {
-            var idColumn = new Integer32PropertyInfo(
-                CollectionType.None,
-                "Id",
-                "Unique Identifier for the object",
-                false,
-                1,
-                int.MaxValue,
-                true,
-                null);
+            var idColumn = GetIdColumn(classGenerationParameters.KeyType);
 
             return new []
             {
-                GetPropertyDeclaration(idColumn)
+                GetReadOnlyPropertyDeclaration(idColumn)
             };
         }
 
-        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
+        private static PropertyInfoBase GetIdColumn(KeyType keyType)
         {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
-            var identifier = propertyInfo.Name;
-            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
-                .WithAccessorList(
-                    SyntaxFactory.AccessorList(
-                        SyntaxFactory.List(new []
-                        {
-                            SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                            SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                        }
-                            )));
-
-            return result;
+            switch (keyType)
+            {
+                case KeyType.Guid:
+                    return new ClrGuidPropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        true,
+                        null);
+                case KeyType.Int32:
+                    return new Integer32PropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        1,
+                        int.MaxValue,
+                        true,
+                        null);
+                case KeyType.Int64:
+                    return new Integer64PropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        1,
+                        int.MaxValue,
+                        true,
+                        null);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(keyType));
+            }
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
@@ -90,70 +103,6 @@ namespace Dhgms.Nucleotide.Generators
             return new []
             {
                 $"IUnkeyed{classGenerationParameters.ClassName}Model"
-            };
-        }
-
-        private MemberDeclarationSyntax[] GetMembers()
-        {
-            var members = GetUnkeyedInterfaces()
-                .Concat(GetKeyedInterfaces())
-                .ToArray();
-
-            return members;
-        }
-
-        private MemberDeclarationSyntax[] GetUnkeyedInterfaces()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Interface for the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.InterfaceDeclaration($"IUnkeyed{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .WithLeadingTrivia(leadingTrivia)
-            };
-        }
-
-        private MemberDeclarationSyntax[] GetKeyedInterfaces()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Interface for the {name} model.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
-            };
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                //SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                //.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                //.AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
-            };
-
-            var members = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddAccessorListAccessors(accessor)
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-
-                SyntaxFactory.InterfaceDeclaration($"I{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .AddBaseListTypes(baseTypes)
-                    .AddMembers(members)
-                    .WithLeadingTrivia(leadingTrivia)
             };
         }
     }

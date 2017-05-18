@@ -31,6 +31,14 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
+        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        {
+            return new[]
+            {
+                $"Service Interface for {classDeclaration.ClassName}"
+            };
+        }
+
         protected override string GetClassSuffix()
         {
             return "Service";
@@ -41,12 +49,7 @@ namespace Dhgms.Nucleotide.Generators
             return "Services";
         }
 
-        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
-        {
-            return null;
-        }
-
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }

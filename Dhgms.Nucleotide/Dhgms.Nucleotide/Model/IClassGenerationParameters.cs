@@ -32,6 +32,11 @@ namespace Dhgms.Nucleotide.Model
         string ClassName { get; }
 
         /// <summary>
+        /// Gets the type of key used on the model.
+        /// </summary>
+        KeyType KeyType { get; }
+
+        /// <summary>
         /// Gets the collection of properties for the class.
         /// </summary>
         PropertyInfoBase[] Properties { get; }

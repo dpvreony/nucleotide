@@ -33,6 +33,14 @@ namespace Dhgms.Nucleotide.Generators
             return "Command";
         }
 
+        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        {
+            return new[]
+            {
+                $"Commands for {classDeclaration.ClassName}"
+            };
+        }
+
         protected override string GetNamespace()
         {
             return "Commands";
@@ -46,12 +54,7 @@ namespace Dhgms.Nucleotide.Generators
             };
         }
 
-        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
-        {
-            return null;
-        }
-
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }

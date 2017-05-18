@@ -42,12 +42,15 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
         {
-            return null;
+            return new []
+            {
+                $"Command factory for {classDeclaration.ClassName}"
+            };
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
         {
             return null;
         }

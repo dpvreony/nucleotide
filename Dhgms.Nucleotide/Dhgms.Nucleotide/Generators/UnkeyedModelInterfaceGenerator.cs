@@ -28,6 +28,14 @@ namespace Dhgms.Nucleotide.Generators
             return "Model";
         }
 
+        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        {
+            return new[]
+            {
+                $"Unkeyed Model Interface for {classDeclaration.ClassName}"
+            };
+        }
+
         protected override string GetNamespace()
         {
             return "Models";
@@ -38,23 +46,9 @@ namespace Dhgms.Nucleotide.Generators
             return "Unkeyed";
         }
 
-        protected override FieldDeclarationSyntax[] GetFieldDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
         {
-            return null;
-        }
-
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(PropertyInfoBase[] properties)
-        {
-            return properties?.Select(GetPropertyDeclaration).ToArray();
-        }
-
-        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
-        {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
-            var identifier = propertyInfo.Name;
-            var result = SyntaxFactory.PropertyDeclaration(type, identifier);
-
-            return result;
+            return classGenerationParameters.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
@@ -65,70 +59,6 @@ namespace Dhgms.Nucleotide.Generators
         protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
         {
             return null;
-        }
-
-        private MemberDeclarationSyntax[] GetMembers()
-        {
-            var members = GetUnkeyedInterfaces()
-                .Concat(GetKeyedInterfaces())
-                    .ToArray();
-
-            return members;
-        }
-
-        private MemberDeclarationSyntax[] GetUnkeyedInterfaces()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Interface for the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.InterfaceDeclaration($"IUnkeyed{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .WithLeadingTrivia(leadingTrivia)
-            };
-        }
-
-        private MemberDeclarationSyntax[] GetKeyedInterfaces()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Interface for the {name} model.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
-            };
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                //SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                //.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                //.AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
-            };
-
-            var members = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddAccessorListAccessors(accessor)
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-
-                SyntaxFactory.InterfaceDeclaration($"I{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .AddBaseListTypes(baseTypes)
-                    .AddMembers(members)
-                    .WithLeadingTrivia(leadingTrivia)
-            };
         }
     }
 }
