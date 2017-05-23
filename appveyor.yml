@@ -2,6 +2,7 @@ version: 1.0.{build}
 #branches:
 #  only:
 #  - master
+image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 assembly_info:
@@ -12,8 +13,8 @@ assembly_info:
   assembly_informational_version: '{version}{localversionsuffix}'
 init:
 - ps: >-
-    if ($env:APPVEYOR_REPO_BRANCH -eq 'master') {
-      $env:localversionsuffix = "-dev"
+    if ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
+      $env:localversionsuffix = '-' + $env:APPVEYOR_REPO_BRANCH
     }
 before_build:
 # If there's a newer build queued for the same PR, cancel this one
@@ -21,6 +22,16 @@ before_build:
 
 # patch vs2017 csproj format versions
 # taken from: https://www.arthurrump.com/2017/03/17/visual-studio-2017-csproj-version-patching-in-appveyor/
+
+#$configFiles = Get-ChildItem . *.csproj -rec
+#$versionString = "<PackageVersion>" + $env:APPVEYOR_BUILD_VERSION + "</PackageVersion>"
+#foreach ($file in $configFiles)
+#{
+#    (Get-Content $file.PSPath) |
+#    Foreach-Object { $_ -replace "<PackageVersion>1.0.0</PackageVersion>", $versionString  } |
+#    Set-Content $file.PSPath
+#}
+
 #    $path = (Get-Item src\Dhgms.Nucleotide.csproj).FullName
 #    $csproj = [xml](Get-Content $path)
 #    $csproj.Project.PropertyGroup.Version = $Env:APPVEYOR_BUILD_VERSION
@@ -31,11 +42,13 @@ before_build:
             https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
             Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
             throw "There are newer queued builds for this pull request, failing early." }
-    Invoke-Expression "nuget restore src\Dhgms.Nucleotide.sln"
- 
-build:
-  project: src\Dhgms.Nucleotide.sln
-  verbosity: minimal
+    Invoke-Expression "dotnet restore src\Dhgms.Nucleotide.sln" 
+#build:
+  #project: src\Dhgms.Nucleotide.sln
+  #verbosity: minimal
+build_script:
+- ps: dotnet restore src\Dhgms.Nucleotide.sln
+- ps: dotnet build src\Dhgms.Nucleotide.sln
 after_build:
 - cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script:
