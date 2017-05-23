@@ -16,17 +16,19 @@ init:
       $env:localversionsuffix = "-dev"
     }
 before_build:
-- ps: >-
-# taken from: https://raw.githubusercontent.com/tkelman/numpy/440e81ace36d65a7b62eec1a0460467f3dc97085/appveyor.yml
 # If there's a newer build queued for the same PR, cancel this one
+# taken from: https://raw.githubusercontent.com/tkelman/numpy/440e81ace36d65a7b62eec1a0460467f3dc97085/appveyor.yml
+
+# patch vs2017 csproj format versions
+# taken from: https://www.arthurrump.com/2017/03/17/visual-studio-2017-csproj-version-patching-in-appveyor/
+- ps: >-
     if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
             https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
             Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
             throw "There are newer queued builds for this pull request, failing early." }
     Invoke-Expression "nuget restore src\Dhgms.Nucleotide.sln"
  
- # taken from https://github.com/dpvreony/nucleotide/blob/roslyn/appveyor.yml
-    $path = (Get-Item .\Project\Project.csproj).FullName
+    $path = (Get-Item src\Dhgms.Nucleotide.csproj).FullName
     $csproj = [xml](Get-Content $path)
     $csproj.Project.PropertyGroup.Version = $Env:APPVEYOR_BUILD_VERSION
     $csproj.Save($path)
