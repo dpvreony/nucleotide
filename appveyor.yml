@@ -21,6 +21,11 @@ before_build:
 
 # patch vs2017 csproj format versions
 # taken from: https://www.arthurrump.com/2017/03/17/visual-studio-2017-csproj-version-patching-in-appveyor/
+#    $path = (Get-Item src\Dhgms.Nucleotide.csproj).FullName
+#    $csproj = [xml](Get-Content $path)
+#    $csproj.Project.PropertyGroup.Version = $Env:APPVEYOR_BUILD_VERSION
+#    $csproj.Save($path)
+
 - ps: >-
     if ($env:APPVEYOR_PULL_REQUEST_NUMBER -and $env:APPVEYOR_BUILD_NUMBER -ne ((Invoke-RestMethod `
             https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/history?recordsNumber=50).builds | `
@@ -28,15 +33,11 @@ before_build:
             throw "There are newer queued builds for this pull request, failing early." }
     Invoke-Expression "nuget restore src\Dhgms.Nucleotide.sln"
  
-    $path = (Get-Item src\Dhgms.Nucleotide.csproj).FullName
-    $csproj = [xml](Get-Content $path)
-    $csproj.Project.PropertyGroup.Version = $Env:APPVEYOR_BUILD_VERSION
-    $csproj.Save($path)
 build:
   project: src\Dhgms.Nucleotide.sln
   verbosity: minimal
 after_build:
-- cmd: nuget pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.nuspec -Symbols -NonInteractive -Version %APPVEYOR_BUILD_VERSION%%localversionsuffix%
+- cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script:
 - src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\Dhgms.Nucleotide.UnitTests.dll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
 - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
