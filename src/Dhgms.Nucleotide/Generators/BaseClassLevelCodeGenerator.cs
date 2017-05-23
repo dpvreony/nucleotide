@@ -59,6 +59,7 @@ namespace Dhgms.Nucleotide.Generators
             var namedTypeSymbols = a.Value as INamedTypeSymbol;
             var generationModel = await this.GetModel(namedTypeSymbols, compilation);
 
+            /*
             if (generationModel == null)
             {
                 namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
@@ -67,6 +68,7 @@ namespace Dhgms.Nucleotide.Generators
             {
                 namespaceDeclaration = await this.GenerateClasses(namespaceDeclaration, generationModel.ClassGenerationParameters);
             }
+            */
 
             var nodes = new MemberDeclarationSyntax[]
             {
@@ -114,11 +116,16 @@ namespace Dhgms.Nucleotide.Generators
             Requires.NotNull(symbol, "symbol");
             Requires.NotNull(compilation, "compilation");
 
-            var matchingReferences = from reference in compilation.References.OfType<PortableExecutableReference>()
-                                     where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase) // TODO: make this more correct
-                                     select new AssemblyName(Path.GetFileNameWithoutExtension(reference.FilePath));
+            var matchingReferences = (from reference in compilation.References.OfType<PortableExecutableReference>()
+                where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase)
+                select new AssemblyName(Path.GetFileNameWithoutExtension(reference.FilePath))).ToArray();
 
-            return Assembly.Load(matchingReferences.First());
+            if (matchingReferences.Length == 0)
+            {
+                throw new InvalidOperationException($"Failed to find {symbol.Identity}");
+            }
+
+            return Assembly.Load(matchingReferences[0]);
         }
 
         protected virtual async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
