@@ -31,7 +31,7 @@ before_build:
 
     Invoke-Expression "dotnet restore src\Dhgms.Nucleotide.sln" 
 
-    $configFiles = Get-ChildItem src\*.csproj -rec
+    $configFiles = Get-ChildItem src\*\Dhgms.Nucleotide.csproj -rec
 
     foreach ($fileName in $configFiles)
     {
