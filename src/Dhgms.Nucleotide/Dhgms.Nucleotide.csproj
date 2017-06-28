@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.5</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <Version>0.0.1</Version>
     <Authors>DHGMSSolutions,dpvreony</Authors>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.3.9" />
+    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.9" />
   </ItemGroup>
 
   <ItemGroup>

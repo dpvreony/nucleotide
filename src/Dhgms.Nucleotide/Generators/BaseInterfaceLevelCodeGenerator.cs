@@ -40,14 +40,12 @@ namespace Dhgms.Nucleotide.Generators
         /// <summary>
         /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
         /// </summary>
-        /// <param name="applyTo">The syntax node this attribute is found on.</param>
-        /// <param name="compilation">The overall compilation being generated for.</param>
+        /// <param name="context">The transformation context being generated for.</param>
         /// <param name="progress">A way to report diagnostic messages.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
         public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
-            MemberDeclarationSyntax applyTo,
-            CSharpCompilation compilation,
+            TransformationContext context,
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
@@ -58,6 +56,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var a = castDetails.First();
             var namedTypeSymbols = a.Value as INamedTypeSymbol;
+            var compilation = context.Compilation;
             var generationModel = await this.GetModel(namedTypeSymbols, compilation);
 
             if (generationModel == null)
