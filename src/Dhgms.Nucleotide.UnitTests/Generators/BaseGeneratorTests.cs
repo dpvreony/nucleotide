@@ -12,29 +12,41 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     //[ExcludeFromCodeCoverage]
     public static class GeneratorTests
     {
-        private static IEnumerable<object[]> TestData = new[]
-        {
-            CommandClassGeneratorTestData
-        };
-
-        private static CodeGeneratorFactory CommandClassGeneratorFactory =
-            attributeData => new CommandClassGenerator(attributeData);
-
-        private static object[] CommandClassGeneratorTestData = new object[]
-        {
-            CommandClassGeneratorFactory
-        };
 
         public delegate ICodeGenerator CodeGeneratorFactory(AttributeData attributeData);
 
         public sealed class ConstructorMethod
         {
+            public static IEnumerable<object[]> TestData = new[]
+            {
+                CommandClassGeneratorTestData
+            };
+
+            private static CodeGeneratorFactory CommandClassGeneratorFactory =
+                attributeData => new CommandClassGenerator(attributeData);
+
+            private static object[] CommandClassGeneratorTestData = new object[]
+            {
+                CommandClassGeneratorFactory
+            };
+
             [Theory]
             [MemberData(nameof(TestData))]
             public void ThrowsArgumentNullException(CodeGeneratorFactory factory)
             {
+                var exception = Assert.Throws<ArgumentNullException>(() => factory(null));
+                Assert.Equal("attributeData", exception.ParamName);
             }
 
+            [Theory]
+            [MemberData(nameof(TestData))]
+            public void ReturnsInstance(CodeGeneratorFactory factory)
+            {
+                // just done so code compiles.
+                AttributeData attributeData = default(AttributeData);
+                var instance = factory(attributeData);
+                Assert.NotNull(instance);
+            }
         }
     }
 }
