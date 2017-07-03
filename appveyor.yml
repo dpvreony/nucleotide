@@ -35,7 +35,7 @@ build_script:
 - ps: |
     $fileVersion = $Env:APPVEYOR_BUILD_VERSION
     #moving forward assembly version will be major.minor.0
-    $assemblyVersion = = $Env:APPVEYOR_BUILD_VERSION
+    $assemblyVersion = $Env:APPVEYOR_BUILD_VERSION
     $informationalVersion = $Env:APPVEYOR_BUILD_VERSION + $env:localversionsuffix
     dotnet build src\Dhgms.Nucleotide.sln -c Release /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
 after_build:
