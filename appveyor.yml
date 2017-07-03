@@ -30,25 +30,14 @@ before_build:
             throw "There are newer queued builds for this pull request, failing early." }
 
     Invoke-Expression "dotnet restore src\Dhgms.Nucleotide.sln" 
-
-    $configFiles = Get-ChildItem src\*\Dhgms.Nucleotide.csproj -rec
-
-    foreach ($fileName in $configFiles)
-    {
-        $path = (Get-Item $fileName).FullName
-
-        $csproj = [xml](Get-Content $path)
-
-        $csproj.Project.PropertyGroup.Version = $Env:APPVEYOR_BUILD_VERSION
-
-        $csproj.Save($path)
-    }
-#build:
-  #project: src\Dhgms.Nucleotide.sln
-  #verbosity: minimal
 build_script:
 - ps: dotnet restore src\Dhgms.Nucleotide.sln
-- ps: dotnet build src\Dhgms.Nucleotide.sln
+- ps: |
+    $fileVersion = $Env:APPVEYOR_BUILD_VERSION
+    #moving forward assembly version will be major.minor.0
+    $assemblyVersion = = $Env:APPVEYOR_BUILD_VERSION
+    $informationalVersion = $Env:APPVEYOR_BUILD_VERSION + $env:localversionsuffix
+    dotnet build src\Dhgms.Nucleotide.sln -c Release /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
 after_build:
 - cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script:
