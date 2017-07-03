@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <Version>0.0.1</Version>
     <Authors>DHGMSSolutions,dpvreony</Authors>
     <Company>DHGMS Solutions</Company>
