@@ -27,7 +27,7 @@ Nucleotide is a library to aid in the generation of .NET code for manipulation t
 
 This project leverages Roslyn functionality to combine a simple DSL style model with the power of the compiler to give a simple way to generate code.
 
-This version of Nucleotide is built upon CodeGenerators.Roslyn, this has allowed the removal of depedency on -.tt files.
+This version of Nucleotide is built upon CodeGenerators.Roslyn, this has allowed the removal of dependency on -.tt files.
 
 ## Credits
 
