@@ -29,11 +29,13 @@ This project leverages Roslyn functionality to combine a simple DSL style model 
 
 This version of Nucleotide is built upon CodeGenerators.Roslyn, this has allowed the removal of depedency on -.tt files.
 
+## Credits
+
+* https://github.com/AArnott/CodeGeneration.Roslyn
+
 ## Getting Started
 
 ### Pre-requisites
-
-**Currently the MSBuild generation is broken, this is an issue between the Visual Studio 2017 and the Roslyn library this version of Nucleotide is built on. You will need to use dotnet build from the command line for the time being.**
 
 You will need:
 * Visual Studio 2017
