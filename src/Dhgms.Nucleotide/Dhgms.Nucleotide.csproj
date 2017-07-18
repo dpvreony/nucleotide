@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.9" />
+    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.11" />
   </ItemGroup>
 
   <ItemGroup>

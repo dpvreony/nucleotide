@@ -19,7 +19,7 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Base class for a code generator that generates code based on the Class Level of Generation Metadata.
     /// </summary>
-    public abstract class BaseClassLevelCodeGenerator : ICodeGenerator
+    public abstract class BaseClassLevelCodeGenerator : BaseGenerator
     {
         private readonly object nucleotideGenerationModel;
 
@@ -43,7 +43,7 @@ namespace Dhgms.Nucleotide.Generators
         /// <param name="progress">A way to report diagnostic messages.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
-        public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
+        public override async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
             TransformationContext context,
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
@@ -86,46 +86,6 @@ namespace Dhgms.Nucleotide.Generators
         protected abstract string GetClassSuffix();
 
         protected abstract string GetNamespace();
-
-        private async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, CSharpCompilation compilation)
-        {
-            //var compilation = await document.Project.GetCompilationAsync();
-            var assembly = GetAssembly(namedTypeSymbols.ContainingAssembly, compilation);
-
-            var modelType = assembly.GetType($"{ namedTypeSymbols.ContainingNamespace}.{ namedTypeSymbols.Name}");
-            if (modelType == null)
-            {
-                throw new Exception("Unable to find model type");
-            }
-
-            var instance = Activator.CreateInstance(modelType);
-            if (instance == null)
-            {
-                throw new Exception("Unable to create instance");
-            }
-
-            // namedTypeSymbols.ContainingAssembly
-            //namedTypeSymbols.Name
-            return await Task.FromResult(instance as INucleotideGenerationModel);
-        }
-
-
-        private static Assembly GetAssembly(IAssemblySymbol symbol, Compilation compilation)
-        {
-            Requires.NotNull(symbol, "symbol");
-            Requires.NotNull(compilation, "compilation");
-
-            var matchingReferences = (from reference in compilation.References.OfType<PortableExecutableReference>()
-                where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase)
-                select new AssemblyName(Path.GetFileNameWithoutExtension(reference.FilePath))).ToArray();
-
-            if (matchingReferences.Length == 0)
-            {
-                throw new InvalidOperationException($"Failed to find {symbol.Identity}");
-            }
-
-            return Assembly.Load(matchingReferences[0]);
-        }
 
         protected virtual async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
         {
