@@ -18,17 +18,17 @@
 //        /// Carries out the generation of code for a class
 //        /// </summary>
 //        /// <param name="sb">The string builder to append code to.</param>
-//        /// <param name="classGenerationParameters">The class generation parameters</param>
-//        protected override void DoGenerationOfClass(StringBuilder sb, IClassGenerationParameters classGenerationParameters)
+//        /// <param name="entityGenerationModel">The class generation parameters</param>
+//        protected override void DoGenerationOfClass(StringBuilder sb, IEntityGenerationModel entityGenerationModel)
 //        {
 //            if (sb == null)
 //            {
 //                throw new ArgumentNullException("sb");
 //            }
 
-//            if (classGenerationParameters == null)
+//            if (entityGenerationModel == null)
 //            {
-//                throw new ArgumentNullException("classGenerationParameters");
+//                throw new ArgumentNullException("entityGenerationModel");
 //            }
 
 //            var tabCount = 2;
@@ -37,16 +37,16 @@
 
 //            // generate the main interface
 //            sb.AppendLine("{0}/// <summary>", OldHelpers.GetTabs(tabCount));
-//            sb.AppendLine("{0}/// {1}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks);
+//            sb.AppendLine("{0}/// {1}", OldHelpers.GetTabs(tabCount), entityGenerationModel.ClassRemarks);
 //            sb.AppendLine("{0}/// </summary>", OldHelpers.GetTabs(tabCount));
 //            var nucleotideAssembly = Assembly.GetExecutingAssembly().GetName();
 //            sb.AppendLine($"        [System.CodeDom.Compiler.GeneratedCode(\"DHGMS Nucleotide\", \"{nucleotideAssembly.Version}\")]");
-//            sb.AppendLine("{0}public interface I{1}{2} : IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
+//            sb.AppendLine("{0}public interface I{1}{2} : IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), entityGenerationModel.ClassName, classSuffix);
 //            sb.AppendLine("{0}{{", OldHelpers.GetTabs(tabCount));
 
 //            tabCount++;
 
-//            this.DoProperties(sb, tabCount, classGenerationParameters.Properties.Where(x => x.IsKey).ToArray(), false);
+//            this.DoProperties(sb, tabCount, entityGenerationModel.Properties.Where(x => x.IsKey).ToArray(), false);
 
 //            tabCount--;
 
@@ -55,17 +55,17 @@
 
 //            // generate the unkeyed interface
 //            sb.AppendLine("{0}/// <summary>", OldHelpers.GetTabs(tabCount));
-//            sb.AppendLine("{0}/// Un-keyed interface for {1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassRemarks, classSuffix);
+//            sb.AppendLine("{0}/// Un-keyed interface for {1}{2}", OldHelpers.GetTabs(tabCount), entityGenerationModel.ClassRemarks, classSuffix);
 //            sb.AppendLine("{0}/// </summary>", OldHelpers.GetTabs(tabCount));
 //            sb.AppendLine("{0}/// <remarks>", OldHelpers.GetTabs(tabCount));
 //            sb.AppendLine("{0}/// Un-keyed interfaces are used in services that allow creation of new objects.", OldHelpers.GetTabs(tabCount));
 //            sb.AppendLine("{0}/// </remarks>", OldHelpers.GetTabs(tabCount));
-//            sb.AppendLine("{0}public interface IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), classGenerationParameters.ClassName, classSuffix);
+//            sb.AppendLine("{0}public interface IUnkeyed{1}{2}", OldHelpers.GetTabs(tabCount), entityGenerationModel.ClassName, classSuffix);
 //            sb.AppendLine("{0}{{", OldHelpers.GetTabs(tabCount));
 
 //            tabCount++;
 
-//            this.DoProperties(sb, tabCount, classGenerationParameters.Properties.Where(x => !x.IsKey).ToArray(), true);
+//            this.DoProperties(sb, tabCount, entityGenerationModel.Properties.Where(x => !x.IsKey).ToArray(), true);
 
 //            tabCount--;
 

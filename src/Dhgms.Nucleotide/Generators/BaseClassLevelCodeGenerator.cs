@@ -65,7 +65,7 @@ namespace Dhgms.Nucleotide.Generators
             }
             else
             {
-                namespaceDeclaration = await this.GenerateClasses(namespaceDeclaration, generationModel.ClassGenerationParameters);
+                namespaceDeclaration = await this.GenerateClasses(namespaceDeclaration, generationModel.EntityGenerationModel);
             }
             */
 
@@ -87,9 +87,9 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string GetNamespace();
 
-        protected virtual async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
+        protected virtual async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
-            if (generationModelClassGenerationParameters == null || generationModelClassGenerationParameters.Length < 1)
+            if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {
                 namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment("#error DROP OUT 2"));
                 return namespaceDeclaration;
@@ -99,7 +99,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var prefix = GetClassPrefix();
             var suffix = GetClassSuffix();
-            foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
+            foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
                 classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
             }
@@ -121,11 +121,11 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
-            IClassGenerationParameters classDeclaration,
+            IEntityGenerationModel entityDeclaration,
             string prefix,
             string suffix)
         {
-            var entityName = classDeclaration.ClassName;
+            var entityName = entityDeclaration.ClassName;
             var className = $"{prefix}{entityName}{suffix}";
             var members = GetMembers(className, entityName);
 

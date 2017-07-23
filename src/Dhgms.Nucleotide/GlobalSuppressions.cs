@@ -10,5 +10,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Dhgms.Nucleotide.Model.Info")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "S2360:Optional parameters should not be used", Justification = "<Pending>", Scope = "member", Target = "~M:Dhgms.Nucleotide.Generators.IGenerator.Generate(System.Collections.Generic.IList{Dhgms.Nucleotide.Model.IClassGenerationParameters},System.Boolean,System.Boolean)~System.String")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "S2360:Optional parameters should not be used", Justification = "<Pending>", Scope = "member", Target = "~M:Dhgms.Nucleotide.Generators.IGenerator.Generate(System.Collections.Generic.IList{Dhgms.Nucleotide.Model.IEntityGenerationModel},System.Boolean,System.Boolean)~System.String")]
 

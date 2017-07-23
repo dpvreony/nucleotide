@@ -33,11 +33,11 @@ namespace Dhgms.Nucleotide.Generators
             return "Command";
         }
 
-        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {
             return new[]
             {
-                $"Commands for {classDeclaration.ClassName}"
+                $"Commands for {entityDeclaration.ClassName}"
             };
         }
 
@@ -54,7 +54,7 @@ namespace Dhgms.Nucleotide.Generators
             };
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -68,14 +68,14 @@ namespace Dhgms.Nucleotide.Generators
             return declaration;
         }
 
-        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
 
-        protected override async Task<NamespaceDeclarationSyntax> GenerateInterfaces(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
+        protected override async Task<NamespaceDeclarationSyntax> GenerateInterfaces(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
-            if (generationModelClassGenerationParameters == null || generationModelClassGenerationParameters.Length < 1)
+            if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {
                 namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment("#error DROP OUT 2"));
                 return namespaceDeclaration;
@@ -84,7 +84,7 @@ namespace Dhgms.Nucleotide.Generators
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
             var suffix = GetClassSuffix();
-            foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
+            foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
                 classDeclarations.Add(await GetAddCommandInterfaceDeclarationSyntax(generationModelClassGenerationParameter, suffix));
                 classDeclarations.Add(await GetDeleteCommandInterfaceDeclarationSyntax(generationModelClassGenerationParameter, suffix));
@@ -94,10 +94,10 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        //protected override async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        //protected override async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         //{
-        //    var className = $"I{classDeclaration.ClassName}{suffix}";
-        //    var members = GetMembers(classDeclaration.ClassName);
+        //    var className = $"I{entityDeclaration.ClassName}{suffix}";
+        //    var members = GetMembers(entityDeclaration.ClassName);
         //    var declaration = SyntaxFactory.InterfaceDeclaration(className)
         //        .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
         //        .AddMembers(members);
@@ -112,15 +112,15 @@ namespace Dhgms.Nucleotide.Generators
         //    return await Task.FromResult(declaration);
         //}
 
-        private async Task<MemberDeclarationSyntax> GetAddCommandInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        private async Task<MemberDeclarationSyntax> GetAddCommandInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
-            var className = $"IAdd{classDeclaration.ClassName}{suffix}";
-            var members = GetMembers(classDeclaration);
+            var className = $"IAdd{entityDeclaration.ClassName}{suffix}";
+            var members = GetMembers(entityDeclaration);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces(classDeclaration);
+            var baseInterfaces = GetBaseInterfaces(entityDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -130,15 +130,15 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(declaration);
         }
 
-        private async Task<MemberDeclarationSyntax> GetDeleteCommandInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        private async Task<MemberDeclarationSyntax> GetDeleteCommandInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
-            var className = $"IDelete{classDeclaration.ClassName}{suffix}";
-            //var members = GetMembers(classDeclaration.ClassName);
+            var className = $"IDelete{entityDeclaration.ClassName}{suffix}";
+            //var members = GetMembers(entityDeclaration.ClassName);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
             //.AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces(classDeclaration);
+            var baseInterfaces = GetBaseInterfaces(entityDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -148,15 +148,15 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(declaration);
         }
 
-        private async Task<MemberDeclarationSyntax> GetUpdateCommandInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string suffix)
+        private async Task<MemberDeclarationSyntax> GetUpdateCommandInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
-            var className = $"IUpdate{classDeclaration.ClassName}{suffix}";
-            //var members = GetMembers(classDeclaration.ClassName);
+            var className = $"IUpdate{entityDeclaration.ClassName}{suffix}";
+            //var members = GetMembers(entityDeclaration.ClassName);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
             //.AddMembers(members);
 
-            var baseInterfaces = GetBaseInterfaces(classDeclaration);
+            var baseInterfaces = GetBaseInterfaces(entityDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();

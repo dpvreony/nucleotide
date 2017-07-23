@@ -31,11 +31,11 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {
             return new[]
             {
-                $"SignalR Hub interface for {classDeclaration.ClassName}"
+                $"SignalR Hub interface for {entityDeclaration.ClassName}"
             };
         }
 
@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Generators
             return "Hubs";
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -64,7 +64,7 @@ namespace Dhgms.Nucleotide.Generators
             };
         }
 
-        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }

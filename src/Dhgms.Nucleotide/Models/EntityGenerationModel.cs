@@ -1,8 +1,10 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ClassGenerationParameters.cs" company="">
+// <copyright file="EntityGenerationModel.cs" company="">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
+
+using Dhgms.Nucleotide.Models;
 
 namespace Dhgms.Nucleotide.Model
 {
@@ -11,7 +13,7 @@ namespace Dhgms.Nucleotide.Model
     /// <summary>
     /// Represents the parameters for generating an data manager classes
     /// </summary>
-    public abstract class ClassGenerationParameters : IClassGenerationParameters
+    public abstract class EntityGenerationModel : IEntityGenerationModel
     {
         /// <summary>
         /// Gets the main namespace.
@@ -30,6 +32,9 @@ namespace Dhgms.Nucleotide.Model
 
         public abstract KeyType KeyType { get; }
 
+        public abstract IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
+        public abstract IInterfaceGenerationModel[] InterfaceGenerationModels { get; }
+
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
@@ -39,30 +44,5 @@ namespace Dhgms.Nucleotide.Model
         /// Gets the collection of properties for the class.
         /// </summary>
         public abstract PropertyInfoBase[] Properties { get; }
-
-        /// <summary>
-        /// Gets the collection of properties for the inherited base class, if any.
-        /// </summary>
-        public abstract PropertyInfoBase[] BaseClassProperties { get; }
-
-        /// <summary>
-        /// Gets the company name.
-        /// </summary>
-        public abstract string CompanyName { get; }
-
-        /// <summary>
-        /// Gets the copyright banner.
-        /// </summary>
-        public abstract string[] CopyrightBanner { get; }
-
-        /// <summary>
-        /// Gets the copyright start year.
-        /// </summary>
-        public abstract int CopyrightStartYear { get; }
-
-        /// <summary>
-        /// Gets the name of the base information class.
-        /// </summary>
-        public abstract string BaseClassName { get; }
     }
 }

@@ -28,11 +28,11 @@ namespace Dhgms.Nucleotide.Generators
             return "Model";
         }
 
-        protected override string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration)
+        protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {
             return new[]
             {
-                $"Unkeyed Model Interface for {classDeclaration.ClassName}"
+                $"Unkeyed Model Interface for {entityDeclaration.ClassName}"
             };
         }
 
@@ -46,9 +46,9 @@ namespace Dhgms.Nucleotide.Generators
             return "Unkeyed";
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return classGenerationParameters.Properties?.Select(GetPropertyDeclaration).ToArray();
+            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
@@ -56,7 +56,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }

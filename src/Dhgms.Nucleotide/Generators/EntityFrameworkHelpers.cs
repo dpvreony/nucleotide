@@ -35,7 +35,7 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns>
         /// C# code
         /// </returns>
-        public string Generate(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes, bool suppressExceptionsAsCode)
+        public string Generate(string mainNamespaceName, List<Tuple<IEntityGenerationModel, string>> classes, bool suppressExceptionsAsCode)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Dhgms.Nucleotide.Generators
             }
         }
 
-        private string DoGeneration(string mainNamespaceName, List<Tuple<IClassGenerationParameters, string>> classes)
+        private string DoGeneration(string mainNamespaceName, List<Tuple<IEntityGenerationModel, string>> classes)
         {
             if (string.IsNullOrWhiteSpace(mainNamespaceName))
             {
@@ -87,7 +87,7 @@ namespace Dhgms.Nucleotide.Generators
             return sb.ToString();
         }
 
-        private void DoSubNamespace(StringBuilder sb, string mainNamespaceName, string subNamespace, IEnumerable<Tuple<IClassGenerationParameters, string>> classes)
+        private void DoSubNamespace(StringBuilder sb, string mainNamespaceName, string subNamespace, IEnumerable<Tuple<IEntityGenerationModel, string>> classes)
         {
             var fullyQualifiedNamespace = mainNamespaceName + ".Model.Helper.EntityFramework"
                                              + (!string.IsNullOrWhiteSpace(subNamespace)
@@ -116,46 +116,47 @@ namespace Dhgms.Nucleotide.Generators
         /// <param name="sb">
         ///     The string builder to add the code to
         /// </param>
-        /// <param name="classInfo">
+        /// <param name="entityInfo">
         ///     The information relating to the generation of the class
         /// </param>
         /// <param name="inheritingFullyQualifiedClass">
         /// The fully qualified class name for the EF inheriting class
         /// </param>
-        private static void DoEntityFrameworkModelMethod(StringBuilder sb, IClassGenerationParameters classInfo, string inheritingFullyQualifiedClass)
+        private static void DoEntityFrameworkModelMethod(StringBuilder sb, IEntityGenerationModel entityInfo, string inheritingFullyQualifiedClass)
         {
-            if (classInfo == null)
+            if (entityInfo == null)
             {
-                throw new ArgumentNullException("classInfo");
+                throw new ArgumentNullException("entityInfo");
             }
 
-            if (string.IsNullOrWhiteSpace(classInfo.ClassName))
+            if (string.IsNullOrWhiteSpace(entityInfo.ClassName))
             {
                 throw new ArgumentException("ClassName");
             }
 
-            if (classInfo.Properties == null)
+            if (entityInfo.Properties == null)
             {
                 throw new ArgumentException("Properties");
             }
 
-            if (classInfo.Properties.Count(p => p.IsKey) > 1)
+            if (entityInfo.Properties.Count(p => p.IsKey) > 1)
             {
                 throw new ArgumentException("Too many primary keys defined");
             }
 
             // currently not going to support list types in our EF mapping
-            if ((classInfo.BaseClassProperties != null
-                 && classInfo.BaseClassProperties.Any(baseProperty => baseProperty.Collection != CollectionType.None))
-                || classInfo.Properties.Any(property => property.Collection != CollectionType.None))
+            var baseProperties = entityInfo.BaseTypeEntityGenerationModel?.Properties;
+            if ((baseProperties != null
+                 && baseProperties.Any(baseProperty => baseProperty.Collection != CollectionType.None))
+                || entityInfo.Properties.Any(property => property.Collection != CollectionType.None))
             {
                 return;
             }
 
-            string fullyQualifiedClassName = classInfo.MainNamespaceName + ".Model."
-                                             + (!string.IsNullOrWhiteSpace(classInfo.SubNamespace)
-                                                    ? classInfo.SubNamespace + "."
-                                                    : null) + classInfo.ClassName;
+            string fullyQualifiedClassName = entityInfo.MainNamespaceName + ".Model."
+                                             + (!string.IsNullOrWhiteSpace(entityInfo.SubNamespace)
+                                                    ? entityInfo.SubNamespace + "."
+                                                    : null) + entityInfo.ClassName;
 
             sb.AppendLine("/// <summary>");
             sb.AppendLine("/// Maps the information class to the entity framework model");
@@ -183,13 +184,13 @@ namespace Dhgms.Nucleotide.Generators
             sb.AppendLine("    }");
             sb.AppendLine(string.Empty);
 
-            foreach (PropertyInfoBase p in classInfo.Properties.Where(p => p.IsKey))
+            foreach (PropertyInfoBase p in entityInfo.Properties.Where(p => p.IsKey))
             {
                 sb.AppendLine(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().HasKey(x => x." + p.Name + ");");
             }
 
-            foreach (PropertyInfoBase p in classInfo.Properties)
+            foreach (PropertyInfoBase p in entityInfo.Properties)
             {
                 sb.Append(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().Property(x => x." + p.Name + ").Is");
@@ -197,7 +198,7 @@ namespace Dhgms.Nucleotide.Generators
             }
 
             foreach (
-                PropertyInfoBase p in classInfo.Properties.Where(p => !string.IsNullOrWhiteSpace(p.AlternativeDatabaseColumnName)))
+                PropertyInfoBase p in entityInfo.Properties.Where(p => !string.IsNullOrWhiteSpace(p.AlternativeDatabaseColumnName)))
             {
                 sb.AppendLine(
                     "    modelBuilder.Entity<" + fullyQualifiedClassName + ">().Property(x => x." + p.Name
@@ -230,7 +231,7 @@ namespace Dhgms.Nucleotide.Generators
         /// <param name="classes">
         /// Collection of classes to generate helpers for
         /// </param>
-        private void DoOurMethodsRegion(StringBuilder sb, IEnumerable<Tuple<IClassGenerationParameters, string>> classes)
+        private void DoOurMethodsRegion(StringBuilder sb, IEnumerable<Tuple<IEntityGenerationModel, string>> classes)
         {
             foreach (var classInfo in classes)
             {

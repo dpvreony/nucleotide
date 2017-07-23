@@ -65,7 +65,7 @@ namespace Dhgms.Nucleotide.Generators
             }
             else
             {
-                namespaceDeclaration = await this.GenerateInterfaces(namespaceDeclaration, generationModel.ClassGenerationParameters);
+                namespaceDeclaration = await this.GenerateInterfaces(namespaceDeclaration, generationModel.EntityGenerationModel);
             }
 
             var nodes = new MemberDeclarationSyntax[]
@@ -114,9 +114,9 @@ namespace Dhgms.Nucleotide.Generators
             return GetPropertyDeclaration(propertyInfo, accessorList, summary);
         }
 
-        protected virtual async Task<NamespaceDeclarationSyntax> GenerateInterfaces(NamespaceDeclarationSyntax namespaceDeclaration, ClassGenerationParameters[] generationModelClassGenerationParameters)
+        protected virtual async Task<NamespaceDeclarationSyntax> GenerateInterfaces(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
-            if (generationModelClassGenerationParameters == null || generationModelClassGenerationParameters.Length < 1)
+            if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {
                 namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment("#error DROP OUT 2"));
                 return namespaceDeclaration;
@@ -126,7 +126,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var prefix = GetClassPrefix();
             var suffix = GetClassSuffix();
-            foreach (var generationModelClassGenerationParameter in generationModelClassGenerationParameters)
+            foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
                 classDeclarations.Add(await GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
             }
@@ -136,17 +136,17 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string GetClassPrefix();
 
-        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IClassGenerationParameters classDeclaration, string prefix, string suffix)
+        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string prefix, string suffix)
         {
-            var className = $"I{prefix}{classDeclaration.ClassName}{suffix}";
-            var members = GetMembers(classDeclaration);
-            var leadingTrivia = GetInterfaceLeadingTrivia(classDeclaration);
+            var className = $"I{prefix}{entityDeclaration.ClassName}{suffix}";
+            var members = GetMembers(entityDeclaration);
+            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members)
                 .WithLeadingTrivia(leadingTrivia);
 
-            var baseInterfaces = GetBaseInterfaces(classDeclaration);
+            var baseInterfaces = GetBaseInterfaces(entityDeclaration);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -156,22 +156,22 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(declaration);
         }
 
-        protected abstract string[] GetInterfaceSummary(IClassGenerationParameters classDeclaration);
+        protected abstract string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration);
 
-        protected MemberDeclarationSyntax[] GetMembers(IClassGenerationParameters classGenerationParameters)
+        protected MemberDeclarationSyntax[] GetMembers(IEntityGenerationModel entityGenerationModel)
         {
             var result = new List<MemberDeclarationSyntax>();
 
-            var properties = GetPropertyDeclarations(classGenerationParameters);
+            var properties = GetPropertyDeclarations(entityGenerationModel);
             AddToList(result, properties);
 
-            var methods = GetMethodDeclarations(classGenerationParameters.ClassName);
+            var methods = GetMethodDeclarations(entityGenerationModel.ClassName);
             AddToList(result, methods);
 
             return result.ToArray();
         }
 
-        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(IClassGenerationParameters classGenerationParameters);
+        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
 
         /// <summary>
         /// Gets the method declarations to be generated
@@ -183,7 +183,7 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string[] GetBaseInterfaces(IClassGenerationParameters classGenerationParameters);
+        protected abstract string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel);
 
         private static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
             where T : MemberDeclarationSyntax
@@ -194,9 +194,9 @@ namespace Dhgms.Nucleotide.Generators
             }
         }
 
-        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IClassGenerationParameters classDeclaration)
+        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IEntityGenerationModel entityDeclaration)
         {
-            var interfaceSummary = GetInterfaceSummary(classDeclaration);
+            var interfaceSummary = GetInterfaceSummary(entityDeclaration);
 
             return GetSummary(interfaceSummary);
         }

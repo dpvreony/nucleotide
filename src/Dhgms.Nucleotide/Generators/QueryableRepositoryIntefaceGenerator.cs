@@ -102,7 +102,7 @@ namespace Dhgms.Nucleotide.Generators
                 // ignored
             }
 
-            //var baselist = classDeclaration.BaseList;
+            //var baselist = entityDeclaration.BaseList;
             //var baseTypes = baselist.Types;
             //if (baseTypes.All(bt => bt.GetType() != typeof(INucleotideGenerationModel)))
             if (instance == null)
@@ -115,21 +115,21 @@ namespace Dhgms.Nucleotide.Generators
                 return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);
             }
 
-            var classes = instance.ClassGenerationParameters;
+            var classes = instance.EntityGenerationModel;
             var members = GetInterfaces(/*classes*/);
 
             /*
-            var properties = classDeclaration.Members.OfType<PropertyDeclarationSyntax>();
+            var properties = entityDeclaration.Members.OfType<PropertyDeclarationSyntax>();
             var classGenCollection = properties.FirstOrDefault(
                 p =>
-                    p.Identifier.Text.Equals(nameof(INucleotideGenerationModel.ClassGenerationParameters),
+                    p.Identifier.Text.Equals(nameof(INucleotideGenerationModel.EntityGenerationModel),
                         StringComparison.Ordinal));
 
             if (classGenCollection == null)
             {
                 var comments = new[]
                 {
-                    $"#error Unable to find property {nameof(INucleotideGenerationModel.ClassGenerationParameters)}."
+                    $"#error Unable to find property {nameof(INucleotideGenerationModel.EntityGenerationModel)}."
                 };
 
                 return new Tuple<string[], MemberDeclarationSyntax[]>(comments, null);

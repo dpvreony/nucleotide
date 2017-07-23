@@ -62,54 +62,54 @@
 //        /// Carries out the generation of code for a class
 //        /// </summary>
 //        /// <param name="sb">The string builder to append code to.</param>
-//        /// <param name="classGenerationParameters">The class generation parameters</param>
-//        protected override void DoGenerationOfClass(StringBuilder sb, IClassGenerationParameters classGenerationParameters)
+//        /// <param name="entityGenerationModel">The class generation parameters</param>
+//        protected override void DoGenerationOfClass(StringBuilder sb, IEntityGenerationModel entityGenerationModel)
 //        {
-//            if (classGenerationParameters == null)
+//            if (entityGenerationModel == null)
 //            {
-//                throw new ArgumentNullException("classGenerationParameters");
+//                throw new ArgumentNullException("entityGenerationModel");
 //            }
 
-//            var mainNamespaceName = classGenerationParameters.MainNamespaceName;
+//            var mainNamespaceName = entityGenerationModel.MainNamespaceName;
 //            if (string.IsNullOrWhiteSpace(mainNamespaceName))
 //            {
-//                throw new ArgumentException("MainNamespaceName", "classGenerationParameters");
+//                throw new ArgumentException("MainNamespaceName", "entityGenerationModel");
 //            }
 
-//            var className = classGenerationParameters.ClassName;
+//            var className = entityGenerationModel.ClassName;
 //            if (string.IsNullOrWhiteSpace(className))
 //            {
-//                throw new ArgumentException("ClassName", "classGenerationParameters");
+//                throw new ArgumentException("ClassName", "entityGenerationModel");
 //            }
 
-//            var companyName = classGenerationParameters.CompanyName;
+//            var companyName = entityGenerationModel.CompanyName;
 //            if (string.IsNullOrWhiteSpace(companyName))
 //            {
-//                throw new ArgumentException("CompanyName", "classGenerationParameters");
+//                throw new ArgumentException("CompanyName", "entityGenerationModel");
 //            }
 
-//            var copyrightBanner = classGenerationParameters.CopyrightBanner;
+//            var copyrightBanner = entityGenerationModel.CopyrightBanner;
 //            if (copyrightBanner == null || copyrightBanner.Length < 1)
 //            {
-//                throw new ArgumentException("copyrightBanner", "classGenerationParameters");
+//                throw new ArgumentException("copyrightBanner", "entityGenerationModel");
 //            }
 
-//            var copyrightStartYear = classGenerationParameters.CopyrightStartYear;
+//            var copyrightStartYear = entityGenerationModel.CopyrightStartYear;
 //            if (copyrightStartYear < 1900)
 //            {
-//                throw new ArgumentException("CopyrightStartYear", "classGenerationParameters");
+//                throw new ArgumentException("CopyrightStartYear", "entityGenerationModel");
 //            }
 
-//            var classRemarks = classGenerationParameters.ClassRemarks;
+//            var classRemarks = entityGenerationModel.ClassRemarks;
 //            if (string.IsNullOrWhiteSpace(classRemarks))
 //            {
-//                throw new ArgumentException("ClassRemarks", "classGenerationParameters");
+//                throw new ArgumentException("ClassRemarks", "entityGenerationModel");
 //            }
 
-//            var properties = classGenerationParameters.Properties;
+//            var properties = entityGenerationModel.Properties;
 //            if (properties == null)
 //            {
-//                throw new ArgumentException("Properties", "classGenerationParameters");
+//                throw new ArgumentException("Properties", "entityGenerationModel");
 //            }
 
 //            if (properties.Count(p => p.IsKey) > 1)
@@ -128,8 +128,8 @@
 //            sb.AppendLine("        public class " + className + this.GetClassSuffix());
 //            sb.AppendLine("// ReSharper disable RedundantNameQualifier");
 
-//            var baseClassName = classGenerationParameters.BaseClassName;
-//            var baseClassProperties = classGenerationParameters.BaseClassProperties;
+//            var baseClassName = entityGenerationModel.BaseClassName;
+//            var baseClassProperties = entityGenerationModel.BaseClassProperties;
 //            if (string.IsNullOrWhiteSpace(baseClassName) == false && baseClassProperties != null
 //                && baseClassProperties.Length > 0)
 //            {
@@ -152,7 +152,7 @@
 //            sb.Append(OldHelpers.GetIEquatableRegion(className + this.GetClassSuffix(), baseClassName, baseClassProperties));
 
 //            this.DoOurMethodsRegion(
-//                sb, mainNamespaceName, classGenerationParameters.SubNamespace, className, properties, baseClassName, baseClassProperties);
+//                sb, mainNamespaceName, entityGenerationModel.SubNamespace, className, properties, baseClassName, baseClassProperties);
 
 //            this.DoDisposeMethod(sb, properties, baseClassName);
 
