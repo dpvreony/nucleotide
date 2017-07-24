@@ -41,7 +41,7 @@ build_script:
 after_build:
 - cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script:
-- C:\Users\appveyor\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Users\appveyor\.nuget\packages\xunit.runner.console\2.2.0\tools\xunit.console.x86.exe" -targetargs:"C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard1.6\Dhgms.Nucleotide.UnitTests.dll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
+- C:\Users\appveyor\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Users\appveyor\.nuget\packages\xunit.runner.console\2.2.0\tools\xunit.console.exe" -targetargs:"C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard1.6\Dhgms.Nucleotide.UnitTests.dll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
 - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
 - pip install codecov
 - codecov -f "DhgmsNucleotide_coverage.xml"
