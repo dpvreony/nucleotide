@@ -38,9 +38,11 @@ build_script:
     $assemblyVersion = $Env:APPVEYOR_BUILD_VERSION
     $informationalVersion = $Env:APPVEYOR_BUILD_VERSION + $env:localversionsuffix
     dotnet build src\Dhgms.Nucleotide.sln -c Release /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
-after_build:
-- cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
-test_script: |
+    dotnet pack src\Dhgms.Nucleotide.sln /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
+#after_build:
+#- cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
+test_script:
+- ps: |
     $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\opencover\*\Tools\OpenCover.Console.exe).FullName
     Write-Host "OpenCover : $openCoverConsole"
     $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\xunit.runner.console\*\tools\xunit.console.exe).FullName
