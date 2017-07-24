@@ -40,11 +40,14 @@ build_script:
     dotnet build src\Dhgms.Nucleotide.sln -c Release /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
 after_build:
 - cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
-test_script:
-- C:\Users\appveyor\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Users\appveyor\.nuget\packages\xunit.runner.console\2.2.0\tools\xunit.console.exe" -targetargs:"C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard1.6\Dhgms.Nucleotide.UnitTests.dll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
-- "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
-- pip install codecov
-- codecov -f "DhgmsNucleotide_coverage.xml"
+test_script: |
+    $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\opencover\*\Tools\OpenCover.Console.exe).FullName
+    $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\xunit.runner.console\*\tools\xunit.console.exe).FullName
+    $unittestdll = (Get-ChildItem C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard*\Dhgms.Nucleotide.UnitTests.dll).FullName
+    $openCoverConsole -register:user -target:"$xunitConsole" -targetargs:"$unittestdll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
+    "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+    pip install codecov
+    codecov -f "DhgmsNucleotide_coverage.xml"
 artifacts:
 - path: '*.nupkg'
   name: nuget
