@@ -43,9 +43,9 @@ build_script:
 #- cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script:
 - ps: |
-    $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\opencover\*\Tools\OpenCover.Console.exe).FullName
+    $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\packages\opencover\*\Tools\OpenCover.Console.exe).FullName
     Write-Host "OpenCover : $openCoverConsole"
-    $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\xunit.runner.console\*\tools\xunit.console.exe).FullName
+    $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\xunit.console.exe).FullName
     Write-Host "xunit     : $xunitConsole"
     $unittestdll = (Get-ChildItem C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard*\Dhgms.Nucleotide.UnitTests.dll).FullName
     Write-Host "unit test : $unittestdll"
