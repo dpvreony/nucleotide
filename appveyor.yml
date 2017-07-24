@@ -42,9 +42,12 @@ after_build:
 - cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
 test_script: |
     $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\opencover\*\Tools\OpenCover.Console.exe).FullName
+    Write-Host "OpenCover : $openCoverConsole"
     $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\xunit.runner.console\*\tools\xunit.console.exe).FullName
+    Write-Host "xunit     : $xunitConsole"
     $unittestdll = (Get-ChildItem C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard*\Dhgms.Nucleotide.UnitTests.dll).FullName
-    $openCoverConsole -register:user -target:"$xunitConsole" -targetargs:"$unittestdll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
+    Write-Host "unit test : $unittestdll"
+    .$openCoverConsole -register:user -target:"$xunitConsole" -targetargs:"$unittestdll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
     "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
     pip install codecov
     codecov -f "DhgmsNucleotide_coverage.xml"
