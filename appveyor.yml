@@ -11,6 +11,9 @@ assembly_info:
   assembly_version: '{version}'
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}{localversionsuffix}'
+environment:
+  sonarqubeLogin:
+    secure: DzgnR1CWO5ZS1iyThcuGLK/K6WFP5mrmN1W7uOwQajoAoAZM9+HQxI0CM5K2vGX4
 init:
 - ps: >-
     if ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
@@ -31,13 +34,18 @@ before_build:
 
     Invoke-Expression "dotnet restore src\Dhgms.Nucleotide.sln" 
 build_script:
+- choco install "msbuild-sonarqube-runner" -y
 - ps: dotnet restore src\Dhgms.Nucleotide.sln
 - ps: |
     $fileVersion = $Env:APPVEYOR_BUILD_VERSION
     #moving forward assembly version will be major.minor.0
     $assemblyVersion = $Env:APPVEYOR_BUILD_VERSION
     $informationalVersion = $Env:APPVEYOR_BUILD_VERSION + $env:localversionsuffix
+    $sonarqubeProjectKey = "nucleotide"
+    $sonarqubeOrganisationKey = "dpvreony-github"
+    SonarQube.Scanner.MSBuild.exe begin /k:"$sonarqubeProjectKey" /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.organization=$sonarqubeOrganisationKey" /d:"sonar.login=$env:sonarqubeLogin"
     dotnet build src\Dhgms.Nucleotide.sln -c Release /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
+    SonarQube.Scanner.MSBuild.exe end /d:"sonar.login=$env:sonarqubeLogin"
     dotnet pack src\Dhgms.Nucleotide.sln /p:FileVersion=$fileVersion /p:AssemblyVersion=$assemblyVersion /p:Version=$informationalVersion
 #after_build:
 #- cmd: dotnet pack src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
