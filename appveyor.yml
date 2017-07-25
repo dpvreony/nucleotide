@@ -49,7 +49,9 @@ test_script:
     Write-Host "xunit     : $xunitConsole"
     $unittestdll = (Get-ChildItem C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\bin\Release\netstandard*\Dhgms.Nucleotide.UnitTests.dll).FullName
     Write-Host "unit test : $unittestdll"
-    .$openCoverConsole -register:user -target:"dotnet" -targetargs:"xunit $unittestdll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -filter:"+[Dhgms*]*" -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
+    $dotnetLocation = Get-Command "dotnet.exe"
+    Write-Host "dotnet    : $dotnetLocation.Path"
+    .$openCoverConsole -register:user -target:"$dotnetLocation.Path" -targetargs:"xunit $unittestdll -noshadow -appveyor" -returntargetcode -excludebyattribute:*.ExcludeFromCodeCoverage* -filter:"+[Dhgms*]*" -hideskipped:All -output:.\DhgmsNucleotide_coverage.xml
     "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
     pip install codecov
     codecov -f "DhgmsNucleotide_coverage.xml"
