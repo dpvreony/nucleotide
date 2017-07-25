@@ -13,7 +13,7 @@ assembly_info:
   assembly_informational_version: '{version}{localversionsuffix}'
 environment:
   sonarqubeLogin:
-    secure: DzgnR1CWO5ZS1iyThcuGLK/K6WFP5mrmN1W7uOwQajoAoAZM9+HQxI0CM5K2vGX4
+    secure: cn/J1/GsOt4dF7zRxdB9ajSk1/UzxYZq0MMLLQPkFA92GtrWIYeiKgrzC2d5z7bq
 init:
 - ps: >-
     if ($env:APPVEYOR_REPO_BRANCH -ne 'master') {
