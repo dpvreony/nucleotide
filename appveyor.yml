@@ -45,8 +45,6 @@ test_script:
 - ps: |
     $openCoverConsole = (Get-ChildItem C:\Users\appveyor\.nuget\packages\opencover\*\Tools\OpenCover.Console.exe).FullName
     Write-Host "OpenCover : $openCoverConsole"
-    $xunitConsole = (Get-ChildItem C:\Users\appveyor\.nuget\packages\xunit.runner.console\*\tools\xunit.console.exe).FullName
-    Write-Host "xunit     : $xunitConsole"
     $unittestproject = "C:\projects\nucleotide\src\Dhgms.Nucleotide.UnitTests\"
     Write-Host "unit test : $unittestdll"
     $dotnetLocation = "C:\Program Files\dotnet\dotnet.exe"
