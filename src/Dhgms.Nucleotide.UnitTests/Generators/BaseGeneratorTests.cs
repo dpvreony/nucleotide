@@ -12,20 +12,22 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     //[ExcludeFromCodeCoverage]
     public static class GeneratorTests
     {
-
         public delegate ICodeGenerator CodeGeneratorFactory(AttributeData attributeData);
 
         public sealed class ConstructorMethod
         {
             public static IEnumerable<object[]> TestData = new[]
             {
-                CommandClassGeneratorTestData
+                new object[]
+                {
+                    CommandClassGeneratorFactory
+                },
             };
 
-            private static CodeGeneratorFactory CommandClassGeneratorFactory =
+            private static readonly CodeGeneratorFactory CommandClassGeneratorFactory =
                 attributeData => new CommandClassGenerator(attributeData);
 
-            private static object[] CommandClassGeneratorTestData = new object[]
+            private static readonly object[] CommandClassGeneratorTestData = new object[]
             {
                 CommandClassGeneratorFactory
             };

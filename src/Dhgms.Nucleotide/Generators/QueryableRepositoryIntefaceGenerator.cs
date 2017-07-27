@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Code Generator for Repository Interface that supports Filtering via IQueryable selectors
     /// </summary>
-    public class QueryableRepositoryIntefaceGenerator : ICodeGenerator
+    public sealed class QueryableRepositoryIntefaceGenerator : ICodeGenerator
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryableRepositoryIntefaceGenerator"/> class. 
