@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
-    public static class QueryableRepositoryIntefaceGeneratorTests
+    public static class QueryableRepositoryInterfaceGeneratorTests
     {
         public sealed class ConstructorMethod
         {
@@ -16,7 +16,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             public void ThrowsArgumentNullException()
             {
 
-                var exception = Assert.Throws<ArgumentNullException>(() => new QueryableRepositoryIntefaceGenerator(null));
+                var exception = Assert.Throws<ArgumentNullException>(() => new QueryableRepositoryInterfaceGenerator(null));
                 Assert.Equal("attributeData", exception.ParamName);
             }
 
@@ -24,7 +24,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             public void ReturnsInstance()
             {
                 var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                var instance = new QueryableRepositoryIntefaceGenerator(attributeData.Object);
+                var instance = new QueryableRepositoryInterfaceGenerator(attributeData.Object);
                 Assert.NotNull(instance);
             }
         }

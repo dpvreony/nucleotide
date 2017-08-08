@@ -12,24 +12,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
     public class BaseGeneratorTests
     {
-<<<<<<< HEAD
-        public delegate ICodeGenerator CodeGeneratorFactory(AttributeData attributeData);
-
-        public sealed class ConstructorMethod
-        {
-            public static IEnumerable<object[]> TestData = new[]
-            {
-                new object[]
-                {
-                    CommandClassGeneratorFactory
-                },
-            };
-
-            private static readonly CodeGeneratorFactory CommandClassGeneratorFactory =
-                attributeData => new CommandClassGenerator(attributeData);
-
-            private static readonly object[] CommandClassGeneratorTestData = new object[]
-=======
         public abstract class BaseConstructorMethod<TGenerator>
             where TGenerator : class
         {
@@ -37,7 +19,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             [Fact]
             public void ThrowsArgumentNullException()
->>>>>>> origin/roslyn
             {
                 var factory = GetFactory();
                 var exception = Assert.Throws<ArgumentNullException>(() => factory(null));

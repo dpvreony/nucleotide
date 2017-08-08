@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generates a Repository Interface that supports searching and results based on IQueryable logic
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(QueryableRepositoryIntefaceGenerator))]
+    [CodeGenerationAttribute(typeof(QueryableRepositoryInterfaceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateQueryableRepositoryInterfaceAttribute : BaseCodeGeneratorAttribute
     {
