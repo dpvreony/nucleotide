@@ -21,73 +21,16 @@ namespace Dhgms.Nucleotide.Generators
     /// </summary>
     public abstract class BaseClassLevelCodeGenerator : BaseGenerator
     {
-        private readonly object nucleotideGenerationModel;
-
         /// <summary>
         ///
         /// </summary>
         /// <param name="attributeData"></param>
-        protected BaseClassLevelCodeGenerator(AttributeData attributeData)
+        protected BaseClassLevelCodeGenerator(AttributeData attributeData) : base(attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
-            Requires.That(attributeData.ConstructorArguments.Length > 0, nameof(attributeData), "x");
-
-            this.nucleotideGenerationModel = attributeData.ConstructorArguments;
             //this.nucleotideGenerationModel = (Type) [0].Value;
         }
 
-        /// <summary>
-        /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
-        /// </summary>
-        /// <param name="context">The transformation context being generated for.</param>
-        /// <param name="progress">A way to report diagnostic messages.</param>
-        /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>The generated member syntax to be added to the project.</returns>
-        public override async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
-            TransformationContext context,
-            IProgress<Diagnostic> progress,
-            CancellationToken cancellationToken)
-        {
-            var namespaceName = this.GetNamespace();
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName));
-
-            var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.nucleotideGenerationModel;
-
-            var a = castDetails.First();
-            var namedTypeSymbols = a.Value as INamedTypeSymbol;
-            var compilation = context.Compilation;
-            var generationModel = await this.GetModel(namedTypeSymbols, compilation);
-
-            /*
-            if (generationModel == null)
-            {
-                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
-            }
-            else
-            {
-                namespaceDeclaration = await this.GenerateClasses(namespaceDeclaration, generationModel.EntityGenerationModel);
-            }
-            */
-
-            var nodes = new MemberDeclarationSyntax[]
-            {
-                namespaceDeclaration
-            };
-
-            var results = SyntaxFactory.List(nodes);
-
-            return await Task.FromResult(results);
-        }
-
-        /// <summary>
-        /// Gets the suffix to be applied to a clas
-        /// </summary>
-        /// <returns>Class suffix</returns>
-        protected abstract string GetClassSuffix();
-
-        protected abstract string GetNamespace();
-
-        protected virtual async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
+        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {

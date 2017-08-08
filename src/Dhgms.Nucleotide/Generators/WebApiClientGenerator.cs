@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    class WebApiClientGenerator : BaseClassLevelCodeGenerator
+    public sealed class WebApiClientGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class.

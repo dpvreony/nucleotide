@@ -71,7 +71,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override async Task<NamespaceDeclarationSyntax> GenerateClasses(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
+        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {

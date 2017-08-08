@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Reflection;
 using System.Text;
 using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
+using Moq;
 using Xunit;
-using System.Diagnostics.CodeAnalysis;
-using CodeGeneration.Roslyn;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
-    //[ExcludeFromCodeCoverage]
-    public static class GeneratorTests
+    public class BaseGeneratorTests
     {
+<<<<<<< HEAD
         public delegate ICodeGenerator CodeGeneratorFactory(AttributeData attributeData);
 
         public sealed class ConstructorMethod
@@ -28,25 +29,38 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 attributeData => new CommandClassGenerator(attributeData);
 
             private static readonly object[] CommandClassGeneratorTestData = new object[]
-            {
-                CommandClassGeneratorFactory
-            };
+=======
+        public abstract class BaseConstructorMethod<TGenerator>
+            where TGenerator : class
+        {
+            protected abstract Func<AttributeData, TGenerator> GetFactory();
 
-            [Theory]
-            [MemberData(nameof(TestData))]
-            public void ThrowsArgumentNullException(CodeGeneratorFactory factory)
+            [Fact]
+            public void ThrowsArgumentNullException()
+>>>>>>> origin/roslyn
             {
+                var factory = GetFactory();
                 var exception = Assert.Throws<ArgumentNullException>(() => factory(null));
                 Assert.Equal("attributeData", exception.ParamName);
             }
 
-            [Theory]
-            [MemberData(nameof(TestData))]
-            public void ReturnsInstance(CodeGeneratorFactory factory)
+            [Fact]
+            public void ThrowsArgumentException()
             {
-                // just done so code compiles.
-                AttributeData attributeData = default(AttributeData);
-                var instance = factory(attributeData);
+                var factory = GetFactory();
+                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
+                attributeData.SetupProperty(x => x.ConstructorArguments, ImmutableArray<TypedConstant>.Empty);
+
+                var exception = Assert.Throws<ArgumentNullException>(() => factory(null));
+                Assert.Equal("attributeData", exception.ParamName);
+            }
+
+            [Fact]
+            public void ReturnsInstance()
+            {
+                var factory = GetFactory();
+                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
+                var instance = factory(attributeData.Object);
                 Assert.NotNull(instance);
             }
         }
