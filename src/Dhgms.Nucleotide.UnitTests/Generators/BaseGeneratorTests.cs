@@ -30,9 +30,9 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             {
                 var factory = GetFactory();
                 var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                attributeData.SetupProperty(x => x.ConstructorArguments, ImmutableArray<TypedConstant>.Empty);
+                attributeData.SetupGet(x => x.ConstructorArguments).Returns(ImmutableArray<TypedConstant>.Empty);
 
-                var exception = Assert.Throws<ArgumentNullException>(() => factory(null));
+                var exception = Assert.Throws<ArgumentException>(() => factory(attributeData.Object));
                 Assert.Equal("attributeData", exception.ParamName);
             }
 
@@ -41,6 +41,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             {
                 var factory = GetFactory();
                 var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
+                attributeData.SetupGet(x => x.ConstructorArguments).Returns(ImmutableArray<TypedConstant>.Empty);
                 var instance = factory(attributeData.Object);
                 Assert.NotNull(instance);
             }

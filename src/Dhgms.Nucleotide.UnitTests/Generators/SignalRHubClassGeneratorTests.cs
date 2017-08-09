@@ -10,22 +10,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
     public static class SignalRHubClassGeneratorTests
     {
-        public sealed class ConstructorMethod
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<SignalRHubClassGenerator>
         {
-            [Fact]
-            public void ThrowsArgumentNullException()
+            protected override Func<AttributeData, SignalRHubClassGenerator> GetFactory()
             {
-
-                var exception = Assert.Throws<ArgumentNullException>(() => new SignalRHubClassGenerator(null));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
-            public void ReturnsInstance()
-            {
-                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                var instance = new SignalRHubClassGenerator(attributeData.Object);
-                Assert.NotNull(instance);
+                return data => new SignalRHubClassGenerator(data);
             }
         }
     }

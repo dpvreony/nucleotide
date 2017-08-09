@@ -10,22 +10,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
     public static class EntityFrameworkModelGeneratorTests
     {
-        public sealed class ConstructorMethod
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<EntityFrameworkModelGenerator>
         {
-            [Fact]
-            public void ThrowsArgumentNullException()
+            protected override Func<AttributeData, EntityFrameworkModelGenerator> GetFactory()
             {
-
-                var exception = Assert.Throws<ArgumentNullException>(() => new EntityFrameworkModelGenerator(null));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
-            public void ReturnsInstance()
-            {
-                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                var instance = new EntityFrameworkModelGenerator(attributeData.Object);
-                Assert.NotNull(instance);
+                return data => new EntityFrameworkModelGenerator(data);
             }
         }
     }

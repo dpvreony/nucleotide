@@ -10,22 +10,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
     public static class QueryInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<QueryInterfaceGenerator>
         {
-            [Fact]
-            public void ThrowsArgumentNullException()
+            protected override Func<AttributeData, QueryInterfaceGenerator> GetFactory()
             {
-
-                var exception = Assert.Throws<ArgumentNullException>(() => new QueryInterfaceGenerator(null));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
-            public void ReturnsInstance()
-            {
-                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                var instance = new QueryInterfaceGenerator(attributeData.Object);
-                Assert.NotNull(instance);
+                return data => new QueryInterfaceGenerator(data);
             }
         }
     }

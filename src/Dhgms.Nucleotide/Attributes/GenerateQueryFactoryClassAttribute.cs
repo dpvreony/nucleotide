@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate a Query Factory class associated with this class.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(QueryFactoryGenerator))]
+    [CodeGenerationAttribute(typeof(QueryFactoryClassGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateQueryFactoryClassAttribute : BaseCodeGeneratorAttribute
     {

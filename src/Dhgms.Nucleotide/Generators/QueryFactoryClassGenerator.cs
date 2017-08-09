@@ -15,12 +15,12 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Generator for Query Factory Class
     /// </summary>
-    public sealed class QueryFactoryGenerator : ICodeGenerator
+    public sealed class QueryFactoryClassGenerator : ICodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryFactoryGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="QueryFactoryClassGenerator"/> class. 
         /// </summary>
-        public QueryFactoryGenerator(AttributeData attributeData)
+        public QueryFactoryClassGenerator(AttributeData attributeData)
         {
             Requires.NotNull(attributeData, nameof(attributeData));
         }
