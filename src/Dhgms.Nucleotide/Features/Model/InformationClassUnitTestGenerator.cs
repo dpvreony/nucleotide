@@ -4,12 +4,12 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Generators
+using System.Text;
+using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.PropertyInfo;
+
+namespace Dhgms.Nucleotide.Features.Model
 {
-    using System.Text;
-
-    using Dhgms.Nucleotide.PropertyInfo;
-
     /// <summary>
     /// Unit Test Generator for an Information Class
     /// </summary>

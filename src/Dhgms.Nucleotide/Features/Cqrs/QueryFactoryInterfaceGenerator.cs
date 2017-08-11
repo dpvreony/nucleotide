@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
+﻿using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Cqrs
 {
     /// <summary>
-    /// Generator for Query Interface
+    /// Generator for Query Factory Interface
     /// </summary>
-    public sealed class QueryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class QueryFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryInterfaceGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="QueryFactoryInterfaceGenerator"/> class. 
         /// </summary>
-        public QueryInterfaceGenerator(AttributeData attributeData) : base(attributeData)
+        public QueryFactoryInterfaceGenerator(AttributeData attributeData) : base(attributeData)
         {
         }
 
@@ -35,18 +26,18 @@ namespace Dhgms.Nucleotide.Generators
         {
             return new[]
             {
-                $"Query for {entityDeclaration.ClassName}"
+                $"Query factory for {entityDeclaration.ClassName}"
             };
         }
 
         protected override string GetClassSuffix()
         {
-            return "Query";
+            return "QueryFactory";
         }
 
         protected override string GetNamespace()
         {
-            return "Queries";
+            return "QueryFactories";
         }
 
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)

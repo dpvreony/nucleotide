@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
@@ -10,17 +7,17 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Cqrs
 {
     /// <summary>
-    /// Generator for SignalR Hub Class
+    /// Generator for Query Class
     /// </summary>
-    public sealed class SignalRHubClassGenerator : ICodeGenerator
+    public sealed class QueryClassGenerator : ICodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SignalRHubClassGenerator"/> class.
+        /// Initializes a new instance of the <see cref="QueryClassGenerator"/> class. 
         /// </summary>
-        public SignalRHubClassGenerator(AttributeData attributeData)
+        public QueryClassGenerator(AttributeData attributeData)
         {
             Requires.NotNull(attributeData, nameof(attributeData));
         }
@@ -39,7 +36,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var nodes = new MemberDeclarationSyntax[]
             {
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Wcf"))
+                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Queries"))
                     .AddMembers(GetClasses())
             };
 

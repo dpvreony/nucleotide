@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Features.WebApi;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 

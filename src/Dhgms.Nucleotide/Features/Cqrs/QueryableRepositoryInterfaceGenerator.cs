@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
@@ -12,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Cqrs
 {
     /// <summary>
     /// Code Generator for Repository Interface that supports Filtering via IQueryable selectors

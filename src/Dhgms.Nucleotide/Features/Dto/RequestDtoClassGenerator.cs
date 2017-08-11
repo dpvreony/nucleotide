@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Dhgms.Nucleotide.Features.Model;
+using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Dto
 {
     public sealed class RequestDtoClassGenerator : BaseClassLevelCodeGenerator
     {

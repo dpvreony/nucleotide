@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Features.Cqrs;
 using Dhgms.Nucleotide.Generators;
 
 namespace Dhgms.Nucleotide.Attributes

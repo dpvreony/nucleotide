@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGenerator : BaseClassLevelCodeGenerator
     {

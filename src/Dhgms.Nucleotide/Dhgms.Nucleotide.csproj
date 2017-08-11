@@ -37,4 +37,10 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClassGenerators\" />
+    <Folder Include="Features\Mvc\" />
+    <Folder Include="Features\ReactiveUi\" />
+  </ItemGroup>
+
 </Project>

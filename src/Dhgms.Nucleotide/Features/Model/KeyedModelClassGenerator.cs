@@ -1,37 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Model
 {
     /// <summary>
     /// Generates models
     /// </summary>
-    public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator
+    public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class. 
         /// </summary>
-        public UnkeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
+        public KeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
         {
         }
 
-        private MemberDeclarationSyntax[] GetMembers()
-        {
-            var members = GetUnkeyedClasses()
-                .Concat(GetKeyedClasses())
-                .ToArray();
-
-            return members;
-        }
 
         private MemberDeclarationSyntax[] GetKeyedClasses()
         {
@@ -64,10 +51,10 @@ namespace Dhgms.Nucleotide.Generators
             return new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.ClassDeclaration($"{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .AddMembers(members)
-                .WithLeadingTrivia(leadingTrivia)
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                    .AddBaseListTypes(baseTypes)
+                    .AddMembers(members)
+                    .WithLeadingTrivia(leadingTrivia)
             };
         }
 
@@ -88,9 +75,9 @@ namespace Dhgms.Nucleotide.Generators
             return new MemberDeclarationSyntax[]
             {
                 SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .WithLeadingTrivia(leadingTrivia)
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                    .AddBaseListTypes(baseTypes)
+                    .WithLeadingTrivia(leadingTrivia)
             };
         }
 
@@ -130,14 +117,14 @@ namespace Dhgms.Nucleotide.Generators
 
         protected override string GetBaseClass(string entityName)
         {
-            return null;
+            return $"Unkeyed{entityName}Model";
         }
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
             return new List<string>
             {
-                $"IUnkeyed{entityName}Model"
+                $"IKeyed{entityName}Model"
             };
         }
     }

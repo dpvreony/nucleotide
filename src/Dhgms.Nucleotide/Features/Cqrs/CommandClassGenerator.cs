@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
@@ -10,17 +7,17 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Cqrs
 {
     /// <summary>
-    /// Generator for Query Class
+    /// Generator for Command Class
     /// </summary>
-    public sealed class QueryClassGenerator : ICodeGenerator
+    public sealed class CommandClassGenerator : ICodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QueryClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="CommandClassGenerator"/> class. 
         /// </summary>
-        public QueryClassGenerator(AttributeData attributeData)
+        public CommandClassGenerator(AttributeData attributeData)
         {
             Requires.NotNull(attributeData, nameof(attributeData));
         }
@@ -39,7 +36,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var nodes = new MemberDeclarationSyntax[]
             {
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Queries"))
+                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("Commands"))
                     .AddMembers(GetClasses())
             };
 

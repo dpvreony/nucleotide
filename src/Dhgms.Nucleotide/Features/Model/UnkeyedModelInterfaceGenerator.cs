@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
+﻿using System.Linq;
+using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Features.Model
 {
     public sealed class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {

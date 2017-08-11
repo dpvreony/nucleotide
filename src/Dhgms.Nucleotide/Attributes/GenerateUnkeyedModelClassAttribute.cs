@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using CodeGeneration.Roslyn;
+using Dhgms.Nucleotide.Features.Model;
 using Dhgms.Nucleotide.Generators;
 
 namespace Dhgms.Nucleotide.Attributes
