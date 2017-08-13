@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Dhgms.Nucleotide.Features.Wcf;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;

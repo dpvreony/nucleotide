@@ -169,16 +169,34 @@ namespace Dhgms.Nucleotide.Helpers
         /// Gets syntax to create and assign a variable from invoking another variable
         /// </summary>
         /// <param name="variableToCreate"></param>
-        /// <param name="variableToInvoke"></param>
+        /// <param name="variableToReference"></param>
+        /// <param name="methodToInvoke"></param>
+        /// <param name="arguments"></param>
         /// <returns></returns>
-        public static StatementSyntax GetVariableAssignmentFromVariableInvocationSyntax(string variableToCreate, string variableToReference, string methodToInvoke)
+        public static StatementSyntax GetVariableAssignmentFromVariableInvocationSyntax(
+            string variableToCreate,
+            string variableToReference,
+            string methodToInvoke,
+            string[] arguments)
         {
             var fieldMemberAccess = SyntaxFactory.MemberAccessExpression(
                 SyntaxKind.SimpleMemberAccessExpression,
                 SyntaxFactory.IdentifierName(variableToReference),
                 SyntaxFactory.IdentifierName(methodToInvoke));
 
-            var getCommandInvocation = SyntaxFactory.InvocationExpression(fieldMemberAccess);
+            var argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (arguments != null && arguments.Length > 0)
+            {
+
+                foreach (var s in arguments)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            var argListSyntax = SyntaxFactory.ArgumentList(argsList);
+
+            var getCommandInvocation = SyntaxFactory.InvocationExpression(fieldMemberAccess, argListSyntax);
 
 
             var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),

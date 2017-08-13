@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
-using Dhgms.Nucleotide.Features.Wcf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

@@ -45,19 +45,19 @@ namespace Dhgms.Nucleotide.Features.WebApi
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName)
         {
-#if NET46
-            return "System.Web.Http.ApiController";
-#else
             return "Microsoft.AspNetCore.Mvc.Controller";
-#endif
         }
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
+            return null;
+
+            /*
             return new List<string>
             {
                 $"Services.I{entityName}Service"
             };
+            */
         }
 
         /// <inheritdoc />
@@ -91,7 +91,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             return new List<Tuple<string, IList<string>>>
             {
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null)
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null)
             };
         }
 
@@ -114,8 +115,20 @@ namespace Dhgms.Nucleotide.Features.WebApi
         private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
             var methodName = "AddAsync";
-            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetAddCommandAsync");
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command", "ExecuteAsync");
+            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax(
+                "command",
+                "_commandFactory",
+                "GetAddCommandAsync");
+
+            var arguments = new[]
+            {
+                "requestDto"
+            };
+
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax(
+                "result",
+                "command",
+                "ExecuteAsync", arguments);
 
             var signalRNotificationExecution = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("_signalRHub", "OnAddAsync", new [] { "result" });
 
@@ -136,15 +149,15 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var attributes = new List<Tuple<string, IList<string>>>
             {
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Add\""}),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null)//,
+                //new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Add\""}),
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
 
-            var parameters = GetParams(new []{ $"RequestDtos.Add{entityName}RequestDto requestDto"});
+            var parameters = GetParams(new []{ $"Models.Unkeyed{entityName}Model requestDto"});
 
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<int>");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
@@ -156,7 +169,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
         {
             var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetDeleteCommandAsync");
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command", "ExecuteAsync");
+            var arguments = new[]
+            {
+                "id"
+            };
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command", "ExecuteAsync", arguments);
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
@@ -169,9 +186,9 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
 
-            var parameters = GetParams(new[] { $"int {OldHelpers.GetVariableName(entityName)}Id" });
+            var parameters = GetParams(new[] { $"int id" });
 
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "DeleteAsync")
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
@@ -198,7 +215,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var parameters = GetParams(new[] { $"RequestDtos.List{entityName}RequestDto requestDto" });
 
-            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.List{entityName}ResponseDto>");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
@@ -210,7 +227,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         private MemberDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
         {
             var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("command", "_commandFactory", "GetUpdateCommandAsync");
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command", "ExecuteAsync");
+            var arguments = new[]
+            {
+                "requestDto"
+            };
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "command", "ExecuteAsync", arguments);
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
 
             var body = new StatementSyntax[] { commandLocalDeclaration, commandExecutionDeclaration, returnStatement };
@@ -225,10 +246,9 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var parameters = GetParams(new[]
             {
-                $"int {OldHelpers.GetVariableName(entityName)}Id",
                 $"RequestDtos.Update{entityName}RequestDto requestDto"
             });
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "UpdateAsync")
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
@@ -239,12 +259,17 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
         private MemberDeclarationSyntax GetViewMethodDeclaration(string entityName)
         {
-            var entityIdVariableName = $"{OldHelpers.GetVariableName(entityName)}Id";
+            var entityIdVariableName = "id";
             const string notFoundResult = "new Microsoft.AspNetCore.Mvc.NotFoundResult()";
             var numberTooLowCheckDeclaration =
                 RoslynGenerationHelpers.GetReturnIfLessThanSyntax(entityIdVariableName, 1, notFoundResult);
             var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetViewQueryAsync");
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query");
+
+            var arguments = new[]
+            {
+                "id"
+            };
+            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query", "Execute", arguments);
             var nullQueryResultCheckDeclaration = RoslynGenerationHelpers.GetReturnIfNullSyntax("result", notFoundResult);
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
 
@@ -269,10 +294,10 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var parameters = GetParams(new[]
             {
-                $"int {OldHelpers.GetVariableName(entityName)}Id"
+                "int id"
             });
 
-            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ResponseDtos.View{entityName}ResponseDto>");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ViewAsync")
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
