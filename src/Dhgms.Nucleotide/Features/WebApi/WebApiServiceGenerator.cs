@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Helpers;
+using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -21,6 +22,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         }
 
         /// <inheritdoc />
+        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override string GetClassPrefix()
         {
             return null;

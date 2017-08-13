@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -19,69 +21,7 @@ namespace Dhgms.Nucleotide.Features.Model
         {
         }
 
-
-        private MemberDeclarationSyntax[] GetKeyedClasses()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Represents the {name} model.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Unkeyed{name}Model")),
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"I{name}Model"))
-            };
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
-            };
-
-            var members = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).AddAccessorListAccessors(accessor)
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.ClassDeclaration($"{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .AddBaseListTypes(baseTypes)
-                    .AddMembers(members)
-                    .WithLeadingTrivia(leadingTrivia)
-            };
-        }
-
-        private MemberDeclarationSyntax[] GetUnkeyedClasses()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Represents the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                    .AddBaseListTypes(baseTypes)
-                    .WithLeadingTrivia(leadingTrivia)
-            };
-        }
-
-        protected override string GetClassPrefix() => "Unkeyed";
+        protected override string GetClassPrefix() => null;
 
         protected override string GetClassSuffix() => "Model";
 
@@ -91,7 +31,7 @@ namespace Dhgms.Nucleotide.Features.Model
         {
             return new[]
             {
-                $"Unkeyed Model Class for {entityName}"
+                $"Keyed Model Class for {entityName}"
             };
         }
 
@@ -110,6 +50,53 @@ namespace Dhgms.Nucleotide.Features.Model
             return null;
         }
 
+        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            var idColumn = GetIdColumn(entityGenerationModel.KeyType);
+
+            return new[]
+            {
+                GetReadOnlyPropertyDeclaration(idColumn)
+            };
+        }
+
+        private static PropertyInfoBase GetIdColumn(KeyType keyType)
+        {
+            switch (keyType)
+            {
+                case KeyType.Guid:
+                    return new ClrGuidPropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        true,
+                        null);
+                case KeyType.Int32:
+                    return new Integer32PropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        1,
+                        int.MaxValue,
+                        true,
+                        null);
+                case KeyType.Int64:
+                    return new Integer64PropertyInfo(
+                        CollectionType.None,
+                        "Id",
+                        "Unique Identifier for the object",
+                        false,
+                        1,
+                        int.MaxValue,
+                        true,
+                        null);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(keyType));
+            }
+        }
+
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;
@@ -124,7 +111,7 @@ namespace Dhgms.Nucleotide.Features.Model
         {
             return new List<string>
             {
-                $"IKeyed{entityName}Model"
+                $"I{entityName}Model"
             };
         }
     }

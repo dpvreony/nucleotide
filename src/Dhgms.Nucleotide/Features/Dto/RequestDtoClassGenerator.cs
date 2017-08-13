@@ -39,6 +39,11 @@ namespace Dhgms.Nucleotide.Features.Dto
             return null;
         }
 
+        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]
@@ -96,7 +101,7 @@ namespace Dhgms.Nucleotide.Features.Dto
         private async Task<MemberDeclarationSyntax> GetAddClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"Add{entityDeclaration.ClassName}{suffix}";
-            var members = GetMembers(className, entityDeclaration.ClassName);
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
             var declaration = SyntaxFactory.ClassDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
@@ -114,7 +119,7 @@ namespace Dhgms.Nucleotide.Features.Dto
         private async Task<MemberDeclarationSyntax> GetListClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"List{entityDeclaration.ClassName}{suffix}";
-            var members = GetMembers(className, entityDeclaration.ClassName);
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
             var declaration = SyntaxFactory.ClassDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);
@@ -132,7 +137,7 @@ namespace Dhgms.Nucleotide.Features.Dto
         private async Task<MemberDeclarationSyntax> GetUpdateClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"Update{entityDeclaration.ClassName}{suffix}";
-            var members = GetMembers(className, entityDeclaration.ClassName);
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
             var declaration = SyntaxFactory.ClassDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
                 .AddMembers(members);

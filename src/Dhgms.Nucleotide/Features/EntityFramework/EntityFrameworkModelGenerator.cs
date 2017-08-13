@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -10,6 +11,11 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
     {
         public EntityFrameworkModelGenerator(AttributeData attributeData) : base(attributeData)
         {
+        }
+
+        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
         }
 
         protected override string GetClassSuffix()

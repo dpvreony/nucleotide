@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -121,5 +122,29 @@ namespace Dhgms.Nucleotide.Generators
             var loadContext = AssemblyLoadContext.GetLoadContext(assembly);
             return loadContext.LoadFromAssemblyPath(matchingReferences[0].FilePath);
         }
+
+        protected abstract PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo);
+
+        protected abstract PropertyDeclarationSyntax GetReadOnlyPropertyDeclaration(PropertyInfoBase propertyInfo);
+
+        protected IEnumerable<SyntaxTrivia> GetSummary(string[] summaryLines)
+        {
+            var result = new List<SyntaxTrivia>
+            {
+                SyntaxFactory.Comment($"/// <summary>")
+            };
+
+            var lines = summaryLines.Select(line => SyntaxFactory.Comment($"/// {line}"));
+            result.AddRange(lines);
+
+            result.Add(SyntaxFactory.Comment($"/// </summary>"));
+
+            return result;
+        }
+
+        protected abstract PropertyDeclarationSyntax GetPropertyDeclaration(
+            PropertyInfoBase propertyInfo,
+            AccessorDeclarationSyntax[] accessorList,
+            IEnumerable<SyntaxTrivia> summary);
     }
 }

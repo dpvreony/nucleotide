@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -70,7 +71,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var entityName = entityDeclaration.ClassName;
             var className = $"{prefix}{entityName}{suffix}";
-            var members = GetMembers(className, entityName);
+            var members = GetMembers(className, entityName, entityDeclaration);
 
             // SyntaxFactory.Token(SyntaxKind.SealedKeyword)
 
@@ -138,7 +139,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract List<Tuple<string, IList<string>>> GetClassAttributes();
 
-        protected MemberDeclarationSyntax[] GetMembers(string className, string entityName)
+        protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel entityGenerationModel)
         {
             var result = new List<MemberDeclarationSyntax>();
 
@@ -153,6 +154,12 @@ namespace Dhgms.Nucleotide.Generators
             if (constructorArguments != null && constructorArguments.Count > 0)
             {
                 result.Add(GenerateConstructor(className, constructorArguments, entityName));
+            }
+
+            var properties = GetPropertyDeclarations(entityGenerationModel);
+            if (properties != null && properties.Length > 0)
+            {
+                result.AddRange(properties);
             }
 
             var methods = GetMethodDeclarations(entityName);
@@ -216,6 +223,12 @@ namespace Dhgms.Nucleotide.Generators
         /// </summary>
         /// <returns></returns>
         protected abstract MemberDeclarationSyntax[] GetMethodDeclarations(string entityName);
+
+        /// <summary>
+        /// Gets the property declarations to be generated
+        /// </summary>
+        /// <returns></returns>
+        protected abstract MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
 
         protected static ParameterListSyntax GetParams(string[] argCollection)
         {
@@ -306,7 +319,7 @@ namespace Dhgms.Nucleotide.Generators
             return argumentList;
         }
 
-        private static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
+        protected static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
         {
             var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName(returnType), methodName);
 
@@ -340,5 +353,48 @@ namespace Dhgms.Nucleotide.Generators
         protected abstract IList<string> GetImplementedInterfaces(string entityName);
 
         protected abstract string GetClassPrefix();
+
+        protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
+        {
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            };
+
+            var summary = GetSummary(new[] { $"Gets or sets {propertyInfo.Name}" });
+
+            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
+        }
+
+        protected override PropertyDeclarationSyntax GetReadOnlyPropertyDeclaration(PropertyInfoBase propertyInfo)
+        {
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            };
+
+            var summary = GetSummary(new[] { $"Gets {propertyInfo.Name}" });
+
+            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
+        }
+
+        protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
+        {
+            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var identifier = propertyInfo.Name;
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(summary);
+
+            return result;
+        }
     }
 }

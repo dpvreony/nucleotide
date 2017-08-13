@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -18,6 +19,11 @@ namespace Dhgms.Nucleotide.Features.Model
         /// </summary>
         public UnkeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
         {
+        }
+
+        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
         }
 
         private MemberDeclarationSyntax[] GetMembers()

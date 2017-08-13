@@ -30,34 +30,6 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
-        protected PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
-        {
-            var accessorList = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-            };
-
-            var summary = GetSummary(new[] {$"Gets or sets {propertyInfo.Name}"});
-
-            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
-        }
-
-        protected PropertyDeclarationSyntax GetReadOnlyPropertyDeclaration(PropertyInfoBase propertyInfo)
-        {
-            var accessorList = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-            };
-
-            var summary = GetSummary(new[] { $"Gets {propertyInfo.Name}" });
-
-            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
-        }
-
         protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
@@ -129,6 +101,48 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns>Base class</returns>
         protected abstract string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel);
 
+        protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
+        {
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            };
+
+            var summary = GetSummary(new[] { $"Gets or sets {propertyInfo.Name}" });
+
+            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
+        }
+
+        protected override PropertyDeclarationSyntax GetReadOnlyPropertyDeclaration(PropertyInfoBase propertyInfo)
+        {
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            };
+
+            var summary = GetSummary(new[] { $"Gets {propertyInfo.Name}" });
+
+            return GetPropertyDeclaration(propertyInfo, accessorList, summary);
+        }
+
+        protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
+        {
+            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var identifier = propertyInfo.Name;
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(summary);
+
+            return result;
+        }
+
         private static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
             where T : MemberDeclarationSyntax
         {
@@ -143,35 +157,6 @@ namespace Dhgms.Nucleotide.Generators
             var interfaceSummary = GetInterfaceSummary(entityDeclaration);
 
             return GetSummary(interfaceSummary);
-        }
-
-        private IEnumerable<SyntaxTrivia> GetSummary(string[] summaryLines)
-        {
-            var result = new List<SyntaxTrivia>
-            {
-                SyntaxFactory.Comment($"/// <summary>")
-            };
-
-            var lines = summaryLines.Select(line => SyntaxFactory.Comment($"/// {line}"));
-            result.AddRange(lines);
-
-            result.Add(SyntaxFactory.Comment($"/// </summary>"));
-
-            return result;
-        }
-
-        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
-        {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
-            var identifier = propertyInfo.Name;
-            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
-                .WithAccessorList(
-                    SyntaxFactory.AccessorList(
-                        SyntaxFactory.List(accessorList)
-                    ))
-                .WithLeadingTrivia(summary);
-
-            return result;
         }
     }
 }
