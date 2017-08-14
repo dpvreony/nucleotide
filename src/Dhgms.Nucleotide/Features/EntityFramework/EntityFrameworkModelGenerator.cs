@@ -33,6 +33,11 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return null;
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]

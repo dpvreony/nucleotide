@@ -19,6 +19,11 @@ namespace Dhgms.Nucleotide.Features.Dto
         {
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         protected override string GetClassPrefix()
         {
             return null;

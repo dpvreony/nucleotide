@@ -27,6 +27,11 @@ namespace Dhgms.Nucleotide.Features.Model
 
         protected override string GetNamespace() => "Models";
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]

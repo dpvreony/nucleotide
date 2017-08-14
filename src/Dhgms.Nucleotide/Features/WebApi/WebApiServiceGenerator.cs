@@ -42,6 +42,14 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return "Controllers";
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return new List<string>
+            {
+                "Microsoft.Extensions.Logging"
+            };
+        }
+
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName)
         {
@@ -68,7 +76,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Hubs.I{entityName}Hub", "signalRHub", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"CommandFactories.I{entityName}CommandFactory", "commandFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(_ => $"Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.Extensions.Logging.ILogger<{entityName}Controller>", "logger", Accessibility.Private),
             };
 
             return result;
@@ -130,12 +139,22 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 "command",
                 "ExecuteAsync", arguments);
 
-            var signalRNotificationExecution = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("_signalRHub", "OnAddAsync", new [] { "result" });
+            var signalRNotificationExecution = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("_signalRHub", "OnAddAsync", new [] { "result" }, true);
 
             var catchDeclaration = SyntaxFactory.CatchDeclaration(SyntaxFactory.IdentifierName("Exception"),
                     SyntaxFactory.Identifier("ex"));
 
-            var exceptionLoggingInvocation = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("Logger", "WarnException", new [] { $"\"Exception in {methodName} for SignalR OnAdd\"", "ex" });
+            var loggerExceptionArgs = new[]
+            {
+                $"EventId.{entityName}ControllerOnAddNotifySignalR",
+                "ex",
+                $"\"Exception in {methodName} for SignalR OnAdd\"",
+            };
+            var exceptionLoggingInvocation = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax(
+                "_logger",
+                "LogWarning",
+                loggerExceptionArgs,
+                false);
             var catchBlockStatements = new [] {exceptionLoggingInvocation};
 
             var catchBlock = SyntaxFactory.Block(catchBlockStatements);

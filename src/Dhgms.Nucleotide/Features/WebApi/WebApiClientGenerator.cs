@@ -39,6 +39,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return "ApiClients";
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName)
         {

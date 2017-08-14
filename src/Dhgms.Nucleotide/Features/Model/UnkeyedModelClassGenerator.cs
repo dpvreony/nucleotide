@@ -26,6 +26,11 @@ namespace Dhgms.Nucleotide.Features.Model
             return null;
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         private MemberDeclarationSyntax[] GetMembers()
         {
             var members = GetUnkeyedClasses()

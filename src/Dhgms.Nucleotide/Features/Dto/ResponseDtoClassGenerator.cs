@@ -24,6 +24,11 @@ namespace Dhgms.Nucleotide.Features.Dto
             return null;
         }
 
+        protected override IList<string> GetUsings()
+        {
+            return null;
+        }
+
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]

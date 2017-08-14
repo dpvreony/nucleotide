@@ -48,21 +48,27 @@ namespace Dhgms.Nucleotide.Generators
                 classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
             }
 
-            var usings = GetUsings();
+            var usings = GetUsingDirectives();
             namespaceDeclaration = namespaceDeclaration.AddUsings(usings);
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        private UsingDirectiveSyntax[] GetUsings()
+        private UsingDirectiveSyntax[] GetUsingDirectives()
         {
-            var result = new[]
-            {
-                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System"))
-            };
+            var usings = GetUsings() ?? new List<string>();
 
-            return result;
+            if (usings.All(u => !u.Equals("System", StringComparison.Ordinal)))
+            {
+                usings.Add("System");
+            }
+
+            var directives = usings.Select(u => SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(u))).ToArray();
+
+            return directives;
         }
+
+        protected abstract IList<string> GetUsings();
 
         protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
             IEntityGenerationModel entityDeclaration,

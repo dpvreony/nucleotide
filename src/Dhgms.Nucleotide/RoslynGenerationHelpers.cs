@@ -219,7 +219,7 @@ namespace Dhgms.Nucleotide.Helpers
         /// <param name="methodName"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static StatementSyntax GetMethodOnFieldInvocationSyntax(string fieldName, string methodName, string[] args)
+        public static StatementSyntax GetMethodOnFieldInvocationSyntax(string fieldName, string methodName, string[] args, bool isAsync)
         {
             var fieldMemberAccess = SyntaxFactory.MemberAccessExpression(
                   SyntaxKind.SimpleMemberAccessExpression,
@@ -242,6 +242,11 @@ namespace Dhgms.Nucleotide.Helpers
             }
 
             var getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
+
+            if (!isAsync)
+            {
+                return SyntaxFactory.ExpressionStatement(getCommandInvocation);
+            }
 
             var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
                 getCommandInvocation);
