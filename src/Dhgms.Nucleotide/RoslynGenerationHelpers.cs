@@ -113,6 +113,39 @@ namespace Dhgms.Nucleotide.Helpers
         }
 
         /// <summary>
+        /// Produces syntax for creating a variable and assigning from executing a method on a field
+        /// </summary>
+        /// <param name="variableName"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
+        public static LocalDeclarationStatementSyntax GetVariableAssignmentFromVariablePropertyAccessSyntax(
+            string variableName,
+            string fieldName,
+            string propertyName)
+        {
+            var fieldMemberAccess = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxFactory.IdentifierName("this"),
+                name: SyntaxFactory.IdentifierName(fieldName));
+
+            var getAddCommandInvocation = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                fieldMemberAccess,
+                name: SyntaxFactory.IdentifierName(propertyName));
+            //var getCommandInvocation = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, getAddCommandInvocation,) .InvocationExpression(getAddCommandInvocation);
+
+            var equalsValueClause = SyntaxFactory.EqualsValueClause(
+                SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                getAddCommandInvocation);
+            var variableSyntax = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
+            variableSyntax = variableSyntax.Add(SyntaxFactory.VariableDeclarator(variableName).WithInitializer(equalsValueClause));
+            var variableDeclaration =
+                SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("var")), variableSyntax);
+            return SyntaxFactory.LocalDeclarationStatement(variableDeclaration);
+        }
+
+        /// <summary>
         /// Produces a null guard check for a parameter
         /// </summary>
         /// <param name="parameterName">parameter name</param>

@@ -124,6 +124,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
             var methodName = "AddAsync";
+
+            var userLocalDeclaration =
+                RoslynGenerationHelpers
+                    .GetVariableAssignmentFromVariablePropertyAccessSyntax("user", "HttpContext", "User");
+
             var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax(
                 "command",
                 "_commandFactory",
@@ -131,7 +136,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var arguments = new[]
             {
-                "requestDto"
+                "requestDto",
+                "user"
             };
 
             var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax(
@@ -164,11 +170,20 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result.Id"));
 
-            var body = new [] { commandLocalDeclaration, commandExecutionDeclaration, trySignalRNotification, returnStatement };
+            var body = new []
+            {
+                userLocalDeclaration,
+                commandLocalDeclaration,
+                commandExecutionDeclaration,
+                trySignalRNotification,
+                returnStatement
+            };
 
             var attributes = new List<Tuple<string, IList<string>>>
             {
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null)//,
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ "typeof(int)"}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", "Type = typeof(int)"}),
                 //new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Add\""}),
             };
 
@@ -228,6 +243,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
             {
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_List\""}),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof({entityName}[])"}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof({entityName}[])"}),
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
@@ -306,7 +323,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
             var attributes = new List<Tuple<string, IList<string>>>
             {
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_View\""}),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof({entityName}Model)"}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof({entityName}Model)" }),
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
