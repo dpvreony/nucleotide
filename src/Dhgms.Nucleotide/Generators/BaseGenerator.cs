@@ -72,14 +72,37 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel);
 
+        protected abstract string GetClassPrefix();
+
         /// <summary>
-        /// Gets the suffix to be applied to a clas
+        /// Gets the suffix to be applied to a class
         /// </summary>
         /// <returns>Class suffix</returns>
         protected abstract string GetClassSuffix();
 
         protected abstract string GetNamespace();
 
+        protected static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
+            where T : MemberDeclarationSyntax
+        {
+            if (items != null && items.Count > 0)
+            {
+                list.AddRange(items);
+            }
+        }
+
+        protected static ParameterListSyntax GetParams(string[] argCollection)
+        {
+            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
+
+            foreach (var s in argCollection)
+            {
+                var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier(s));
+                parameters = parameters.Add(node);
+            }
+
+            return SyntaxFactory.ParameterList(parameters);
+        }
 
         protected async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, CSharpCompilation compilation)
         {

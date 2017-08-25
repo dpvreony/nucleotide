@@ -255,19 +255,6 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns></returns>
         protected abstract MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
 
-        protected static ParameterListSyntax GetParams(string[] argCollection)
-        {
-            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
-
-            foreach (var s in argCollection)
-            {
-                var node = SyntaxFactory.Parameter(SyntaxFactory.Identifier(s));
-                parameters = parameters.Add(node);
-            }
-
-            return SyntaxFactory.ParameterList(parameters);
-        }
-
         private ConstructorDeclarationSyntax GenerateConstructor(string className, IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments, string entityName)
         {
             var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
@@ -376,8 +363,6 @@ namespace Dhgms.Nucleotide.Generators
         /// </summary>
         /// <returns>List of implemented interfaces</returns>
         protected abstract IList<string> GetImplementedInterfaces(string entityName);
-
-        protected abstract string GetClassPrefix();
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
         {

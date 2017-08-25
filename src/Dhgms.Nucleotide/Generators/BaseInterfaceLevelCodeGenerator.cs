@@ -50,8 +50,6 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        protected abstract string GetClassPrefix();
-
         protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string prefix, string suffix)
         {
             var className = $"I{prefix}{entityDeclaration.ClassName}{suffix}";
