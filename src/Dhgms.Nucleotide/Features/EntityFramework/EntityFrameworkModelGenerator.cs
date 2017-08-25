@@ -13,6 +13,12 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         {
         }
 
+
+        protected override bool GetWhetherClassShouldBePartialClass() => true;
+
+        protected override bool GetWhetherClassShouldBeSealedClass() => true;
+
+
         protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;

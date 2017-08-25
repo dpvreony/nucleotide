@@ -81,8 +81,23 @@ namespace Dhgms.Nucleotide.Generators
 
             // SyntaxFactory.Token(SyntaxKind.SealedKeyword)
 
+            var modifiers = new List<SyntaxToken>
+            {
+                SyntaxFactory.Token(SyntaxKind.PublicKeyword)
+            };
+
+            if (this.GetWhetherClassShouldBeSealedClass())
+            {
+                modifiers.Add(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
+            }
+
+            if (this.GetWhetherClassShouldBePartialClass())
+            {
+                modifiers.Add(SyntaxFactory.Token(SyntaxKind.PartialKeyword));
+            }
+
             var declaration = SyntaxFactory.ClassDeclaration(className)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(modifiers.ToArray())
                 .AddMembers(members);
 
             var classAttributes = GetClassAttributes();
@@ -117,6 +132,10 @@ namespace Dhgms.Nucleotide.Generators
 
             return await Task.FromResult(declaration);
         }
+
+        protected abstract bool GetWhetherClassShouldBePartialClass();
+
+        protected abstract bool GetWhetherClassShouldBeSealedClass();
 
         private T DoCommentSection<T>(T declaration, string[] commentLines)
             where T : MemberDeclarationSyntax

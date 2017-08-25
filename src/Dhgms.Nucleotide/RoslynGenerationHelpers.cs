@@ -86,7 +86,7 @@ namespace Dhgms.Nucleotide.Helpers
         /// <param name="fieldName"></param>
         /// <param name="methodName"></param>
         /// <returns></returns>
-        public static LocalDeclarationStatementSyntax GetVariableAssignmentFromMethodOnFieldSyntax(string variableName, string fieldName, string methodName)
+        public static LocalDeclarationStatementSyntax GetVariableAssignmentFromMethodOnFieldSyntax(string variableName, string fieldName, string methodName, string[] args, bool isAsync)
         {
             var fieldMemberAccess = SyntaxFactory.MemberAccessExpression(
                   SyntaxKind.SimpleMemberAccessExpression,
@@ -97,14 +97,26 @@ namespace Dhgms.Nucleotide.Helpers
                   SyntaxKind.SimpleMemberAccessExpression,
                   fieldMemberAccess,
                   name: SyntaxFactory.IdentifierName(methodName));
-            var getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation);
 
-            var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
-                getCommandInvocation);
+            SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (args != null && args.Length > 0)
+            {
+                foreach (var s in args)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            ExpressionSyntax getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
+            if (isAsync)
+            {
+                getCommandInvocation = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
+                    getCommandInvocation);
+            }
 
             var equalsValueClause = SyntaxFactory.EqualsValueClause(
                 SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                awaitCommand);
+                getCommandInvocation);
             var variableSyntax = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
             variableSyntax = variableSyntax.Add(SyntaxFactory.VariableDeclarator(variableName).WithInitializer(equalsValueClause));
             var variableDeclaration =
@@ -155,6 +167,21 @@ namespace Dhgms.Nucleotide.Helpers
             var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(parameterName));
             var condition = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, parameterIdentifier,
                 SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression(returnName));
+            return SyntaxFactory.IfStatement(condition, returnStatement);
+        }
+
+        /// <summary>
+        /// Produces a false check for a parameter
+        /// </summary>
+        /// <param name="parameterName">parameter name</param>
+        /// <returns>Roslyn syntax</returns>
+        public static IfStatementSyntax GetReturnIfFalseSyntax(string parameterName, string returnName)
+        {
+            var parameterIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(parameterName));
+            var condition = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, parameterIdentifier);
+            //var condition = SyntaxFactory.ParseExpression(parameterName);
 
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression(returnName));
             return SyntaxFactory.IfStatement(condition, returnStatement);

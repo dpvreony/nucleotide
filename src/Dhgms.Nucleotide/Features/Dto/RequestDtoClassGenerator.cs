@@ -19,6 +19,11 @@ namespace Dhgms.Nucleotide.Features.Dto
         {
         }
 
+        protected override bool GetWhetherClassShouldBePartialClass() => true;
+
+        protected override bool GetWhetherClassShouldBeSealedClass() => true;
+
+
         protected override IList<string> GetUsings()
         {
             return null;

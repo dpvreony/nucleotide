@@ -15,6 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClassGenerators\**" />
+    <EmbeddedResource Remove="ClassGenerators\**" />
+    <None Remove="ClassGenerators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.11" />
   </ItemGroup>
 
@@ -38,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClassGenerators\" />
     <Folder Include="Features\Mvc\" />
     <Folder Include="Features\ReactiveUi\" />
   </ItemGroup>

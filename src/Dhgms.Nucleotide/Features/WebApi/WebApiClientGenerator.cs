@@ -23,6 +23,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return null;
         }
 
+        protected override bool GetWhetherClassShouldBePartialClass() => true;
+
+        protected override bool GetWhetherClassShouldBeSealedClass() => true;
+
+
         /// <inheritdoc />
         protected override string GetClassPrefix()
         {

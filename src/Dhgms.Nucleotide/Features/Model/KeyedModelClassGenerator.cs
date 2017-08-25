@@ -15,11 +15,15 @@ namespace Dhgms.Nucleotide.Features.Model
     public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class.
         /// </summary>
         public KeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
         {
         }
+
+        protected override bool GetWhetherClassShouldBePartialClass() => false;
+
+        protected override bool GetWhetherClassShouldBeSealedClass() => false;
 
         protected override string GetClassPrefix() => null;
 

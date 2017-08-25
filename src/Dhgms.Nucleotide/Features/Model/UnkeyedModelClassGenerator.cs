@@ -15,11 +15,15 @@ namespace Dhgms.Nucleotide.Features.Model
     public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.
         /// </summary>
         public UnkeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
         {
         }
+
+        protected override bool GetWhetherClassShouldBePartialClass() => false;
+
+        protected override bool GetWhetherClassShouldBeSealedClass() => false;
 
         protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
