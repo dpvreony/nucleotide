@@ -108,11 +108,7 @@ namespace Dhgms.Nucleotide.Helpers
             }
 
             ExpressionSyntax getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
-            if (isAsync)
-            {
-                getCommandInvocation = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
-                    getCommandInvocation);
-            }
+            getCommandInvocation = GetAwaitedExpressionSyntax(true, getCommandInvocation);
 
             var equalsValueClause = SyntaxFactory.EqualsValueClause(
                 SyntaxFactory.Token(SyntaxKind.EqualsToken),
@@ -208,21 +204,41 @@ namespace Dhgms.Nucleotide.Helpers
         /// <param name="variableToCreate"></param>
         /// <param name="variableToInvoke"></param>
         /// <returns></returns>
-        public static StatementSyntax GetVariableAssignmentFromVariableInvocationSyntax(string variableToCreate, string variableToInvoke)
+        public static StatementSyntax GetVariableAssignmentFromVariableInvocationSyntax(string variableToCreate, string variableToInvoke, bool isAsync)
         {
-            var getCommandInvocation = SyntaxFactory.InvocationExpression(SyntaxFactory.IdentifierName(variableToInvoke));
+            ExpressionSyntax getCommandInvocation = SyntaxFactory.InvocationExpression(SyntaxFactory.IdentifierName(variableToInvoke));
 
-            var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
-                getCommandInvocation);
+            getCommandInvocation = GetAwaitedExpressionSyntax(isAsync, getCommandInvocation);
 
             var equalsValueClause = SyntaxFactory.EqualsValueClause(
                 SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                awaitCommand);
+                getCommandInvocation);
             var variableSyntax = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
             variableSyntax = variableSyntax.Add(SyntaxFactory.VariableDeclarator(variableToCreate).WithInitializer(equalsValueClause));
             var variableDeclaration =
                 SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("var")), variableSyntax);
             return SyntaxFactory.LocalDeclarationStatement(variableDeclaration);
+        }
+
+        private static ExpressionSyntax GetAwaitedExpressionSyntax(bool isAsync, ExpressionSyntax getCommandInvocation)
+        {
+            if (isAsync)
+            {
+                var configureAwaitMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    getCommandInvocation,
+                    name: SyntaxFactory.IdentifierName("ConfigureAwait"));
+
+                var configureAwaitArgsList = new SeparatedSyntaxList<ArgumentSyntax>();
+                configureAwaitArgsList =
+                    configureAwaitArgsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseExpression("false")));
+                getCommandInvocation = SyntaxFactory.InvocationExpression(configureAwaitMemberAccessExpression,
+                    SyntaxFactory.ArgumentList(configureAwaitArgsList));
+
+                getCommandInvocation = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
+                    getCommandInvocation);
+            }
+            return getCommandInvocation;
         }
 
         /// <summary>
@@ -256,15 +272,13 @@ namespace Dhgms.Nucleotide.Helpers
 
             var argListSyntax = SyntaxFactory.ArgumentList(argsList);
 
-            var getCommandInvocation = SyntaxFactory.InvocationExpression(fieldMemberAccess, argListSyntax);
+            ExpressionSyntax getCommandInvocation = SyntaxFactory.InvocationExpression(fieldMemberAccess, argListSyntax);
 
-
-            var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
-                getCommandInvocation);
+            getCommandInvocation = GetAwaitedExpressionSyntax(true, getCommandInvocation);
 
             var equalsValueClause = SyntaxFactory.EqualsValueClause(
                 SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                awaitCommand);
+                getCommandInvocation);
             var variableSyntax = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
             variableSyntax = variableSyntax.Add(SyntaxFactory.VariableDeclarator(variableToCreate).WithInitializer(equalsValueClause));
             var variableDeclaration =
@@ -303,10 +317,24 @@ namespace Dhgms.Nucleotide.Helpers
 
             var getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
 
+
             if (!isAsync)
             {
+                //var configureAwaitInvocation = SyntaxFactory.MemberAccessExpression()
+                //getAddCommandInvocation.WithExpression()
+
                 return SyntaxFactory.ExpressionStatement(getCommandInvocation);
             }
+
+            var configureAwaitMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                getCommandInvocation,
+                name: SyntaxFactory.IdentifierName("ConfigureAwait"));
+
+            var configureAwaitArgsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            configureAwaitArgsList =
+                configureAwaitArgsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseExpression("false")));
+            getCommandInvocation = SyntaxFactory.InvocationExpression(configureAwaitMemberAccessExpression, SyntaxFactory.ArgumentList(configureAwaitArgsList));
 
             var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
                 getCommandInvocation);
