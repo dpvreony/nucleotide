@@ -134,24 +134,6 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return result.ToArray();
         }
 
-        private MemberDeclarationSyntax GetEventIdMethodDeclaration(string entityName, string eventName)
-        {
-            var methodName = $"Get{eventName}EventId";
-
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await System.Threading.Tasks.Task.FromResult(new EventId(NumericEventIds.{entityName}Controller{eventName}Id, \"{entityName}Controller{eventName}\"))"));
-
-            var body = new StatementSyntax[]
-            {
-                returnStatement
-            };
-
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<EventId>");
-            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
-                .AddBodyStatements(body);
-            return declaration;
-        }
-
         private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
             var methodName = "AddAsync";
