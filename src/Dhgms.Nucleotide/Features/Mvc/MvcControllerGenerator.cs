@@ -41,7 +41,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
 
         protected override string GetNamespace()
         {
-            return "Controllers";
+            return "MvcControllers";
         }
 
         protected override IList<string> GetUsings()

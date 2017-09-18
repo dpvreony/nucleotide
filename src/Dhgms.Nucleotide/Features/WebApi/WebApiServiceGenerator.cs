@@ -39,7 +39,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
         protected override string GetNamespace()
         {
-            return "Controllers";
+            return "ApiControllers";
         }
 
         protected override IList<string> GetUsings()
