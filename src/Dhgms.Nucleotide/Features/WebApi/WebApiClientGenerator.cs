@@ -77,7 +77,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             //return result;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return null;
         }

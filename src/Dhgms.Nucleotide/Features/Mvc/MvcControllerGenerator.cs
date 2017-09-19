@@ -104,12 +104,13 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return null;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return new List<Tuple<string, IList<string>>>
             {
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null)
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new[]{ $"\"{entityDeclaration.ClassName}\"" })
             };
         }
 

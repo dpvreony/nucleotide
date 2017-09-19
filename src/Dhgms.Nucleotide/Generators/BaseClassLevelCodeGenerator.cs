@@ -100,7 +100,7 @@ namespace Dhgms.Nucleotide.Generators
                 .AddModifiers(modifiers.ToArray())
                 .AddMembers(members);
 
-            var classAttributes = GetClassAttributes();
+            var classAttributes = GetClassAttributes(entityDeclaration);
             if (classAttributes != null && classAttributes.Count > 0)
             {
                 var attributeListSyntax = GetAttributeListSyntax(classAttributes);
@@ -162,7 +162,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string[] GetClassLevelCommentRemarks(string entityName);
 
-        protected abstract List<Tuple<string, IList<string>>> GetClassAttributes();
+        protected abstract List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration);
 
         protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel entityGenerationModel)
         {

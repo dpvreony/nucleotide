@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Features.Model
             return null;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes()
+        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return null;
         }

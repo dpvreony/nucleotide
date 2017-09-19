@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     public sealed class CommandFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WcfServiceGenerator"/> class. 
+        /// Initializes a new instance of the <see cref="CommandFactoryInterfaceGenerator"/> class. 
         /// </summary>
         public CommandFactoryInterfaceGenerator(AttributeData attributeData) : base(attributeData)
         {
