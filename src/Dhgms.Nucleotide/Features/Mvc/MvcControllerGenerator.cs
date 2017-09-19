@@ -49,7 +49,8 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return new List<string>
             {
                 "Microsoft.Extensions.Logging",
-                "Microsoft.AspNetCore.Authorization"
+                "Microsoft.AspNetCore.Authorization",
+                "Microsoft.AspNetCore.Mvc"
             };
         }
 
@@ -139,7 +140,8 @@ namespace Dhgms.Nucleotide.Features.Mvc
                 "user"
             };
             var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query", "ExecuteAsync", arguments);
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
+            var viewInvocation = RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { "\"List\"", "result"}, false);
+            var returnStatement = SyntaxFactory.ReturnStatement(viewInvocation);
 
             var body = new StatementSyntax[]
             {
@@ -156,11 +158,11 @@ namespace Dhgms.Nucleotide.Features.Mvc
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
 
-            //var parameters = GetParams(new[] { $"RequestDtos.List{entityName}RequestDto requestDto" });
+            var parameters = GetParams(new[] { $"[FromQuery]RequestDtos.List{entityName}RequestDto requestDto" });
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
-                //.WithParameterList(parameters)
+                .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddAttributeLists(attributeListSyntax)
                 .AddBodyStatements(body);
@@ -181,7 +183,8 @@ namespace Dhgms.Nucleotide.Features.Mvc
             };
             var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query", "Execute", arguments);
             var nullQueryResultCheckDeclaration = RoslynGenerationHelpers.GetReturnIfNullSyntax("result", notFoundResult);
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result"));
+            var viewInvocation = RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { "\"View\"", "result" }, false);
+            var returnStatement = SyntaxFactory.ReturnStatement(viewInvocation);
 
             // todo: https://github.com/blowdart/AspNetAuthorizationWorkshop/blob/master/src/Step_7_Resource_Based_Requirements/Controllers/DocumentController.cs
 

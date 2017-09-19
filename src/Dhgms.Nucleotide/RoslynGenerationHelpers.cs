@@ -289,6 +289,55 @@ namespace Dhgms.Nucleotide.Helpers
         /// <summary>
         /// Gets the syntax for invoking a method on a field and passing in a value
         /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static ExpressionSyntax GetMethodOnClassInvocationSyntax(string methodName, string[] args, bool isAsync)
+        {
+            var getAddCommandInvocation = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxFactory.IdentifierName("this"),
+                name: SyntaxFactory.IdentifierName(methodName));
+
+            SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (args != null && args.Length > 0)
+            {
+
+                foreach (var s in args)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            var getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
+
+
+            if (!isAsync)
+            {
+                //var configureAwaitInvocation = SyntaxFactory.MemberAccessExpression()
+                //getAddCommandInvocation.WithExpression()
+
+                return getCommandInvocation;
+            }
+
+            var configureAwaitMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                getCommandInvocation,
+                name: SyntaxFactory.IdentifierName("ConfigureAwait"));
+
+            var configureAwaitArgsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            configureAwaitArgsList =
+                configureAwaitArgsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseExpression("false")));
+            getCommandInvocation = SyntaxFactory.InvocationExpression(configureAwaitMemberAccessExpression, SyntaxFactory.ArgumentList(configureAwaitArgsList));
+
+            var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
+                getCommandInvocation);
+            return awaitCommand;
+        }
+
+        /// <summary>
+        /// Gets the syntax for invoking a method on a field and passing in a value
+        /// </summary>
         /// <param name="fieldName"></param>
         /// <param name="methodName"></param>
         /// <param name="args"></param>
