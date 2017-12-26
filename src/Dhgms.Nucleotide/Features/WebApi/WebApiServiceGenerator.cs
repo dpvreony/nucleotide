@@ -56,10 +56,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         /// <inheritdoc />
-        protected override string GetBaseClass(string entityName)
-        {
-            return "Microsoft.AspNetCore.Mvc.Controller";
-        }
+        protected override string GetBaseClass(string entityName) =>
+            "Dhgms.AspNetCoreContrib.Controllers.WebApiCrudController";
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
@@ -78,7 +76,6 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             var result = new List<Tuple<Func<string, string>, string, Accessibility>>
             {
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Hubs.I{entityName}Hub", "signalRHub", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"CommandFactories.I{entityName}CommandFactory", "commandFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(_ => "Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
@@ -107,7 +104,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             {
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null),
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new[]{ $"\"api/{entityDeclaration.ClassName}\"" })
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new[]{ $"\"api/{entityDeclaration.ClassName.ToLower()}\"" })
             };
         }
 
@@ -122,12 +119,12 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 GetUpdateMethodDeclaration(entityName),
                 GetViewMethodDeclaration(entityName),
                 GetEventIdMethodDeclaration(entityName, "Add"),
-                GetEventIdMethodDeclaration(entityName, "OnAddNotifySignalR"),
+                //GetEventIdMethodDeclaration(entityName, "OnAddNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
-                GetEventIdMethodDeclaration(entityName, "OnDeleteNotifySignalR"),
+                //GetEventIdMethodDeclaration(entityName, "OnDeleteNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "Update"),
-                GetEventIdMethodDeclaration(entityName, "OnUpdateNotifySignalR"),
+                //GetEventIdMethodDeclaration(entityName, "OnUpdateNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "View"),
             };
 
@@ -139,9 +136,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             var methodName = "AddAsync";
 
+            var eventId = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("eventId", "GetAddEventId", true);
+
             var logMethodEntryArgs = new[]
             {
-                $"await GetAddEventId()",
+                $"eventId",
                 $"\"Entered {methodName}\""
             };
 
@@ -151,87 +150,49 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 logMethodEntryArgs,
                 false);
 
-            var userLocalDeclaration =
-                RoslynGenerationHelpers
-                    .GetVariableAssignmentFromVariablePropertyAccessSyntax("user", "HttpContext", "User");
-
-            var resourceAuthorizationArgs = new[]
-            {
-                $"user",
-                $"\"{entityName}{methodName}\""
-            };
-
-            var resourceAuthorizationInvocation = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax(
-                "isAuthorized",
-                "_authorizationService",
-                "AuthorizeAsync",
-                resourceAuthorizationArgs,
-                true);
-
-            const string notFoundResult = "new Microsoft.AspNetCore.Mvc.UnauthorizedResult()";
-            var notAuthorizedReturnStatement = RoslynGenerationHelpers.GetReturnIfFalseSyntax("isAuthorized", notFoundResult);
-
-            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax(
-                "command",
-                "_commandFactory",
-                "GetAddCommandAsync",
-                null,
-                true);
-
-            var arguments = new[]
-            {
-                "requestDto",
-                "user"
-            };
-
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax(
-                "result",
-                "command",
-                "ExecuteAsync", arguments);
-
-            var signalRNotificationExecution = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax("_signalRHub", "OnAddAsync", new [] { "result" }, true);
 
             var catchDeclaration = SyntaxFactory.CatchDeclaration(SyntaxFactory.IdentifierName("Exception"),
                     SyntaxFactory.Identifier("ex"));
 
             var loggerExceptionArgs = new[]
             {
-                $"await GetOnAddNotifySignalREventId()",
+                $"eventId",
                 "ex",
-                $"\"Exception in {methodName} for SignalR OnAdd\"",
+                $"\"Exception in On{methodName}\"",
             };
             var exceptionLoggingInvocation = RoslynGenerationHelpers.GetMethodOnFieldInvocationSyntax(
                 "_logger",
                 "LogWarning",
                 loggerExceptionArgs,
                 false);
-            var catchBlockStatements = new [] {exceptionLoggingInvocation};
+            var rethrow = SyntaxFactory.ThrowStatement();
+            var catchBlockStatements = new []
+            {
+                exceptionLoggingInvocation,
+                rethrow
+            };
 
             var catchBlock = SyntaxFactory.Block(catchBlockStatements);
             var catchClause = SyntaxFactory.CatchClause(catchDeclaration, null, catchBlock);
 
-            var trySignalRNotification = SyntaxFactory.TryStatement(SyntaxFactory.Block(signalRNotificationExecution), new SyntaxList<CatchClauseSyntax>().Add(catchClause), null);
+            var baseMethodInvocationSyntax =
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("OnAddAsync", new [] {"requestDto"}, true);
+            var returnStatement = SyntaxFactory.ReturnStatement(baseMethodInvocationSyntax);
 
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName("result.Id"));
+            var tryOnAddAsync = SyntaxFactory.TryStatement(SyntaxFactory.Block(returnStatement), new SyntaxList<CatchClauseSyntax>().Add(catchClause), null);
 
             var body = new []
             {
+                eventId,
                 logMethodEntryInvocation,
-                userLocalDeclaration,
-                resourceAuthorizationInvocation,
-                notAuthorizedReturnStatement,
-                commandLocalDeclaration,
-                commandExecutionDeclaration,
-                trySignalRNotification,
-                returnStatement
+                tryOnAddAsync
             };
 
             var attributes = new List<Tuple<string, IList<string>>>
             {
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpPost", null),
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ "typeof(int)"}),
-                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", "Type = typeof(int)"}),
-                //new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_Add\""}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", "Type = typeof(int)"})
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
