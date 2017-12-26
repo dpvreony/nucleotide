@@ -1,6 +1,8 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Cqrs
@@ -47,12 +49,35 @@ namespace Dhgms.Nucleotide.Features.Cqrs
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
-            return null;
+            var result = new List<MethodDeclarationSyntax>
+            {
+                GetListMethodDeclaration(entityName),
+                GetViewMethodDeclaration(entityName)
+            };
+
+            return result.ToArray();
         }
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return null;
+        }
+        private MethodDeclarationSyntax GetListMethodDeclaration(string entityName)
+        {
+            var methodName = "GetListQueryAsync";
+
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Commands.IList{entityName}Query>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            return declaration;
+        }
+
+        private MethodDeclarationSyntax GetViewMethodDeclaration(string entityName)
+        {
+            var methodName = "GetViewQueryAsync";
+
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Commands.IView{entityName}Query>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            return declaration;
         }
     }
 }

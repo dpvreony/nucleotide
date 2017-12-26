@@ -314,8 +314,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
             {
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", new List<string> { $"Roles=\"API_{entityName}_List\""}),
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof({entityName}[])"}),
-                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof({entityName}[])"}),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof(Models.{entityName}Model[])"}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof(Models.{entityName}Model[])"}),
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
@@ -394,8 +394,8 @@ namespace Dhgms.Nucleotide.Features.WebApi
             var attributes = new List<Tuple<string, IList<string>>>
             {
                 new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof({entityName}Model)"}),
-                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof({entityName}Model)" }),
+                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.Produces", new List<string>{ $"typeof(Models.{entityName}Model)"}),
+                new Tuple<string, IList<string>>("Swashbuckle.AspNetCore.SwaggerGen.SwaggerResponse", new List<string>{ "200", $"Type = typeof(Models.{entityName}Model)" }),
             };
 
             var attributeListSyntax = GetAttributeListSyntax(attributes);
