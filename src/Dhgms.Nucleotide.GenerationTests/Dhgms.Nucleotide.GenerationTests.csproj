@@ -1,16 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.11" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.1.0" />
+    <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
