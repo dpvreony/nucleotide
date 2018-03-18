@@ -57,7 +57,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName) =>
-            "Dhgms.AspNetCoreContrib.Controllers.WebApiCrudController";
+            $"Dhgms.AspNetCoreContrib.Controllers.CrudController<{entityName}Controller, IList{entityName}Query, IList{entityName}RequestDto, IList{entityName}QueryResponse, IView{entityName}Query, IView{entityName}QueryResponse, IAdd{entityName}Command, IAdd{entityName}RequestDto, IAdd{entityName}ResponseDto, IDelete{entityName}Command, IDelete{entityName}ResponseDto, IUpdate{entityName}Command, IUpdate{entityName}RequestDto, IUpdate{entityName}ResponseDto>";
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
