@@ -19,10 +19,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
         }
 
-        protected override string GetClassPrefix()
-        {
-            return null;
-        }
+        protected override string[] GetClassPrefixes() => null;
 
         protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {
@@ -62,11 +59,12 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
             return null;
         }
+
         private MethodDeclarationSyntax GetListMethodDeclaration(string entityName)
         {
             var methodName = "GetListQueryAsync";
 
-            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Commands.IList{entityName}Query>");
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Queries.IList{entityName}Query>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
             return declaration;
         }
@@ -75,7 +73,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
             var methodName = "GetViewQueryAsync";
 
-            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Commands.IView{entityName}Query>");
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Queries.IView{entityName}Query>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
             return declaration;
         }

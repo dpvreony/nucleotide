@@ -72,7 +72,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel);
 
-        protected abstract string GetClassPrefix();
+        protected abstract string[] GetClassPrefixes();
 
         /// <summary>
         /// Gets the suffix to be applied to a class

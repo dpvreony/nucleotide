@@ -25,7 +25,7 @@ namespace Dhgms.Nucleotide.Features.Model
 
         protected override bool GetWhetherClassShouldBeSealedClass() => false;
 
-        protected override string GetClassPrefix() => null;
+        protected override string[] GetClassPrefixes() => null;
 
         protected override string GetClassSuffix() => "Model";
 

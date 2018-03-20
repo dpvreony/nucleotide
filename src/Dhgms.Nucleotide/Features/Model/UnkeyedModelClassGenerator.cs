@@ -105,7 +105,7 @@ namespace Dhgms.Nucleotide.Features.Model
             };
         }
 
-        protected override string GetClassPrefix() => "Unkeyed";
+        protected override string[] GetClassPrefixes() => new [] {"Unkeyed"};
 
         protected override string GetClassSuffix() => "Model";
 

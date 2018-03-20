@@ -27,10 +27,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return null;
         }
 
-        protected override string GetClassPrefix()
-        {
-            return null;
-        }
+        protected override string[] GetClassPrefixes() => null;
 
         protected override string GetClassSuffix()
         {

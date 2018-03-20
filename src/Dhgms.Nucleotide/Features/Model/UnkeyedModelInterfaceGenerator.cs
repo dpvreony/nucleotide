@@ -33,9 +33,9 @@ namespace Dhgms.Nucleotide.Features.Model
             return "Models";
         }
 
-        protected override string GetClassPrefix()
+        protected override string[] GetClassPrefixes()
         {
-            return "Unkeyed";
+            return new[] { "Unkeyed"};
         }
 
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)

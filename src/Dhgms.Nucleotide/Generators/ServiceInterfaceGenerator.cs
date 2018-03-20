@@ -26,10 +26,7 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
-        protected override string GetClassPrefix()
-        {
-            return null;
-        }
+        protected override string[] GetClassPrefixes() => null;
 
         protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {

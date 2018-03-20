@@ -77,9 +77,6 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return null;
         }
 
-        protected override string GetClassPrefix()
-        {
-            return null;
-        }
+        protected override string[] GetClassPrefixes() => null;
     }
 }

@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
         }
 
-        protected override string GetClassPrefix() => null;
+        protected override string[] GetClassPrefixes() => null;
 
         protected override string GetClassSuffix() => "Command";
 
@@ -49,23 +49,26 @@ namespace Dhgms.Nucleotide.Features.Cqrs
 
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
-            var prefix = GetClassPrefix();
+            var prefixes = GetClassPrefixes();
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
-                classDeclarations.Add(await GetAddInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
-                classDeclarations.Add(await GetDeleteInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
-                classDeclarations.Add(await GetUpdateInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                foreach (var prefix in prefixes)
+                {
+                    classDeclarations.Add(await GetAddInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                    classDeclarations.Add(await GetDeleteInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                    classDeclarations.Add(await GetUpdateInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                }
             }
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
-        protected string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
+        protected string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration, string prefix)
         {
             return new[]
             {
-                $"{GetClassPrefix()} Command for {entityDeclaration.ClassName}"
+                $"{prefix} Command for {entityDeclaration.ClassName}"
             };
         }
 
@@ -99,7 +102,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
             var className = $"IAdd{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(entityDeclaration);
-            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration);
+            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration, prefix);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members)
@@ -119,7 +122,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
             var className = $"IDelete{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(entityDeclaration);
-            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration);
+            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration, prefix);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members)
@@ -139,7 +142,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
             var className = $"IUpdate{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(entityDeclaration);
-            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration);
+            var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration, prefix);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members)
@@ -168,9 +171,9 @@ namespace Dhgms.Nucleotide.Features.Cqrs
             return result.ToArray();
         }
 
-        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IEntityGenerationModel entityDeclaration)
+        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IEntityGenerationModel entityDeclaration, string prefix)
         {
-            var interfaceSummary = GetInterfaceSummary(entityDeclaration);
+            var interfaceSummary = GetInterfaceSummary(entityDeclaration, prefix);
 
             return GetSummary(interfaceSummary);
         }
