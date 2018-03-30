@@ -41,6 +41,11 @@ namespace Dhgms.Nucleotide.Generators
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
             var prefixes = GetClassPrefixes();
+            if (prefixes == null || prefixes.Length == 0)
+            {
+                prefixes = new[] { string.Empty };
+            }
+
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
@@ -48,6 +53,7 @@ namespace Dhgms.Nucleotide.Generators
                 {
                     classDeclarations.Add(await GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
                 }
+
             }
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
