@@ -21,7 +21,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
         }
 
-        protected override string[] GetClassPrefixes() => null;
+        protected override string[] GetClassPrefixes() => new []{ "List", "View" };
 
         protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {

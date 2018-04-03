@@ -98,16 +98,73 @@ namespace Dhgms.Nucleotide.Features.Dto
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
+                classDeclarations.Add(await GetAddClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(await GetDeleteClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
                 classDeclarations.Add(await GetListClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(await GetUpdateClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
                 classDeclarations.Add(await GetViewClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
             }
 
             return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
         }
 
+        private async Task<MemberDeclarationSyntax> GetAddClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        {
+            var className = $"Add{entityDeclaration.ClassName}{suffix}";
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
+            var declaration = SyntaxFactory.ClassDeclaration(className)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddMembers(members);
+
+            var baseClass = GetBaseClass(null);
+            if (!string.IsNullOrWhiteSpace(baseClass))
+            {
+                var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
+                declaration = declaration.AddBaseListTypes(b);
+            }
+
+            return await Task.FromResult(declaration);
+        }
+
+        private async Task<MemberDeclarationSyntax> GetDeleteClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        {
+            var className = $"Delete{entityDeclaration.ClassName}{suffix}";
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
+            var declaration = SyntaxFactory.ClassDeclaration(className)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddMembers(members);
+
+            var baseClass = GetBaseClass(null);
+            if (!string.IsNullOrWhiteSpace(baseClass))
+            {
+                var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
+                declaration = declaration.AddBaseListTypes(b);
+            }
+
+            return await Task.FromResult(declaration);
+        }
+
         private async Task<MemberDeclarationSyntax> GetListClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"List{entityDeclaration.ClassName}{suffix}";
+            var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
+            var declaration = SyntaxFactory.ClassDeclaration(className)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
+                .AddMembers(members);
+
+            var baseClass = GetBaseClass(null);
+            if (!string.IsNullOrWhiteSpace(baseClass))
+            {
+                var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
+                declaration = declaration.AddBaseListTypes(b);
+            }
+
+            return await Task.FromResult(declaration);
+        }
+
+        private async Task<MemberDeclarationSyntax> GetUpdateClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        {
+            var className = $"Update{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
             var declaration = SyntaxFactory.ClassDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.SealedKeyword))
