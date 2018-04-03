@@ -110,11 +110,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             var result = new List<MemberDeclarationSyntax>
             {
-                GetAddMethodDeclaration(entityName),
-                GetDeleteMethodDeclaration(entityName),
-                GetListMethodDeclaration(entityName),
-                GetUpdateMethodDeclaration(entityName),
-                GetViewMethodDeclaration(entityName),
+                //GetAddMethodDeclaration(entityName),
+                //GetDeleteMethodDeclaration(entityName),
+                //GetListMethodDeclaration(entityName),
+                //GetUpdateMethodDeclaration(entityName),
+                //GetViewMethodDeclaration(entityName),
                 GetEventIdMethodDeclaration(entityName, "Add"),
                 //GetEventIdMethodDeclaration(entityName, "OnAddNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
