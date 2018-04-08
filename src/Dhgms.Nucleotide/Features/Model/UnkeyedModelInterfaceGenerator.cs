@@ -38,17 +38,18 @@ namespace Dhgms.Nucleotide.Features.Model
             return new[] { "Unkeyed"};
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
+            IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string entityName)
         {
             return null;
         }
 
-        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return null;
         }

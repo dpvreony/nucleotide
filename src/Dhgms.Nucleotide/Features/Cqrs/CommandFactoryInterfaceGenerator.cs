@@ -39,24 +39,25 @@ namespace Dhgms.Nucleotide.Features.Cqrs
             };
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
+            IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return null;
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
             var result = new List<MethodDeclarationSyntax>
             {
-                GetAddMethodDeclaration(entityName),
-                GetDeleteMethodDeclaration(entityName),
-                GetUpdateMethodDeclaration(entityName),
+                GetAddMethodDeclaration(className),
+                GetDeleteMethodDeclaration(className),
+                GetUpdateMethodDeclaration(className),
             };
 
             return result.ToArray();
         }
 
-        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return null;
         }

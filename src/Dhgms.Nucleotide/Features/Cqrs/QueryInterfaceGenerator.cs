@@ -41,11 +41,12 @@ namespace Dhgms.Nucleotide.Features.Cqrs
             return "Queries";
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
+            IEntityGenerationModel entityGenerationModel, string prefix)
         {
             var result = new List<PropertyDeclarationSyntax>
             {
-                GetRequestDtoPropertyDeclaration(entityGenerationModel),
+                GetRequestDtoPropertyDeclaration(entityGenerationModel, prefix),
                 GetClaimsPrincipalDeclaration()
             };
 
@@ -71,7 +72,8 @@ namespace Dhgms.Nucleotide.Features.Cqrs
             return declaration;
         }
 
-        private PropertyDeclarationSyntax GetRequestDtoPropertyDeclaration(IEntityGenerationModel entityGenerationModel)
+        private PropertyDeclarationSyntax GetRequestDtoPropertyDeclaration(IEntityGenerationModel entityGenerationModel,
+            string prefix)
         {
             var methodName = "RequestDto";
 
@@ -83,23 +85,23 @@ namespace Dhgms.Nucleotide.Features.Cqrs
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
             };
 
-            var returnType = SyntaxFactory.ParseTypeName($"RequestDtos.List{entityGenerationModel.ClassName}RequestDto");
+            var returnType = SyntaxFactory.ParseTypeName($"RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto");
             var declaration = SyntaxFactory.PropertyDeclaration(returnType, methodName)
                 .AddAccessorListAccessors(accessor);
 
             return declaration;
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
             return null;
         }
 
-        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return new[]
             {
-                "Dhgms.AspNetCoreContrib.Abstractions.IAuditableRequest<RequestDtos.ListUserRequestDto, ResponseDtos.ListUserResponseDto>"
+                $"Dhgms.AspNetCoreContrib.Abstractions.IAuditableRequest<RequestDtos.{prefix}UserRequestDto, ResponseDtos.{prefix}UserResponseDto>"
             };
         }
     }

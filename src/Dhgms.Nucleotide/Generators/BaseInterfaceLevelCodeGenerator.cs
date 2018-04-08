@@ -62,14 +62,14 @@ namespace Dhgms.Nucleotide.Generators
         protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string prefix, string suffix)
         {
             var className = $"I{prefix}{entityDeclaration.ClassName}{suffix}";
-            var members = GetMembers(entityDeclaration);
+            var members = GetMembers(entityDeclaration, prefix);
             var leadingTrivia = GetInterfaceLeadingTrivia(entityDeclaration);
             var declaration = SyntaxFactory.InterfaceDeclaration(className)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddMembers(members)
                 .WithLeadingTrivia(leadingTrivia);
 
-            var baseInterfaces = GetBaseInterfaces(entityDeclaration);
+            var baseInterfaces = GetBaseInterfaces(entityDeclaration, prefix);
             if (baseInterfaces != null && baseInterfaces.Length > 0)
             {
                 var b = baseInterfaces.Select(bi => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(bi)) as BaseTypeSyntax).ToArray();
@@ -81,32 +81,33 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration);
 
-        protected MemberDeclarationSyntax[] GetMembers(IEntityGenerationModel entityGenerationModel)
+        protected MemberDeclarationSyntax[] GetMembers(IEntityGenerationModel entityGenerationModel, string prefix)
         {
             var result = new List<MemberDeclarationSyntax>();
 
-            var properties = GetPropertyDeclarations(entityGenerationModel);
+            var properties = GetPropertyDeclarations(entityGenerationModel, prefix);
             AddToList(result, properties);
 
-            var methods = GetMethodDeclarations(entityGenerationModel.ClassName);
+            var methods = GetMethodDeclarations(entityGenerationModel.ClassName, prefix);
             AddToList(result, methods);
 
             return result.ToArray();
         }
 
-        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
+        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(
+            IEntityGenerationModel entityGenerationModel, string prefix);
 
         /// <summary>
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(string entityName);
+        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix);
 
         /// <summary>
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel);
+        protected abstract string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix);
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
         {

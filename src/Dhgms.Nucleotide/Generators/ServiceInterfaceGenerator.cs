@@ -46,17 +46,18 @@ namespace Dhgms.Nucleotide.Generators
             return "Services";
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
+            IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return null;
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string entityName)
         {
             return null;
         }
 
-        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel)
+        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
             return null;
         }
