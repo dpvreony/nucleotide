@@ -43,8 +43,10 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             return new List<string>
             {
+                "System.Threading.Tasks",
                 "Microsoft.Extensions.Logging",
-                "Microsoft.AspNetCore.Authorization"
+                "Microsoft.AspNetCore.Authorization",
+                "Microsoft.AspNetCore.Mvc"
             };
         }
 
@@ -110,6 +112,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             var result = new List<MemberDeclarationSyntax>
             {
+                GetAddActionResultAsyncDeclaration(entityName),
+                GetDeleteActionResultAsyncDeclaration(entityName),
+                GetListActionResultAsyncDeclaration(entityName),
+                GetUpdateActionResultAsyncDeclaration(entityName),
+                GetViewActionResultAsyncDeclaration(entityName),
                 //GetAddMethodDeclaration(entityName),
                 //GetDeleteMethodDeclaration(entityName),
                 //GetListMethodDeclaration(entityName),
@@ -127,6 +134,57 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
 
             return result.ToArray();
+        }
+
+        private MemberDeclarationSyntax GetAddActionResultAsyncDeclaration(string entityName)
+        {
+            return GetOkActionResultDeclaration(entityName, "add");
+        }
+
+        private MemberDeclarationSyntax GetDeleteActionResultAsyncDeclaration(string entityName)
+        {
+            return GetOkActionResultDeclaration(entityName, "delete");
+        }
+
+        private MemberDeclarationSyntax GetListActionResultAsyncDeclaration(string entityName)
+        {
+            return GetOkActionResultDeclaration(entityName, "list");
+        }
+
+        private MemberDeclarationSyntax GetUpdateActionResultAsyncDeclaration(string entityName)
+        {
+            return GetOkActionResultDeclaration(entityName, "update");
+        }
+
+        private MemberDeclarationSyntax GetViewActionResultAsyncDeclaration(string entityName)
+        {
+            return GetOkActionResultDeclaration(entityName, "view");
+        }
+
+        private MemberDeclarationSyntax GetOkActionResultDeclaration(string entityName, string action)
+        {
+            var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
+            var lowerAction = action.Substring(0, 1).ToLower() + action.Substring(1);
+
+            var methodName = $"Get{camelAction}ActionResultAsync";
+
+            var baseMethodInvocationSyntax =
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("Ok", new [] {$"{lowerAction}Response"}, true);
+            var returnStatement = SyntaxFactory.ReturnStatement(baseMethodInvocationSyntax);
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var parameters = GetParams(new []{ $"ResponseDtos.{camelAction}{entityName}ResponseDto {lowerAction}Response"});
+
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<IActionResult>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
+                .AddBodyStatements(body);
+            return declaration;
         }
 
         private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
