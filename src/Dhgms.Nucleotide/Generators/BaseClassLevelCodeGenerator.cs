@@ -418,7 +418,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected MemberDeclarationSyntax GetEventIdMethodDeclaration(string entityName, string eventName)
         {
-            var methodName = $"Get{eventName}EventId";
+            var methodName = $"Get{eventName}EventIdAsync";
 
             var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await System.Threading.Tasks.Task.FromResult(new EventId(NumericEventIds.{entityName}Controller{eventName}Id, \"{entityName}Controller{eventName}\"))"));
 
@@ -429,7 +429,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<EventId>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddBodyStatements(body);
             return declaration;
         }

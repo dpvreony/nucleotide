@@ -123,12 +123,9 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 //GetUpdateMethodDeclaration(entityName),
                 //GetViewMethodDeclaration(entityName),
                 GetEventIdMethodDeclaration(entityName, "Add"),
-                //GetEventIdMethodDeclaration(entityName, "OnAddNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
-                //GetEventIdMethodDeclaration(entityName, "OnDeleteNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "Update"),
-                //GetEventIdMethodDeclaration(entityName, "OnUpdateNotifySignalR"),
                 GetEventIdMethodDeclaration(entityName, "View"),
             };
 

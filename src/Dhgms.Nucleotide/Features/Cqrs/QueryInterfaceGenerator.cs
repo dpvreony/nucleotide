@@ -38,13 +38,14 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            var result = new List<PropertyDeclarationSyntax>
-            {
-                GetRequestDtoPropertyDeclaration(entityGenerationModel, prefix),
-                GetClaimsPrincipalDeclaration()
-            };
+            //var result = new List<PropertyDeclarationSyntax>
+            //{
+            //    GetRequestDtoPropertyDeclaration(entityGenerationModel, prefix),
+            //    GetClaimsPrincipalDeclaration()
+            //};
 
-            return result.ToArray();
+            //return result.ToArray();
+            return null;
         }
 
         private PropertyDeclarationSyntax GetClaimsPrincipalDeclaration()
@@ -84,6 +85,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
                 .AddAccessorListAccessors(accessor);
 
             return declaration;
+            return null;
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
