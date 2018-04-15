@@ -122,6 +122,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 //GetListMethodDeclaration(entityName),
                 //GetUpdateMethodDeclaration(entityName),
                 //GetViewMethodDeclaration(entityName),
+                GetPolicyMethodDeclaration(entityName, "Add"),
+                GetPolicyMethodDeclaration(entityName, "Delete"),
+                GetPolicyMethodDeclaration(entityName, "List"),
+                GetPolicyMethodDeclaration(entityName, "Update"),
+                GetPolicyMethodDeclaration(entityName, "View"),
                 GetEventIdMethodDeclaration(entityName, "Add"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
                 GetEventIdMethodDeclaration(entityName, "List"),
@@ -131,6 +136,24 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
 
             return result.ToArray();
+        }
+
+        private MemberDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)
+        {
+            var methodName = $"Get{action}PolicyAsync";
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await Task.FromResult(\"{entityName}.{action}\").ConfigureAwait(false)"));
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var returnType = SyntaxFactory.ParseTypeName("Task<string>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddBodyStatements(body);
+            return declaration;
         }
 
         private MemberDeclarationSyntax GetAddActionResultAsyncDeclaration(string entityName)
@@ -166,8 +189,12 @@ namespace Dhgms.Nucleotide.Features.WebApi
             var methodName = $"Get{camelAction}ActionResultAsync";
 
             var baseMethodInvocationSyntax =
-                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("Ok", new [] {$"{lowerAction}Response"}, true);
-            var returnStatement = SyntaxFactory.ReturnStatement(baseMethodInvocationSyntax);
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("Ok", new [] {$"{lowerAction}Response"}, false);
+
+            var taskFromResult =
+                RoslynGenerationHelpers.GetStaticMethodInvocationSyntax("Task", "FromResult",
+                    baseMethodInvocationSyntax, true);
+            var returnStatement = SyntaxFactory.ReturnStatement(taskFromResult);
 
             var body = new StatementSyntax[]
             {
