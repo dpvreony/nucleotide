@@ -59,7 +59,11 @@ namespace Dhgms.Nucleotide.Features.Cqrs
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return null;
+            var className = entityGenerationModel.ClassName;
+            return new []
+            {
+                $"Dhgms.AspNetCoreContrib.Abstractions.IAuditableCommandFactory<Commands.IAdd{className}Command, RequestDtos.Add{className}RequestDto, ResponseDtos.Add{className}ResponseDto, Commands.IDelete{className}Command, ResponseDtos.Delete{className}ResponseDto, Commands.IUpdate{className}Command, RequestDtos.Update{className}RequestDto, ResponseDtos.Update{className}ResponseDto>"
+            };
         }
 
         private MethodDeclarationSyntax GetAddMethodDeclaration(string entityName)
