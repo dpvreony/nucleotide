@@ -62,6 +62,8 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return null;
         }
 
+        protected override IList<string> GetBaseConstructorArguments() => null;
+
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;

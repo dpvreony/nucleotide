@@ -178,6 +178,7 @@ namespace Dhgms.Nucleotide.Generators
             var result = new List<MemberDeclarationSyntax>();
 
             var constructorArguments = GetConstructorArguments();
+            var baseArguments = GetBaseConstructorArguments();
 
             var fields = GetFieldDeclarations(constructorArguments, entityName);
             if (fields != null && fields.Length > 0)
@@ -187,7 +188,7 @@ namespace Dhgms.Nucleotide.Generators
 
             if (constructorArguments != null && constructorArguments.Count > 0)
             {
-                result.Add(GenerateConstructor(className, constructorArguments, entityName));
+                result.Add(GenerateConstructor(className, constructorArguments, entityName, baseArguments));
             }
 
             var properties = GetPropertyDeclarations(entityGenerationModel);
@@ -204,6 +205,8 @@ namespace Dhgms.Nucleotide.Generators
 
             return result.ToArray();
         }
+
+        protected abstract IList<string> GetBaseConstructorArguments();
 
         protected static AttributeListSyntax GetAttributeListSyntax(IList<Tuple<string, IList<string>>> attributes)
         {
@@ -268,7 +271,7 @@ namespace Dhgms.Nucleotide.Generators
             string className,
             IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
             string entityName,
-            IList<Tuple<Func<string, string>, string, Accessibility>> baseArguments)
+            IList<string> baseArguments)
         {
             var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
             var body = new List<StatementSyntax>();
@@ -276,7 +279,7 @@ namespace Dhgms.Nucleotide.Generators
             // null checks
             foreach (var constructorArgument in constructorArguments)
             {
-                if (baseArguments.Any(ba => ba.Item2.Equals(constructorArgument.Item2)))
+                if (baseArguments.Any(ba => ba.Equals(constructorArgument.Item2)))
                 {
                     // don't deal with base arguments, should be validated in base class
                     continue;
@@ -290,7 +293,7 @@ namespace Dhgms.Nucleotide.Generators
             // assignments
             foreach (var constructorArgument in constructorArguments)
             {
-                if (baseArguments.Any(ba => ba.Item2.Equals(constructorArgument.Item2)))
+                if (baseArguments.Any(ba => ba.Equals(constructorArgument.Item2)))
                 {
                     // don't deal with base arguments, should be assigned in base class
                     continue;
@@ -319,8 +322,26 @@ namespace Dhgms.Nucleotide.Generators
             var declaration = SyntaxFactory.ConstructorDeclaration(className)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .
                 .AddBodyStatements(body.ToArray());
+
+            if (baseArguments != null && baseArguments.Count > 0)
+            {
+                var seperatedSyntaxList = new SeparatedSyntaxList<ArgumentSyntax>();
+
+                foreach (var baseArgument in baseArguments)
+                {
+                    seperatedSyntaxList = seperatedSyntaxList.Add(
+                        SyntaxFactory.Argument(
+                            SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(baseArgument))));
+                }
+
+                var baseInitializerArgumentList = SyntaxFactory.ArgumentList(seperatedSyntaxList);
+
+                var initializer = SyntaxFactory.ConstructorInitializer(
+                    SyntaxKind.BaseConstructorInitializer,
+                    baseInitializerArgumentList);
+                declaration = declaration.WithInitializer(initializer);
+            }
 
             var summary = new[]
             {

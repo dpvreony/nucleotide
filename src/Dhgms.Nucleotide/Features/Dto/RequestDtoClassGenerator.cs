@@ -23,6 +23,7 @@ namespace Dhgms.Nucleotide.Features.Dto
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
+        protected override IList<string> GetBaseConstructorArguments() => null;
 
         protected override IList<string> GetUsings()
         {

@@ -27,6 +27,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
+        protected override IList<string> GetBaseConstructorArguments() => null;
 
         /// <inheritdoc />
         protected override string[] GetClassPrefixes() => null;

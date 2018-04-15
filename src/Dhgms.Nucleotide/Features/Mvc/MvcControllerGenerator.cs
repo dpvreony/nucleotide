@@ -77,9 +77,23 @@ namespace Dhgms.Nucleotide.Features.Mvc
         {
             var result = new List<Tuple<Func<string, string>, string, Accessibility>>
             {
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(_ => "Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.Extensions.Logging.ILogger<{entityName}Controller>", "logger", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"MediatR.IMediator", "mediator", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
+            };
+
+            return result;
+        }
+
+        protected override IList<string> GetBaseConstructorArguments()
+        {
+            var result = new List<string>
+            {
+                "authorizationService",
+                "logger",
+                "mediator",
+                "queryFactory"
             };
 
             return result;

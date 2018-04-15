@@ -31,6 +31,8 @@ namespace Dhgms.Nucleotide.Features.Model
 
         protected override string GetNamespace() => "Models";
 
+        protected override IList<string> GetBaseConstructorArguments() => null;
+
         protected override IList<string> GetUsings()
         {
             return null;
