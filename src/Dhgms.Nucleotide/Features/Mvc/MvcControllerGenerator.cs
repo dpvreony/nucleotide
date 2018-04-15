@@ -45,6 +45,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
         {
             return new List<string>
             {
+                "System.Threading.Tasks",
                 "Microsoft.Extensions.Logging",
                 "Microsoft.AspNetCore.Authorization",
                 "Microsoft.AspNetCore.Mvc"
@@ -56,10 +57,8 @@ namespace Dhgms.Nucleotide.Features.Mvc
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         /// <inheritdoc />
-        protected override string GetBaseClass(string entityName)
-        {
-            return "Microsoft.AspNetCore.Mvc.Controller";
-        }
+        protected override string GetBaseClass(string entityName) =>
+            $"Dhgms.AspNetCoreContrib.Controllers.QueryOnlyController<{entityName}Controller, Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto>";
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
@@ -78,8 +77,6 @@ namespace Dhgms.Nucleotide.Features.Mvc
         {
             var result = new List<Tuple<Func<string, string>, string, Accessibility>>
             {
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Hubs.I{entityName}Hub", "signalRHub", Accessibility.Private),
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"CommandFactories.I{entityName}CommandFactory", "commandFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(_ => "Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.Extensions.Logging.ILogger<{entityName}Controller>", "logger", Accessibility.Private),
@@ -116,8 +113,15 @@ namespace Dhgms.Nucleotide.Features.Mvc
         {
             var result = new List<MemberDeclarationSyntax>
             {
-                GetListMethodDeclaration(entityName),
-                GetViewMethodDeclaration(entityName),
+                GetMvcViewActionResultDeclaration(entityName, "list"),
+                GetMvcViewActionResultDeclaration(entityName, "view"),
+                //GetAddMethodDeclaration(entityName),
+                //GetDeleteMethodDeclaration(entityName),
+                //GetListMethodDeclaration(entityName),
+                //GetUpdateMethodDeclaration(entityName),
+                //GetViewMethodDeclaration(entityName),
+                GetPolicyMethodDeclaration(entityName, "List"),
+                GetPolicyMethodDeclaration(entityName, "View"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "View"),
             };
@@ -126,92 +130,50 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return result.ToArray();
         }
 
-        private MemberDeclarationSyntax GetListMethodDeclaration(string entityName)
+        private MemberDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)
         {
-            var userLocalDeclaration =
-                RoslynGenerationHelpers
-                    .GetVariableAssignmentFromVariablePropertyAccessSyntax("user", "HttpContext", "User");
-            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetListQueryAsync", null, true);
-            var arguments = new[]
-            {
-                "requestDto",
-                "user"
-            };
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query", "ExecuteAsync", arguments);
-            var viewInvocation = RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { "\"List\"", "result"}, false);
-            var returnStatement = SyntaxFactory.ReturnStatement(viewInvocation);
+            var methodName = $"Get{action}PolicyAsync";
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await Task.FromResult(\"Mvc.{entityName}.{action}\").ConfigureAwait(false)"));
 
             var body = new StatementSyntax[]
             {
-                userLocalDeclaration,
-                commandLocalDeclaration,
-                commandExecutionDeclaration,
                 returnStatement
             };
 
-            var attributes = new List<Tuple<string, IList<string>>>
-            {
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null)
-            };
-
-            var attributeListSyntax = GetAttributeListSyntax(attributes);
-
-            var parameters = GetParams(new[] { $"[FromQuery]RequestDtos.List{entityName}RequestDto requestDto" });
-
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
-            var declaration = SyntaxFactory.MethodDeclaration(returnType, "ListAsync")
-                .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
-                .AddAttributeLists(attributeListSyntax)
+            var returnType = SyntaxFactory.ParseTypeName("Task<string>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddBodyStatements(body);
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetViewMethodDeclaration(string entityName)
+        private MemberDeclarationSyntax GetMvcViewActionResultDeclaration(string entityName, string action)
         {
-            var entityIdVariableName = "id";
-            const string notFoundResult = "new Microsoft.AspNetCore.Mvc.NotFoundResult()";
-            var numberTooLowCheckDeclaration =
-                RoslynGenerationHelpers.GetReturnIfLessThanSyntax(entityIdVariableName, 1, notFoundResult);
-            var commandLocalDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromMethodOnFieldSyntax("query", "_queryFactory", "GetViewQueryAsync", null, true);
+            var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
+            var lowerAction = action.Substring(0, 1).ToLower() + action.Substring(1);
 
-            var arguments = new[]
+            var methodName = $"Get{camelAction}ActionResultAsync";
+
+            var baseMethodInvocationSyntax =
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new [] {$"{lowerAction}Response"}, false);
+
+            var taskFromResult =
+                RoslynGenerationHelpers.GetStaticMethodInvocationSyntax("Task", "FromResult",
+                    baseMethodInvocationSyntax, true);
+            var returnStatement = SyntaxFactory.ReturnStatement(taskFromResult);
+
+            var body = new StatementSyntax[]
             {
-                "id"
-            };
-            var commandExecutionDeclaration = RoslynGenerationHelpers.GetVariableAssignmentFromVariableInvocationSyntax("result", "query", "Execute", arguments);
-            var nullQueryResultCheckDeclaration = RoslynGenerationHelpers.GetReturnIfNullSyntax("result", notFoundResult);
-            var viewInvocation = RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { "\"View\"", "result" }, false);
-            var returnStatement = SyntaxFactory.ReturnStatement(viewInvocation);
-
-            // todo: https://github.com/blowdart/AspNetAuthorizationWorkshop/blob/master/src/Step_7_Resource_Based_Requirements/Controllers/DocumentController.cs
-
-            var body = new[]
-            {
-                numberTooLowCheckDeclaration,
-                commandLocalDeclaration,
-                commandExecutionDeclaration,
-                nullQueryResultCheckDeclaration,
                 returnStatement
             };
 
-            var attributes = new List<Tuple<string, IList<string>>>
-            {
-                new Tuple<string, IList<string>>("Microsoft​.AspNetCore​.Mvc.HttpGet", null),
-            };
+            var parameters = GetParams(new []{ $"ResponseDtos.{camelAction}{entityName}ResponseDto {lowerAction}Response"});
 
-            var attributeListSyntax = GetAttributeListSyntax(attributes);
-
-            var parameters = GetParams(new[]
-            {
-                "int id"
-            });
-
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
-            var declaration = SyntaxFactory.MethodDeclaration(returnType, "ViewAsync")
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<IActionResult>");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
-                .AddAttributeLists(attributeListSyntax)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
                 .AddBodyStatements(body);
             return declaration;
         }

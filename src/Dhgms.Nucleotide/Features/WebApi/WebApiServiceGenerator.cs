@@ -142,7 +142,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
         {
             var methodName = $"Get{action}PolicyAsync";
 
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await Task.FromResult(\"{entityName}.{action}\").ConfigureAwait(false)"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await Task.FromResult(\"Api.{entityName}.{action}\").ConfigureAwait(false)"));
 
             var body = new StatementSyntax[]
             {

@@ -264,7 +264,11 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns></returns>
         protected abstract MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
 
-        private ConstructorDeclarationSyntax GenerateConstructor(string className, IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments, string entityName)
+        private ConstructorDeclarationSyntax GenerateConstructor(
+            string className,
+            IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
+            string entityName,
+            IList<Tuple<Func<string, string>, string, Accessibility>> baseArguments)
         {
             var parameters = GetParams(constructorArguments.Select(x => $"{x.Item1(entityName)} {x.Item2}").ToArray());
             var body = new List<StatementSyntax>();
@@ -272,6 +276,12 @@ namespace Dhgms.Nucleotide.Generators
             // null checks
             foreach (var constructorArgument in constructorArguments)
             {
+                if (baseArguments.Any(ba => ba.Item2.Equals(constructorArgument.Item2)))
+                {
+                    // don't deal with base arguments, should be validated in base class
+                    continue;
+                }
+
                 var nullCheck = RoslynGenerationHelpers.GetNullGuardCheckSyntax(constructorArgument.Item2);
 
                 body.Add(nullCheck);
@@ -280,6 +290,12 @@ namespace Dhgms.Nucleotide.Generators
             // assignments
             foreach (var constructorArgument in constructorArguments)
             {
+                if (baseArguments.Any(ba => ba.Item2.Equals(constructorArgument.Item2)))
+                {
+                    // don't deal with base arguments, should be assigned in base class
+                    continue;
+                }
+
                 var left = SyntaxFactory.MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
                     SyntaxFactory.ThisExpression(),
@@ -303,6 +319,7 @@ namespace Dhgms.Nucleotide.Generators
             var declaration = SyntaxFactory.ConstructorDeclaration(className)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .
                 .AddBodyStatements(body.ToArray());
 
             var summary = new[]
