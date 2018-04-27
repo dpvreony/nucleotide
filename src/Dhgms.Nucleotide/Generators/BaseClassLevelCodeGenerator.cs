@@ -31,7 +31,7 @@ namespace Dhgms.Nucleotide.Generators
             //this.nucleotideGenerationModel = (Type) [0].Value;
         }
 
-        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
+        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, IEntityGenerationModel[] generationModelEntityGenerationModel)
         {
             if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {
@@ -265,7 +265,7 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the property declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
+        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
 
         private ConstructorDeclarationSyntax GenerateConstructor(
             string className,
@@ -411,6 +411,8 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns>List of implemented interfaces</returns>
         protected abstract IList<string> GetImplementedInterfaces(string entityName);
 
+        protected abstract SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo);
+
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
         {
             var accessorList = new[]
@@ -443,6 +445,8 @@ namespace Dhgms.Nucleotide.Generators
         {
             var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
+
+            var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(
@@ -450,6 +454,12 @@ namespace Dhgms.Nucleotide.Generators
                         SyntaxFactory.List(accessorList)
                     ))
                 .WithLeadingTrivia(summary);
+
+            if (attributes.Count > 0)
+            {
+                var attributeLists = SyntaxFactory.AttributeList(attributes);
+                result = result.AddAttributeLists(attributeLists);
+            }
 
             return result;
         }

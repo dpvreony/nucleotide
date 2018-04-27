@@ -29,14 +29,18 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override string MainNamespaceName => null;
 
-        public override PropertyInfoBase[] Properties => null;
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+            new ClrStringPropertyInfo(CollectionType.None, "Username", "Username for the user", false, 3, 255, false, false, null),
+            new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", false, 0, 1024, false, false, null)
+        };
 
         public override string SubNamespace => null;
     }
 
     public class ModelGenerationDetails : INucleotideGenerationModel
     {
-        public EntityGenerationModel[] EntityGenerationModel => new[]
+        public IEntityGenerationModel[] EntityGenerationModel => new[]
         {
             new UserEntityGenerationModel()
         };

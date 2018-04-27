@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,61 +28,14 @@ namespace Dhgms.Nucleotide.Features.Model
 
         protected override IList<string> GetBaseConstructorArguments() => null;
 
-        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return null;
+            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
         protected override IList<string> GetUsings()
         {
             return null;
-        }
-
-        private MemberDeclarationSyntax[] GetMembers()
-        {
-            var members = GetUnkeyedClasses()
-                .Concat(GetKeyedClasses())
-                .ToArray();
-
-            return members;
-        }
-
-        private MemberDeclarationSyntax[] GetKeyedClasses()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Represents the {name} model.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Unkeyed{name}Model")),
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"I{name}Model"))
-            };
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword))
-            };
-
-            var members = new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName("long"), "Id").AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).AddAccessorListAccessors(accessor)
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.ClassDeclaration($"{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .AddMembers(members)
-                .WithLeadingTrivia(leadingTrivia)
-            };
         }
 
         private MemberDeclarationSyntax[] GetUnkeyedClasses()
@@ -152,6 +106,11 @@ namespace Dhgms.Nucleotide.Features.Model
             {
                 $"IUnkeyed{entityName}Model"
             };
+        }
+
+        protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
+        {
+            return default(SeparatedSyntaxList<AttributeSyntax>);
         }
     }
 }

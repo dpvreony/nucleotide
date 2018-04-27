@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -22,7 +23,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
         }
 
         /// <inheritdoc />
-        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -151,6 +152,11 @@ namespace Dhgms.Nucleotide.Features.WebApi
 
 
             return result.ToArray();
+        }
+
+        protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
+        {
+            return default(SeparatedSyntaxList<AttributeSyntax>);
         }
 
         private MemberDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)

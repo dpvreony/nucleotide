@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -13,13 +14,12 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         {
         }
 
-
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
 
-        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -80,5 +80,10 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         }
 
         protected override string[] GetClassPrefixes() => null;
+
+        protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
+        {
+            return default(SeparatedSyntaxList<AttributeSyntax>);
+        }
     }
 }

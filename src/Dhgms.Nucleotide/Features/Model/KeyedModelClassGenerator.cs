@@ -61,7 +61,7 @@ namespace Dhgms.Nucleotide.Features.Model
             return null;
         }
 
-        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             var idColumn = GetIdColumn(entityGenerationModel.KeyType);
 
@@ -124,6 +124,11 @@ namespace Dhgms.Nucleotide.Features.Model
             {
                 $"I{entityName}Model"
             };
+        }
+
+        protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
+        {
+            return default(SeparatedSyntaxList<AttributeSyntax>);
         }
     }
 }

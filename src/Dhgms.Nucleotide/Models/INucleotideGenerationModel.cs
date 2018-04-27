@@ -8,6 +8,6 @@
         /// <summary>
         /// Gets a collection of Class Generation Parameters.
         /// </summary>
-        EntityGenerationModel[] EntityGenerationModel { get; }
+        IEntityGenerationModel[] EntityGenerationModel { get; }
     }
 }

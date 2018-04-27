@@ -70,7 +70,7 @@ namespace Dhgms.Nucleotide.Generators
             return await Task.FromResult(results);
         }
 
-        protected abstract Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel);
+        protected abstract Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, IEntityGenerationModel[] generationModelEntityGenerationModel);
 
         protected abstract string[] GetClassPrefixes();
 

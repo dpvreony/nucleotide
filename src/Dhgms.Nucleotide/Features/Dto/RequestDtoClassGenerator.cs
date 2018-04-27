@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Dhgms.Nucleotide.Features.Model;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -47,7 +48,7 @@ namespace Dhgms.Nucleotide.Features.Dto
             return null;
         }
 
-        protected override MemberDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -85,7 +86,7 @@ namespace Dhgms.Nucleotide.Features.Dto
             return null;
         }
 
-        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, EntityGenerationModel[] generationModelEntityGenerationModel)
+        protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, IEntityGenerationModel[] generationModelEntityGenerationModel)
         {
             if (generationModelEntityGenerationModel == null || generationModelEntityGenerationModel.Length < 1)
             {
@@ -196,6 +197,11 @@ namespace Dhgms.Nucleotide.Features.Dto
             }
 
             return await Task.FromResult(declaration);
+        }
+
+        protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
+        {
+            return default(SeparatedSyntaxList<AttributeSyntax>);
         }
     }
 }
