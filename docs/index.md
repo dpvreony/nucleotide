@@ -14,20 +14,25 @@ To provide a tool that automatically generates repeditive .NET code to allow bet
 
 Nucleotide is a library to aid in the generation of .NET code for manipulation the following types of objects:
 
+### Client \ Server
 * Client\Server Services (Interfaces)
-* Commands (Interfaces and Classes)
-* Command Factory (Interfaces and Classes)
-* Entity Framework DbSet (Classes)
-* Entity Framework Models (Classes)
 * Models (Interfaces and Classes)
-* Queries (Interfaces and Classes)
-* Query Factories (Interfaces and Classes)
 * Request DTO POCO Objects (Classes)
 * Response DTO POCO Objects (Classes)
+
+### Server
+* Commands (Interfaces and Classes)
+* Command Factory (Interfaces and Classes)
+* Entity Framework DbContext (Classes)
+* Entity Framework Models (Classes)
+* Queries (Interfaces and Classes)
+* Query Factories (Interfaces and Classes)
 * SignalR Hubs (Classes)
-* WCF Service classes (Classes)
-* Web Api Client (Classes)
 * Web Api Controllers (Classes)
+
+### Client
+* ReactiveUI ViewModels (Interfaces and Classes)
+* Web Api Client (Classes)
 
 This project leverages Roslyn functionality to combine a simple DSL style model with the power of the roslyn to
 
