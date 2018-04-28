@@ -2,6 +2,8 @@
   projects :
   - name : .NET Compiler Platform ("Roslyn")
     uri : https://github.com/dotnet/roslyn
+  - name : Refit
+    uri : https://github.com/paulcbetts/refit
   - name : Roslyn-based Code Generation
     uri : https://github.com/AArnott/CodeGeneration.Roslyn
 - category : Documentation
