@@ -22,6 +22,11 @@ namespace Dhgms.Nucleotide.Generators
         protected BaseGenerator(AttributeData attributeData)
         {
             Requires.NotNull(attributeData, nameof(attributeData));
+            if (attributeData.ConstructorArguments == null)
+            {
+                throw new ArgumentException("ConstructorArguments", nameof(attributeData));
+            }
+
             Requires.That(attributeData.ConstructorArguments.Length > 0, nameof(attributeData), "x");
 
             this.NucleotideGenerationModel = attributeData.ConstructorArguments;

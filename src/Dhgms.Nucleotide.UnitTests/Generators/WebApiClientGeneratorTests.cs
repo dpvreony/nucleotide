@@ -11,22 +11,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
     public static class WebApiClientGeneratorTests
     {
-        public sealed class ConstructorMethod
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiClientGenerator>
         {
-            [Fact]
-            public void ThrowsArgumentNullException()
+            protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
             {
-
-                var exception = Assert.Throws<ArgumentNullException>(() => new WebApiClientGenerator(null));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
-            public void ReturnsInstance()
-            {
-                var attributeData = new Mock<AttributeData>(MockBehavior.Strict);
-                var instance = new WebApiClientGenerator(attributeData.Object);
-                Assert.NotNull(instance);
+                return attributeData => new WebApiClientGenerator(attributeData);
             }
         }
     }

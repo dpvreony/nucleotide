@@ -1,10 +1,10 @@
-﻿using Dhgms.Nucleotide.Attributes;
-using Dhgms.Nucleotide.ModelTests;
+﻿//using Dhgms.Nucleotide.Attributes;
+//using Dhgms.Nucleotide.ModelTests;
 
-namespace Dhgms.Nucleotide.GenerationTests
-{
-    [GenerateQueryFactoryClass(typeof(ModelGenerationDetails))]
-    class QueryFactoryClassGeneration
-    {
-    }
-}
+//namespace Dhgms.Nucleotide.GenerationTests
+//{
+//    [GenerateQueryFactoryClass(typeof(ModelGenerationDetails))]
+//    class QueryFactoryClassGeneration
+//    {
+//    }
+//}
