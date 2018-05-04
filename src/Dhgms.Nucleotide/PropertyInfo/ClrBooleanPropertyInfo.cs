@@ -70,55 +70,55 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
         /// </summary>
-        public override bool GenerateAutoProperty
-        {
-            get
-            {
-                return true;
-            }
-        }
+        //public override bool GenerateAutoProperty
+        //{
+        //    get
+        //    {
+        //        return true;
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the code used for outputting a value as part of a string array
-        /// </summary>
-        public override string ToStringArrayCode
-        {
-            get
-            {
-                return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
-            }
-        }
+        ///// <summary>
+        ///// Gets the code used for outputting a value as part of a string array
+        ///// </summary>
+        //public override string ToStringArrayCode
+        //{
+        //    get
+        //    {
+        //        return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
+        //    }
+        //}
 
-        /// <summary>
-        /// Whether the type is disposable
-        /// </summary>
-        public override bool DisposableType
-        {
-            get
-            {
-                return false;
-            }
-        }
+        ///// <summary>
+        ///// Whether the type is disposable
+        ///// </summary>
+        //public override bool DisposableType
+        //{
+        //    get
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return null;
-        }
+        ///// <summary>
+        ///// Produces the data annotations specific to the property
+        ///// </summary>
+        ///// <returns></returns>
+        //public override string GetDataAnnotations()
+        //{
+        //    return null;
+        //}
 
-        /// <summary>
-        /// Gets a random value for use in a unit test.
-        /// </summary>
-        public override string RandomUnitTestValue
-        {
-            get
-            {
-                return new System.Random().Next(1) == 1 ? "true" : "false";
-            }
-        }
+        ///// <summary>
+        ///// Gets a random value for use in a unit test.
+        ///// </summary>
+        //public override string RandomUnitTestValue
+        //{
+        //    get
+        //    {
+        //        return new System.Random().Next(1) == 1 ? "true" : "false";
+        //    }
+        //}
         #endregion
     }
 }

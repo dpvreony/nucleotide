@@ -73,112 +73,112 @@ namespace Dhgms.Nucleotide.PropertyInfo
             this.maximumValue = maximumValue;
         }
 
-        /// <summary>
-        /// Gets the mutator code for a poperty
-        /// </summary>
-        /// <returns>C# code</returns>
-        public override string GetMutator()
-        {
-            StringBuilder sb = new StringBuilder();
+        ///// <summary>
+        ///// Gets the mutator code for a poperty
+        ///// </summary>
+        ///// <returns>C# code</returns>
+        //public override string GetMutator()
+        //{
+        //    StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("            set");
-            sb.AppendLine("        {");
+        //    sb.AppendLine("            set");
+        //    sb.AppendLine("        {");
 
-            if (this.minimumValue != null)
-            {
-                sb.Append("            if (");
-                if (this.Optional)
-                {
-                    sb.Append("value != null && ");
-                }
+        //    if (this.minimumValue != null)
+        //    {
+        //        sb.Append("            if (");
+        //        if (this.Optional)
+        //        {
+        //            sb.Append("value != null && ");
+        //        }
 
-                sb.AppendLine("value < " + this.minimumValue + ")");
-                sb.AppendLine("            {");
-                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException(" + this.minimumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
-                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
-                sb.AppendLine("            }");
-                sb.AppendLine(string.Empty);
-            }
+        //        sb.AppendLine("value < " + this.minimumValue + ")");
+        //        sb.AppendLine("            {");
+        //        sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+        //        sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooLowClrDateTimeException(" + this.minimumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
+        //        sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+        //        sb.AppendLine("            }");
+        //        sb.AppendLine(string.Empty);
+        //    }
 
-            if (this.maximumValue != null)
-            {
-                sb.Append("            if (");
-                if (this.Optional)
-                {
-                    sb.Append("value != null && ");
-                }
+        //    if (this.maximumValue != null)
+        //    {
+        //        sb.Append("            if (");
+        //        if (this.Optional)
+        //        {
+        //            sb.Append("value != null && ");
+        //        }
 
-                sb.AppendLine("value > " + this.maximumValue + ")");
-                sb.AppendLine("            {");
-                sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
-                sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException(" + this.maximumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
-                sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
-                sb.AppendLine("            }");
-                sb.AppendLine(string.Empty);
-            }
+        //        sb.AppendLine("value > " + this.maximumValue + ")");
+        //        sb.AppendLine("            {");
+        //        sb.AppendLine("                // ReSharper disable RedundantNameQualifier");
+        //        sb.AppendLine("                throw new Dhgms.DataManager.Model.Exception.NumberTooHighClrDateTimeException(" + this.maximumValue + ", value" + (this.Optional ? ".Value" : "") + ");");
+        //        sb.AppendLine("                // ReSharper restore RedundantNameQualifier");
+        //        sb.AppendLine("            }");
+        //        sb.AppendLine(string.Empty);
+        //    }
 
-            sb.AppendLine("            this." + OldHelpers.GetVariableName(this.Name) + " = value;");
+        //    sb.AppendLine("            this." + OldHelpers.GetVariableName(this.Name) + " = value;");
 
-            sb.AppendLine("        }");
-            return sb.ToString();
-        }
+        //    sb.AppendLine("        }");
+        //    return sb.ToString();
+        //}
 
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns></returns>
-        public override string GetDataAnnotations()
-        {
-            return "[System.ComponentModel.DataAnnotations.Range(typeof(System.DateTime), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
-        }
+        ///// <summary>
+        ///// Produces the data annotations specific to the property
+        ///// </summary>
+        ///// <returns></returns>
+        //public override string GetDataAnnotations()
+        //{
+        //    return "[System.ComponentModel.DataAnnotations.Range(typeof(System.DateTime), \"" + this.minimumValue + "\", \"" + this.maximumValue + "\")]";
+        //}
 
-        /// <summary>
-        /// Whether to generate an auto property, or a property that uses a field
-        /// </summary>
-        public override bool GenerateAutoProperty
-        {
-            get
-            {
-                return this.maximumValue == null && this.minimumValue == null;
-            }
-        }
+        ///// <summary>
+        ///// Whether to generate an auto property, or a property that uses a field
+        ///// </summary>
+        //public override bool GenerateAutoProperty
+        //{
+        //    get
+        //    {
+        //        return this.maximumValue == null && this.minimumValue == null;
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the code used for outputting a value as part of a string array
-        /// </summary>
-        public override string ToStringArrayCode
-        {
-            get
-            {
-                return "ToString(\"yyyy-MM-dd HH:mm:ss\")";
-            }
-        }
+        ///// <summary>
+        ///// Gets the code used for outputting a value as part of a string array
+        ///// </summary>
+        //public override string ToStringArrayCode
+        //{
+        //    get
+        //    {
+        //        return "ToString(\"yyyy-MM-dd HH:mm:ss\")";
+        //    }
+        //}
 
         /// <summary>
         /// Whether the type is disposable
         /// </summary>
-        public override bool DisposableType
-        {
-            get
-            {
-                return false;
-            }
-        }
+        //public override bool DisposableType
+        //{
+        //    get
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets a random value for use in a unit test.
-        /// </summary>
-        public override string RandomUnitTestValue
-        {
-            get
-            {
-                var minValue = this.minimumValue.HasValue && this.minimumValue.Value > System.DateTime.MinValue ? this.minimumValue.Value : System.DateTime.MinValue;
-                var max32BitDate = new System.DateTime(int.MaxValue);
-                var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32BitDate ? this.maximumValue.Value : max32BitDate;
-                var randomTicks = new System.DateTime(new System.Random().Next((int)minValue.Ticks, (int)maxValue.Ticks));
-                return string.Format(CultureInfo.InvariantCulture, "new System.DateTime({0})", randomTicks);
-            }
-        }
+        ///// <summary>
+        ///// Gets a random value for use in a unit test.
+        ///// </summary>
+        //public override string RandomUnitTestValue
+        //{
+        //    get
+        //    {
+        //        var minValue = this.minimumValue.HasValue && this.minimumValue.Value > System.DateTime.MinValue ? this.minimumValue.Value : System.DateTime.MinValue;
+        //        var max32BitDate = new System.DateTime(int.MaxValue);
+        //        var maxValue = this.maximumValue.HasValue && this.maximumValue.Value < max32BitDate ? this.maximumValue.Value : max32BitDate;
+        //        var randomTicks = new System.DateTime(new System.Random().Next((int)minValue.Ticks, (int)maxValue.Ticks));
+        //        return string.Format(CultureInfo.InvariantCulture, "new System.DateTime({0})", randomTicks);
+        //    }
+        //}
     }
 }
