@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -20,7 +21,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
         {
             public MockAttributeData()
             {
+            }
 
+            public MockAttributeData(TypedConstant constructorArg)
+            {
+                this.CommonConstructorArguments = ImmutableArray.Create(constructorArg);
             }
 
             protected override INamedTypeSymbol CommonAttributeClass { get; }
@@ -57,7 +62,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             public void ReturnsInstance()
             {
                 var factory = GetFactory();
-                var attributeData = new MockAttributeData();
+                var attributeData = new MockAttributeData(new TypedConstant());
                 var instance = factory(attributeData);
 
                 Assert.NotNull(instance);
