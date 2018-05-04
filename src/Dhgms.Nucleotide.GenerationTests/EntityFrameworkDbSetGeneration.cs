@@ -3,7 +3,7 @@ using Dhgms.Nucleotide.ModelTests;
 
 namespace Dhgms.Nucleotide.GenerationTests
 {
-    [GenerateEntityFrameworkDbSet(typeof(ModelGenerationDetails))]
+    [GenerateEntityFrameworkDbContext(typeof(ModelGenerationDetails))]
     class EntityFrameworkDbSetGeneration
     {
     }

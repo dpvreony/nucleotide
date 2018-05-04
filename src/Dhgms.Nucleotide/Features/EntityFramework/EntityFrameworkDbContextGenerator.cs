@@ -15,14 +15,14 @@ using Validation;
 namespace Dhgms.Nucleotide.Features.EntityFramework
 {
     /// <summary>
-    /// Code Generator for Entity Framework DB Sets
+    /// Code Generator for Entity Framework DB Context
     /// </summary>
-    public sealed class EntityFrameworkDbSetGenerator : BaseGenerator
+    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EntityFrameworkDbSetGenerator"/> class.
+        /// Initializes a new instance of the <see cref="EntityFrameworkDbContextGenerator"/> class.
         /// </summary>
-        public EntityFrameworkDbSetGenerator(AttributeData attributeData) : base(attributeData)
+        public EntityFrameworkDbContextGenerator(AttributeData attributeData) : base(attributeData)
         {
             Requires.NotNull(attributeData, nameof(attributeData));
         }
@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return await Task.FromResult(namespaceDeclaration);
         }
 
-        protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel[] generationModelEntityGenerationModel)
+        private MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel[] generationModelEntityGenerationModel)
         {
             var result = new List<MemberDeclarationSyntax>();
 
@@ -66,6 +66,8 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             //{
             //    result.Add(GenerateConstructor(className, constructorArguments, entityName, baseArguments));
             //}
+            result.Add(GetDefaultConstructor(className));
+            result.Add(GetConstructorWithDbOptions(className));
 
             var properties = GetPropertyDeclarations(generationModelEntityGenerationModel);
             if (properties != null && properties.Length > 0)
@@ -80,6 +82,45 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             }
 
             return result.ToArray();
+        }
+
+        private ConstructorDeclarationSyntax GetDefaultConstructor(string className)
+        {
+            var body = new List<StatementSyntax>();
+
+            var declaration = SyntaxFactory.ConstructorDeclaration(className)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+
+            return declaration;
+        }
+
+        private ConstructorDeclarationSyntax GetConstructorWithDbOptions(string className)
+        {
+            var parameters = GetParams(new []{ "DbContextOptions dbContextOptions"});
+
+            var seperatedSyntaxList = new SeparatedSyntaxList<ArgumentSyntax>();
+
+            seperatedSyntaxList = seperatedSyntaxList.Add(
+                SyntaxFactory.Argument(
+                    SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("dbContextOptions"))));
+
+            var baseInitializerArgumentList = SyntaxFactory.ArgumentList(seperatedSyntaxList);
+
+            var initializer = SyntaxFactory.ConstructorInitializer(
+                SyntaxKind.BaseConstructorInitializer,
+                baseInitializerArgumentList);
+
+            var body = new List<StatementSyntax>();
+
+            var declaration = SyntaxFactory.ConstructorDeclaration(className)
+                .WithParameterList(parameters)
+                .WithInitializer(initializer)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+
+            return declaration;
+
         }
 
         /// <summary>

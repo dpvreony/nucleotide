@@ -14,15 +14,15 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generates an Entity Framework DB Set
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    [CodeGenerationAttribute(typeof(EntityFrameworkDbSetGenerator))]
+    [CodeGenerationAttribute(typeof(EntityFrameworkDbContextGenerator))]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateEntityFrameworkDbSetAttribute : BaseCodeGeneratorAttribute
+    public sealed class GenerateEntityFrameworkDbContextAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateEntityFrameworkDbSetAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
+        public GenerateEntityFrameworkDbContextAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
         }
     }
