@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 using CodeGeneration.Roslyn;
@@ -11,6 +12,8 @@ using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
+
+    [ExcludeFromCodeCoverage]
     public class BaseGeneratorTests
     {
         public class MockAttributeData : AttributeData

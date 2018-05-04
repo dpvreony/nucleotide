@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
@@ -8,6 +9,7 @@ using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
+    [ExcludeFromCodeCoverage]
     public static class ServiceInterfaceGeneratorTests
     {
         public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ServiceInterfaceGenerator>

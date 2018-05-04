@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Features.Model;
 using Dhgms.Nucleotide.Generators;
@@ -9,6 +10,7 @@ using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
+    [ExcludeFromCodeCoverage]
     public static class UnkeyedModelClassGeneratorTests
     {
         public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<UnkeyedModelClassGenerator>
