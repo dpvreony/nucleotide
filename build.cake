@@ -217,10 +217,12 @@ Task("RunUnitTests")
 Task("UploadTestCoverage")
     .WithCriteria(() => !local)
     .WithCriteria(() => isRepository)
+	.WithCriteria(() => !isPullRequest)
     .IsDependentOn("RunUnitTests")
     .Does(() =>
 {
     // Resolve the API key.
+	// pull requests can't currently get secure variables
     var token = EnvironmentVariable("COVERALLS_TOKEN");
     if (string.IsNullOrEmpty(token))
     {
