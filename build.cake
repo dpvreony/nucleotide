@@ -50,6 +50,7 @@ var isRepository = StringComparer.OrdinalIgnoreCase.Equals(githubOwner + "/" + g
 var isDevelopBranch = StringComparer.OrdinalIgnoreCase.Equals("develop", AppVeyor.Environment.Repository.Branch);
 var isReleaseBranch = StringComparer.OrdinalIgnoreCase.Equals("master", AppVeyor.Environment.Repository.Branch);
 var isTagged = AppVeyor.Environment.Repository.Tag.IsTag;
+var unitTestProjectFilePath = "./src/Dhgms.Nucleotide.UnitTests/Dhgms.Nucleotide.UnitTests.csproj";
 
 
 var vsPath = VSWhereLatest();
@@ -174,7 +175,6 @@ Task("RunUnitTests")
     .IsDependentOn("BuildSolution")
     .Does(() =>
 {
-	var unitTestProjectFilePath = "./src/Dhgms.AspNetCoreContrib.UnitTests/Dhgms.AspNetCoreContrib.UnitTests.csproj";
 	var projectDirectory = new FilePath(unitTestProjectFilePath).GetDirectory();
 	var pdbDirectory = projectDirectory + "\\bin\\Debug\\netcoreapp2.0";
 
