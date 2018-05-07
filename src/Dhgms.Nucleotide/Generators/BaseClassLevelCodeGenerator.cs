@@ -180,7 +180,7 @@ namespace Dhgms.Nucleotide.Generators
             var constructorArguments = GetConstructorArguments();
             var baseArguments = GetBaseConstructorArguments();
 
-            var fields = GetFieldDeclarations(constructorArguments, entityName);
+            var fields = GetFieldDeclarations(constructorArguments, baseArguments, entityName);
             if (fields != null && fields.Length > 0)
             {
                 result.AddRange(fields);
@@ -230,6 +230,7 @@ namespace Dhgms.Nucleotide.Generators
 
         private MemberDeclarationSyntax[] GetFieldDeclarations(
             IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
+            IList<string> baseArguments,
             string entityName)
         {
             if (constructorArguments == null || constructorArguments.Count < 1)
@@ -241,6 +242,12 @@ namespace Dhgms.Nucleotide.Generators
 
             foreach (var constructorArgument in constructorArguments)
             {
+                if (baseArguments.Any(ba => ba.Equals(constructorArgument.Item2)))
+                {
+                    // don't deal with base arguments, should be provided for in base class
+                    continue;
+                }
+
                 var fieldType = constructorArgument.Item1(entityName);
 
                 var fieldDeclaration = SyntaxFactory.FieldDeclaration(
