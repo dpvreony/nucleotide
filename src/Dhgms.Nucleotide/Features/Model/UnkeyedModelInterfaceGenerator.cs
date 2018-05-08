@@ -44,7 +44,7 @@ namespace Dhgms.Nucleotide.Features.Model
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
             return null;
         }

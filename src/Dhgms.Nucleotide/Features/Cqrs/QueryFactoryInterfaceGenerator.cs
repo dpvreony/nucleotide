@@ -45,7 +45,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
             return null;
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
             var result = new List<MethodDeclarationSyntax>
             {

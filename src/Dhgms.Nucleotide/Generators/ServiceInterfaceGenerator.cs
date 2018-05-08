@@ -52,7 +52,7 @@ namespace Dhgms.Nucleotide.Generators
             return null;
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
             return null;
         }

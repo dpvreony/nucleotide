@@ -4,6 +4,8 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.ModelTests;
@@ -72,9 +74,20 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
         public abstract class BaseGenerateAsyncMethod<TGenerator>
             where TGenerator : class, ICodeGenerator
         {
-            [Fact]
-            public void ThrowsArgumentNullException()
+            protected abstract Func<AttributeData, TGenerator> GetFactory();
+
+            //[Theory]
+            public async Task ThrowsArgumentNullException(
+                TransformationContext context,
+                IProgress<Diagnostic> progress,
+                string paramNameThatThrowsException)
             {
+                var factory = GetFactory();
+                var attributeData = new MockAttributeData(new TypedConstant());
+                var instance = factory(attributeData);
+                var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => instance.GenerateAsync(context, progress, CancellationToken.None));
+                Assert.NotNull(ex);
+                Assert.Equal(paramNameThatThrowsException, ex.ParamName);
             }
 
         }
