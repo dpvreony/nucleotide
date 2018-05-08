@@ -151,15 +151,6 @@ namespace Dhgms.Nucleotide.Generators
             return result;
         }
 
-        private static void AddToList<T>(List<MemberDeclarationSyntax> list, IReadOnlyCollection<T> items)
-            where T : MemberDeclarationSyntax
-        {
-            if (items != null && items.Count > 0)
-            {
-                list.AddRange(items);
-            }
-        }
-
         private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IEntityGenerationModel entityDeclaration)
         {
             var interfaceSummary = GetInterfaceSummary(entityDeclaration);
