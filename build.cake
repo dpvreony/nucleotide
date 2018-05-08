@@ -261,7 +261,7 @@ Task("SonarBegin")
             Information("Sonar: Running Sonar on branch " + AppVeyor.Environment.Repository.Branch);
             if (!isReleaseBranch)
             {
-                arguments += " /d:\"sonar.branch.name=" + AppVeyor.Environment.Repository.Branch "\"";
+                arguments += " /d:\"sonar.branch.name=" + AppVeyor.Environment.Repository.Branch + "\"";
             }
         }
 
