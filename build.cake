@@ -57,14 +57,14 @@ var vsPath = VSWhereLatest();
 
 if (vsPath == null)
 {
-	throw new Exception("Unable to find Visual Studio");
+    throw new Exception("Unable to find Visual Studio");
 }
 Information("Visual Studio Path: " + vsPath);
 
 var msBuildPath = GetFiles(vsPath + "/**/msbuild.exe").FirstOrDefault();
 if (msBuildPath == null)
 {
-	throw new Exception("Unable to find MSBuild path");
+    throw new Exception("Unable to find MSBuild path");
 }
 Information("MSBuild Path: " + msBuildPath);
 
@@ -97,13 +97,17 @@ var sonarqubeProjectKey = "nucleotide";
 var sonarqubeOrganisationKey = "dpvreony-github";
 
 // sonarqube
-if (isRepository && !local && sonarQubeLogin != null) {
-    if (isPullRequest) { 
+if (isRepository && !local && sonarQubeLogin != null)
+{
+    if (isPullRequest)
+    {
+        // currently doesn't happen as PR's don't pass secure env vars
         sonarQubePreview = true;
         runSonarQube = true;
         Information("Sonar on PR " + AppVeyor.Environment.PullRequest.Number);
     }
-    else if (isReleaseBranch) {
+    else
+    {
         runSonarQube = true;
         Information("Sonar on branch " + AppVeyor.Environment.Repository.Branch);
     }
@@ -175,15 +179,15 @@ Task("RunUnitTests")
     .IsDependentOn("BuildSolution")
     .Does(() =>
 {
-	var projectDirectory = new FilePath(unitTestProjectFilePath).GetDirectory();
-	var pdbDirectory = projectDirectory + "\\bin\\Debug\\netcoreapp2.0";
+    var projectDirectory = new FilePath(unitTestProjectFilePath).GetDirectory();
+    var pdbDirectory = projectDirectory + "\\bin\\Debug\\netcoreapp2.0";
 
-	// workaround for https://github.com/xunit/xunit/issues/1573
-	// C:\Program Files\dotnet\shared\Microsoft.NETCore.App
-	var fxVersion = "2.0.5";
+    // workaround for https://github.com/xunit/xunit/issues/1573
+    // C:\Program Files\dotnet\shared\Microsoft.NETCore.App
+    var fxVersion = "2.0.5";
 
     Action<ICakeContext> testAction = tool => {
-		tool.DotNetCoreTool(
+        tool.DotNetCoreTool(
                 projectPath: unitTestProjectFilePath,
                 command: "xunit", 
                 arguments: "-noshadow -fxversion " + fxVersion + " -configuration Debug -diagnostics"
@@ -193,13 +197,13 @@ Task("RunUnitTests")
     OpenCover(testAction,
         testCoverageOutputFile,
         new OpenCoverSettings {
-			//LogLevel = OpenCoverLogLevel.All,
-			MergeOutput = true,
-			Register = "user",
+            //LogLevel = OpenCoverLogLevel.All,
+            MergeOutput = true,
+            Register = "user",
             ReturnTargetCodeOffset = 0,
             ArgumentCustomization = args => args.Append("-coverbytest:*.UnitTests.dll").Append("-searchdirs:" + pdbDirectory).Append("-oldstyle"),
-			// working dir set to allow use of dotnet-xunit
-			WorkingDirectory = projectDirectory
+            // working dir set to allow use of dotnet-xunit
+            WorkingDirectory = projectDirectory
         }
         .WithFilter("+[Dhgms*]*")
         .ExcludeByAttribute("*.ExcludeFromCodeCoverage*")
@@ -217,12 +221,12 @@ Task("RunUnitTests")
 Task("UploadTestCoverage")
     .WithCriteria(() => !local)
     .WithCriteria(() => isRepository)
-	.WithCriteria(() => !isPullRequest)
+    .WithCriteria(() => !isPullRequest)
     .IsDependentOn("RunUnitTests")
     .Does(() =>
 {
     // Resolve the API key.
-	// pull requests can't currently get secure variables
+    // pull requests can't currently get secure variables
     var token = EnvironmentVariable("COVERALLS_TOKEN");
     if (string.IsNullOrEmpty(token))
     {
@@ -251,13 +255,19 @@ Task("SonarBegin")
 
         if (sonarQubePreview) {
             Information("Sonar: Running Sonar on PR " + AppVeyor.Environment.PullRequest.Number);
-		    arguments += " /d:\"sonar.projectVersion=sonar.projectVersion\" /d:\"sonar.analysis.mode=preview\"";
+            arguments += " /d:\"sonar.projectVersion=sonar.projectVersion\" /d:\"sonar.analysis.mode=preview\"";
         }
         else {
             Information("Sonar: Running Sonar on branch " + AppVeyor.Environment.Repository.Branch);
+            if (!isReleaseBranch)
+            {
+                arguments += " /d:\"sonar.branch.name=" + AppVeyor.Environment.Repository.Branch "\"";
+            }
         }
+
+
         var sonarStartSettings = new ProcessSettings{ Arguments = arguments };
-		StartProcess("./tools/MSBuild.SonarQube.Runner.Tool/tools/MSBuild.SonarQube.Runner.exe", sonarStartSettings);
+        StartProcess("./tools/MSBuild.SonarQube.Runner.Tool/tools/MSBuild.SonarQube.Runner.exe", sonarStartSettings);
   /*
      SonarBegin(new SonarBeginSettings{
         Url = "sonarcube.contoso.local",
@@ -265,7 +275,7 @@ Task("SonarBegin")
         Password = "admin",
         Verbose = true
      });
-	 */
+     */
   });
 
 Task("SonarEnd")
