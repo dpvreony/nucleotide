@@ -38,55 +38,9 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            //var result = new List<PropertyDeclarationSyntax>
-            //{
-            //    GetRequestDtoPropertyDeclaration(entityGenerationModel, prefix),
-            //    GetClaimsPrincipalDeclaration()
-            //};
-
-            //return result.ToArray();
-            return null;
+            return new PropertyDeclarationSyntax[0];
         }
 
-        private PropertyDeclarationSyntax GetClaimsPrincipalDeclaration()
-        {
-            var methodName = "ClaimsPrincipal";
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-            };
-
-            var returnType = SyntaxFactory.ParseTypeName($"System.Security.Claims.ClaimsPrincipal");
-            var declaration = SyntaxFactory.PropertyDeclaration(returnType, methodName)
-                .AddAccessorListAccessors(accessor);
-
-            return declaration;
-        }
-
-        private PropertyDeclarationSyntax GetRequestDtoPropertyDeclaration(IEntityGenerationModel entityGenerationModel,
-            string prefix)
-        {
-            var methodName = "RequestDto";
-
-            var accessor = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-            };
-
-            var returnType = SyntaxFactory.ParseTypeName($"RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto");
-            var declaration = SyntaxFactory.PropertyDeclaration(returnType, methodName)
-                .AddAccessorListAccessors(accessor);
-
-            return declaration;
-            return null;
-        }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
