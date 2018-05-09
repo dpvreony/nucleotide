@@ -115,7 +115,6 @@ namespace Dhgms.Nucleotide.Generators
 
             var typeName = $"{namedTypeSymbols.ContainingNamespace}.{namedTypeSymbols.Name}";
             var modelType = assembly.GetType(typeName);
-            //var modelType = Type.GetType(typeName);
             if (modelType == null)
             {
                 throw new InvalidOperationException($"Unable to find model type: {typeName}");
@@ -127,8 +126,6 @@ namespace Dhgms.Nucleotide.Generators
                 throw new InvalidOperationException($"Unable to create instance: {typeName}");
             }
 
-            // namedTypeSymbols.ContainingAssembly
-            //namedTypeSymbols.Name
             return await Task.FromResult(instance as INucleotideGenerationModel);
         }
 

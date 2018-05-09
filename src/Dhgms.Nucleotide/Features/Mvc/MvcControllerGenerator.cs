@@ -113,7 +113,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return null;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return new List<Tuple<string, IList<string>>>
             {
@@ -124,9 +124,9 @@ namespace Dhgms.Nucleotide.Features.Mvc
         }
 
         /// <inheritdoc />
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
-            var result = new List<MemberDeclarationSyntax>
+            var result = new List<MethodDeclarationSyntax>
             {
                 GetMvcViewActionResultDeclaration(entityName, "list"),
                 GetMvcViewActionResultDeclaration(entityName, "view"),
@@ -145,7 +145,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return result.ToArray();
         }
 
-        private MemberDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)
+        private MethodDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)
         {
             var methodName = $"Get{action}PolicyAsync";
 
@@ -163,7 +163,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetMvcViewActionResultDeclaration(string entityName, string action)
+        private MethodDeclarationSyntax GetMvcViewActionResultDeclaration(string entityName, string action)
         {
             var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
             var lowerAction = action.Substring(0, 1).ToLower() + action.Substring(1);

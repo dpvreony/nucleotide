@@ -80,12 +80,12 @@ namespace Dhgms.Nucleotide.Features.Model
             return null;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return null;
         }
 
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
             return null;
         }

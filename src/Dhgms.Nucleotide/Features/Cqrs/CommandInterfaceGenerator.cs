@@ -38,13 +38,13 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return null;
+            return Array.Empty<PropertyDeclarationSyntax>();
         }
 
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
-            return null;
+            return Array.Empty<MethodDeclarationSyntax>();
         }
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)

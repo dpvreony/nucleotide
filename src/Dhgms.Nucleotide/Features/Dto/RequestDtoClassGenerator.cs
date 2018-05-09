@@ -24,34 +24,19 @@ namespace Dhgms.Nucleotide.Features.Dto
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
-        protected override IList<string> GetBaseConstructorArguments() => null;
+        protected override IList<string> GetBaseConstructorArguments() => Array.Empty<string>();
 
-        protected override IList<string> GetUsings()
-        {
-            return null;
-        }
+        protected override IList<string> GetUsings() => Array.Empty<string>();
 
-        protected override string[] GetClassPrefixes() => null;
+        protected override string[] GetClassPrefixes() => Array.Empty<string>();
 
-        protected override string GetClassSuffix()
-        {
-            return "RequestDto";
-        }
+        protected override string GetClassSuffix() => "RequestDto";
 
-        protected override string GetNamespace()
-        {
-            return "RequestDtos";
-        }
+        protected override string GetNamespace() => "RequestDtos";
 
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
-        {
-            return null;
-        }
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName) => Array.Empty<MethodDeclarationSyntax>();
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
-        {
-            return null;
-        }
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<PropertyDeclarationSyntax>();
 
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
@@ -61,29 +46,17 @@ namespace Dhgms.Nucleotide.Features.Dto
             };
         }
 
-        protected override string[] GetClassLevelCommentRemarks(string entityName)
-        {
-            return null;
-        }
+        protected override string[] GetClassLevelCommentRemarks(string entityName) => Array.Empty<string>();
 
-        protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
-        {
-            return null;
-        }
+        protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments() => Array.Empty<Tuple<Func<string, string>, string, Accessibility>>();
 
-        protected override string GetBaseClass(string entityName)
-        {
-            return null;
-        }
+        protected override string GetBaseClass(string entityName) => null;
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
-        {
-            return null;
-        }
+        protected override IList<string> GetImplementedInterfaces(string entityName) => Array.Empty<string>();
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
-            return null;
+            return Array.Empty<Tuple<string, IList<string>>>();
         }
 
         protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, IEntityGenerationModel[] generationModelEntityGenerationModel)

@@ -76,15 +76,15 @@ namespace Dhgms.Nucleotide.Features.WebApi
             //return result;
         }
 
-        protected override List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return null;
         }
 
         /// <inheritdoc />
-        protected override MemberDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
-            var result = new List<MemberDeclarationSyntax>();
+            var result = new List<MethodDeclarationSyntax>();
 
             result.Add(GetAddMethodDeclaration(entityName));
             result.Add(GetDeleteMethodDeclaration(entityName));
@@ -108,7 +108,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return null;
         }
 
-        private MemberDeclarationSyntax GetAddMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetAddMethodDeclaration(string entityName)
         {
             var methodName = "AddAsync";
             var throwStatement = RoslynGenerationHelpers.GetThrowNotImplementedExceptionSyntax() as StatementSyntax;
@@ -123,7 +123,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetDeleteMethodDeclaration(string entityName)
         {
             var throwStatement = RoslynGenerationHelpers.GetThrowNotImplementedExceptionSyntax() as StatementSyntax;
 
@@ -137,7 +137,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetListMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetListMethodDeclaration(string entityName)
         {
             var throwStatement = RoslynGenerationHelpers.GetThrowNotImplementedExceptionSyntax() as StatementSyntax;
 
@@ -150,7 +150,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetUpdateMethodDeclaration(string entityName)
         {
             var throwStatement = RoslynGenerationHelpers.GetThrowNotImplementedExceptionSyntax() as StatementSyntax;
 
@@ -164,7 +164,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             return declaration;
         }
 
-        private MemberDeclarationSyntax GetViewMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetViewMethodDeclaration(string entityName)
         {
             var throwStatement = RoslynGenerationHelpers.GetThrowNotImplementedExceptionSyntax() as StatementSyntax;
 

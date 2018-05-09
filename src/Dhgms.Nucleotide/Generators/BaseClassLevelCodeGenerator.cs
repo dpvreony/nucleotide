@@ -171,7 +171,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string[] GetClassLevelCommentRemarks(string entityName);
 
-        protected abstract List<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration);
+        protected abstract IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration);
 
         protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel entityGenerationModel)
         {
@@ -266,7 +266,7 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MemberDeclarationSyntax[] GetMethodDeclarations(string entityName);
+        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(string entityName);
 
         /// <summary>
         /// Gets the property declarations to be generated
@@ -471,7 +471,7 @@ namespace Dhgms.Nucleotide.Generators
             return result;
         }
 
-        protected MemberDeclarationSyntax GetEventIdMethodDeclaration(string entityName, string eventName)
+        protected MethodDeclarationSyntax GetEventIdMethodDeclaration(string entityName, string eventName)
         {
             var methodName = $"Get{eventName}EventIdAsync";
 

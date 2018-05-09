@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Cqrs
@@ -38,13 +36,13 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return new PropertyDeclarationSyntax[0];
+            return Array.Empty<PropertyDeclarationSyntax>();
         }
 
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
-            return null;
+            return Array.Empty<MethodDeclarationSyntax>();
         }
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)

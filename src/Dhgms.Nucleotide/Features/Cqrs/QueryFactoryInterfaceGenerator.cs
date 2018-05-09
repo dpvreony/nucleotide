@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
@@ -19,7 +20,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         {
         }
 
-        protected override string[] GetClassPrefixes() => null;
+        protected override string[] GetClassPrefixes() => Array.Empty<string>();
 
         protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
         {
@@ -42,7 +43,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return null;
+            return Array.Empty<PropertyDeclarationSyntax>();
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
