@@ -5,15 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.11" />
+    <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.49" />
     <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="1.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" />
     <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj" />
-    <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.11" />
+    <DotNetCliToolReference Include="dotnet-codegen" Version="0.4.49" />
   </ItemGroup>
 
 </Project>
