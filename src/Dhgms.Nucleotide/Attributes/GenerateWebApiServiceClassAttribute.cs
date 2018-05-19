@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a Web API service.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(WebApiServiceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateWebApiServiceClassAttribute : Attribute

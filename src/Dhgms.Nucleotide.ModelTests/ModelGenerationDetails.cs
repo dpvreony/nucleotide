@@ -44,5 +44,7 @@ namespace Dhgms.Nucleotide.ModelTests
         {
             new UserEntityGenerationModel()
         };
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
 }

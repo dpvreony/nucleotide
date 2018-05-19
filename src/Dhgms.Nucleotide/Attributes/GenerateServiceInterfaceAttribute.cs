@@ -12,7 +12,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a Service Interface associated with this class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(ServiceInterfaceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateServiceInterfaceAttribute : BaseCodeGeneratorAttribute

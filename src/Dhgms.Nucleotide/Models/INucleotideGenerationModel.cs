@@ -9,5 +9,7 @@
         /// Gets a collection of Class Generation Parameters.
         /// </summary>
         IEntityGenerationModel[] EntityGenerationModel { get; }
+
+        string RootNamespace { get; }
     }
 }

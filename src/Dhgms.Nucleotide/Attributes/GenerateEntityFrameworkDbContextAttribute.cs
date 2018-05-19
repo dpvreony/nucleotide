@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generates an Entity Framework DB Set
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(EntityFrameworkDbContextGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateEntityFrameworkDbContextAttribute : BaseCodeGeneratorAttribute

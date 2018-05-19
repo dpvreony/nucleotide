@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a Query Interface associated with this class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(QueryInterfaceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateQueryInterfaceAttribute : BaseCodeGeneratorAttribute

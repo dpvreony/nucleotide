@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a Command Interface associated with this class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(CommandInterfaceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateCommandInterfaceAttribute : BaseCodeGeneratorAttribute

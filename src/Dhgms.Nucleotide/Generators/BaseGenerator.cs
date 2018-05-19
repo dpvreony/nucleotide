@@ -46,9 +46,6 @@ namespace Dhgms.Nucleotide.Generators
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
-            var namespaceName = GetNamespace();
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName));
-
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
 
             var a = castDetails.First();
@@ -56,12 +53,16 @@ namespace Dhgms.Nucleotide.Generators
             var compilation = context.Compilation;
             var generationModel = await this.GetModel(namedTypeSymbols, compilation);
 
+            NamespaceDeclarationSyntax namespaceDeclaration;
+            var namespaceName = GetNamespace();
             if (generationModel == null)
             {
-                namespaceDeclaration = namespaceDeclaration.WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
+                namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName)).WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
             }
             else
             {
+                var rootNamespace = generationModel.RootNamespace;
+                namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));
                 namespaceDeclaration = await this.GenerateObjects(namespaceDeclaration, generationModel.EntityGenerationModel);
             }
 

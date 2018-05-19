@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate the models associate to this class
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(KeyedModelClassGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateKeyedModelClassAttribute : BaseCodeGeneratorAttribute

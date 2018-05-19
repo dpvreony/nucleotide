@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate the models interfaces associate to this class
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(UnkeyedModelInterfaceGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateUnkeyedModelInterfaceAttribute : BaseCodeGeneratorAttribute

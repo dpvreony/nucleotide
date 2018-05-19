@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a SignalR Hub Interface associated with this class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(SignalRHubClassGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateSignalRHubClassAttribute : BaseCodeGeneratorAttribute

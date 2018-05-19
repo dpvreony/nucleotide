@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Attributes
     /// <summary>
     /// Generate a Web API service.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     [CodeGenerationAttribute(typeof(MvcControllerGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateMvcControllerClassAttribute : Attribute
