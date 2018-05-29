@@ -366,7 +366,7 @@ namespace Dhgms.Nucleotide.Generators
         /// <returns></returns>
         protected abstract IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments();
 
-        private static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
+        protected static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
         {
             if (attributeArguments == null || attributeArguments.Count < 1)
             {

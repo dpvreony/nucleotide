@@ -33,6 +33,30 @@ namespace Dhgms.Nucleotide.Features.Model
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
+        protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
+        {
+            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var identifier = propertyInfo.Name;
+
+            var attributes = GetAttributesForProperty(propertyInfo);
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.VirtualKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(summary);
+
+            if (attributes.Count > 0)
+            {
+                var attributeLists = SyntaxFactory.AttributeList(attributes);
+                result = result.AddAttributeLists(attributeLists);
+            }
+
+            return result;
+        }
+
+
         protected override IList<string> GetUsings()
         {
             return null;

@@ -102,12 +102,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <summary>
         /// Gets or sets the maximum length of a string
         /// </summary>
-        private int? MaximumLength { get; set; }
+        public int? MaximumLength { get; }
 
         /// <summary>
         /// Gets or sets the maximum length of a string
         /// </summary>
-        private int? MinimumLength { get; set; }
+        public int? MinimumLength { get; }
 
         #endregion
 
