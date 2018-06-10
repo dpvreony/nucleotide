@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Dhgms.Nucleotide.Features.AttributeGenerators;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
 using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
@@ -173,37 +175,14 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             NumericPropertyInfo<T> numericPropertyInfo)
             where T : struct
         {
-            // TODO: need to review this for const expressions i.e. Double.PositiveInfinity
-            var argumentList = GetAttributeArgumentListSyntax(new List<string>
-            {
-                numericPropertyInfo.MinimumValue.ToString(),
-                numericPropertyInfo.MaximumValue.ToString()
-            });
-
-            nodes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Range"), argumentList));
+            var propertyAnnotationGenerator = new NumericPropertyAttributeGenerator<T>();
+            nodes.AddRange(propertyAnnotationGenerator.GetAttributes(numericPropertyInfo));
         }
 
         private void AddStringAttributes(List<AttributeSyntax> nodes, ClrStringPropertyInfo stringPropertyInfo)
         {
-            if (stringPropertyInfo.MaximumLength.HasValue)
-            {
-                var argumentList = GetAttributeArgumentListSyntax(new List<string>
-                {
-                    stringPropertyInfo.MaximumLength.Value.ToString()
-                });
-
-                nodes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("MaxLength"), argumentList));
-            }
-
-            if (stringPropertyInfo.MinimumLength.HasValue)
-            {
-                var argumentList = GetAttributeArgumentListSyntax(new List<string>
-                {
-                    stringPropertyInfo.MinimumLength.Value.ToString()
-                });
-
-                nodes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("MinLength"), argumentList));
-            }
+            var propertyAnnotationGenerator = new StringPropertyAttributeGenerator();
+            nodes.AddRange(propertyAnnotationGenerator.GetAttributes(stringPropertyInfo));
         }
     }
 }

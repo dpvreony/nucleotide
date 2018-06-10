@@ -14,6 +14,26 @@ namespace Dhgms.Nucleotide.Helpers
     /// </summary>
     public static class RoslynGenerationHelpers
     {
+        public static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
+        {
+            if (attributeArguments == null || attributeArguments.Count < 1)
+            {
+                return null;
+            }
+
+            var argumentList = SyntaxFactory.AttributeArgumentList();
+
+            foreach (var attributeArgument in attributeArguments)
+            {
+                var name = SyntaxFactory.ParseName(attributeArgument);
+                var attribArgSyntax = SyntaxFactory.AttributeArgument(name);
+                argumentList = argumentList.AddArguments(attribArgSyntax);
+            }
+
+            return argumentList;
+        }
+
+
         /// <summary>
         /// Produces the Invocation Syntax for using the nameof operator
         /// </summary>
