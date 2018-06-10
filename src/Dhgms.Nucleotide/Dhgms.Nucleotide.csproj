@@ -27,22 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="PropertyInfo\Number.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Number.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="PropertyInfo\Number.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Number.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

@@ -59,7 +59,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 description,
                 optional,
                 "System.DateTime",
-                "Dhgms.DataManager.Model.SearchFilter.DateTime",
                 "DateTime",
                 false,
                 "System.DateTime.MinValue",

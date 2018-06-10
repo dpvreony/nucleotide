@@ -435,9 +435,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="netDataType">
         /// The .NET data type
         /// </param>
-        /// <param name="searchFilterType">
-        /// The Search Filter type
-        /// </param>
         /// <param name="sqlDataReaderType">
         /// The SQL DataReader type
         /// </param>
@@ -469,7 +466,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             string description, 
             bool optional, 
             string netDataType, 
-            string searchFilterType, 
             string sqlDataReaderType, 
             bool requiresSqlMapping, 
             string defaultValue, 
@@ -496,7 +492,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             this.Description = description;
             this.Optional = optional;
             this.NetDataType = netDataType;
-            this.SearchFilterType = searchFilterType;
             this.SqlDataReaderType = sqlDataReaderType;
             this.RequiresSqlMapping = requiresSqlMapping;
             this.DefaultValue = defaultValue;
@@ -578,21 +573,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets a value indicating whether to generate an auto property, or a property that uses a field
-        /// </summary>
-        //public abstract bool GenerateAutoProperty { get; }
-
-        /// <summary>
-        /// Gets the code used for outputting a value as part of a string array
-        /// </summary>
-        //public abstract string ToStringArrayCode { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the type is disposable
-        /// </summary>
-        //public abstract bool DisposableType { get; }
-
-        /// <summary>
         /// Gets or sets the name of the property
         /// </summary>
         public string Name { get; set; }
@@ -620,11 +600,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         public bool RequiresSqlMapping { get; set; }
 
         /// <summary>
-        /// Gets or sets the search filter type
-        /// </summary>
-        public string SearchFilterType { get; set; }
-
-        /// <summary>
         /// Gets or sets the SQL DataReader Type
         /// </summary>
         public string SqlDataReaderType { get; set; }
@@ -639,11 +614,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// Used where the database naming convention doesn't match the .NET naming convention
         /// </summary>
         public string AlternativeDatabaseColumnName { get; set; }
-
-        ///// <summary>
-        ///// Gets a random value for use in a unit test.
-        ///// </summary>
-        //public abstract string RandomUnitTestValue { get; }
 
         #endregion
 

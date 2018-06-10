@@ -44,7 +44,6 @@
                 description, 
                 optional, 
                 "System.Guid", 
-                "Dhgms.DataManager.Model.SearchFilter.Guid", 
                 "Guid", 
                 false, 
                 "Guid.Empty", 

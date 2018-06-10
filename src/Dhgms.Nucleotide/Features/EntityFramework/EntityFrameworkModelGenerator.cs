@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Model;
 using Dhgms.Nucleotide.PropertyInfo;
@@ -119,14 +120,67 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
                 nodes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Required")));
             }
 
-            if (propertyInfo is ClrStringPropertyInfo stringPropertyInfo)
+            switch (propertyInfo)
             {
-                AddStringAttributes(nodes, stringPropertyInfo);
+                case ClrStringPropertyInfo stringPropertyInfo:
+                    AddStringAttributes(nodes, stringPropertyInfo);
+                    break;
+                case ClrBytePropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case ClrCharPropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case ClrDecimalPropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case ClrDoublePropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case ClrSinglePropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case Integer16PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case Integer32PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case Integer64PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case UnsignedInteger8PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case UnsignedInteger16PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case UnsignedInteger32PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
+                case UnsignedInteger64PropertyInfo numericPropertyInfo:
+                    AddNumericAttributes(nodes, numericPropertyInfo);
+                    break;
             }
 
             var result = SyntaxFactory.SeparatedList(nodes);
 
             return result;
+        }
+
+        private void AddNumericAttributes<T>(
+            List<AttributeSyntax> nodes,
+            NumericPropertyInfo<T> numericPropertyInfo)
+            where T : struct
+        {
+            // TODO: need to review this for const expressions i.e. Double.PositiveInfinity
+            var argumentList = GetAttributeArgumentListSyntax(new List<string>
+            {
+                numericPropertyInfo.MinimumValue.ToString(),
+                numericPropertyInfo.MaximumValue.ToString()
+            });
+
+            nodes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Range"), argumentList));
         }
 
         private void AddStringAttributes(List<AttributeSyntax> nodes, ClrStringPropertyInfo stringPropertyInfo)

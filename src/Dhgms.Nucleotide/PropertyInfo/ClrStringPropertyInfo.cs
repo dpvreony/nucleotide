@@ -66,7 +66,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 description, 
                 optional, 
                 "string", 
-                "Dhgms.DataManager.Model.SearchFilter.String", 
                 "String", 
                 false, 
                 "null", 

@@ -51,7 +51,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 description, 
                 optional, 
                 "bool", 
-                "Dhgms.DataManager.Model.SearchFilter.Boolean", 
                 "Boolean", 
                 false, 
                 "false", 
