@@ -216,7 +216,7 @@ namespace Dhgms.Nucleotide.Generators
             {
                 var name = SyntaxFactory.ParseName(attribute.Item1);
 
-                var argumentList = GetAttributeArgumentListSyntax(attribute.Item2);
+                var argumentList = RoslynGenerationHelpers.GetAttributeArgumentListSyntax(attribute.Item2);
 
 
                 var attribute2 = SyntaxFactory.Attribute(name, argumentList);
@@ -365,25 +365,6 @@ namespace Dhgms.Nucleotide.Generators
         /// </summary>
         /// <returns></returns>
         protected abstract IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments();
-
-        protected static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
-        {
-            if (attributeArguments == null || attributeArguments.Count < 1)
-            {
-                return null;
-            }
-
-            var argumentList = SyntaxFactory.AttributeArgumentList();
-
-            foreach (var attributeArgument in attributeArguments)
-            {
-                var name = SyntaxFactory.ParseName(attributeArgument);
-                var attribArgSyntax = SyntaxFactory.AttributeArgument(name);
-                argumentList = argumentList.AddArguments(attribArgSyntax);
-            }
-
-            return argumentList;
-        }
 
         protected static MemberDeclarationSyntax GetMethod(string methodName, string returnType, SyntaxTrivia[] leadingTrivia, ParameterListSyntax parameterListSyntax, TypeParameterListSyntax typeParameterListSyntax)
         {
