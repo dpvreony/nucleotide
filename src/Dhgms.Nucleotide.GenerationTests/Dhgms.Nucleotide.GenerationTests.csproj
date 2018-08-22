@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="CodeGeneration.Roslyn.BuildTime" Version="0.4.62" />
     <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="1.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
