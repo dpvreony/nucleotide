@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.49" />
+    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.62" />
   </ItemGroup>
 
   <ItemGroup>
