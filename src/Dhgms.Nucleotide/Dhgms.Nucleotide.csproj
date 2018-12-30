@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <Version>0.0.1</Version>
     <Authors>DHGMSSolutions,dpvreony</Authors>
     <Company>DHGMS Solutions</Company>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.62" />
+    <PackageReference Include="CodeGeneration.Roslyn" Version="0.4.88" />
   </ItemGroup>
 
   <ItemGroup>
