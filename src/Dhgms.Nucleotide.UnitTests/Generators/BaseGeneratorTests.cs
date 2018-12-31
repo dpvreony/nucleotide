@@ -117,10 +117,21 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             internal static readonly ImmutableArray<MetadataReference> MetadataReferences;
 
+            public static IEnumerable<object[]> GeneratesCodeMemberData => new List<object[]>
+            {
+                _simpleCodeGenerationCase
+            };
+
             public static IEnumerable<object[]> ThrowsArgumentNullExceptionMemberData => new List<object[]>
             {
                 _throwsArgumentNullForContext,
                 _throwsArgumentNullForProgress
+            };
+
+            private static object[] _simpleCodeGenerationCase => new object[]
+            {
+                GetTransformationContext(),
+                new Progress<Diagnostic>(_ => { })
             };
 
             private static object[] _throwsArgumentNullForContext => new object[]
@@ -139,9 +150,9 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
-            [Theory]
+            //[Theory]
             [MemberData(nameof(ThrowsArgumentNullExceptionMemberData))]
-            public async Task ThrowsArgumentNullException(
+            public async Task ThrowsArgumentNullExceptionAsync(
                 TransformationContext context,
                 IProgress<Diagnostic> progress,
                 string paramNameThatThrowsException)
@@ -152,6 +163,18 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => instance.GenerateAsync(context, progress, CancellationToken.None));
                 Assert.NotNull(ex);
                 Assert.Equal(paramNameThatThrowsException, ex.ParamName);
+            }
+
+            [Theory]
+            [MemberData(nameof(GeneratesCodeMemberData))]
+            public async Task GeneratesCodeAsync(
+                TransformationContext context,
+                IProgress<Diagnostic> progress)
+            {
+                var factory = GetFactory();
+                var attributeData = new MockAttributeData(new TypedConstant());
+                var instance = factory(attributeData);
+                await instance.GenerateAsync(context, progress, CancellationToken.None);
             }
 
             private static Project CreateProject(params string[] sources)
