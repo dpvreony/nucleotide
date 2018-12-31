@@ -20,5 +20,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 return attributeData => new WebApiClientGenerator(attributeData);
             }
         }
+ 
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiClientGenerator>
+        {
+            protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
+            {
+                return data => new WebApiClientGenerator(data);
+            }
+        }
     }
 }

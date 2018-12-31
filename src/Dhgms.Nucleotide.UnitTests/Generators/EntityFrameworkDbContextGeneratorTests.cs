@@ -20,5 +20,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 return data => new EntityFrameworkDbContextGenerator(data);
             }
         }
+
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<EntityFrameworkDbContextGenerator>
+        {
+            protected override Func<AttributeData, EntityFrameworkDbContextGenerator> GetFactory()
+            {
+                return data => new EntityFrameworkDbContextGenerator(data);
+            }
+        }
     }
 }

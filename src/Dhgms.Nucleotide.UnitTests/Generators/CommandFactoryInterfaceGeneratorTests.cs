@@ -20,5 +20,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 return attributeData => new CommandFactoryInterfaceGenerator(attributeData);
             }
         }
+
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<CommandFactoryInterfaceGenerator>
+        {
+            protected override Func<AttributeData, CommandFactoryInterfaceGenerator> GetFactory()
+            {
+                return data => new CommandFactoryInterfaceGenerator(data);
+            }
+        }
     }
 }

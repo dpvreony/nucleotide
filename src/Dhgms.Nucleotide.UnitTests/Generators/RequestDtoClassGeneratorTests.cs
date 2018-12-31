@@ -20,5 +20,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 return data => new RequestDtoClassGenerator(data);
             }
         }
+
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<RequestDtoClassGenerator>
+        {
+            protected override Func<AttributeData, RequestDtoClassGenerator> GetFactory()
+            {
+                return data => new RequestDtoClassGenerator(data);
+            }
+        }
     }
 }
