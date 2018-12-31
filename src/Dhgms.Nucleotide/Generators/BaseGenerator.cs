@@ -50,32 +50,29 @@ namespace Dhgms.Nucleotide.Generators
 
             var a = castDetails.First();
             var namedTypeSymbols = a.Value as INamedTypeSymbol;
+
+            var namespaceName = GetNamespace();
+
+            if (namedTypeSymbols == null)
+            {
+                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to a type symbol indicating the model type.");
+            }
+
             var compilation = context.Compilation;
+
             var generationModel = await this.GetModel(namedTypeSymbols, compilation);
 
-            NamespaceDeclarationSyntax namespaceDeclaration;
-            var namespaceName = GetNamespace();
             if (generationModel == null)
             {
-                namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName)).WithLeadingTrivia(SyntaxFactory.Comment($"#error Failed to find model: {namedTypeSymbols}"));
-            }
-            else
-            {
-                var rootNamespace = generationModel.RootNamespace;
-                namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));
-                namespaceDeclaration = await this.GenerateObjects(namespaceDeclaration, generationModel.EntityGenerationModel);
+                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
             }
 
-            var nodes = new MemberDeclarationSyntax[]
-            {
-                namespaceDeclaration
-            };
+            var rootNamespace = generationModel.RootNamespace;
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));
+            namespaceDeclaration = await this.GenerateObjects(namespaceDeclaration, generationModel.EntityGenerationModel);
 
-            var results = SyntaxFactory.List(nodes);
-
-            return await Task.FromResult(results);
+            return await GetSyntaxList(namespaceDeclaration);
         }
-
         protected abstract Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration, IEntityGenerationModel[] generationModelEntityGenerationModel);
 
         protected abstract string[] GetClassPrefixes();
@@ -172,5 +169,40 @@ namespace Dhgms.Nucleotide.Generators
             PropertyInfoBase propertyInfo,
             AccessorDeclarationSyntax[] accessorList,
             IEnumerable<SyntaxTrivia> summary);
+
+
+        private async Task<SyntaxList<MemberDeclarationSyntax>> ReportErrorInNamespace(
+            IProgress<Diagnostic> progress,
+            string namespaceName,
+            string comment)
+        {
+            var errorDiagnostic = Diagnostic.Create(
+                "NUC0001",
+                "Nucleotide Generation",
+                "Problem working out the model to be used for generation",
+                DiagnosticSeverity.Error,
+                DiagnosticSeverity.Error,
+                true,
+                0,
+                "Model load error");
+
+            progress.Report(errorDiagnostic);
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName))
+                .WithLeadingTrivia(SyntaxFactory.Comment(comment));
+
+            return await GetSyntaxList(namespaceDeclaration);
+        }
+
+        private async Task<SyntaxList<MemberDeclarationSyntax>> GetSyntaxList(NamespaceDeclarationSyntax namespaceDeclaration)
+        {
+            var nodes = new MemberDeclarationSyntax[]
+            {
+                namespaceDeclaration
+            };
+
+            var results = SyntaxFactory.List(nodes);
+            return await Task.FromResult(results);
+        }
+
     }
 }
