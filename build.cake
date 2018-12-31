@@ -2,6 +2,7 @@
 // ADDINS
 //////////////////////////////////////////////////////////////////////
 
+#addin "nuget:?package=Cake.DocFx&version=0.11.0"
 //#addin "nuget:?package=Cake.FileHelpers&version=1.0.4"
 #addin "nuget:?package=Cake.Coveralls&version=0.4.0"
 //#addin "nuget:?package=Cake.PinNuGetDependency&version=1.0.0"
@@ -19,6 +20,8 @@
 #tool "nuget:?package=ReportGenerator&version=2.5.11"
 #tool "nuget:?package=vswhere&version=2.1.4"
 #tool "nuget:?package=MSBuild.SonarQube.Runner.Tool"
+#tool "nuget:?package=docfx.console&version=2.40.5"
+
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
