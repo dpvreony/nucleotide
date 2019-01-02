@@ -126,7 +126,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
         /// <inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
         {
-            var result = new List<MethodDeclarationSyntax>
+            var result = new []
             {
                 GetAddActionResultAsyncDeclaration(entityName),
                 GetDeleteActionResultAsyncDeclaration(entityName),
@@ -151,7 +151,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
             };
 
 
-            return result.ToArray();
+            return result;
         }
 
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)

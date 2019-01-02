@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Helpers;
 using Dhgms.Nucleotide.Model;
 using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
@@ -129,7 +130,12 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         /// <returns></returns>
         private MemberDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel[] generationModelEntityGenerationModel)
         {
-            return null;
+            var results = new[]
+            {
+                GetOnModelCreatingMethodDeclaration(generationModelEntityGenerationModel)
+            };
+
+            return results;
         }
 
         /// <summary>
@@ -341,5 +347,30 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return null;
         }
 
+        private MemberDeclarationSyntax GetOnModelCreatingMethodDeclaration(IEntityGenerationModel[] generationModelEntityGenerationModel)
+        {
+            var methodName = $"OnModelCreating";
+
+            var body = generationModelEntityGenerationModel.Select(GetApplyConfigurationInvocationDeclaration).ToArray();
+
+            var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder"});
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
+                .AddBodyStatements(body.ToArray());
+            return declaration;
+        }
+
+        private StatementSyntax GetApplyConfigurationInvocationDeclaration(IEntityGenerationModel entityGenerationModel)
+        {
+            var invokeExpression = RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax("modelBuilder",
+                "ApplyConfiguration",
+                new[] {$"new EntityTypeConfigurations.{entityGenerationModel.ClassName}EntityTypeConfiguration()"},
+                false);
+
+            return invokeExpression;
+        }
     }
 }
