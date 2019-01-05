@@ -146,9 +146,13 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         {
             var methodName = $"Configure{propertyInfoBase.Name}Column";
 
-            var body = new StatementSyntax[]
-            {
-            };
+            var body = new List<StatementSyntax>();
+            CheckPrimaryKeyMethodDeclaration(body, propertyInfoBase);
+
+            // get the initial property method invoke to use as the basis of chaining others together
+            var propertyInvocation = GetEfPropertyInvocation(propertyInfoBase);
+            body.Add(propertyInvocation);
+
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});
 
@@ -156,9 +160,55 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body);
+                .AddBodyStatements(body.ToArray());
             return declaration;
         }
 
+        private StatementSyntax GetEfPropertyInvocation(PropertyInfoBase propertyInfoBase)
+        {
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "Property",
+                new[] {$"table => table.{propertyInfoBase.Name}"},
+                false);
+
+            fluentApiInvocation = CheckRequiredMethodDeclaration(fluentApiInvocation, propertyInfoBase.Optional);
+            //fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
+
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private StatementSyntax CheckDescriptionMethodDeclaration(StatementSyntax fluentApiInvocation, string description)
+        {
+            return fluentApiInvocation;
+        }
+
+        private ExpressionSyntax CheckRequiredMethodDeclaration(ExpressionSyntax fluentApiInvocation, bool optional)
+        {
+            if (optional)
+            {
+                return fluentApiInvocation;
+            }
+
+            return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "IsRequired",
+                null);
+        }
+
+        private void CheckPrimaryKeyMethodDeclaration(List<StatementSyntax> body, PropertyInfoBase propertyInfoBase)
+        {
+            if (!propertyInfoBase.IsKey)
+            {
+                return;
+            }
+
+            var statement =
+                RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
+                    "builder",
+                    "HasKey",
+                    new[] {$"x => x.{propertyInfoBase.Name}"}, false);
+            body.Add(statement);
+        }
     }
 }

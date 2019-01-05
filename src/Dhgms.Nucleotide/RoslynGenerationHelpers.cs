@@ -548,5 +548,70 @@ namespace Dhgms.Nucleotide.Helpers
                 getCommandInvocation);
             return SyntaxFactory.ExpressionStatement(awaitCommand);
         }
+
+        public static ExpressionSyntax GetMethodOnVariableInvocationExpression(string variableName, string methodName, string[] args, bool isAsync)
+        {
+            var getAddCommandInvocation = SyntaxFactory.MemberAccessExpression(
+                  SyntaxKind.SimpleMemberAccessExpression,
+                  SyntaxFactory.IdentifierName(variableName),
+                  SyntaxFactory.IdentifierName(methodName));
+
+            SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (args != null && args.Length > 0)
+            {
+
+                foreach (var s in args)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            var getCommandInvocation = SyntaxFactory.InvocationExpression(getAddCommandInvocation, SyntaxFactory.ArgumentList(argsList));
+
+
+            if (!isAsync)
+            {
+                //var configureAwaitInvocation = SyntaxFactory.MemberAccessExpression()
+                //getAddCommandInvocation.WithExpression()
+
+                return getCommandInvocation;
+            }
+
+            var configureAwaitMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                getCommandInvocation,
+                name: SyntaxFactory.IdentifierName("ConfigureAwait"));
+
+            var configureAwaitArgsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            configureAwaitArgsList =
+                configureAwaitArgsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseExpression("false")));
+            getCommandInvocation = SyntaxFactory.InvocationExpression(configureAwaitMemberAccessExpression, SyntaxFactory.ArgumentList(configureAwaitArgsList));
+
+            var awaitCommand = SyntaxFactory.AwaitExpression(SyntaxFactory.Token(SyntaxKind.AwaitKeyword),
+                getCommandInvocation);
+            return awaitCommand;
+        }
+
+        public static InvocationExpressionSyntax GetFluentApiChainedInvocationExpression(ExpressionSyntax fluentApiInvocation, string name, string[] args)
+        {
+            var memberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                fluentApiInvocation,
+                SyntaxFactory.IdentifierName(name));
+
+            SeparatedSyntaxList<ArgumentSyntax> argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (args != null && args.Length > 0)
+            {
+
+                foreach (var s in args)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            var invocationExpression = SyntaxFactory.InvocationExpression(memberAccessExpression, SyntaxFactory.ArgumentList(argsList));
+
+            return invocationExpression;
+        }
     }
 }
