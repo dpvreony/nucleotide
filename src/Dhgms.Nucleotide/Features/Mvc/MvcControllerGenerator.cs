@@ -124,8 +124,9 @@ namespace Dhgms.Nucleotide.Features.Mvc
         }
 
         /// <inheritdoc />
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
+            var entityName = entityGenerationModel.ClassName;
             var result = new List<MethodDeclarationSyntax>
             {
                 GetMvcViewActionResultDeclaration(entityName, "list"),

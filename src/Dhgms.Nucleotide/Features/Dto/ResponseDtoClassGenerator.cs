@@ -62,7 +62,7 @@ namespace Dhgms.Nucleotide.Features.Dto
             return "ResponseDtos";
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }

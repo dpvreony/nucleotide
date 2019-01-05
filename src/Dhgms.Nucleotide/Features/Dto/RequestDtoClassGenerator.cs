@@ -34,7 +34,7 @@ namespace Dhgms.Nucleotide.Features.Dto
 
         protected override string GetNamespace() => "RequestDtos";
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName) => Array.Empty<MethodDeclarationSyntax>();
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<MethodDeclarationSyntax>();
 
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<PropertyDeclarationSyntax>();
 

@@ -197,7 +197,7 @@ namespace Dhgms.Nucleotide.Generators
                 result.AddRange(properties);
             }
 
-            var methods = GetMethodDeclarations(entityName);
+            var methods = GetMethodDeclarations(entityGenerationModel);
             if (methods != null && methods.Length > 0)
             {
                 result.AddRange(methods);
@@ -266,7 +266,7 @@ namespace Dhgms.Nucleotide.Generators
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(string entityName);
+        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel);
 
         /// <summary>
         /// Gets the property declarations to be generated

@@ -63,7 +63,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return "EfModels";
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }

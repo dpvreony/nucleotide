@@ -124,8 +124,10 @@ namespace Dhgms.Nucleotide.Features.WebApi
         }
 
         /// <inheritdoc />
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
+            var entityName = entityGenerationModel.ClassName;
+
             var result = new []
             {
                 GetAddActionResultAsyncDeclaration(entityName),

@@ -44,15 +44,20 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return "EntityTypeConfigurations";
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(string entityName)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            var result = new []
+            var result = new List<MethodDeclarationSyntax>()
             {
-                GetConfigureMethodDeclaration(entityName),
+                GetConfigureMethodDeclaration(entityGenerationModel),
             };
 
+            var entityName = entityGenerationModel.ClassName;
+            foreach (var propertyInfoBase in entityGenerationModel.Properties)
+            {
+                result.Add(GetPropertyMappingMethodDeclaration(entityName ,propertyInfoBase));
+            }
 
-            return result;
+            return result.ToArray();
         }
 
         protected override IList<string> GetUsings()
@@ -108,8 +113,9 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             return default(SeparatedSyntaxList<AttributeSyntax>);
         }
 
-        private MethodDeclarationSyntax GetConfigureMethodDeclaration(string entityName)
+        private MethodDeclarationSyntax GetConfigureMethodDeclaration(IEntityGenerationModel entityGenerationModel)
         {
+            var entityName = entityGenerationModel.ClassName;
             var methodName = $"Configure";
 
             var body = new StatementSyntax[]
@@ -125,5 +131,26 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
                 .AddBodyStatements(body);
             return declaration;
         }
+
+        private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
+            string entityName,
+            PropertyInfoBase propertyInfoBase)
+        {
+            var methodName = $"Configure{propertyInfoBase.Name}Column";
+
+            var body = new StatementSyntax[]
+            {
+            };
+
+            var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body);
+            return declaration;
+        }
+
     }
 }
