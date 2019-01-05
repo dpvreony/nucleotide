@@ -118,9 +118,17 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             var entityName = entityGenerationModel.ClassName;
             var methodName = $"Configure";
 
-            var body = new StatementSyntax[]
+            var body = new List<StatementSyntax>();
+
+            foreach (var propertyInfo in entityGenerationModel.Properties)
             {
-            };
+                var configureColumnMethodName = $"Configure{propertyInfo.Name}Column";
+                var expression =
+                    RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(configureColumnMethodName,
+                        new[] {"builder"}, false);
+                var statement = SyntaxFactory.ExpressionStatement(expression);
+                body.Add(statement);
+            }
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});
 
@@ -128,7 +136,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body);
+                .AddBodyStatements(body.ToArray());
             return declaration;
         }
 
