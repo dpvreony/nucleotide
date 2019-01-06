@@ -64,7 +64,8 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         {
             return new List<string>()
             {
-                "Microsoft.EntityFrameworkCore"
+                "Microsoft.EntityFrameworkCore",
+                "Dhgms.EfCoreContrib"
             };
         }
 
@@ -173,14 +174,52 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
                 false);
 
             fluentApiInvocation = CheckRequiredMethodDeclaration(fluentApiInvocation, propertyInfoBase.Optional);
-            //fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
+            fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
+            fluentApiInvocation = CheckHasSqlDefaultValueMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlDefault);
+            fluentApiInvocation = CheckHasComputedColumnSqlMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlComputedColumn);
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
 
-        private StatementSyntax CheckDescriptionMethodDeclaration(StatementSyntax fluentApiInvocation, string description)
+        private ExpressionSyntax CheckHasComputedColumnSqlMethodDeclaration(ExpressionSyntax fluentApiInvocation, string sqlComputedColumn)
         {
-            return fluentApiInvocation;
+            if (sqlComputedColumn == null)
+            {
+                return fluentApiInvocation;
+            }
+
+            // doesn't use isnull or whitespace as ef may not need to (or support) know what is used to calculate
+
+            return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasDefaultValueSql",
+                new[] { sqlComputedColumn });
+        }
+
+        private ExpressionSyntax CheckHasSqlDefaultValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string sqlDefault)
+        {
+            if (string.IsNullOrWhiteSpace(sqlDefault))
+            {
+                return fluentApiInvocation;
+            }
+
+            return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasDefaultValueSql",
+                new[] { $"\"{sqlDefault}\"" });
+        }
+
+        private ExpressionSyntax CheckDescriptionMethodDeclaration(ExpressionSyntax fluentApiInvocation, string description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return fluentApiInvocation;
+            }
+
+            return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasDescriptionSql",
+                new[] { $"\"{description}\"" });
         }
 
         private ExpressionSyntax CheckRequiredMethodDeclaration(ExpressionSyntax fluentApiInvocation, bool optional)

@@ -594,6 +594,8 @@ namespace Dhgms.Nucleotide.PropertyInfo
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public bool Optional { get; set; }
 
+        public string SqlDefault { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the type needs mapping to be used with SQL
         /// </summary>
@@ -614,6 +616,8 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// Used where the database naming convention doesn't match the .NET naming convention
         /// </summary>
         public string AlternativeDatabaseColumnName { get; set; }
+
+        public string SqlComputedColumn { get; set; }
 
         #endregion
 
