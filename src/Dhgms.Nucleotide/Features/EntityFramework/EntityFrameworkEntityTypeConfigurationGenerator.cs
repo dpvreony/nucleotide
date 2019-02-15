@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.EntityFramework
 {
-    public class EntityFrameworkEntityTypeConfigurationGenerator : BaseClassLevelCodeGenerator
+    public class EntityFrameworkEntityTypeConfigurationGenerator : BaseClassLevelCodeGenerator<EntityFrameworkEntityTypeConfigurationFeatureFlags>
     {
         public EntityFrameworkEntityTypeConfigurationGenerator(AttributeData attributeData) : base(attributeData)
         {
@@ -22,7 +22,6 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         protected override bool GetWhetherClassShouldBePartialClass() => false;
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
-
 
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
@@ -52,9 +51,11 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             };
 
             var entityName = entityGenerationModel.ClassName;
+            result.Add(GetTableMappingMethodDeclaration(entityName, entityGenerationModel));
+
             foreach (var propertyInfoBase in entityGenerationModel.Properties)
             {
-                result.Add(GetPropertyMappingMethodDeclaration(entityName ,propertyInfoBase));
+                result.Add(GetPropertyMappingMethodDeclaration(entityName, propertyInfoBase));
             }
 
             return result.ToArray();
@@ -121,12 +122,28 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
 
             var body = new List<StatementSyntax>();
 
+            var subMethodParams = new[] {"builder"};
+
+            // do table level operations
+            {
+                var expression =
+                    RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
+                        "ConfigureTable",
+                        subMethodParams,
+                        false);
+                var statement = SyntaxFactory.ExpressionStatement(expression);
+                body.Add(statement);
+            }
+
+            // do column level operations
             foreach (var propertyInfo in entityGenerationModel.Properties)
             {
                 var configureColumnMethodName = $"Configure{propertyInfo.Name}Column";
                 var expression =
-                    RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(configureColumnMethodName,
-                        new[] {"builder"}, false);
+                    RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
+                        configureColumnMethodName,
+                        subMethodParams,
+                        false);
                 var statement = SyntaxFactory.ExpressionStatement(expression);
                 body.Add(statement);
             }
@@ -155,7 +172,28 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
             body.Add(propertyInvocation);
 
 
-            var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});
+            var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+            return declaration;
+        }
+
+        private MethodDeclarationSyntax GetTableMappingMethodDeclaration(
+            string entityName,
+            IEntityGenerationModel entityGenerationModel)
+        {
+            var methodName = $"ConfigureTable";
+
+            var body = new List<StatementSyntax>();
+
+            //var tableInvocation = GetEfTableInvocation(entityGenerationModel);
+            //body.Add(tableInvocation);
+
+            var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
 
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
@@ -174,11 +212,36 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
                 false);
 
             fluentApiInvocation = CheckRequiredMethodDeclaration(fluentApiInvocation, propertyInfoBase.Optional);
-            fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
+            if (FeatureFlags?.GenerateSqlDescriptions == true)
+            {
+                fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
+            }
             fluentApiInvocation = CheckHasSqlDefaultValueMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlDefault);
             fluentApiInvocation = CheckHasComputedColumnSqlMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlComputedColumn);
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private StatementSyntax GetEfTableInvocation(IEntityGenerationModel entityGenerationModel)
+        {
+            throw new NotImplementedException();
+            /*
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "Property",
+                new[] { $"table => table" },
+                false);
+
+            fluentApiInvocation = CheckTableNameMethodDeclaration(fluentApiInvocation, entityGenerationModel.)
+
+            if (FeatureFlags?.GenerateSqlDescriptions == true)
+            {
+                fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, entityGenerationModel.ClassRemarks);
+            }
+
+            // could add SQL triggers here.
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+            */
         }
 
         private ExpressionSyntax CheckHasComputedColumnSqlMethodDeclaration(ExpressionSyntax fluentApiInvocation, string sqlComputedColumn)

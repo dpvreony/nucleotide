@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
     /// <summary>
     /// Code Generator for Entity Framework DB Context
     /// </summary>
-    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator
+    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EntityFrameworkDbContextGenerator"/> class.

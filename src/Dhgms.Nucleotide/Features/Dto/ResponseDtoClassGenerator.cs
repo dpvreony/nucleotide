@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Dto
 {
-    public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator
+    public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator<ResponseDtoClassFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.

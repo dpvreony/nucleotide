@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Cqrs
 {
-    public sealed class CommandInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class CommandInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandInterfaceFeatureFlags>
     {
 
         /// <summary>

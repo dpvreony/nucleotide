@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Model
 {
-    public sealed class KeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class KeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<KeyedModelInterfaceFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyedModelInterfaceGenerator"/> class. 

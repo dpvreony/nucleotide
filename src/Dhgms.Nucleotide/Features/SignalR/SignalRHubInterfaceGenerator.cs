@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Features.SignalR
     /// <summary>
     /// Generator for SignalR Hub Interface
     /// </summary>
-    public sealed class SignalRHubInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class SignalRHubInterfaceGenerator : BaseInterfaceLevelCodeGenerator<SignalRHubInterfaceFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalRHubInterfaceGenerator"/> class.

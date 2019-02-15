@@ -20,7 +20,8 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Base class for a code generator that generates code based on the Class Level of Generation Metadata.
     /// </summary>
-    public abstract class BaseClassLevelCodeGenerator : BaseGenerator
+    public abstract class BaseClassLevelCodeGenerator<TFeatureFlags> : BaseGenerator<TFeatureFlags>
+        where TFeatureFlags : class
     {
         /// <summary>
         ///

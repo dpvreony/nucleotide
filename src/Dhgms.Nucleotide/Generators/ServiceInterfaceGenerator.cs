@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Generator for Service Interface
     /// </summary>
-    public class ServiceInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public class ServiceInterfaceGenerator : BaseInterfaceLevelCodeGenerator<ServiceInterfaceFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceInterfaceGenerator"/> class. 

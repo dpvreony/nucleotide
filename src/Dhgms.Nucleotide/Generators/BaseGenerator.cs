@@ -17,7 +17,8 @@ using Validation;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public abstract class BaseGenerator : ICodeGenerator
+    public abstract class BaseGenerator<TFeatureFlags> : ICodeGenerator
+        where TFeatureFlags : class
     {
         protected BaseGenerator(AttributeData attributeData)
         {
@@ -33,6 +34,8 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         protected object NucleotideGenerationModel { get; }
+
+        protected TFeatureFlags FeatureFlags { get; }
 
         /// <summary>
         /// Create the syntax tree representing the expansion of some member to which this attribute is applied.

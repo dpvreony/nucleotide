@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// <summary>
     /// Generator for Query Interface
     /// </summary>
-    public sealed class QueryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class QueryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryInterfaceFeatureFlag>
     {
 
         /// <summary>

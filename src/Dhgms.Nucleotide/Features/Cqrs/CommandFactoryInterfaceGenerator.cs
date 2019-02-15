@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// <summary>
     /// Generator for Command Factory Interface
     /// </summary>
-    public sealed class CommandFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class CommandFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandFactoryInterfaceFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandFactoryInterfaceGenerator"/> class. 

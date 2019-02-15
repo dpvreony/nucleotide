@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
     /// <summary>
     /// Generates the MVC Controllers
     /// </summary>
-    public sealed class MvcControllerGenerator : BaseClassLevelCodeGenerator
+    public sealed class MvcControllerGenerator : BaseClassLevelCodeGenerator<MvcControllerFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MvcControllerGenerator"/> class.

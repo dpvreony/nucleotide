@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelGenerator : BaseClassLevelCodeGenerator
+    public sealed class EntityFrameworkModelGenerator : BaseClassLevelCodeGenerator<EntityFrameworkModelFeatureFlags>
     {
         public EntityFrameworkModelGenerator(AttributeData attributeData) : base(attributeData)
         {

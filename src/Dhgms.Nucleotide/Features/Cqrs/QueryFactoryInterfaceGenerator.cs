@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// <summary>
     /// Generator for Query Factory Interface
     /// </summary>
-    public sealed class QueryFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator
+    public sealed class QueryFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryFactoryInterfaceFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryFactoryInterfaceGenerator"/> class. 

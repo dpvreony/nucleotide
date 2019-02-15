@@ -12,7 +12,7 @@ namespace Dhgms.Nucleotide.Features.Model
     /// <summary>
     /// Generates models
     /// </summary>
-    public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator
+    public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator<KeyedModelClassFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class.

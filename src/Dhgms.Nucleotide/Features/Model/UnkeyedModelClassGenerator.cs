@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Features.Model
     /// <summary>
     /// Generates models
     /// </summary>
-    public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator
+    public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator<UnkeyedModelClassFeatureFlags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.
