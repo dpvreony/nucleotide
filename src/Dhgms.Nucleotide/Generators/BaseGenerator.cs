@@ -13,7 +13,6 @@ using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
 namespace Dhgms.Nucleotide.Generators
 {
@@ -22,13 +21,20 @@ namespace Dhgms.Nucleotide.Generators
     {
         protected BaseGenerator(AttributeData attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
+            if (attributeData == null)
+            {
+                throw new ArgumentNullException(nameof(attributeData));
+            }
+
             if (attributeData.ConstructorArguments == null)
             {
                 throw new ArgumentException("ConstructorArguments", nameof(attributeData));
             }
 
-            Requires.That(attributeData.ConstructorArguments.Length > 0, nameof(attributeData), "x");
+            if (attributeData.ConstructorArguments.Length < 1)
+            {
+                throw new ArgumentException(nameof(attributeData));
+            }
 
             this.NucleotideGenerationModel = attributeData.ConstructorArguments;
         }
@@ -132,8 +138,15 @@ namespace Dhgms.Nucleotide.Generators
 
         protected Assembly GetAssembly(IAssemblySymbol symbol, Compilation compilation)
         {
-            Requires.NotNull(symbol, "symbol");
-            Requires.NotNull(compilation, "compilation");
+            if (symbol == null)
+            {
+                throw new ArgumentNullException(nameof(symbol));
+            }
+
+            if (compilation == null)
+            {
+                throw new ArgumentNullException(nameof(compilation));
+            }
 
             var matchingReferences = (from reference in compilation.References.OfType<PortableExecutableReference>()
                 where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase)

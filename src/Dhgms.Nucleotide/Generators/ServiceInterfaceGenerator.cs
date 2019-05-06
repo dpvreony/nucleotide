@@ -10,7 +10,6 @@ using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
 namespace Dhgms.Nucleotide.Generators
 {

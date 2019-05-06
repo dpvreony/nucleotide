@@ -5,7 +5,6 @@ using CodeGeneration.Roslyn;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
 namespace Dhgms.Nucleotide.Features.SignalR
 {
@@ -19,7 +18,10 @@ namespace Dhgms.Nucleotide.Features.SignalR
         /// </summary>
         public SignalRHubClassGenerator(AttributeData attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
+            if (attributeData == null)
+            {
+                throw new ArgumentNullException(nameof(attributeData));
+            }
         }
 
         /// <summary>

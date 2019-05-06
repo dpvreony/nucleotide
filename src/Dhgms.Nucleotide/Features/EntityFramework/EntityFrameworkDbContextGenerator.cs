@@ -11,7 +11,6 @@ using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Validation;
 
 namespace Dhgms.Nucleotide.Features.EntityFramework
 {
@@ -25,7 +24,10 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
         /// </summary>
         public EntityFrameworkDbContextGenerator(AttributeData attributeData) : base(attributeData)
         {
-            Requires.NotNull(attributeData, nameof(attributeData));
+            if (attributeData == null)
+            {
+                throw new ArgumentNullException(nameof(attributeData));
+            }
         }
 
         protected override async Task<NamespaceDeclarationSyntax> GenerateObjects(NamespaceDeclarationSyntax namespaceDeclaration,
