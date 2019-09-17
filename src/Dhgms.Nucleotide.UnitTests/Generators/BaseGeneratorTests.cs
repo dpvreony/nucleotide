@@ -150,7 +150,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
-            //[Theory]
+            [Theory]
             [MemberData(nameof(ThrowsArgumentNullExceptionMemberData))]
             public async Task ThrowsArgumentNullExceptionAsync(
                 TransformationContext context,
