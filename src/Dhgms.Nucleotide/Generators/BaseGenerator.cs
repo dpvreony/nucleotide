@@ -55,6 +55,16 @@ namespace Dhgms.Nucleotide.Generators
             IProgress<Diagnostic> progress,
             CancellationToken cancellationToken)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (progress == null)
+            {
+                throw new ArgumentNullException(nameof(progress));
+            }
+
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
 
             var a = castDetails.First();
