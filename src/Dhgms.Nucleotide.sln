@@ -1,83 +1,60 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7EFBC9C-E778-4A30-AD62-5FB70B6D0754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide", "Dhgms.Nucleotide\Dhgms.Nucleotide.csproj", "{A9B9CF56-473A-4B1D-849B-BA8816439C08}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.UnitTests", "Dhgms.Nucleotide.UnitTests\Dhgms.Nucleotide.UnitTests.csproj", "{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.ModelTests", "Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj", "{8B50F266-A8FC-4766-B953-88C29BDC93D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.Analyzers", "Dhgms.Nucleotide.Analyzers\Dhgms.Nucleotide.Analyzers.csproj", "{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.GenerationTests", "Dhgms.Nucleotide.GenerationTests\Dhgms.Nucleotide.GenerationTests.csproj", "{91B35FF3-3B4A-4F63-B437-302756C4EF71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3B51307A-81A9-485E-841F-A023FDE3B148}"
 	ProjectSection(SolutionItems) = preProject
-		build.ps1 = build.ps1
-		Dhgms.Nucleotide.vsmdi = Dhgms.Nucleotide.vsmdi
-		install.ps1 = install.ps1
-		Local.testsettings = Local.testsettings
-		Project.Targets = Project.Targets
-		Settings.StyleCop = Settings.StyleCop
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-		uninstall.ps1 = uninstall.ps1
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhgms.Nucleotide", "Dhgms.Nucleotide\Dhgms.Nucleotide.csproj", "{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82BF3CBD-3DDB-4189-AE7C-BA3032D1D368}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugetpackage", "nugetpackage", "{10B30B5D-7064-429E-A73B-BF485FC38AED}"
-	ProjectSection(SolutionItems) = preProject
-		nugetpackage\dhgmsnucleotide.targets = nugetpackage\dhgmsnucleotide.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDhgms.NucleotideMocking", "TestDhgms.NucleotideMocking\TestDhgms.NucleotideMocking.csproj", "{06D18E16-EC37-4E16-8EE3-47607E095FE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dhgms.Nucleotide.UnitTests", "Dhgms.Nucleotide.UnitTests\Dhgms.Nucleotide.UnitTests.csproj", "{A257886A-194D-4C15-AA6B-EDCA3AA88904}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docfx_project", "docfx_project\docfx_project.csproj", "{DA32EBC2-E98E-453B-97EE-8B42EED13E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|Mixed Platforms = Debug|Mixed Platforms
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|Mixed Platforms = Release|Mixed Platforms
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B74FDDD1-0B58-4D89-B86C-0393D5D69B0E}.Release|x86.ActiveCfg = Release|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{06D18E16-EC37-4E16-8EE3-47607E095FE1}.Release|x86.ActiveCfg = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Debug|x86.Build.0 = Debug|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|x86.ActiveCfg = Release|Any CPU
-		{A257886A-194D-4C15-AA6B-EDCA3AA88904}.Release|x86.Build.0 = Release|Any CPU
+		{A9B9CF56-473A-4B1D-849B-BA8816439C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B9CF56-473A-4B1D-849B-BA8816439C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B9CF56-473A-4B1D-849B-BA8816439C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B9CF56-473A-4B1D-849B-BA8816439C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B50F266-A8FC-4766-B953-88C29BDC93D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B50F266-A8FC-4766-B953-88C29BDC93D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B50F266-A8FC-4766-B953-88C29BDC93D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B50F266-A8FC-4766-B953-88C29BDC93D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B35FF3-3B4A-4F63-B437-302756C4EF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B35FF3-3B4A-4F63-B437-302756C4EF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B35FF3-3B4A-4F63-B437-302756C4EF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B35FF3-3B4A-4F63-B437-302756C4EF71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA32EBC2-E98E-453B-97EE-8B42EED13E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA32EBC2-E98E-453B-97EE-8B42EED13E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA32EBC2-E98E-453B-97EE-8B42EED13E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA32EBC2-E98E-453B-97EE-8B42EED13E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Dhgms.Nucleotide.vsmdi
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63B18DD6-AC35-4B1D-AA67-E13583950136}
 	EndGlobalSection
 EndGlobal

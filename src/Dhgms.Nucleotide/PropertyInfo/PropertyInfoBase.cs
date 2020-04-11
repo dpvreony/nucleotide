@@ -24,8 +24,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
     /// </summary>
     public abstract class PropertyInfoBase
     {
-        #region Constants and Fields
-
         /// <summary>
         /// The data type for the property.
         /// </summary>
@@ -418,10 +416,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// </summary>
         private string description;
 
-        #endregion
-
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyInfoBase"/> class. 
         /// Constructor
@@ -440,9 +434,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// </param>
         /// <param name="netDataType">
         /// The .NET data type
-        /// </param>
-        /// <param name="searchFilterType">
-        /// The Search Filter type
         /// </param>
         /// <param name="sqlDataReaderType">
         /// The SQL DataReader type
@@ -475,7 +466,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             string description, 
             bool optional, 
             string netDataType, 
-            string searchFilterType, 
             string sqlDataReaderType, 
             bool requiresSqlMapping, 
             string defaultValue, 
@@ -502,7 +492,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             this.Description = description;
             this.Optional = optional;
             this.NetDataType = netDataType;
-            this.SearchFilterType = searchFilterType;
             this.SqlDataReaderType = sqlDataReaderType;
             this.RequiresSqlMapping = requiresSqlMapping;
             this.DefaultValue = defaultValue;
@@ -520,8 +509,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             get;
             set;
         }
-
-        #endregion
 
         #region Public Properties
 
@@ -548,7 +535,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
                     case CollectionType.None:
                         return this.defaultValue;
                     default:
-                        throw new InvalidEnumArgumentException("CollectionType not recognised");
+                        throw new InvalidOperationException();
                 }
             }
 
@@ -586,21 +573,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         }
 
         /// <summary>
-        /// Gets a value indicating whether to generate an auto property, or a property that uses a field
-        /// </summary>
-        public abstract bool GenerateAutoProperty { get; }
-
-        /// <summary>
-        /// Gets the code used for outputting a value as part of a string array
-        /// </summary>
-        public abstract string ToStringArrayCode { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the type is disposable
-        /// </summary>
-        public abstract bool DisposableType { get; }
-
-        /// <summary>
         /// Gets or sets the name of the property
         /// </summary>
         public string Name { get; set; }
@@ -622,15 +594,12 @@ namespace Dhgms.Nucleotide.PropertyInfo
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public bool Optional { get; set; }
 
+        public string SqlDefault { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the type needs mapping to be used with SQL
         /// </summary>
         public bool RequiresSqlMapping { get; set; }
-
-        /// <summary>
-        /// Gets or sets the search filter type
-        /// </summary>
-        public string SearchFilterType { get; set; }
 
         /// <summary>
         /// Gets or sets the SQL DataReader Type
@@ -648,146 +617,143 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// </summary>
         public string AlternativeDatabaseColumnName { get; set; }
 
-        /// <summary>
-        /// Gets a random value for use in a unit test.
-        /// </summary>
-        public abstract string RandomUnitTestValue { get; }
+        public string SqlComputedColumn { get; set; }
 
         #endregion
 
-        #region Public Methods and Operators
+        //#region Public Methods and Operators
 
-        /// <summary>
-        /// Gets the C# for carrying out a compare.
-        /// </summary>
-        /// <param name="checkResultDeclared">
-        /// The check Result Declared.
-        /// </param>
-        /// <returns>
-        /// C# for carrying out a compare
-        /// </returns>
-        public virtual string GetCSharpCompareCode(bool checkResultDeclared)
-        {
-            var sb = new StringBuilder();
+        ///// <summary>
+        ///// Gets the C# for carrying out a compare.
+        ///// </summary>
+        ///// <param name="checkResultDeclared">
+        ///// The check Result Declared.
+        ///// </param>
+        ///// <returns>
+        ///// C# for carrying out a compare
+        ///// </returns>
+        //public virtual string GetCSharpCompareCode(bool checkResultDeclared)
+        //{
+        //    var sb = new StringBuilder();
 
-            if (this.Optional)
-            {
-                if (!this.NullableType)
-                {
-                    if (!checkResultDeclared)
-                    {
-                        sb.Append("var checkResult = 0;");
-                    }
+        //    if (this.Optional)
+        //    {
+        //        if (!this.NullableType)
+        //        {
+        //            if (!checkResultDeclared)
+        //            {
+        //                sb.Append("var checkResult = 0;");
+        //            }
 
-                    sb.AppendLine("            if (this." + this.Name + " != null)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                if (other." + this.Name + " == null)");
-                    sb.AppendLine("                {");
-                    sb.AppendLine("                    checkResult = -1;");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("                else");
-                    sb.AppendLine("                {");
-                    sb.AppendLine(
-                        "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name + ".Value);");
-                    sb.AppendLine("                }");
-                    sb.AppendLine("            }");
-                    sb.AppendLine("            else if (other." + this.Name + " != null)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine("                checkResult = 1;");
-                    sb.AppendLine("            }");
-                }
-                else
-                {
-                    sb.Append("            ");
-                    if (!checkResultDeclared)
-                    {
-                        sb.Append("var ");
-                    }
+        //            sb.AppendLine("            if (this." + this.Name + " != null)");
+        //            sb.AppendLine("            {");
+        //            sb.AppendLine("                if (other." + this.Name + " == null)");
+        //            sb.AppendLine("                {");
+        //            sb.AppendLine("                    checkResult = -1;");
+        //            sb.AppendLine("                }");
+        //            sb.AppendLine("                else");
+        //            sb.AppendLine("                {");
+        //            sb.AppendLine(
+        //                "                    checkResult = this." + this.Name + ".Value.CompareTo(other." + this.Name + ".Value);");
+        //            sb.AppendLine("                }");
+        //            sb.AppendLine("            }");
+        //            sb.AppendLine("            else if (other." + this.Name + " != null)");
+        //            sb.AppendLine("            {");
+        //            sb.AppendLine("                checkResult = 1;");
+        //            sb.AppendLine("            }");
+        //        }
+        //        else
+        //        {
+        //            sb.Append("            ");
+        //            if (!checkResultDeclared)
+        //            {
+        //                sb.Append("var ");
+        //            }
 
-                    sb.AppendLine("checkResult = this." + this.Name + ".CompareTo(other." + this.Name + ");");
-                }
-            }
-            else
-            {
-                sb.Append("            ");
-                if (!checkResultDeclared)
-                {
-                    sb.Append("var ");
-                }
+        //            sb.AppendLine("checkResult = this." + this.Name + ".CompareTo(other." + this.Name + ");");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        sb.Append("            ");
+        //        if (!checkResultDeclared)
+        //        {
+        //            sb.Append("var ");
+        //        }
 
-                sb.AppendLine("checkResult = this." + this.Name + ".CompareTo(other." + this.Name + ");");
-            }
+        //        sb.AppendLine("checkResult = this." + this.Name + ".CompareTo(other." + this.Name + ");");
+        //    }
 
-            return sb.ToString();
-        }
+        //    return sb.ToString();
+        //}
 
-        /// <summary>
-        /// Gets the C# for the data type declaration
-        /// </summary>
-        /// <returns>
-        /// C# for the data type declaration
-        /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        public string GetCSharpDataTypeDeclaration()
-        {
-            switch (this.Collection)
-            {
-                case CollectionType.GenericList:
-                    return "System.Collections.Generic.List<" + this.NetDataType + ">";
-                case CollectionType.GenericLinkedList:
-                    return "System.Collections.Generic.LinkedList<" + this.NetDataType + ">";
-                case CollectionType.Array:
-                    return this.NetDataType + "[]";
-                case CollectionType.None:
-                    return this.NetDataType;
-                default:
-                    throw new InvalidEnumArgumentException("ColletionType not matched.");
-            }
-        }
+        ///// <summary>
+        ///// Gets the C# for the data type declaration
+        ///// </summary>
+        ///// <returns>
+        ///// C# for the data type declaration
+        ///// </returns>
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        //public string GetCSharpDataTypeDeclaration()
+        //{
+        //    switch (this.Collection)
+        //    {
+        //        case CollectionType.GenericList:
+        //            return "System.Collections.Generic.List<" + this.NetDataType + ">";
+        //        case CollectionType.GenericLinkedList:
+        //            return "System.Collections.Generic.LinkedList<" + this.NetDataType + ">";
+        //        case CollectionType.Array:
+        //            return this.NetDataType + "[]";
+        //        case CollectionType.None:
+        //            return this.NetDataType;
+        //        default:
+        //            throw new InvalidOperationException();
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the setter code for a property
-        /// </summary>
-        /// <returns>
-        /// the setter code for a property
-        /// </returns>
-        public virtual string GetMutator()
-        {
-            var sb = new StringBuilder();
+        ///// <summary>
+        ///// Gets the setter code for a property
+        ///// </summary>
+        ///// <returns>
+        ///// the setter code for a property
+        ///// </returns>
+        //public virtual string GetMutator()
+        //{
+        //    var sb = new StringBuilder();
 
-            sb.AppendLine("        set");
-            sb.AppendLine("        {");
+        //    sb.AppendLine("        set");
+        //    sb.AppendLine("        {");
 
-            sb.AppendLine("            this." + Helpers.GetVariableName(this.Name) + " = value;");
+        //    sb.AppendLine("            this." + OldHelpers.GetVariableName(this.Name) + " = value;");
 
-            sb.AppendLine("        }");
-            return sb.ToString();
-        }
+        //    sb.AppendLine("        }");
+        //    return sb.ToString();
+        //}
 
-        /// <summary>
-        /// Gets the logic for checking the hash code
-        /// </summary>
-        /// <returns>
-        /// logic for checking the hash code
-        /// </returns>
-        public virtual string GetHashcodeOperation()
-        {
-            if (this.dataType.IsClass || this.dataType.FullName.Equals("System.String", StringComparison.Ordinal))
-            {
-                return "(this." + this.Name + " != null ? this." + this.Name + ".GetHashCode() : 0)";
-            }
+        ///// <summary>
+        ///// Gets the logic for checking the hash code
+        ///// </summary>
+        ///// <returns>
+        ///// logic for checking the hash code
+        ///// </returns>
+        //public virtual string GetHashcodeOperation()
+        //{
+        //    //if (this.dataType.IsClass || this.dataType.FullName.Equals("System.String", StringComparison.Ordinal))
+        //    //{
+        //    //    return "(this." + this.Name + " != null ? this." + this.Name + ".GetHashCode() : 0)";
+        //    //}
 
-            return "this." + this.Name + ".GetHashCode()";
-        }
+        //    return "this." + this.Name + ".GetHashCode()";
+        //}
 
-        #endregion
+        //#endregion
         
-        /// <summary>
-        /// Produces the data annotations specific to the property
-        /// </summary>
-        /// <returns>
-        /// Data annotation code
-        /// </returns>
-        public abstract string GetDataAnnotations();
+        ///// <summary>
+        ///// Produces the data annotations specific to the property
+        ///// </summary>
+        ///// <returns>
+        ///// Data annotation code
+        ///// </returns>
+        //public abstract string GetDataAnnotations();
     }
 }
