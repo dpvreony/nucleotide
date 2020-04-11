@@ -24,6 +24,10 @@
 #tool "nuget:?package=MSBuild.SonarQube.Runner.Tool"
 #tool "dotnet:?package=dotnet-sonarscanner&version=4.4.2"
 #tool "nuget:?package=docfx.console&version=2.40.5"
+#tool "dotnet:?package=dotMorten.OmdGenerator&version=1.1.2"
+#tool "dotnet:?package=ConfigValidate&version=1.0.0&global"
+#tool "dotnet:?package=dotnet-outdated&version=2.7.0&global"
+#tool "dotnet:?package=snitch&global"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -85,7 +89,7 @@ var packageVersion = isReleaseBranch ? majorMinorPatch : informationalVersion;
 Information("informationalVersion: " + informationalVersion);
 Information("assemblyVersion: " + assemblyVersion);
 Information("fileVersion: " + fileVersion);
-
+Information("packageVersion: " + packageVersion);
 
 // Artifacts
 var artifactDirectory = "./artifacts/";
@@ -111,6 +115,8 @@ if (isRepository && !local && sonarQubeLogin != null) {
     }
 }
 
+// open cover
+var openCoverArtifactDirectory = artifactDirectory + "/opencover/";
 
 // Define global marcos.
 Action Abort = () => { throw new Exception("a non-recoverable fatal error occurred."); };
@@ -141,11 +147,11 @@ Task("BuildSolution")
 
         MSBuild(solution, new MSBuildSettings() {
                 ToolPath = msBuildPath,
-                ArgumentCustomization = args => args.Append("/bl:build.binlog /m")
+                ArgumentCustomization = args => args.Append("/bl:artifacts\\binlog\\build.binlog /m")
             }
             .WithTarget("build;pack") 
             .WithProperty("AndroidSdkDirectory", androidHome)
-            .WithProperty("PackageOutputPath",  MakeAbsolute(Directory(artifactDirectory)).ToString().Quote())
+            .WithProperty("PackageOutputPath",  MakeAbsolute(Directory(artifactDirectory + "/nuget/")).ToString().Quote())
             .WithProperty("TreatWarningsAsErrors", treatWarningsAsErrors.ToString())
             .SetConfiguration("Release")
             .WithProperty("Version", packageVersion)
@@ -159,7 +165,7 @@ Task("BuildSolution")
     // Restore must be a separate step
     MSBuild("./src/Dhgms.Nucleotide.sln", new MSBuildSettings() {
             ToolPath = msBuildPath,
-            ArgumentCustomization = args => args.Append("/bl:restore.binlog /m")
+            ArgumentCustomization = args => args.Append("/bl:artifacts\\binlog\\restore.binlog /m")
         }
         .WithTarget("restore")
         .WithProperty("AndroidSdkDirectory", androidHome)
@@ -205,11 +211,11 @@ Task("RunUnitTests")
         .ExcludeByFile("*/*.g.cs")
         .ExcludeByFile("*/*.g.i.cs"));
 
-    ReportGenerator(testCoverageOutputFile, artifactDirectory);
+    ReportGenerator(testCoverageOutputFile, openCoverArtifactDirectory);
 }).ReportError(exception =>
 {
     var apiApprovals = GetFiles("./**/ApiApprovalTests.*");
-    CopyFiles(apiApprovals, artifactDirectory);
+    CopyFiles(apiApprovals, openCoverArtifactDirectory);
 });
 
 Task("UploadTestCoverage")
@@ -222,7 +228,8 @@ Task("UploadTestCoverage")
     var token = EnvironmentVariable("COVERALLS_TOKEN");
     if (string.IsNullOrEmpty(token))
     {
-        throw new Exception("The COVERALLS_TOKEN environment variable is not defined.");
+		// pr's don't have the token for security reasons
+		return;
     }
 
     CoverallsIo(testCoverageOutputFile, new CoverallsIoSettings()
@@ -243,7 +250,7 @@ Task("SonarBegin")
   .Does(() => {
     var coverageFilePath = MakeAbsolute(new FilePath(testCoverageOutputFile)).FullPath;
     Information("Sonar: Test Coverage Output File: " + testCoverageOutputFile);
-    var arguments = "sonarscanner begin /k:\"" + sonarqubeProjectKey + "\" /v:\"" + nugetVersion + "\" /d:\"sonar.host.url=https://sonarcloud.io\" /d:\"sonar.organization=" + sonarqubeOrganisationKey + "\" /d:\"sonar.login=" + sonarQubeLogin + "\" /d:sonar.cs.opencover.reportsPaths=\"" + coverageFilePath + "\"";
+    var arguments = "sonarscanner begin /k:\"" + sonarqubeProjectKey + "\" /v:\"" + nugetVersion + "\" /d:\"sonar.host.url=https://sonarcloud.io\" /o:" + sonarqubeOrganisationKey + "\" /d:\"sonar.login=" + sonarQubeLogin + "\" /d:sonar.cs.opencover.reportsPaths=\"" + coverageFilePath + "\"";
 
     if (sonarQubePreview) {
         Information("Sonar: Running Sonar on PR " + AppVeyor.Environment.PullRequest.Number);
@@ -278,24 +285,76 @@ Task("Package")
 {
 });
 
-/*
-Task("PinNuGetDependencies")
+Task("ValidateConfiguration")
+    .IsDependentOn("BuildSolution")
     .Does (() =>
 {
-    // only pin whitelisted packages.
-    foreach(var package in packageWhitelist)
-    {
-        // only pin the package which was created during this build run.
-        var packagePath = artifactDirectory + File(string.Concat(package, ".", nugetVersion, ".nupkg"));
-
-        // see https://github.com/cake-contrib/Cake.PinNuGetDependency
-        PinNuGetDependency(packagePath, "reactiveui");
-    }
+	var directories = GetSubDirectories("./src/");
+	foreach (var dir in directories)
+	{
+		var validationSettings = new ProcessSettings
+		{
+			Arguments = "config-validate",
+			WorkingDirectory = dir
+		};
+		StartProcess("dotnet.exe", validationSettings);
+	}
 });
-*/
+
+Task("ListOutdatedPackages")
+    .IsDependentOn("BuildSolution")
+    .Does (() =>
+{
+	var dir = Directory("./src/");
+    CreateDirectory(artifactDirectory + "\\outdated");
+	var validationSettings = new ProcessSettings
+	{
+		Arguments = "outdated -o artifacts\\outdated\\outdated.json src",
+		//WorkingDirectory = dir
+	};
+	StartProcess("dotnet.exe", validationSettings);
+});
+
+Task("RunSnitchOnPackages")
+    .IsDependentOn("BuildSolution")
+    .Does (() =>
+{
+	var dir = Directory("./src/");
+	var snitchSettings = new ProcessSettings
+	{
+		WorkingDirectory = dir
+	};
+	StartProcess("snitch", snitchSettings);
+});
+
+Task("GenerateOmd")
+    .IsDependentOn("Sonar")
+    .Does (() =>
+{
+    CreateDirectory(artifactDirectory + "\\omd");
+    var omdSettings = new ProcessSettings{ Arguments = "/source=src /output=artifacts\\omd\\index.htm /format=html" };
+    StartProcess("tools\\generateomd.exe", omdSettings);
+});
+
+Task("CopyDocFx")
+    .IsDependentOn("BuildSolution")
+    .Does (() =>
+{
+// Copy the output of docfx to artifacts
+	var docfxArtifactDirectory = artifactDirectory + "docfx/";
+    CreateDirectory(docfxArtifactDirectory);
+    CopyDirectory(
+		"./src/docfx_project/_site/",
+		docfxArtifactDirectory);
+});
 
 Task("PublishPackages")
+    .IsDependentOn("CopyDocFx")
+    .IsDependentOn("ListOutdatedPackages")
+    .IsDependentOn("RunSnitchOnPackages")
+    //.IsDependentOn("ValidateConfiguration")
     .IsDependentOn("RunUnitTests")
+    .IsDependentOn("GenerateOmd")
     .IsDependentOn("Package")
     .WithCriteria(() => !local)
     .WithCriteria(() => !isPullRequest)
