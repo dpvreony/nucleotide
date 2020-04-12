@@ -18,8 +18,8 @@
   build_script:
     - ps: .\build.ps1
   artifacts:
-    - path: artifacts/*.nupkg
-    - path: '**/*.binlog'
+    - path: 'artifacts/nuget/*.nupkg'
+    - path: 'artifacts/binlog/*.binlog'
   test: off
   on_failure:
     - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
@@ -48,8 +48,8 @@
   build_script:
     - ps: .\build.ps1
   artifacts:
-    - path: artifacts/**/*.nupkg
-    - path: '**/*.binlog'
+    - path: 'artifacts/nuget/*.nupkg'
+    - path: 'artifacts/binlog/*.binlog'
   test: off
   on_failure:
     - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
