@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
@@ -9,6 +10,10 @@
   <ItemGroup>
     <PackageReference Include="DocFx.Console" Version="2.51.0" />
     <PackageReference Include="DocFx.Plugins.PlantUml" Version="1.1.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj" />
   </ItemGroup>
 
 </Project>
