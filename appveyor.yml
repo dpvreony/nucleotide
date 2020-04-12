@@ -48,7 +48,7 @@
   build_script:
     - ps: .\build.ps1
   artifacts:
-    - path: artifacts/*.nupkg
+    - path: artifacts/**/*.nupkg
     - path: '**/*.binlog'
   test: off
   on_failure:
