@@ -94,7 +94,7 @@ Information("packageVersion: " + packageVersion);
 // Artifacts
 var artifactDirectory = "./artifacts/";
 var testCoverageOutputFile = artifactDirectory + "OpenCover.xml";
-var packageWhitelist = new[] { "Dhgms.Nucleotide" };
+var packageWhitelist = new[] { "Dhgms.Nucleotide", "Dhgms.Nucleotide.Attributes", "Dhgms.Nucleotide.Generators" };
 
 var runSonarQube = false;
 var sonarQubePreview = false;
