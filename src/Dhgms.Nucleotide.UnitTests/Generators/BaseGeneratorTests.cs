@@ -16,8 +16,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
@@ -43,7 +45,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator>
+        public abstract class BaseConstructorMethod<TGenerator> : Foundatio.Logging.Xunit.TestWithLoggingBase
             where TGenerator : class, ICodeGenerator
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
@@ -75,9 +77,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
                 Assert.NotNull(instance);
             }
+
+            protected BaseConstructorMethod(ITestOutputHelper output) : base(output)
+            {
+            }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator>
+        public abstract class BaseGenerateAsyncMethod<TGenerator> : Foundatio.Logging.Xunit.TestWithLoggingBase
             where TGenerator : class, ICodeGenerator
         {
             internal const string DefaultFilePathPrefix = "Test";
@@ -174,7 +180,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 var factory = GetFactory();
                 var attributeData = new MockAttributeData(new TypedConstant());
                 var instance = factory(attributeData);
-                await instance.GenerateAsync(context, progress, CancellationToken.None);
+                var result = await instance.GenerateAsync(context, progress, CancellationToken.None);
+                var resultAsString = result.ToFullString();
+                Assert.False(resultAsString.StartsWith("#error", StringComparison.OrdinalIgnoreCase));
+                this._logger.LogInformation(result.ToFullString());
             }
 
             private static Project CreateProject(params string[] sources)
@@ -241,6 +250,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     compilationUnitExterns);
 
                 return transformationContext;
+            }
+
+            protected BaseGenerateAsyncMethod(ITestOutputHelper output) : base(output)
+            {
             }
         }
     }

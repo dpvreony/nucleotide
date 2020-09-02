@@ -7,6 +7,7 @@ using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
@@ -15,6 +16,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     {
         public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<CommandFactoryInterfaceGenerator>
         {
+            public ConstructorMethod(ITestOutputHelper output) : base(output)
+            {
+            }
+
             protected override Func<AttributeData, CommandFactoryInterfaceGenerator> GetFactory()
             {
                 return attributeData => new CommandFactoryInterfaceGenerator(attributeData);
@@ -23,6 +28,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
         public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<CommandFactoryInterfaceGenerator>
         {
+            public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
+            {
+            }
+
             protected override Func<AttributeData, CommandFactoryInterfaceGenerator> GetFactory()
             {
                 return data => new CommandFactoryInterfaceGenerator(data);
