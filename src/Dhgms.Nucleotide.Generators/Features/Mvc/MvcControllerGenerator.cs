@@ -93,8 +93,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             {
                 "authorizationService",
                 "logger",
-                "mediator",
-                "queryFactory"
+                "mediator"
             };
 
             return result;
@@ -138,12 +137,41 @@ namespace Dhgms.Nucleotide.Features.Mvc
                 //GetViewMethodDeclaration(entityName),
                 GetPolicyMethodDeclaration(entityName, "List"),
                 GetPolicyMethodDeclaration(entityName, "View"),
+                GetQueryMethodDeclaration(entityName, "List", $"RequestDtos.List{entityName}RequestDto"),
+                GetQueryMethodDeclaration(entityName, "View", "long"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "View"),
             };
 
 
             return result.ToArray();
+        }
+
+        private MethodDeclarationSyntax GetQueryMethodDeclaration(string entityName, string action, string requestDtoType)
+        {
+            var methodName = $"Get{action}QueryAsync";
+
+            var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"_queryFactory.Get{camelAction}QueryAsync(query, claimsPrincipal, cancellationToken)"));
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<Queries.I{camelAction}{entityName}Query>");
+
+            var parameters = GetParams(new []
+            {
+                $"{requestDtoType} query",
+                "System.Security.Claims.ClaimsPrincipal claimsPrincipal",
+                "System.Threading.CancellationToken cancellationToken",
+            });
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
+                .AddBodyStatements(body);
+            return declaration;
         }
 
         private MethodDeclarationSyntax GetPolicyMethodDeclaration(string entityName, string action)

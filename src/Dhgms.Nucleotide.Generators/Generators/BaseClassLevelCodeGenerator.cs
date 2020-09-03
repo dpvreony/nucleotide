@@ -255,7 +255,7 @@ namespace Dhgms.Nucleotide.Generators
                     SyntaxFactory.ParseTypeName(fieldType),
                     SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{constructorArgument.Item2}")) })
                     ))
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
                 result.Add(fieldDeclaration);
             }
 
@@ -456,7 +456,7 @@ namespace Dhgms.Nucleotide.Generators
         {
             var methodName = $"Get{eventName}EventIdAsync";
 
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await System.Threading.Tasks.Task.FromResult(new EventId(NumericEventIds.{entityName}Controller{eventName}Id, \"{entityName}Controller{eventName}\"))"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"System.Threading.Tasks.Task.FromResult(new EventId(NumericEventIds.{entityName}Controller{eventName}Id, \"{entityName}Controller{eventName}\"))"));
 
             var body = new StatementSyntax[]
             {
@@ -465,7 +465,7 @@ namespace Dhgms.Nucleotide.Generators
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<EventId>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
                 .AddBodyStatements(body);
             return declaration;
         }
