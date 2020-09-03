@@ -2,7 +2,6 @@
   <Sdk Name="CodeGeneration.Roslyn.Plugin.Sdk" Version="0.7.63" />
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
-    <PackAsCodeGenerationRoslynPlugin>$(TargetFramework.Equals('netcoreapp2.1'))</PackAsCodeGenerationRoslynPlugin>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
