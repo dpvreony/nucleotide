@@ -135,6 +135,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 GetListActionResultAsyncDeclaration(entityName),
                 GetUpdateActionResultAsyncDeclaration(entityName),
                 GetViewActionResultAsyncDeclaration(entityName),
+                //GetCommandMethodDeclaration(entityName, "Add"),
                 //GetAddMethodDeclaration(entityName),
                 //GetDeleteMethodDeclaration(entityName),
                 //GetListMethodDeclaration(entityName),

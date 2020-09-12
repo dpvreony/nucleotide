@@ -1,4 +1,4 @@
-﻿//using Dhgms.Nucleotide.Attributes;
-//using Dhgms.Nucleotide.ModelTests;
+﻿using Dhgms.Nucleotide.Attributes;
+using Dhgms.Nucleotide.ModelTests;
 
-//[assembly: GenerateCommandFactoryInterface(typeof(ModelGenerationDetails))]
+[assembly: GenerateCommandFactoryInterface(typeof(ModelGenerationDetails))]

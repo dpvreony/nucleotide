@@ -130,6 +130,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             {
                 GetMvcViewActionResultDeclaration(entityName, "list"),
                 GetMvcViewActionResultDeclaration(entityName, "view"),
+                //GetCommandMethodDeclaration(entityName, "Add"),
                 //GetAddMethodDeclaration(entityName),
                 //GetDeleteMethodDeclaration(entityName),
                 //GetListMethodDeclaration(entityName),
@@ -145,6 +146,34 @@ namespace Dhgms.Nucleotide.Features.Mvc
 
 
             return result.ToArray();
+        }
+
+        private MethodDeclarationSyntax GetCommandMethodDeclaration(string entityName, string action)
+        {
+            var methodName = $"Get{action}CommandAsync";
+            var requestDtoType = $"RequestDtos.{action}{entityName}RequestDto";
+
+            var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"_commandFactory.Get{camelAction}CommandAsync(query, claimsPrincipal, cancellationToken)"));
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<Queries.I{camelAction}{entityName}Query>");
+
+            var parameters = GetParams(new []
+            {
+                $"{requestDtoType} command",
+                "System.Security.Claims.ClaimsPrincipal claimsPrincipal",
+                "System.Threading.CancellationToken cancellationToken",
+            });
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
+                .AddBodyStatements(body);
+            return declaration;
         }
 
         private MethodDeclarationSyntax GetQueryMethodDeclaration(string entityName, string action, string requestDtoType)
