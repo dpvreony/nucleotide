@@ -163,7 +163,7 @@ Task("BuildSolution")
     };
 	
     var restoreArgs = "tool restore";
-    var restoreProcessSettings = new ProcessSettings{ Arguments = arguments };
+    var restoreProcessSettings = new ProcessSettings{ Arguments = restoreArgs };
     StartProcess("dotnet.exe", restoreProcessSettings);
 
     // Restore must be a separate step
