@@ -93,7 +93,8 @@ namespace Dhgms.Nucleotide.Features.Mvc
             {
                 "authorizationService",
                 "logger",
-                "mediator"
+                "mediator",
+                "queryFactory",
             };
 
             return result;
@@ -181,7 +182,7 @@ namespace Dhgms.Nucleotide.Features.Mvc
             var methodName = $"Get{action}QueryAsync";
 
             var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"_queryFactory.Get{camelAction}QueryAsync(query, claimsPrincipal, cancellationToken)"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"QueryFactory.Get{camelAction}QueryAsync(query, claimsPrincipal, cancellationToken)"));
 
             var body = new StatementSyntax[]
             {

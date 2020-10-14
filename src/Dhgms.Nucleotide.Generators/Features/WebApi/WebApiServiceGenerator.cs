@@ -135,26 +135,95 @@ namespace Dhgms.Nucleotide.Features.WebApi
                 GetListActionResultAsyncDeclaration(entityName),
                 GetUpdateActionResultAsyncDeclaration(entityName),
                 GetViewActionResultAsyncDeclaration(entityName),
-                //GetCommandMethodDeclaration(entityName, "Add"),
+
                 //GetAddMethodDeclaration(entityName),
                 //GetDeleteMethodDeclaration(entityName),
                 //GetListMethodDeclaration(entityName),
                 //GetUpdateMethodDeclaration(entityName),
                 //GetViewMethodDeclaration(entityName),
+
+                GetCommandMethodDeclaration(entityName,"Add", $"RequestDtos.Add{entityName}RequestDto"),
+                GetCommandMethodDeclaration(entityName,"Delete", "long"),
+                GetCommandMethodDeclaration(entityName,"Update", $"RequestDtos.Update{entityName}RequestDto"),
+
                 GetPolicyMethodDeclaration(entityName, "Add"),
                 GetPolicyMethodDeclaration(entityName, "Delete"),
                 GetPolicyMethodDeclaration(entityName, "List"),
                 GetPolicyMethodDeclaration(entityName, "Update"),
                 GetPolicyMethodDeclaration(entityName, "View"),
+
                 GetEventIdMethodDeclaration(entityName, "Add"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "Update"),
                 GetEventIdMethodDeclaration(entityName, "View"),
+
+                GetQueryMethodDeclaration(entityName,"List", $"RequestDtos.List{entityName}RequestDto"),
+                GetQueryMethodDeclaration(entityName,"View", "long"),
             };
 
 
             return result;
+        }
+
+        private MethodDeclarationSyntax GetCommandMethodDeclaration(
+            string entityName,
+            string action,
+            string requestType)
+        {
+            var methodName = $"Get{action}CommandAsync";
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await CommandFactory.Get{action}CommandAsync(request, claimsPrincipal, cancellationToken).ConfigureAwait(false)"));
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<Commands.I{action}{entityName}Command>");
+
+            var parameters = GetParams(new []
+            {
+                $"{requestType} request",
+                "System.Security.Claims.ClaimsPrincipal claimsPrincipal",
+                "System.Threading.CancellationToken cancellationToken",
+            });
+
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddBodyStatements(body);
+            return declaration;
+        }
+
+        private MethodDeclarationSyntax GetQueryMethodDeclaration(
+            string entityName,
+            string action,
+            string requestType)
+        {
+            var methodName = $"Get{action}QueryAsync";
+
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"await QueryFactory.Get{action}QueryAsync(request, claimsPrincipal, cancellationToken).ConfigureAwait(false)"));
+
+            var body = new StatementSyntax[]
+            {
+                returnStatement
+            };
+
+            var returnType = SyntaxFactory.ParseTypeName($"Task<Queries.I{action}{entityName}Query>");
+
+            var parameters = GetParams(new []
+            {
+                $"{requestType} request",
+                "System.Security.Claims.ClaimsPrincipal claimsPrincipal",
+                "System.Threading.CancellationToken cancellationToken",
+            });
+
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
+                .AddBodyStatements(body);
+            return declaration;
         }
 
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
