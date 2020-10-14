@@ -161,6 +161,10 @@ Task("BuildSolution")
             .SetVerbosity(Verbosity.Minimal)
             .SetNodeReuse(false));
     };
+	
+    var restoreArgs = "tool restore";
+    var restoreProcessSettings = new ProcessSettings{ Arguments = arguments };
+    StartProcess("dotnet.exe", restoreProcessSettings);
 
     // Restore must be a separate step
     MSBuild("./src/Dhgms.Nucleotide.sln", new MSBuildSettings() {
