@@ -74,7 +74,7 @@ namespace Dhgms.Nucleotide.Generators
 
             if (namedTypeSymbols == null)
             {
-                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to a type symbol indicating the model type.");
+                return await ReportErrorInNamespace(progress, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
             }
 
             var compilation = context.Compilation;

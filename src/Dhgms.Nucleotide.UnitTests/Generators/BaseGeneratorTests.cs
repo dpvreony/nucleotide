@@ -173,7 +173,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             [Theory]
             [MemberData(nameof(GeneratesCodeMemberData))]
-            public async Task GeneratesCodeAsync(
+            public async Task GeneratesErrorForNonNucleotideGenerationModel(
                 TransformationContext context,
                 IProgress<Diagnostic> progress)
             {
@@ -182,7 +182,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 var instance = factory(attributeData);
                 var result = await instance.GenerateAsync(context, progress, CancellationToken.None);
                 var resultAsString = result.ToFullString();
-                Assert.False(resultAsString.StartsWith("#error", StringComparison.OrdinalIgnoreCase));
+                Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
                 this._logger.LogInformation(result.ToFullString());
             }
 
