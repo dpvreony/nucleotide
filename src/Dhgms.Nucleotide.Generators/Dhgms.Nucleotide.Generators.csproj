@@ -6,9 +6,7 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
-  <!--
   <ItemGroup>
     <None Include="bin/$(Configuration)/**/*.dll" Pack="true" PackagePath="build" KeepDuplicates="false" />
   </ItemGroup>
-  -->
 </Project>

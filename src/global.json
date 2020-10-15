@@ -1,0 +1,8 @@
+{
+  "sdk": {
+	// do not change the version until net5 is out, 3.1.401 introduced a nuget bug https://github.com/NuGet/Home/issues/9786
+	// which causes the wrapper nuget package to fail to generate.
+    "version": "3.1.109",
+    "rollForward": "disable"
+  }
+}
