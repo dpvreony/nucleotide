@@ -186,6 +186,27 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 this._logger.LogInformation(result.ToFullString());
             }
 
+            [Theory]
+            [MemberData(nameof(GeneratesCodeMemberData))]
+            public async Task GeneratesCodeForSimpleNucleotideGenerationModel(
+                TransformationContext context,
+                IProgress<Diagnostic> progress)
+            {
+                var factory = GetFactory();
+
+                // Right now this is difficult to test as the Roslyn Analysis typed constant is internal.
+                // Easiest way to test it to split off the CGR loader and the internal generator
+                // Then pass in the Nucleotide Model direct.
+                var t = new TypedConstant();
+
+                var attributeData = new MockAttributeData(t);
+                var instance = factory(attributeData);
+                var result = await instance.GenerateAsync(context, progress, CancellationToken.None);
+                var resultAsString = result.ToFullString();
+                Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
+                this._logger.LogInformation(result.ToFullString());
+            }
+
             private static Project CreateProject(params string[] sources)
             {
                 var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
