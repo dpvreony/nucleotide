@@ -1,217 +1,94 @@
-##########################################################################
-# This is the Cake bootstrapper script for PowerShell.
-# This file was downloaded from https://github.com/cake-build/resources
-# Feel free to change this file to fit your needs.
-##########################################################################
+$ErrorActionPreference = 'Stop'
 
-<#
+$solutionName = 'Dhgms.Nucleotide'
+$solutionPath = 'src\\' + $solutionName + '.sln'
+$testProject = 'src\\' + $solutionName + '.UnitTests\\' + $solutionName + '.UnitTests.csproj'
 
-.SYNOPSIS
-This is a Powershell script to bootstrap a Cake build.
+function CreateDirectoryIfItDoesNotExist([String] $DirectoryToCreate)
+{
+	if (-not (Test-Path -LiteralPath $DirectoryToCreate))
+	{
+		try
+		{
+			New-Item -Path $DirectoryToCreate -ItemType Directory -ErrorAction Stop | Out-Null #-Force
+		}
+		catch
+		{
+			Write-Error -Message "Unable to create directory '$DirectoryToCreate'. Error was: $_" -ErrorAction Stop
+		}
+	}
+}
 
-.DESCRIPTION
-This Powershell script will download NuGet if missing, restore NuGet tools (including Cake)
-and execute your Cake build script with the parameters you provide.
-
-.PARAMETER Script
-The build script to execute.
-.PARAMETER Target
-The build script target to run.
-.PARAMETER Configuration
-The build configuration to use.
-.PARAMETER Verbosity
-Specifies the amount of information to be displayed.
-.PARAMETER ShowDescription
-Shows description about tasks.
-.PARAMETER DryRun
-Performs a dry run.
-.PARAMETER Experimental
-Uses the nightly builds of the Roslyn script engine.
-.PARAMETER Mono
-Uses the Mono Compiler rather than the Roslyn script engine.
-.PARAMETER SkipToolPackageRestore
-Skips restoring of packages.
-.PARAMETER ScriptArgs
-Remaining arguments are added here.
-
-.LINK
-https://cakebuild.net
-
-#>
-
-[CmdletBinding()]
-Param(
-    [string]$Script = "build.cake",
-    [string]$Target,
-    [string]$Configuration,
-    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
-    [string]$Verbosity,
-    [switch]$ShowDescription,
-    [Alias("WhatIf", "Noop")]
-    [switch]$DryRun,
-    [switch]$Experimental,
-    [switch]$Mono,
-    [switch]$SkipToolPackageRestore,
-    [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
-    [string[]]$ScriptArgs
+$tools = (
+	('dotnet', ('tool', 'install', '--global', 'dotMorten.OmdGenerator')),
+	('dotnet', ('tool', 'install', '--global', 'ConfigValidate')),
+	('dotnet', ('tool', 'install', '--global', 'dotnet-outdated')),
+	('dotnet', ('tool', 'install', '--global', 'snitch')),
+	('dotnet', ('tool', 'install', '--global', 'dotnet-sonarscanner'))
+	#{ restore $solutionPath /bl:artifacts\\binlog\\restore.binlog }
 )
 
-[Reflection.Assembly]::LoadWithPartialName("System.Security") | Out-Null
-function MD5HashFile([string] $filePath)
+Foreach ($i in $tools)
 {
-    if ([string]::IsNullOrEmpty($filePath) -or !(Test-Path $filePath -PathType Leaf))
-    {
-        return $null
-    }
-
-    [System.IO.Stream] $file = $null;
-    [System.Security.Cryptography.MD5] $md5 = $null;
-    try
-    {
-        $md5 = [System.Security.Cryptography.MD5]::Create()
-        $file = [System.IO.File]::OpenRead($filePath)
-        return [System.BitConverter]::ToString($md5.ComputeHash($file))
-    }
-    finally
-    {
-        if ($file -ne $null)
-        {
-            $file.Dispose()
-        }
-    }
+	& $i[0] $i[1]
 }
 
-function GetProxyEnabledWebClient
+CreateDirectoryIfItDoesNotExist('.\artifacts\nupkg');
+CreateDirectoryIfItDoesNotExist('.\artifacts\outdated');
+CreateDirectoryIfItDoesNotExist('.\artifacts\snitch');
+CreateDirectoryIfItDoesNotExist('.\artifacts\omd');
+CreateDirectoryIfItDoesNotExist('.\artifacts\docfx');
+Remove-Item 'artifacts\docfx\*.*' -Recurse
+
+$actions = (
+	('dotnet', ('restore', $solutionPath, '/bl:artifacts\\binlog\\restore.binlog')),
+	('dotnet', ('build', $solutionPath, '--configuration', 'Release', '--no-restore', '/bl:artifacts\\binlog\\build.binlog')),
+	('dotnet', ('test', $testProject, '--configuration', 'Release', '--no-build', '--nologo', '--collect:"XPlat Code Coverage"', '--', 'DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover', '/bl:artifacts\\binlog\\test.binlog'))
+)
+
+Foreach ($i in $actions)
 {
-    $wc = New-Object System.Net.WebClient
-    $proxy = [System.Net.WebRequest]::GetSystemWebProxy()
-    $proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials        
-    $wc.Proxy = $proxy
-    return $wc
+	& $i[0] $i[1]
+	if(!$?)
+	{
+		return 1;
+	}
 }
 
-Write-Host "Preparing to run build script..."
+#$runSonar = $false;
+#
+#if ($runSonar)
+#{
+#	dotnet sonarscanner begin /k:"project-key"
+#}
 
-if(!$PSScriptRoot){
-    $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
+
+#if ($runSonar)
+#{
+#	dotnet sonarscanner end
+#}
+
+if ($Env:GITHUB_REF -and $Env:GITHUB_REF.StartsWith("refs/heads/dependabot"))
+{
+	#drop out if dependabot, no point doing package ref checks, or additional output as won't be used.
+	Write-Host "Dependabot branch, skipping rest of checks"
+	return
 }
 
-$TOOLS_DIR = Join-Path $PSScriptRoot "tools"
-$ADDINS_DIR = Join-Path $TOOLS_DIR "Addins"
-$MODULES_DIR = Join-Path $TOOLS_DIR "Modules"
-$NUGET_EXE = Join-Path $TOOLS_DIR "nuget.exe"
-$CAKE_EXE = Join-Path $TOOLS_DIR "Cake/Cake.exe"
-$NUGET_URL = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-$PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
-$PACKAGES_CONFIG_MD5 = Join-Path $TOOLS_DIR "packages.config.md5sum"
-$ADDINS_PACKAGES_CONFIG = Join-Path $ADDINS_DIR "packages.config"
-$MODULES_PACKAGES_CONFIG = Join-Path $MODULES_DIR "packages.config"
+$postBuildActions = (
+	('dotnet', ('pack', $solutionPath, '--configuration', 'Release', '--no-build', '/bl:artifacts\\binlog\\pack.binlog', '/p:PackageOutputPath=..\artifacts\nupkg')),
+	('dotnet', ('outdated', '-o', 'artifacts\outdated\outdated.json', 'src'))
+	#('snitch', ('src', '--strict')),
+	#('generateomd.exe', ('/source=src', '/output=artifacts\omd\index.htm', '/format=html'))
+)
 
-# Make sure tools folder exists
-if ((Test-Path $PSScriptRoot) -and !(Test-Path $TOOLS_DIR)) {
-    Write-Verbose -Message "Creating tools directory..."
-    New-Item -Path $TOOLS_DIR -Type directory | out-null
+Foreach ($i in $postBuildActions)
+{
+	& $i[0] $i[1]
+	if(!$?)
+	{
+		return 1;
+	}
 }
 
-# Try find NuGet.exe in path if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Trying to find nuget.exe in PATH..."
-    $existingPaths = $Env:Path -Split ';' | Where-Object { (![string]::IsNullOrEmpty($_)) -and (Test-Path $_ -PathType Container) }
-    $NUGET_EXE_IN_PATH = Get-ChildItem -Path $existingPaths -Filter "nuget.exe" | Select -First 1
-    if ($NUGET_EXE_IN_PATH -ne $null -and (Test-Path $NUGET_EXE_IN_PATH.FullName)) {
-        Write-Verbose -Message "Found in PATH at $($NUGET_EXE_IN_PATH.FullName)."
-        $NUGET_EXE = $NUGET_EXE_IN_PATH.FullName
-    }
-}
-
-# Try download NuGet.exe if not exists
-if (!(Test-Path $NUGET_EXE)) {
-    Write-Verbose -Message "Downloading NuGet.exe..."
-    try {
-        $wc = GetProxyEnabledWebClient
-        $wc.DownloadFile($NUGET_URL, $NUGET_EXE)
-    } catch {
-        Throw "Could not download NuGet.exe."
-    }
-}
-
-# Save nuget.exe path to environment to be available to child processed
-$ENV:NUGET_EXE = $NUGET_EXE
-
-# Restore tools from NuGet?
-if(-Not $SkipToolPackageRestore.IsPresent) {
-    Push-Location
-    Set-Location $TOOLS_DIR
-
-    Write-Verbose -Message "Restoring tools from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install Cake -ExcludeVersion -Version 0.30.0 -OutputDirectory `"$TOOLS_DIR`""
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install xunit.runner.console -ExcludeVersion -Version 2.4.0-beta.1.build3958 -OutputDirectory `"$TOOLS_DIR`""
-
-    if ($LASTEXITCODE -ne 0) {
-        Throw "An error occured while restoring NuGet tools."
-    }
-    else
-    {
-        $md5Hash | Out-File $PACKAGES_CONFIG_MD5 -Encoding "ASCII"
-    }
-    Write-Verbose -Message ($NuGetOutput | out-string)
-
-    Pop-Location
-}
-
-# Restore addins from NuGet
-if (Test-Path $ADDINS_PACKAGES_CONFIG) {
-    Push-Location
-    Set-Location $ADDINS_DIR
-
-    Write-Verbose -Message "Restoring addins from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$ADDINS_DIR`""
-
-    if ($LASTEXITCODE -ne 0) {
-        Throw "An error occured while restoring NuGet addins."
-    }
-
-    Write-Verbose -Message ($NuGetOutput | out-string)
-
-    Pop-Location
-}
-
-# Restore modules from NuGet
-if (Test-Path $MODULES_PACKAGES_CONFIG) {
-    Push-Location
-    Set-Location $MODULES_DIR
-
-    Write-Verbose -Message "Restoring modules from NuGet..."
-    $NuGetOutput = Invoke-Expression "&`"$NUGET_EXE`" install -ExcludeVersion -OutputDirectory `"$MODULES_DIR`""
-
-    if ($LASTEXITCODE -ne 0) {
-        Throw "An error occured while restoring NuGet modules."
-    }
-
-    Write-Verbose -Message ($NuGetOutput | out-string)
-
-    Pop-Location
-}
-
-# Make sure that Cake has been installed.
-if (!(Test-Path $CAKE_EXE)) {
-    Throw "Could not find Cake.exe at $CAKE_EXE"
-}
-
-# Build Cake arguments
-$cakeArguments = @("$Script");
-if ($Target) { $cakeArguments += "-target=$Target" }
-if ($Configuration) { $cakeArguments += "-configuration=$Configuration" }
-if ($Verbosity) { $cakeArguments += "-verbosity=$Verbosity" }
-if ($ShowDescription) { $cakeArguments += "-showdescription" }
-if ($DryRun) { $cakeArguments += "-dryrun" }
-if ($Experimental) { $cakeArguments += "-experimental" }
-if ($Mono) { $cakeArguments += "-mono" }
-$cakeArguments += $ScriptArgs
-$bootstrapArguments = $cakeArguments + "--bootstrap";
-
-# Start Cake
-Write-Host "Running build script..."
-&$CAKE_EXE $bootstrapArguments
-&$CAKE_EXE $cakeArguments
-exit $LASTEXITCODE
+xcopy src\docfx_project\_site artifacts\docfx /E /I /Y
