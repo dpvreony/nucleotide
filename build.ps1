@@ -22,7 +22,7 @@ function CreateDirectoryIfItDoesNotExist([String] $DirectoryToCreate)
 $tools = (
 	('dotnet', ('tool', 'install', '--global', 'dotMorten.OmdGenerator')),
 	('dotnet', ('tool', 'install', '--global', 'ConfigValidate')),
-	('dotnet', ('tool', 'install', '--global', 'dotnet-outdated')),
+	('dotnet', ('tool', 'install', '--global', 'dotnet-outdated-tool')),
 	('dotnet', ('tool', 'install', '--global', 'snitch')),
 	('dotnet', ('tool', 'install', '--global', 'dotnet-sonarscanner'))
 	#{ restore $solutionPath /bl:artifacts\\binlog\\restore.binlog }
@@ -77,8 +77,7 @@ if ($Env:GITHUB_REF -and $Env:GITHUB_REF.StartsWith("refs/heads/dependabot"))
 
 $postBuildActions = (
 	('dotnet', ('pack', $solutionPath, '--configuration', 'Release', '--no-build', '/bl:artifacts\\binlog\\pack.binlog', '/p:PackageOutputPath=..\artifacts\nupkg')),
-	('dotnet', ('--info'))
-	#('dotnet', ('outdated', '-o', 'artifacts\outdated\outdated.json', 'src'))
+	('dotnet', ('outdated', '-o', 'artifacts\outdated\outdated.json', 'src'))
 	#('snitch', ('src', '--strict')),
 	#('generateomd.exe', ('/source=src', '/output=artifacts\omd\index.htm', '/format=html'))
 )
