@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
     <PackAsCodeGenerationRoslynPlugin>$(TargetFramework.Equals('netcoreapp2.1'))</PackAsCodeGenerationRoslynPlugin>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="3.7.1" />
+    <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="4.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
   </ItemGroup>
 
