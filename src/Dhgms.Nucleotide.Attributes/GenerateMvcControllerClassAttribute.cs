@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using CodeGeneration.Roslyn;
-using Dhgms.Nucleotide.Features.Mvc;
-using Dhgms.Nucleotide.Model;
 
 namespace Dhgms.Nucleotide.Attributes
 {
@@ -10,7 +7,6 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate a Web API service.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    [CodeGenerationAttribute(typeof(MvcControllerGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateMvcControllerClassAttribute : Attribute
     {

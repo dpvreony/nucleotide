@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using CodeGeneration.Roslyn;
-using Dhgms.Nucleotide.Features.Model;
-using Dhgms.Nucleotide.Generators;
 
 namespace Dhgms.Nucleotide.Attributes
 {
@@ -10,7 +7,6 @@ namespace Dhgms.Nucleotide.Attributes
     /// Generate the models associate to this class
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
-    [CodeGenerationAttribute(typeof(UnkeyedModelClassGenerator))]
     [Conditional("CodeGeneration")]
     public sealed class GenerateUnkeyedModelClassAttribute : BaseCodeGeneratorAttribute
     {

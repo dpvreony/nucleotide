@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Features.SignalR
     /// <summary>
     /// Generator for SignalR Hub Class
     /// </summary>
-    public sealed class SignalRHubClassGenerator : ICodeGenerator
+    public sealed class SignalRHubClassGenerator : ISourceGenerator
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalRHubClassGenerator"/> class.
@@ -50,6 +50,22 @@ namespace Dhgms.Nucleotide.Features.SignalR
         private MemberDeclarationSyntax[] GetClasses()
         {
             return new MemberDeclarationSyntax[] { };
+        }
+
+        public void Initialize(GeneratorInitializationContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Execute(GeneratorExecutionContext context)
+        {
+            var compilationUnit = 
+            var sourceText = SyntaxTree(
+                compilationUnit,
+                parseOptions,
+                encoding: Encoding.UTF8).GetText();
+            context.AddSource();
+            throw new NotImplementedException();
         }
     }
 }

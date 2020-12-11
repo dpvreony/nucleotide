@@ -7,7 +7,6 @@ using System.Runtime.Loader;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Model;
 using Dhgms.Nucleotide.PropertyInfo;
@@ -17,7 +16,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ICodeGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor, new()
     {
