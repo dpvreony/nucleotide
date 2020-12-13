@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Features.WebApi;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Generators.Features.WebApi;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -14,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class WebApiServiceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiServiceGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -22,11 +23,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiServiceGenerator> GetFactory()
             {
-                return attributeData => new WebApiServiceGenerator(attributeData);
+                return attributeData => new WebApiServiceGenerator();
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiServiceGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
@@ -34,7 +35,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiServiceGenerator> GetFactory()
             {
-                return data => new WebApiServiceGenerator(data);
+                return data => new WebApiServiceGenerator();
             }
         }
     }

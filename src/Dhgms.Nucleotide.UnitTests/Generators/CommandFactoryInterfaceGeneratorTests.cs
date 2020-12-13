@@ -22,7 +22,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, CommandFactoryInterfaceGenerator> GetFactory()
             {
-                return attributeData => new CommandFactoryInterfaceGenerator(attributeData);
+                return attributeData => new CommandFactoryInterfaceGenerator();
             }
         }
 
@@ -34,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, CommandFactoryInterfaceGenerator> GetFactory()
             {
-                return data => new CommandFactoryInterfaceGenerator(data);
+                return data => new CommandFactoryInterfaceGenerator();
             }
         }
     }

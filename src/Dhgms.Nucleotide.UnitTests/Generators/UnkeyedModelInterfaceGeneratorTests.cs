@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class UnkeyedModelInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<UnkeyedModelInterfaceGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<UnkeyedModelInterfaceGenerator, UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -22,11 +22,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, UnkeyedModelInterfaceGenerator> GetFactory()
             {
-                return attributeData => new UnkeyedModelInterfaceGenerator(attributeData);
+                return attributeData => new UnkeyedModelInterfaceGenerator();
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<UnkeyedModelInterfaceGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<UnkeyedModelInterfaceGenerator, UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
@@ -34,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, UnkeyedModelInterfaceGenerator> GetFactory()
             {
-                return data => new UnkeyedModelInterfaceGenerator(data);
+                return data => new UnkeyedModelInterfaceGenerator();
             }
         }
     }

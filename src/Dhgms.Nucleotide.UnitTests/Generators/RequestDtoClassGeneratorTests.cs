@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class RequestDtoClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<RequestDtoClassGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<RequestDtoClassGenerator, RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -22,11 +22,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, RequestDtoClassGenerator> GetFactory()
             {
-                return data => new RequestDtoClassGenerator(data);
+                return data => new RequestDtoClassGenerator();
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<RequestDtoClassGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<RequestDtoClassGenerator, RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
@@ -34,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, RequestDtoClassGenerator> GetFactory()
             {
-                return data => new RequestDtoClassGenerator(data);
+                return data => new RequestDtoClassGenerator();
             }
         }
     }

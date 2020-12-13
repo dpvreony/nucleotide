@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
 using Dhgms.Nucleotide.Features.Cqrs;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -45,8 +45,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : class, ICodeGenerator
+        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+            where TFeatureFlags : class
+            where TGeneratorProcessor : BaseGeneratorProcessor, new()
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
@@ -83,8 +85,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : class, ICodeGenerator
+        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+            where TFeatureFlags : class
+            where TGeneratorProcessor : BaseGeneratorProcessor, new()
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";

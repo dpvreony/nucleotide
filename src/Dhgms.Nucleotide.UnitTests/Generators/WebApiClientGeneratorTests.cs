@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class WebApiClientGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiClientGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiClientGenerator, WebApiClientFeatureFlags, WebApiClientGeneratorProcessor>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -22,11 +22,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
             {
-                return attributeData => new WebApiClientGenerator(attributeData);
+                return attributeData => new WebApiClientGenerator();
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiClientGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiClientGenerator, WebApiClientFeatureFlags, WebApiClientGeneratorProcessor>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
@@ -34,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
             {
-                return data => new WebApiClientGenerator(data);
+                return data => new WebApiClientGenerator();
             }
         }
     }
