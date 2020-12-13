@@ -23,13 +23,5 @@ namespace Dhgms.Nucleotide.Generators
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor, new()
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="attributeData"></param>
-        protected BaseInterfaceLevelCodeGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
     }
 }

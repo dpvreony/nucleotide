@@ -18,17 +18,6 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
     /// </summary>
     public sealed class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EntityFrameworkDbContextGenerator"/> class.
-        /// </summary>
-        public EntityFrameworkDbContextGenerator(AttributeData attributeData) : base(attributeData)
-        {
-            if (attributeData == null)
-            {
-                throw new ArgumentNullException(nameof(attributeData));
-            }
-        }
-
         protected override string GetNamespace()
         {
             return "EfModels";

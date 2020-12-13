@@ -17,13 +17,6 @@ namespace Dhgms.Nucleotide.Features.Mvc
     /// </summary>
     public sealed class MvcControllerGenerator : BaseClassLevelCodeGenerator<MvcControllerFeatureFlags, MvcControllerGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MvcControllerGenerator"/> class.
-        /// </summary>
-        public MvcControllerGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace()
         {
             return "MvcControllers";

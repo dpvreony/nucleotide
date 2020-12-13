@@ -9,13 +9,6 @@ namespace Dhgms.Nucleotide.Features.WebApi
     /// </summary>
     public sealed class WebApiServiceGenerator : BaseClassLevelCodeGenerator<WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebApiServiceGenerator"/> class.
-        /// </summary>
-        public WebApiServiceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace()
         {
             return "ApiControllers";

@@ -14,13 +14,6 @@ namespace Dhgms.Nucleotide.Features.Model
     /// </summary>
     public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator<KeyedModelClassFeatureFlags, KeyedModelClassGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KeyedModelClassGenerator"/> class.
-        /// </summary>
-        public KeyedModelClassGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace() => "Models";
     }
 }

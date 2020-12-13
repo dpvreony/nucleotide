@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Dhgms.Nucleotide.Model;
 
 namespace Dhgms.Nucleotide.Attributes
 {

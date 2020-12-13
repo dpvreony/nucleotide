@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Sdk Name="CodeGeneration.Roslyn.PluginMetapackage.Sdk" Version="0.7.63" />
   <PropertyGroup>
     <TargetFrameworks>netcoreapp5.0</TargetFrameworks>
     <Version>0.0.1</Version>

@@ -9,13 +9,6 @@ namespace Dhgms.Nucleotide.Features.Model
 {
     public sealed class KeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<KeyedModelInterfaceFeatureFlags, KeyedModelInterfaceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KeyedModelInterfaceGenerator"/> class.
-        /// </summary>
-        public KeyedModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace()
         {
             return "Models";

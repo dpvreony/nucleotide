@@ -80,7 +80,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string GetNamespace();
 
-        protected async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, CSharpCompilation compilation)
+        protected async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, Compilation compilation)
         {
             var assembly = GetAssembly(namedTypeSymbols.ContainingAssembly, compilation);
 
@@ -137,11 +137,6 @@ namespace Dhgms.Nucleotide.Generators
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
 
             var a = castDetails.First();
@@ -151,7 +146,7 @@ namespace Dhgms.Nucleotide.Generators
 
             if (namedTypeSymbols == null)
             {
-                return await ReportErrorInNamespace(progress, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
+                return await ReportErrorInNamespace(context, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
             }
 
             var compilation = context.Compilation;
@@ -160,7 +155,7 @@ namespace Dhgms.Nucleotide.Generators
 
             if (generationModel == null)
             {
-                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
+                return await ReportErrorInNamespace(context, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
             }
 
             var rootNamespace = generationModel.RootNamespace;
@@ -175,7 +170,7 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         private async Task<SyntaxList<MemberDeclarationSyntax>> ReportErrorInNamespace(
-            IProgress<Diagnostic> progress,
+            GeneratorExecutionContext progress,
             string namespaceName,
             string comment)
         {
@@ -189,7 +184,7 @@ namespace Dhgms.Nucleotide.Generators
                 0,
                 "Model load error");
 
-            progress.Report(errorDiagnostic);
+            progress.ReportDiagnostic(errorDiagnostic);
             var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName))
                 .WithLeadingTrivia(SyntaxFactory.Comment(comment));
 

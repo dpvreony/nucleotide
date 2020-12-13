@@ -8,12 +8,6 @@ namespace Dhgms.Nucleotide.Features.SignalR
     /// </summary>
     public sealed class SignalRHubInterfaceGenerator : BaseInterfaceLevelCodeGenerator<SignalRHubInterfaceFeatureFlags, SignalRHubInterfaceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SignalRHubInterfaceGenerator"/> class.
-        /// </summary>
-        public SignalRHubInterfaceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
         protected override string GetNamespace()
         {
             return "Hubs";
