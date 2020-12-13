@@ -20,6 +20,7 @@ namespace Dhgms.Nucleotide.Generators
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor, new()
     {
+#if OLDCGR
         protected BaseGenerator(AttributeData attributeData)
         {
             if (attributeData == null)
@@ -39,63 +40,42 @@ namespace Dhgms.Nucleotide.Generators
 
             this.NucleotideGenerationModel = attributeData.ConstructorArguments;
         }
+#endif
 
         protected object NucleotideGenerationModel { get; }
 
         protected TFeatureFlags FeatureFlags { get; }
 
-        /// <summary>
-        /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
-        /// </summary>
-        /// <param name="context">The transformation context being generated for.</param>
-        /// <param name="progress">A way to report diagnostic messages.</param>
-        /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>The generated member syntax to be added to the project.</returns>
-        public async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
-            TransformationContext context,
-            IProgress<Diagnostic> progress,
-            CancellationToken cancellationToken)
+        public void Initialize(GeneratorInitializationContext context)
         {
-            if (context == null)
+        }
+
+        public void Execute(GeneratorExecutionContext context)
+        {
+            var compilationUnit = SyntaxFactory.CompilationUnit();
+            var parseOptions = context.ParseOptions;
+
+            // TODO: this is running async code inside non-async
+            var result = GenerateAsync(context, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
+
+            foreach (var memberDeclarationSyntax in result)
             {
-                throw new ArgumentNullException(nameof(context));
+                // TODO: need to review this might be better way than generate, loop, copy.
+                compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
             }
 
-            if (progress == null)
-            {
-                throw new ArgumentNullException(nameof(progress));
-            }
+            var sourceText = SyntaxFactory.SyntaxTree(
+                    compilationUnit,
+                    parseOptions,
+                    encoding: Encoding.UTF8)
+                .GetText();
 
-            var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
-
-            var a = castDetails.First();
-            var namedTypeSymbols = a.Value as INamedTypeSymbol;
-
-            var namespaceName = GetNamespace();
-
-            if (namedTypeSymbols == null)
-            {
-                return await ReportErrorInNamespace(progress, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
-            }
-
-            var compilation = context.Compilation;
-
-            var generationModel = await this.GetModel(namedTypeSymbols, compilation);
-
-            if (generationModel == null)
-            {
-                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
-            }
-
-            var rootNamespace = generationModel.RootNamespace;
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));
-
-            var generatorProcessor = new TGeneratorProcessor();
-
-            var result = await generatorProcessor.GenerateObjects(namespaceDeclaration, generationModel)
-                .ConfigureAwait(false);
-
-            return await GetSyntaxList(result).ConfigureAwait(false);
+            // TODO: hint name per generator, or per class?
+            context.AddSource(
+                "nucleotide.generated.cs",
+                sourceText);
         }
 
         protected abstract string GetNamespace();
@@ -144,6 +124,54 @@ namespace Dhgms.Nucleotide.Generators
             var assembly = this.GetType().GetTypeInfo().Assembly;
             var loadContext = AssemblyLoadContext.GetLoadContext(assembly);
             return loadContext.LoadFromAssemblyPath(matchingReferences[0].FilePath);
+        }
+
+        /// <summary>
+        /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
+        /// </summary>
+        /// <param name="context">The transformation context being generated for.</param>
+        /// <param name="progress">A way to report diagnostic messages.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>The generated member syntax to be added to the project.</returns>
+        private async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
+            GeneratorExecutionContext context,
+            CancellationToken cancellationToken)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
+
+            var a = castDetails.First();
+            var namedTypeSymbols = a.Value as INamedTypeSymbol;
+
+            var namespaceName = GetNamespace();
+
+            if (namedTypeSymbols == null)
+            {
+                return await ReportErrorInNamespace(progress, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
+            }
+
+            var compilation = context.Compilation;
+
+            var generationModel = await this.GetModel(namedTypeSymbols, compilation);
+
+            if (generationModel == null)
+            {
+                return await ReportErrorInNamespace(progress, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
+            }
+
+            var rootNamespace = generationModel.RootNamespace;
+            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));
+
+            var generatorProcessor = new TGeneratorProcessor();
+
+            var result = await generatorProcessor.GenerateObjects(namespaceDeclaration, generationModel)
+                .ConfigureAwait(false);
+
+            return await GetSyntaxList(result).ConfigureAwait(false);
         }
 
         private async Task<SyntaxList<MemberDeclarationSyntax>> ReportErrorInNamespace(

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Dhgms.Nucleotide.Features.SignalR
 {
@@ -13,6 +14,7 @@ namespace Dhgms.Nucleotide.Features.SignalR
     /// </summary>
     public sealed class SignalRHubClassGenerator : ISourceGenerator
     {
+#if OLDCGR
         /// <summary>
         /// Initializes a new instance of the <see cref="SignalRHubClassGenerator"/> class.
         /// </summary>
@@ -46,6 +48,7 @@ namespace Dhgms.Nucleotide.Features.SignalR
 
             return await Task.FromResult(results);
         }
+#endif
 
         private MemberDeclarationSyntax[] GetClasses()
         {
@@ -54,18 +57,21 @@ namespace Dhgms.Nucleotide.Features.SignalR
 
         public void Initialize(GeneratorInitializationContext context)
         {
-            throw new NotImplementedException();
+            // context.RegisterForSyntaxNotifications();
         }
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var compilationUnit = 
-            var sourceText = SyntaxTree(
+            var compilationUnit = SyntaxFactory.CompilationUnit();
+            var parseOptions = context.ParseOptions;
+
+            var sourceText = SyntaxFactory.SyntaxTree(
                 compilationUnit,
                 parseOptions,
-                encoding: Encoding.UTF8).GetText();
-            context.AddSource();
-            throw new NotImplementedException();
+                encoding: Encoding.UTF8)
+                .GetText();
+
+            context.AddSource("nucleotide.signlarhubclass.generated.cs", sourceText);
         }
     }
 }
