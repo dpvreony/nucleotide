@@ -116,7 +116,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 var otherAssemblies = new[]
                 {
                     typeof(CSharpCompilation).Assembly,
-                    typeof(CodeGenerationAttributeAttribute).Assembly,
                     typeof(QueryFactoryInterfaceGenerator).Assembly
                 };
 
