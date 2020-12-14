@@ -72,6 +72,17 @@ namespace Dhgms.Nucleotide.Generators
                     encoding: Encoding.UTF8)
                 .GetText();
 
+            var d = Diagnostic.Create(
+                "NUC0001",
+                "Nucleotide Generation",
+                "Problem working out the model to be used for generation",
+                DiagnosticSeverity.Error,
+                DiagnosticSeverity.Error,
+                true,
+                0,
+                "Model load error");
+            context.ReportDiagnostic(d);
+
             // TODO: hint name per generator, or per class?
             context.AddSource(
                 "nucleotide.generated.cs",
