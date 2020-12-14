@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
-    <PackAsCodeGenerationRoslynPlugin>$(TargetFramework.Equals('netcoreapp2.1'))</PackAsCodeGenerationRoslynPlugin>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -12,10 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Attributes\Dhgms.Nucleotide.Attributes.csproj" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.Attributes\Dhgms.Nucleotide.Attributes.csproj" PrivateAssets="all" Private="false" />
     <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" />
-    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netcoreapp2.1" OutputItemType="CodeGenerationRoslynPlugin" />
-    <!--<PackageReference Include="CodeGeneration.Roslyn.Attributes" Version="0.7.63" />
-    <PackageReference Include="CodeGeneration.Roslyn.Tool" Version="0.7.63" PrivateAssets="all" />-->
+    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>
