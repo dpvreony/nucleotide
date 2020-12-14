@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators
         }
 #endif
 
-        protected object NucleotideGenerationModel { get; }
+        protected INucleotideGenerationModel NucleotideGenerationModel { get; }
 
         protected TFeatureFlags FeatureFlags { get; }
 
@@ -137,12 +137,18 @@ namespace Dhgms.Nucleotide.Generators
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
+            var namespaceName = GetNamespace();
+            return await ReportErrorInNamespace(
+                context,
+                namespaceName,
+                "#error Failed to detect a generation model from attribute indicating the model type.");
+
+            #if OLDCGR
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
 
             var a = castDetails.First();
             var namedTypeSymbols = a.Value as INamedTypeSymbol;
 
-            var namespaceName = GetNamespace();
 
             if (namedTypeSymbols == null)
             {
@@ -157,6 +163,9 @@ namespace Dhgms.Nucleotide.Generators
             {
                 return await ReportErrorInNamespace(context, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
             }
+            #endif
+
+            var generationModel = this.NucleotideGenerationModel;
 
             var rootNamespace = generationModel.RootNamespace;
             var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName($"{rootNamespace}.{namespaceName}"));

@@ -53,24 +53,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
             [Fact]
-            public void ThrowsArgumentNullException()
-            {
-                var factory = GetFactory();
-                var exception = Assert.Throws<ArgumentNullException>(() => factory(null));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
-            public void ThrowsArgumentException()
-            {
-                var factory = GetFactory();
-                var attributeData = new MockAttributeData();
-
-                var exception = Assert.Throws<ArgumentException>(() => factory(attributeData));
-                Assert.Equal("attributeData", exception.ParamName);
-            }
-
-            [Fact]
             public void ReturnsInstance()
             {
                 var factory = GetFactory();
@@ -94,6 +76,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             internal const string CSharpDefaultFileExt = "cs";
             internal const string TestProjectName = "TestProject";
 
+#if OLDCGR
             static BaseGenerateAsyncMethod()
             {
                 // logic is based upon
@@ -125,16 +108,12 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
 
             internal static readonly ImmutableArray<MetadataReference> MetadataReferences;
+#endif
 
+#if OLDCGR
             public static IEnumerable<object[]> GeneratesCodeMemberData => new List<object[]>
             {
                 _simpleCodeGenerationCase
-            };
-
-            public static IEnumerable<object[]> ThrowsArgumentNullExceptionMemberData => new List<object[]>
-            {
-                _throwsArgumentNullForContext,
-                _throwsArgumentNullForProgress
             };
 
             private static object[] _simpleCodeGenerationCase => new object[]
@@ -143,57 +122,59 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 new Progress<Diagnostic>(_ => { })
             };
 
-            private static object[] _throwsArgumentNullForContext => new object[]
-            {
-                null,
-                new Progress<Diagnostic>(_ => { }),
-                "context"
-            };
-
             private static object[] _throwsArgumentNullForProgress => new object[]
             {
                 GetTransformationContext(),
                 null,
                 "progress"
             };
+#endif
 
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
-            [Theory]
-            [MemberData(nameof(ThrowsArgumentNullExceptionMemberData))]
-            public async Task ThrowsArgumentNullExceptionAsync(
-                TransformationContext context,
-                IProgress<Diagnostic> progress,
-                string paramNameThatThrowsException)
+            private static Compilation CreateCompilation(string source) => CSharpCompilation.Create(
+                assemblyName: "compilation",
+                syntaxTrees: new[] { CSharpSyntaxTree.ParseText(source, new CSharpParseOptions(LanguageVersion.Preview)) },
+                references: new[] { MetadataReference.CreateFromFile(typeof(Binder).GetTypeInfo().Assembly.Location) },
+                options: new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+            );
+
+            private static GeneratorDriver CreateDriver(Compilation compilation, params ISourceGenerator[] generators) => CSharpGeneratorDriver.Create(
+                generators: ImmutableArray.Create(generators),
+                additionalTexts: ImmutableArray<AdditionalText>.Empty,
+                parseOptions: (CSharpParseOptions)compilation.SyntaxTrees.First().Options,
+                optionsProvider: null
+            );
+
+            private static Compilation RunGenerators(Compilation compilation, out ImmutableArray<Diagnostic> diagnostics, params ISourceGenerator[] generators)
             {
-                var factory = GetFactory();
-                var attributeData = new MockAttributeData(new TypedConstant());
-                var instance = factory(attributeData);
-                var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => instance.GenerateAsync(context, progress, CancellationToken.None));
-                Assert.NotNull(ex);
-                Assert.Equal(paramNameThatThrowsException, ex.ParamName);
+                CreateDriver(compilation, generators).RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation, out diagnostics);
+                return updatedCompilation;
             }
 
-            [Theory]
-            [MemberData(nameof(GeneratesCodeMemberData))]
-            public async Task GeneratesErrorForNonNucleotideGenerationModel(
-                TransformationContext context,
-                IProgress<Diagnostic> progress)
+            [Fact]
+            public async Task GeneratesErrorForNonNucleotideGenerationModel()
             {
+                var comp = CreateCompilation(string.Empty);
+
                 var factory = GetFactory();
                 var attributeData = new MockAttributeData(new TypedConstant());
                 var instance = factory(attributeData);
-                var result = await instance.GenerateAsync(context, progress, CancellationToken.None);
+                var newComp = RunGenerators(
+                    comp,
+                    out var generatorDiags,
+                    instance);
+
+#if OLDCGR
                 var resultAsString = result.ToFullString();
                 Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
                 this._logger.LogInformation(result.ToFullString());
+#endif
             }
 
-            [Theory]
-            [MemberData(nameof(GeneratesCodeMemberData))]
-            public async Task GeneratesCodeForSimpleNucleotideGenerationModel(
-                TransformationContext context,
-                IProgress<Diagnostic> progress)
+            [Fact]
+            //[MemberData(nameof(GeneratesCodeMemberData))]
+            public async Task GeneratesCodeForSimpleNucleotideGenerationModel()
             {
                 var factory = GetFactory();
 
@@ -204,12 +185,20 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
                 var attributeData = new MockAttributeData(t);
                 var instance = factory(attributeData);
-                var result = await instance.GenerateAsync(context, progress, CancellationToken.None);
+                var comp = CreateCompilation(string.Empty);
+                var newComp = RunGenerators(
+                    comp,
+                    out var generatorDiags,
+                    instance);
+
+#if OLDCGR
                 var resultAsString = result.ToFullString();
                 Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
                 this._logger.LogInformation(result.ToFullString());
+#endif
             }
 
+            #if OLDCGR
             private static Project CreateProject(params string[] sources)
             {
                 var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
@@ -265,16 +254,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     .Select(x => x.WithoutTrivia())
                     .ToImmutableArray();
 
-                var transformationContext = new TransformationContext(
-                    processingNode,
-                    inputSemanticModel,
-                    compilation,
-                    null,
-                    compilationUnitUsings,
-                    compilationUnitExterns);
+                var transformationContext = new GeneratorExecutionContext();
 
                 return transformationContext;
             }
+#endif
 
             protected BaseGenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
