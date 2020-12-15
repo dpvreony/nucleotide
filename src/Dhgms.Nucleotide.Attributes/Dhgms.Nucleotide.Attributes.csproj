@@ -2,8 +2,5 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp5.0</TargetFrameworks>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" />
-  </ItemGroup>
 
 </Project>

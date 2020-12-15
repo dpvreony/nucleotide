@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -91,6 +88,7 @@ namespace Dhgms.Nucleotide.Generators
 
         protected abstract string GetNamespace();
 
+#if OLDCGR
         protected async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, Compilation compilation)
         {
             var assembly = GetAssembly(namedTypeSymbols.ContainingAssembly, compilation);
@@ -136,6 +134,7 @@ namespace Dhgms.Nucleotide.Generators
             var loadContext = AssemblyLoadContext.GetLoadContext(assembly);
             return loadContext.LoadFromAssemblyPath(matchingReferences[0].FilePath);
         }
+#endif
 
         /// <summary>
         /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
