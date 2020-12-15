@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.Models;
-using Dhgms.Nucleotide.PropertyInfo;
+using Dhgms.Nucleotide.Common.Models;
+using Dhgms.Nucleotide.Common.PropertyInfo;
 
 namespace Dhgms.Nucleotide.ModelTests
 {

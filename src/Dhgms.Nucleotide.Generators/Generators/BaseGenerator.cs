@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Dhgms.Nucleotide.Common.Models;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -69,20 +69,11 @@ namespace Dhgms.Nucleotide.Generators
                     encoding: Encoding.UTF8)
                 .GetText();
 
-            var d = Diagnostic.Create(
-                "NUC0001",
-                "Nucleotide Generation",
-                "Problem working out the model to be used for generation",
-                DiagnosticSeverity.Error,
-                DiagnosticSeverity.Error,
-                true,
-                0,
-                "Model load error");
-            context.ReportDiagnostic(d);
-
             // TODO: hint name per generator, or per class?
+            var feature = "feature";
+            var guid = Guid.NewGuid();
             context.AddSource(
-                "nucleotide.generated.cs",
+                $"nucleotide.{feature}.{guid}.generated.cs",
                 sourceText);
         }
 
@@ -131,7 +122,7 @@ namespace Dhgms.Nucleotide.Generators
             }
 
             var assembly = this.GetType().GetTypeInfo().Assembly;
-            var loadContext = AssemblyLoadContext.GetLoadContext(assembly);
+            var loadContext = System.Runtime.Loader.AssemblyLoadContext.GetLoadContext(assembly);
             return loadContext.LoadFromAssemblyPath(matchingReferences[0].FilePath);
         }
 #endif
@@ -148,10 +139,9 @@ namespace Dhgms.Nucleotide.Generators
             CancellationToken cancellationToken)
         {
             var namespaceName = GetNamespace();
-            return await ReportErrorInNamespace(
-                context,
-                namespaceName,
-                "#error Failed to detect a generation model from attribute indicating the model type.");
+
+            #warning We need to get the attribute.
+            #warning Then we need to get the model property from the attribute.
 
             #if OLDCGR
             var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;

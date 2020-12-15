@@ -1,16 +1,23 @@
-﻿namespace Dhgms.Nucleotide.PropertyInfo
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="DHGMS Solutions" file="ClrBoolean.cs">
+//   Licensed under GNU General Public License version 2 (GPLv2)
+// </copyright>
+// 
+// --------------------------------------------------------------------------------------------------------------------
+
+using Dhgms.Nucleotide.Common.Models;
+
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    using System;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
-    /// Property Information for a Guid
+    /// Property Information for the Boolean Data Type
     /// </summary>
-    public class ClrGuidPropertyInfo : PropertyInfoBase
+    public class ClrBooleanPropertyInfo : PropertyInfoBase
     {
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrStringPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -31,11 +38,11 @@
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrGuidPropertyInfo(
-            CollectionType collection, 
-            string name, 
-            string description, 
-            bool optional, 
+        public ClrBooleanPropertyInfo(
+            CollectionType collection,
+            string name,
+            string description,
+            bool optional,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -43,17 +50,21 @@
                 name, 
                 description, 
                 optional, 
-                "System.Guid", 
-                "Guid", 
+                "bool", 
+                "Boolean", 
                 false, 
-                "Guid.Empty", 
+                "false", 
                 false,
                 isKey,
-                false,
-                typeof(Guid),
+                true,
+                typeof(bool),
                 alternativeDatabaseColumnName)
         {
         }
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
@@ -73,7 +84,7 @@
         //{
         //    get
         //    {
-        //        return "ToString().ToLower()";
+        //        return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
         //    }
         //}
 
@@ -98,14 +109,15 @@
         //}
 
         ///// <summary>
-        ///// Gets the random unit test value.
+        ///// Gets a random value for use in a unit test.
         ///// </summary>
         //public override string RandomUnitTestValue
         //{
         //    get
         //    {
-        //        return Guid.NewGuid().ToString();
+        //        return new System.Random().Next(1) == 1 ? "true" : "false";
         //    }
         //}
+        #endregion
     }
 }

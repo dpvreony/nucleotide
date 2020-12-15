@@ -8,16 +8,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.PropertyInfo
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Dhgms.Nucleotide.Common.Models;
+
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Text;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
     /// base class for property information types. used for defining properties
     /// in information, search filter and view filter classes

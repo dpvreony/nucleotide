@@ -1,23 +1,15 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="DHGMS Solutions" file="ClrBoolean.cs">
-//   Licensed under GNU General Public License version 2 (GPLv2)
-// </copyright>
-// 
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System;
+using Dhgms.Nucleotide.Common.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
-    /// Property Information for the Boolean Data Type
+    /// Property Information for a Guid
     /// </summary>
-    public class ClrBooleanPropertyInfo : PropertyInfoBase
+    public class ClrGuidPropertyInfo : PropertyInfoBase
     {
-        #region Constructors and Destructors
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrStringPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -38,11 +30,11 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrBooleanPropertyInfo(
-            CollectionType collection,
-            string name,
-            string description,
-            bool optional,
+        public ClrGuidPropertyInfo(
+            CollectionType collection, 
+            string name, 
+            string description, 
+            bool optional, 
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -50,21 +42,17 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 name, 
                 description, 
                 optional, 
-                "bool", 
-                "Boolean", 
+                "System.Guid", 
+                "Guid", 
                 false, 
-                "false", 
+                "Guid.Empty", 
                 false,
                 isKey,
-                true,
-                typeof(bool),
+                false,
+                typeof(Guid),
                 alternativeDatabaseColumnName)
         {
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
@@ -84,7 +72,7 @@ namespace Dhgms.Nucleotide.PropertyInfo
         //{
         //    get
         //    {
-        //        return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
+        //        return "ToString().ToLower()";
         //    }
         //}
 
@@ -109,15 +97,14 @@ namespace Dhgms.Nucleotide.PropertyInfo
         //}
 
         ///// <summary>
-        ///// Gets a random value for use in a unit test.
+        ///// Gets the random unit test value.
         ///// </summary>
         //public override string RandomUnitTestValue
         //{
         //    get
         //    {
-        //        return new System.Random().Next(1) == 1 ? "true" : "false";
+        //        return Guid.NewGuid().ToString();
         //    }
         //}
-        #endregion
     }
 }

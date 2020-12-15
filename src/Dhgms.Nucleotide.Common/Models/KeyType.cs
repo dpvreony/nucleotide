@@ -1,4 +1,4 @@
-﻿namespace Dhgms.Nucleotide.Model
+﻿namespace Dhgms.Nucleotide.Common.Models
 {
     public enum KeyType
     {

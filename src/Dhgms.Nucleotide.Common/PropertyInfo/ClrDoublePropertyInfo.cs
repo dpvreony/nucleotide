@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Common.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    public class UnsignedInteger8PropertyInfo
-        : NumericPropertyInfo<byte>
+    public class ClrDoublePropertyInfo
+        : NumericPropertyInfo<double>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Dhgms.Nucleotide.PropertyInfo.ClrDecimalPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrDoublePropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
@@ -24,13 +21,13 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger8PropertyInfo(
+        public ClrDoublePropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            byte minimumValue,
-            byte maximumValue,
+            double minimumValue,
+            double maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -38,14 +35,14 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 name,
                 description,
                 optional,
-                "byte",
-                "UInt8",
+                "double",
+                "Double",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(byte),
+                typeof(double),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Common.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
     public class ClrCharPropertyInfo
         : NumericPropertyInfo<char>

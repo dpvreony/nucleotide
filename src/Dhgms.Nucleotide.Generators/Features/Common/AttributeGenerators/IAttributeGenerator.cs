@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Dhgms.Nucleotide.PropertyInfo;
+using Dhgms.Nucleotide.Common.PropertyInfo;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.AttributeGenerators

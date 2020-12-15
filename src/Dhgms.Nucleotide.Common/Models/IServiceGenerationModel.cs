@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
-
-namespace Dhgms.Nucleotide.Models
+﻿namespace Dhgms.Nucleotide.Common.Models
 {
     /// <summary>
     /// Generation Model for Service Boundaries

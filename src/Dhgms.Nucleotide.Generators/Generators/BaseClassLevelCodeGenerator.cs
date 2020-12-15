@@ -8,8 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Helpers;
-using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

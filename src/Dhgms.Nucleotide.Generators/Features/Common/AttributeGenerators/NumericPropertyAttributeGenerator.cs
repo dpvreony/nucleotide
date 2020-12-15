@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dhgms.Nucleotide.Common.PropertyInfo;
 using Dhgms.Nucleotide.Helpers;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

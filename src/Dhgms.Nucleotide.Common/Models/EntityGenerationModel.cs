@@ -4,12 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Dhgms.Nucleotide.Models;
+using Dhgms.Nucleotide.Common.PropertyInfo;
 
-namespace Dhgms.Nucleotide.Model
+namespace Dhgms.Nucleotide.Common.Models
 {
-    using Dhgms.Nucleotide.PropertyInfo;
-
     /// <summary>
     /// Represents the parameters for generating an data manager classes
     /// </summary>

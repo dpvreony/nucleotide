@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Dhgms.Nucleotide.Generators;
-using Dhgms.Nucleotide.Model;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

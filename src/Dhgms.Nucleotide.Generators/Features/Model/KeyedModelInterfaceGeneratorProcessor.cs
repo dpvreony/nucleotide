@@ -1,7 +1,7 @@
 ﻿using System;
+using Dhgms.Nucleotide.Common.Models;
+using Dhgms.Nucleotide.Common.PropertyInfo;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Features.Model

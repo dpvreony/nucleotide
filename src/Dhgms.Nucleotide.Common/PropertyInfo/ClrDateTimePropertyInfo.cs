@@ -4,13 +4,10 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.PropertyInfo
+using Dhgms.Nucleotide.Common.Models;
+
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    using System.Globalization;
-    using System.Text;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
     /// Property Information for ClrDateTime
     /// </summary>

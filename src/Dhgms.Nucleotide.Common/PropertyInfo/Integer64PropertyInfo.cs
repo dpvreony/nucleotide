@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Common.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    public class ClrDecimalPropertyInfo
-        : NumericPropertyInfo<decimal>
+    public class Integer64PropertyInfo
+        : NumericPropertyInfo<long>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrDecimalPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="Integer64PropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
@@ -24,13 +21,13 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDecimalPropertyInfo(
+        public Integer64PropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            decimal minimumValue,
-            decimal maximumValue,
+            int minimumValue,
+            int maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -38,14 +35,14 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 name,
                 description,
                 optional,
-                "decimal",
-                "Decimal",
+                "long",
+                "Int64",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(decimal),
+                typeof(long),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

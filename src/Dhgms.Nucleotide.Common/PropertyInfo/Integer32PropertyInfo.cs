@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Common.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Common.PropertyInfo
 {
-    public class Integer16PropertyInfo
-        : NumericPropertyInfo<short>
+    public class Integer32PropertyInfo
+        : NumericPropertyInfo<int>
     {
 
         /// <summary>
@@ -24,13 +21,13 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public Integer16PropertyInfo(
+        public Integer32PropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            short minimumValue,
-            short maximumValue,
+            int minimumValue,
+            int maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -38,8 +35,8 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 name,
                 description,
                 optional,
-                "short",
-                "Int16",
+                "int",
+                "Int32",
                 false,
                 "0",
                 false,
