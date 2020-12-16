@@ -1,4 +1,5 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Attributes;
+using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.Features.WebApi;
 using Microsoft.CodeAnalysis;
 
@@ -8,7 +9,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
     /// Generates the Web API service
     /// </summary>
     [Generator]
-    public sealed class WebApiServiceGenerator : BaseClassLevelCodeGenerator<WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
+    public sealed class WebApiServiceGenerator : BaseClassLevelCodeGenerator<WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor, GenerateWebApiServiceClassAttribute>
     {
         protected override string GetNamespace()
         {

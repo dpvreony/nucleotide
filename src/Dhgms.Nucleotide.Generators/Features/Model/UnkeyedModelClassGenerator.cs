@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -12,7 +13,7 @@ namespace Dhgms.Nucleotide.Features.Model
     /// Generates models
     /// </summary>
     [Generator]
-    public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator<UnkeyedModelClassFeatureFlags, UnkeyedModelClassGeneratorProcessor>
+    public class UnkeyedModelClassGenerator : BaseClassLevelCodeGenerator<UnkeyedModelClassFeatureFlags, UnkeyedModelClassGeneratorProcessor, GenerateUnkeyedModelClassAttribute>
     {
         protected override string GetNamespace() => "Models";
     }

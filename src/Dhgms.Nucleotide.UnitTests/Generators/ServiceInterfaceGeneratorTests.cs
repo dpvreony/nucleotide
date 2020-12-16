@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Microsoft.CodeAnalysis;
@@ -14,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class ServiceInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ServiceInterfaceGenerator, ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ServiceInterfaceGenerator, ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor, GenerateServiceInterfaceAttribute>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -26,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ServiceInterfaceGenerator, ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ServiceInterfaceGenerator, ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor, GenerateServiceInterfaceAttribute>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

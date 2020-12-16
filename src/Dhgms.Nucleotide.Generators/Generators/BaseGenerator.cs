@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Common.Models;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Microsoft.CodeAnalysis;
@@ -14,9 +15,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute> : ISourceGenerator
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor, new()
+        where TAttribute : BaseCodeGeneratorAttribute
     {
 #if OLDCGR
         protected BaseGenerator(AttributeData attributeData)
@@ -48,10 +50,23 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
+        public static Diagnostic InfoDiagnostic(string message)
+        {
+            return Diagnostic.Create(
+                "NUC-I0001",
+                "Nucleotide Generation",
+                message,
+                DiagnosticSeverity.Info,
+                DiagnosticSeverity.Info,
+                true,
+                1,
+                "Model Generation");
+        }
+
         public static Diagnostic ErrorDiagnostic(string message)
         {
             return Diagnostic.Create(
-                "NUC0001",
+                "NUC-E0001",
                 "Nucleotide Generation",
                 message,
                 DiagnosticSeverity.Error,
@@ -64,16 +79,18 @@ namespace Dhgms.Nucleotide.Generators
         public void Execute(GeneratorExecutionContext context)
         {
             var compilation = context.Compilation;
+            context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
+
             var syntaxTrees = compilation.SyntaxTrees.ToArray();
-            if (syntaxTrees.Length == 0)
+            if (syntaxTrees.Length < 1)
             {
-                context.ReportDiagnostic(ErrorDiagnostic("No Syntax Trees to process."));
+                context.ReportDiagnostic(InfoDiagnostic("No Syntax Trees to process."));
                 return;
             }
 
             foreach (var syntaxTree in syntaxTrees)
             {
-                context.ReportDiagnostic(ErrorDiagnostic(syntaxTree.FilePath));
+                context.ReportDiagnostic(InfoDiagnostic(syntaxTree.FilePath));
                 // now we have the file we need to look in the file for an attribute
                 // this is how cgr used to work.
 
@@ -86,8 +103,10 @@ namespace Dhgms.Nucleotide.Generators
 
                 if (memberNodes.Length < 1)
                 {
-                    context.ReportDiagnostic(ErrorDiagnostic("No member nodes"));
+                    context.ReportDiagnostic(InfoDiagnostic("No member nodes"));
                 }
+
+                var expectedAttribute = typeof(TAttribute);
 
                 foreach (var memberNode in memberNodes)
                 {
@@ -98,13 +117,19 @@ namespace Dhgms.Nucleotide.Generators
 
                     if (attributeDataArray.Length < 1)
                     {
-                        context.ReportDiagnostic(ErrorDiagnostic("No attribute data"));
+                        context.ReportDiagnostic(InfoDiagnostic("No attribute data"));
                         continue;
                     }
 
                     foreach (var attributeData in attributeDataArray)
                     {
-                        context.ReportDiagnostic(ErrorDiagnostic(attributeData.ToString()));
+                        var currentAttributeName = attributeData?.AttributeClass?.Name;
+                        if (currentAttributeName == null)
+                        {
+                            continue;
+                        }
+
+                        context.ReportDiagnostic(ErrorDiagnostic(currentAttributeName));
                     }
                 }
             }

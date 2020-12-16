@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Features.Cqrs;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
@@ -45,10 +46,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TAttribute> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor, new()
+            where TAttribute : BaseCodeGeneratorAttribute
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
@@ -67,10 +69,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TAttribute> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor, new()
+            where TAttribute : BaseCodeGeneratorAttribute
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";

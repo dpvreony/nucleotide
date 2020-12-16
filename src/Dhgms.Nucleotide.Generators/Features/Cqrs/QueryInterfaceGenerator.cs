@@ -1,4 +1,5 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Attributes;
+using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.Features.Cqrs
@@ -7,7 +8,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// Generator for Query Interface
     /// </summary>
     [Generator]
-    public sealed class QueryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryInterfaceFeatureFlag, QueryInterfaceGeneratorProcessor>
+    public sealed class QueryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryInterfaceFeatureFlag, QueryInterfaceGeneratorProcessor, GenerateQueryInterfaceAttribute>
     {
         protected override string GetNamespace() => "Queries";
     }

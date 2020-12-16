@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide.Attributes\Dhgms.Nucleotide.Attributes.csproj" />
     <ProjectReference Include="..\Dhgms.Nucleotide.Common\Dhgms.Nucleotide.Common.csproj" />
   </ItemGroup>
 </Project>

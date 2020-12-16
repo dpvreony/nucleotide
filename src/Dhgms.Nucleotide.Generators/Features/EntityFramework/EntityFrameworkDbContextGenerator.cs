@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Helpers;
 using Microsoft.CodeAnalysis;
@@ -15,7 +16,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
     /// Code Generator for Entity Framework DB Context
     /// </summary>
     [Generator]
-    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor>
+    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor, GenerateEntityFrameworkDbContextAttribute>
     {
         protected override string GetNamespace()
         {

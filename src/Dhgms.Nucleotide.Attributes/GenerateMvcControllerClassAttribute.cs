@@ -9,20 +9,14 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateMvcControllerClassAttribute : Attribute
+    public sealed class GenerateMvcControllerClassAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateMvcControllerClassAttribute(Type nucleotideGenerationModel)
+        public GenerateMvcControllerClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
-            this.NucleotideGenerationModel = Activator.CreateInstance(nucleotideGenerationModel) as INucleotideGenerationModel;
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public INucleotideGenerationModel NucleotideGenerationModel { get; }
     }
 }

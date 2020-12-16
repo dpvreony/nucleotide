@@ -9,20 +9,14 @@ namespace Dhgms.Nucleotide.Attributes
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly)]
     [Conditional("CodeGeneration")]
-    public sealed class GenerateWebApiServiceClassAttribute : Attribute
+    public sealed class GenerateWebApiServiceClassAttribute : BaseCodeGeneratorAttribute
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="nucleotideGenerationModel"></param>
-        public GenerateWebApiServiceClassAttribute(Type nucleotideGenerationModel)
+        public GenerateWebApiServiceClassAttribute(Type nucleotideGenerationModel) : base(nucleotideGenerationModel)
         {
-            this.NucleotideGenerationModel = Activator.CreateInstance(nucleotideGenerationModel) as INucleotideGenerationModel;
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public INucleotideGenerationModel NucleotideGenerationModel { get; }
     }
 }
