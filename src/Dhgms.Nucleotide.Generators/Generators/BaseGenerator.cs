@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -47,9 +48,71 @@ namespace Dhgms.Nucleotide.Generators
         {
         }
 
+        public static Diagnostic ErrorDiagnostic(string message)
+        {
+            return Diagnostic.Create(
+                "NUC0001",
+                "Nucleotide Generation",
+                message,
+                DiagnosticSeverity.Error,
+                DiagnosticSeverity.Error,
+                true,
+                0,
+                "Model load error");
+        }
+
         public void Execute(GeneratorExecutionContext context)
         {
+            var compilation = context.Compilation;
+            var syntaxTrees = compilation.SyntaxTrees.ToArray();
+            if (syntaxTrees.Length == 0)
+            {
+                context.ReportDiagnostic(ErrorDiagnostic("No Syntax Trees to process."));
+                return;
+            }
+
+            foreach (var syntaxTree in syntaxTrees)
+            {
+                context.ReportDiagnostic(ErrorDiagnostic(syntaxTree.FilePath));
+                // now we have the file we need to look in the file for an attribute
+                // this is how cgr used to work.
+
+                var inputSemanticModel = compilation.GetSemanticModel(syntaxTree);
+
+                var root = syntaxTree.GetRoot();
+                var memberNodes = root
+                    .DescendantNodesAndSelf(n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax || n is TypeDeclarationSyntax)
+                    .OfType<CSharpSyntaxNode>().ToArray();
+
+                if (memberNodes.Length < 1)
+                {
+                    context.ReportDiagnostic(ErrorDiagnostic("No member nodes"));
+                }
+
+                foreach (var memberNode in memberNodes)
+                {
+                    var attributeDataArray = GetAttributeData(
+                        compilation,
+                        inputSemanticModel,
+                        memberNode);
+
+                    if (attributeDataArray.Length < 1)
+                    {
+                        context.ReportDiagnostic(ErrorDiagnostic("No attribute data"));
+                        continue;
+                    }
+
+                    foreach (var attributeData in attributeDataArray)
+                    {
+                        context.ReportDiagnostic(ErrorDiagnostic(attributeData.ToString()));
+                    }
+                }
+            }
+
+            return;
+
             var compilationUnit = SyntaxFactory.CompilationUnit();
+            // compilationUnit.AttributeLists;
             var parseOptions = context.ParseOptions;
 
             // TODO: this is running async code inside non-async
@@ -76,6 +139,18 @@ namespace Dhgms.Nucleotide.Generators
                 $"nucleotide.{feature}.{guid}.generated.cs",
                 sourceText);
         }
+
+        private static ImmutableArray<AttributeData> GetAttributeData(Compilation compilation, SemanticModel document, SyntaxNode syntaxNode)
+        {
+            switch (syntaxNode)
+            {
+                case CompilationUnitSyntax syntax:
+                    return compilation.Assembly.GetAttributes().Where(x => x.ApplicationSyntaxReference.SyntaxTree == syntax.SyntaxTree).ToImmutableArray();
+                default:
+                    return document.GetDeclaredSymbol(syntaxNode)?.GetAttributes() ?? ImmutableArray<AttributeData>.Empty;
+            }
+        }
+
 
         protected abstract string GetNamespace();
 
@@ -138,9 +213,12 @@ namespace Dhgms.Nucleotide.Generators
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
+            //var compilation = context.Compilation;
+            //var attributeSymbol = compilation.GetTypeByMetadataName(WhamNodeCoreAttributeMetadataName);
+
             var namespaceName = GetNamespace();
 
-            #warning We need to get the attribute.
+            #warning We need to get the attribute. in theory 0..*, typically should be 1.
             #warning Then we need to get the model property from the attribute.
 
             #if OLDCGR
