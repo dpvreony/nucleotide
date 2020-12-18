@@ -11,10 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj">
-      <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
-    </ProjectReference>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>

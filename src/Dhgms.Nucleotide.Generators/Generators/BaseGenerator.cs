@@ -85,6 +85,7 @@ namespace Dhgms.Nucleotide.Generators
                 context.ReportDiagnostic(InfoDiagnostic("No Syntax Trees to process."));
                 return;
             }
+            context.ReportDiagnostic(ErrorDiagnostic("Source generator firing."));
 
             foreach (var syntaxTree in syntaxTrees)
             {

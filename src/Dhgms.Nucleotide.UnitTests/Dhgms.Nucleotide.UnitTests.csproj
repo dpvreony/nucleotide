@@ -26,9 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.GenerationTests\Dhgms.Nucleotide.GenerationTests.csproj" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" />
     <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" />
-    <ProjectReference Include="..\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj" />
   </ItemGroup>
 
   <ItemGroup>
