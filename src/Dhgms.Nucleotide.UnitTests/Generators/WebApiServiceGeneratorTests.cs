@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Features.WebApi;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.Features.WebApi;
@@ -16,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class WebApiServiceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor, GenerateWebApiServiceClassAttribute>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -28,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor, GenerateWebApiServiceClassAttribute>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiServiceGenerator, WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

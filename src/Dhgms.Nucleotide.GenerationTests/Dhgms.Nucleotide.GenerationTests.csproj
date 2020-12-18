@@ -11,8 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Attributes\Dhgms.Nucleotide.Attributes.csproj" PrivateAssets="all" Private="false" />
-    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" />
-    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj">
+      <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
+    </ProjectReference>
+    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" OutputItemType="Analyzer" />
   </ItemGroup>
+
 </Project>

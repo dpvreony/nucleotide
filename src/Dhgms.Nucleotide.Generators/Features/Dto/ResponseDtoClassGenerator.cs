@@ -1,11 +1,8 @@
-﻿using Dhgms.Nucleotide.Attributes;
-using Dhgms.Nucleotide.Features.Model;
-using Dhgms.Nucleotide.Generators;
-using Microsoft.CodeAnalysis;
+﻿using Dhgms.Nucleotide.Generators;
 
 namespace Dhgms.Nucleotide.Features.Dto
 {
-    public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator<ResponseDtoClassFeatureFlags, ResponseDtoClassGeneratorProcessor, GenerateResponseDtoAttribute>
+    public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator<ResponseDtoClassFeatureFlags, ResponseDtoClassGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

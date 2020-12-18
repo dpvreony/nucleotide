@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Dhgms.Nucleotide.Attributes;
 using Dhgms.Nucleotide.Common.Models;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Microsoft.CodeAnalysis;
@@ -15,10 +14,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute> : ISourceGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor, new()
-        where TAttribute : BaseCodeGeneratorAttribute
     {
 #if OLDCGR
         protected BaseGenerator(AttributeData attributeData)
@@ -105,33 +103,6 @@ namespace Dhgms.Nucleotide.Generators
                 {
                     context.ReportDiagnostic(InfoDiagnostic("No member nodes"));
                 }
-
-                var expectedAttribute = typeof(TAttribute);
-
-                foreach (var memberNode in memberNodes)
-                {
-                    var attributeDataArray = GetAttributeData(
-                        compilation,
-                        inputSemanticModel,
-                        memberNode);
-
-                    if (attributeDataArray.Length < 1)
-                    {
-                        context.ReportDiagnostic(InfoDiagnostic("No attribute data"));
-                        continue;
-                    }
-
-                    foreach (var attributeData in attributeDataArray)
-                    {
-                        var currentAttributeName = attributeData?.AttributeClass?.Name;
-                        if (currentAttributeName == null)
-                        {
-                            continue;
-                        }
-
-                        context.ReportDiagnostic(ErrorDiagnostic(currentAttributeName));
-                    }
-                }
             }
 
             return;
@@ -163,6 +134,24 @@ namespace Dhgms.Nucleotide.Generators
             context.AddSource(
                 $"nucleotide.{feature}.{guid}.generated.cs",
                 sourceText);
+        }
+
+        private static string GetFullTypeName(INamedTypeSymbol symbol)
+        {
+            var nameBuilder = new StringBuilder();
+            ISymbol symbolOrParent = symbol;
+            while (symbolOrParent != null && !string.IsNullOrEmpty(symbolOrParent.Name))
+            {
+                if (nameBuilder.Length > 0)
+                {
+                    nameBuilder.Insert(0, ".");
+                }
+
+                nameBuilder.Insert(0, symbolOrParent.Name);
+                symbolOrParent = symbolOrParent.ContainingSymbol;
+            }
+
+            return nameBuilder.ToString();
         }
 
         private static ImmutableArray<AttributeData> GetAttributeData(Compilation compilation, SemanticModel document, SyntaxNode syntaxNode)

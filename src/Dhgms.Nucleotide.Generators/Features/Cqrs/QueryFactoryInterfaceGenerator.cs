@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Dhgms.Nucleotide.Attributes;
-using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators;
 using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.Features.Cqrs
@@ -10,7 +7,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// Generator for Query Factory Interface
     /// </summary>
     [Generator]
-    public sealed class QueryFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryFactoryInterfaceFeatureFlags, QueryFactoryInterfaceGeneratorProcessor, GenerateQueryFactoryInterfaceAttribute>
+    public sealed class QueryFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<QueryFactoryInterfaceFeatureFlags, QueryFactoryInterfaceGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

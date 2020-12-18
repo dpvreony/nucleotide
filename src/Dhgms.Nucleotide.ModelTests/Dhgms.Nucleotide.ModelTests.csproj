@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

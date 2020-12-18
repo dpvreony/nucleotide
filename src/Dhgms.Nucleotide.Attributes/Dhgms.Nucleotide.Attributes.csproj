@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.Common\Dhgms.Nucleotide.Common.csproj" />
-  </ItemGroup>
-
-</Project>

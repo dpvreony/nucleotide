@@ -15,9 +15,6 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../Dhgms.Nucleotide.Attributes/Dhgms.Nucleotide.Attributes.csproj" />
-    <NupkgAdditionalDependency
-      Include="Dhgms.Nucleotide.Generators"
-      IncludeAssets="all" />
+    <NupkgAdditionalDependency Include="Dhgms.Nucleotide.Generators" IncludeAssets="all" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,5 @@
 ﻿using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

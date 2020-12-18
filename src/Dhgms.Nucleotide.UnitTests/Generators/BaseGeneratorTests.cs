@@ -2,23 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Dhgms.Nucleotide.Attributes;
-using Dhgms.Nucleotide.Features.Cqrs;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -46,11 +36,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TAttribute> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute>
+        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor, new()
-            where TAttribute : BaseCodeGeneratorAttribute
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
@@ -69,11 +58,10 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TAttribute> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TAttribute>
+        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor, new()
-            where TAttribute : BaseCodeGeneratorAttribute
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";
