@@ -8,7 +8,7 @@ namespace Dhgms.Nucleotide.Features.WebApi
     /// Generates the Web API service
     /// </summary>
     [Generator]
-    public sealed class WebApiServiceGenerator : BaseClassLevelCodeGenerator<WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
+    public abstract class WebApiServiceGenerator : BaseClassLevelCodeGenerator<WebApiServiceFeatureFlags, WebApiServiceGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

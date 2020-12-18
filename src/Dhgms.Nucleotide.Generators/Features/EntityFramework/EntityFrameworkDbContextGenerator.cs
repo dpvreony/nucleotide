@@ -7,7 +7,7 @@ namespace Dhgms.Nucleotide.Features.EntityFramework
     /// Code Generator for Entity Framework DB Context
     /// </summary>
     [Generator]
-    public sealed class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor>
+    public abstract class EntityFrameworkDbContextGenerator : BaseGenerator<EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

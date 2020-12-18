@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Features.Model;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -22,7 +23,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, KeyedModelClassGenerator> GetFactory()
             {
-                return data => new KeyedModelClassGenerator();
+                return data => new TestKeyedModelClassGenerator();
             }
         }
 
@@ -34,7 +35,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, KeyedModelClassGenerator> GetFactory()
             {
-                return data => new KeyedModelClassGenerator();
+                return data => new TestKeyedModelClassGenerator();
             }
         }
     }

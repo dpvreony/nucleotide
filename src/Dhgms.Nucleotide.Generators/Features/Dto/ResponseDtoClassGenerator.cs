@@ -2,7 +2,7 @@
 
 namespace Dhgms.Nucleotide.Features.Dto
 {
-    public sealed class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator<ResponseDtoClassFeatureFlags, ResponseDtoClassGeneratorProcessor>
+    public abstract class ResponseDtoClassGenerator : BaseClassLevelCodeGenerator<ResponseDtoClassFeatureFlags, ResponseDtoClassGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

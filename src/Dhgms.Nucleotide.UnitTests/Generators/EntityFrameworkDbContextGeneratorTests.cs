@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Dhgms.Nucleotide.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -21,7 +22,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, EntityFrameworkDbContextGenerator> GetFactory()
             {
-                return data => new EntityFrameworkDbContextGenerator();
+                return data => new TestEntityFrameworkDbContextGenerator();
             }
         }
 
@@ -33,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, EntityFrameworkDbContextGenerator> GetFactory()
             {
-                return data => new EntityFrameworkDbContextGenerator();
+                return data => new TestEntityFrameworkDbContextGenerator();
             }
         }
     }

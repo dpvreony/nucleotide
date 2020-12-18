@@ -7,7 +7,7 @@ namespace Dhgms.Nucleotide.Features.Cqrs
     /// Generator for Command Factory Interface
     /// </summary>
     [Generator]
-    public sealed class CommandFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandFactoryInterfaceFeatureFlags, CommandFactoryInterfaceGeneratorProcessor>
+    public abstract class CommandFactoryInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandFactoryInterfaceFeatureFlags, CommandFactoryInterfaceGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

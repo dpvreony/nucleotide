@@ -6,7 +6,7 @@ namespace Dhgms.Nucleotide.Generators
     /// <summary>
     /// Generator for Service Interface
     /// </summary>
-    public class ServiceInterfaceGenerator : BaseInterfaceLevelCodeGenerator<ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor>
+    public abstract class ServiceInterfaceGenerator : BaseInterfaceLevelCodeGenerator<ServiceInterfaceFeatureFlags, ServiceInterfaceGeneratorProcessor>
     {
         protected override string GetNamespace()
         {

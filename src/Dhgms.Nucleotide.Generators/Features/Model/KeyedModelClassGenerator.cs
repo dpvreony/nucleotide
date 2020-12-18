@@ -7,7 +7,7 @@ namespace Dhgms.Nucleotide.Features.Model
     /// Generates models
     /// </summary>
     [Generator]
-    public class KeyedModelClassGenerator : BaseClassLevelCodeGenerator<KeyedModelClassFeatureFlags, KeyedModelClassGeneratorProcessor>
+    public abstract class KeyedModelClassGenerator : BaseClassLevelCodeGenerator<KeyedModelClassFeatureFlags, KeyedModelClassGeneratorProcessor>
     {
         protected override string GetNamespace() => "Models";
     }

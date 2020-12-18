@@ -2,7 +2,7 @@
 
 namespace Dhgms.Nucleotide.Features.Dto
 {
-    public sealed class RequestDtoClassGenerator : BaseClassLevelCodeGenerator<RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
+    public abstract class RequestDtoClassGenerator : BaseClassLevelCodeGenerator<RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
     {
         protected override string GetNamespace() => "RequestDtos";
     }

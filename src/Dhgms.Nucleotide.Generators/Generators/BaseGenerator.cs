@@ -18,29 +18,7 @@ namespace Dhgms.Nucleotide.Generators
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor, new()
     {
-#if OLDCGR
-        protected BaseGenerator(AttributeData attributeData)
-        {
-            if (attributeData == null)
-            {
-                throw new ArgumentNullException(nameof(attributeData));
-            }
-
-            if (attributeData.ConstructorArguments == null)
-            {
-                throw new ArgumentException("ConstructorArguments", nameof(attributeData));
-            }
-
-            if (attributeData.ConstructorArguments.Length < 1)
-            {
-                throw new ArgumentException(nameof(attributeData));
-            }
-
-            this.NucleotideGenerationModel = attributeData.ConstructorArguments;
-        }
-#endif
-
-        protected INucleotideGenerationModel NucleotideGenerationModel { get; }
+        protected abstract INucleotideGenerationModel NucleotideGenerationModel { get; }
 
         protected TFeatureFlags FeatureFlags { get; }
 
@@ -85,7 +63,6 @@ namespace Dhgms.Nucleotide.Generators
                 context.ReportDiagnostic(InfoDiagnostic("No Syntax Trees to process."));
                 return;
             }
-            context.ReportDiagnostic(ErrorDiagnostic("Source generator firing."));
 
             foreach (var syntaxTree in syntaxTrees)
             {

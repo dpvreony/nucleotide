@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Dhgms.Nucleotide.Features.Cqrs;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -21,7 +22,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, QueryInterfaceGenerator> GetFactory()
             {
-                return data => new QueryInterfaceGenerator();
+                return data => new TestQueryInterfaceGenerator();
             }
         }
 
@@ -33,7 +34,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, QueryInterfaceGenerator> GetFactory()
             {
-                return data => new QueryInterfaceGenerator();
+                return data => new TestQueryInterfaceGenerator();
             }
         }
     }

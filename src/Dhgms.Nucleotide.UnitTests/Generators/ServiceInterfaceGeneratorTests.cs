@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -22,7 +23,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, ServiceInterfaceGenerator> GetFactory()
             {
-                return data => new ServiceInterfaceGenerator();
+                return data => new TestServiceInterfaceGenerator();
             }
         }
 
@@ -34,7 +35,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, ServiceInterfaceGenerator> GetFactory()
             {
-                return data => new ServiceInterfaceGenerator();
+                return data => new TestServiceInterfaceGenerator();
             }
         }
     }

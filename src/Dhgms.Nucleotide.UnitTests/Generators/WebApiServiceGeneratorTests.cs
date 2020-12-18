@@ -5,6 +5,7 @@ using System.Text;
 using Dhgms.Nucleotide.Features.WebApi;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.Features.WebApi;
+using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;
 using Xunit;
@@ -23,7 +24,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiServiceGenerator> GetFactory()
             {
-                return attributeData => new WebApiServiceGenerator();
+                return attributeData => new TestWebApiServiceGenerator();
             }
         }
 
@@ -35,7 +36,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
             protected override Func<AttributeData, WebApiServiceGenerator> GetFactory()
             {
-                return data => new WebApiServiceGenerator();
+                return data => new TestWebApiServiceGenerator();
             }
         }
     }

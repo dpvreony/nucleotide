@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 namespace Dhgms.Nucleotide.Features.Model
 {
     [Generator]
-    public sealed class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
+    public abstract class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
     {
         protected override string GetNamespace()
         {
