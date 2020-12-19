@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Features.WebApi;
+using Dhgms.Nucleotide.Features.EntityFramework;
 using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.ModelTests
 {
     [Generator]
-    public sealed class TestWebApiClientGenerator : WebApiClientGenerator
+    public sealed class TestEntityTypeConfigurationGenerator : EntityFrameworkEntityTypeConfigurationGenerator
     {
         protected override INucleotideGenerationModel NucleotideGenerationModel => new ModelGenerationDetails();
     }
