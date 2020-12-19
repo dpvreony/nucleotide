@@ -3,11 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <SaveSourceGeneratorOutput>true</SaveSourceGeneratorOutput>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Dhgms.AspNetCoreContrib.Controllers" Version="4.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <CompilerVisibleProperty Include="IntermediateOutputPath" />
+    <CompilerVisibleProperty Include="SaveSourceGeneratorOutput" />
   </ItemGroup>
 
   <ItemGroup>

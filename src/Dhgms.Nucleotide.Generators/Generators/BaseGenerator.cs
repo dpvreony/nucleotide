@@ -57,34 +57,6 @@ namespace Dhgms.Nucleotide.Generators
             var compilation = context.Compilation;
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
-            var syntaxTrees = compilation.SyntaxTrees.ToArray();
-            if (syntaxTrees.Length < 1)
-            {
-                context.ReportDiagnostic(InfoDiagnostic("No Syntax Trees to process."));
-                return;
-            }
-
-            foreach (var syntaxTree in syntaxTrees)
-            {
-                context.ReportDiagnostic(InfoDiagnostic(syntaxTree.FilePath));
-                // now we have the file we need to look in the file for an attribute
-                // this is how cgr used to work.
-
-                var inputSemanticModel = compilation.GetSemanticModel(syntaxTree);
-
-                var root = syntaxTree.GetRoot();
-                var memberNodes = root
-                    .DescendantNodesAndSelf(n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax || n is TypeDeclarationSyntax)
-                    .OfType<CSharpSyntaxNode>().ToArray();
-
-                if (memberNodes.Length < 1)
-                {
-                    context.ReportDiagnostic(InfoDiagnostic("No member nodes"));
-                }
-            }
-
-            return;
-
             var compilationUnit = SyntaxFactory.CompilationUnit();
             // compilationUnit.AttributeLists;
             var parseOptions = context.ParseOptions;
@@ -109,90 +81,17 @@ namespace Dhgms.Nucleotide.Generators
             // TODO: hint name per generator, or per class?
             var feature = "feature";
             var guid = Guid.NewGuid();
+
+            // https://github.com/dotnet/roslyn-sdk/pull/553/files
+            var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
+            context.ReportDiagnostic(ErrorDiagnostic($"source: {generatedSourceOutputPath}"));
             context.AddSource(
-                $"nucleotide.{feature}.{guid}.generated.cs",
+                generatedSourceOutputPath,
+                $"nucleotide.{feature}.{guid}",
                 sourceText);
         }
 
-        private static string GetFullTypeName(INamedTypeSymbol symbol)
-        {
-            var nameBuilder = new StringBuilder();
-            ISymbol symbolOrParent = symbol;
-            while (symbolOrParent != null && !string.IsNullOrEmpty(symbolOrParent.Name))
-            {
-                if (nameBuilder.Length > 0)
-                {
-                    nameBuilder.Insert(0, ".");
-                }
-
-                nameBuilder.Insert(0, symbolOrParent.Name);
-                symbolOrParent = symbolOrParent.ContainingSymbol;
-            }
-
-            return nameBuilder.ToString();
-        }
-
-        private static ImmutableArray<AttributeData> GetAttributeData(Compilation compilation, SemanticModel document, SyntaxNode syntaxNode)
-        {
-            switch (syntaxNode)
-            {
-                case CompilationUnitSyntax syntax:
-                    return compilation.Assembly.GetAttributes().Where(x => x.ApplicationSyntaxReference.SyntaxTree == syntax.SyntaxTree).ToImmutableArray();
-                default:
-                    return document.GetDeclaredSymbol(syntaxNode)?.GetAttributes() ?? ImmutableArray<AttributeData>.Empty;
-            }
-        }
-
-
         protected abstract string GetNamespace();
-
-#if OLDCGR
-        protected async Task<INucleotideGenerationModel> GetModel(INamedTypeSymbol namedTypeSymbols, Compilation compilation)
-        {
-            var assembly = GetAssembly(namedTypeSymbols.ContainingAssembly, compilation);
-
-            var typeName = $"{namedTypeSymbols.ContainingNamespace}.{namedTypeSymbols.Name}";
-            var modelType = assembly.GetType(typeName);
-            if (modelType == null)
-            {
-                throw new InvalidOperationException($"Unable to find model type: {typeName}");
-            }
-
-            var instance = Activator.CreateInstance(modelType);
-            if (instance == null)
-            {
-                throw new InvalidOperationException($"Unable to create instance: {typeName}");
-            }
-
-            return await Task.FromResult(instance as INucleotideGenerationModel);
-        }
-
-        protected Assembly GetAssembly(IAssemblySymbol symbol, Compilation compilation)
-        {
-            if (symbol == null)
-            {
-                throw new ArgumentNullException(nameof(symbol));
-            }
-
-            if (compilation == null)
-            {
-                throw new ArgumentNullException(nameof(compilation));
-            }
-
-            var matchingReferences = (from reference in compilation.References.OfType<PortableExecutableReference>()
-                where string.Equals(Path.GetFileNameWithoutExtension(reference.FilePath), symbol.Identity.Name, StringComparison.OrdinalIgnoreCase)
-                select reference).ToArray();
-
-            if (matchingReferences == null || matchingReferences.Length == 0)
-            {
-                throw new InvalidOperationException($"Failed to find {symbol.Identity}");
-            }
-
-            var assembly = this.GetType().GetTypeInfo().Assembly;
-            var loadContext = System.Runtime.Loader.AssemblyLoadContext.GetLoadContext(assembly);
-            return loadContext.LoadFromAssemblyPath(matchingReferences[0].FilePath);
-        }
-#endif
 
         /// <summary>
         /// Create the syntax tree representing the expansion of some member to which this attribute is applied.
@@ -205,35 +104,7 @@ namespace Dhgms.Nucleotide.Generators
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
-            //var compilation = context.Compilation;
-            //var attributeSymbol = compilation.GetTypeByMetadataName(WhamNodeCoreAttributeMetadataName);
-
             var namespaceName = GetNamespace();
-
-            #warning We need to get the attribute. in theory 0..*, typically should be 1.
-            #warning Then we need to get the model property from the attribute.
-
-            #if OLDCGR
-            var castDetails = (System.Collections.Immutable.ImmutableArray<TypedConstant>)this.NucleotideGenerationModel;
-
-            var a = castDetails.First();
-            var namedTypeSymbols = a.Value as INamedTypeSymbol;
-
-
-            if (namedTypeSymbols == null)
-            {
-                return await ReportErrorInNamespace(context, namespaceName, "#error Failed to detect a generation model from attribute indicating the model type.");
-            }
-
-            var compilation = context.Compilation;
-
-            var generationModel = await this.GetModel(namedTypeSymbols, compilation);
-
-            if (generationModel == null)
-            {
-                return await ReportErrorInNamespace(context, namespaceName, $"#error Failed to find model: {namedTypeSymbols}");
-            }
-            #endif
 
             var generationModel = this.NucleotideGenerationModel;
 
