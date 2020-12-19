@@ -57,38 +57,33 @@ namespace Dhgms.Nucleotide.Generators
             var compilation = context.Compilation;
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
-            var compilationUnit = SyntaxFactory.CompilationUnit();
-            // compilationUnit.AttributeLists;
-            var parseOptions = context.ParseOptions;
-
             // TODO: this is running async code inside non-async
             var result = GenerateAsync(context, CancellationToken.None)
                 .GetAwaiter()
                 .GetResult();
 
+            var parseOptions = context.ParseOptions;
+
             foreach (var memberDeclarationSyntax in result)
             {
                 // TODO: need to review this might be better way than generate, loop, copy.
-                compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
+                // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
+
+                var cu = SyntaxFactory.CompilationUnit().AddMembers(memberDeclarationSyntax).NormalizeWhitespace();
+
+                // TODO: hint name per generator, or per class?
+                var feature = "feature";
+                var guid = Guid.NewGuid();
+
+                var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
+
+                // https://github.com/dotnet/roslyn-sdk/pull/553/files
+                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
+                context.AddSource(
+                    generatedSourceOutputPath,
+                    $"nucleotide.{feature}.{guid}",
+                    sourceText);
             }
-
-            var sourceText = SyntaxFactory.SyntaxTree(
-                    compilationUnit,
-                    parseOptions,
-                    encoding: Encoding.UTF8)
-                .GetText();
-
-            // TODO: hint name per generator, or per class?
-            var feature = "feature";
-            var guid = Guid.NewGuid();
-
-            // https://github.com/dotnet/roslyn-sdk/pull/553/files
-            var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
-            context.ReportDiagnostic(ErrorDiagnostic($"source: {generatedSourceOutputPath}"));
-            context.AddSource(
-                generatedSourceOutputPath,
-                $"nucleotide.{feature}.{guid}",
-                sourceText);
         }
 
         protected abstract string GetNamespace();
