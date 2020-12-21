@@ -507,8 +507,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
             set;
         }
 
-        #region Public Properties
-
         /// <summary>
         /// Gets or sets whether the property represents a collection
         /// </summary>
@@ -615,8 +613,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         public string AlternativeDatabaseColumnName { get; set; }
 
         public string SqlComputedColumn { get; set; }
-
-        #endregion
 
         //#region Public Methods and Operators
 

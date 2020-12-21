@@ -14,7 +14,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
     public class ClrDateTimePropertyInfo
         : PropertyInfoBase
     {
-        #region fields
         /// <summary>
         /// The minimum value, if any
         /// </summary>
@@ -24,7 +23,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// The maximum value, if any
         /// </summary>
         private readonly System.DateTime? maximumValue;
-        #endregion
 
         /// <summary>
         /// Constructor

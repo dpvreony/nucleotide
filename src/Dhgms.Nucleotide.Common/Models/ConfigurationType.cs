@@ -11,8 +11,6 @@ namespace Dhgms.Nucleotide.Common.Models
     /// </summary>
     public class ConfigurationProperty
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationProperty"/> class.
         /// </summary>
@@ -36,10 +34,6 @@ namespace Dhgms.Nucleotide.Common.Models
             this.IsRequired = isRequired;
         }
 
-        #endregion
-
-        #region Public Properties
-
         /// <summary>
         /// Gets or sets the .NET data type of the property
         /// </summary>
@@ -59,7 +53,5 @@ namespace Dhgms.Nucleotide.Common.Models
         /// Gets or sets the Name of the configuration property
         /// </summary>
         public string Name { get; set; }
-
-        #endregion
     }
 }

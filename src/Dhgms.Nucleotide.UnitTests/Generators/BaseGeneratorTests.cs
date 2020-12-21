@@ -67,60 +67,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             internal const string CSharpDefaultFileExt = "cs";
             internal const string TestProjectName = "TestProject";
 
-#if OLDCGR
-            static BaseGenerateAsyncMethod()
-            {
-                // logic is based upon
-                // https://github.com/AArnott/CodeGeneration.Roslyn/blob/9b7ec97bdcef5c9fae01a10d59e3bb7082382eae/src/CodeGeneration.Roslyn.Tests/Helpers/CompilationTestsBase.cs
-                // and
-                // https://github.com/AArnott/CodeGeneration.Roslyn/blob/227430f6c8f6afad183a90557ccb2c03653c4028/src/CodeGeneration.Roslyn/DocumentTransform.cs
-
-                var coreAssemblyPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
-
-                var coreAssemblyNames = new[]
-                {
-                    "mscorlib.dll",
-                    "System.dll",
-                    "System.Core.dll",
-                    "System.Runtime.dll"
-                };
-
-                var coreMetaReferences = coreAssemblyNames.Select(x => MetadataReference.CreateFromFile(Path.Combine(coreAssemblyPath, x)));
-
-                var otherAssemblies = new[]
-                {
-                    typeof(CSharpCompilation).Assembly,
-                    typeof(QueryFactoryInterfaceGenerator).Assembly
-                };
-
-                MetadataReferences = coreMetaReferences
-                    .Concat<MetadataReference>(otherAssemblies.Select(x => MetadataReference.CreateFromFile(x.Location)))
-                    .ToImmutableArray();
-            }
-
-            internal static readonly ImmutableArray<MetadataReference> MetadataReferences;
-#endif
-
-#if OLDCGR
-            public static IEnumerable<object[]> GeneratesCodeMemberData => new List<object[]>
-            {
-                _simpleCodeGenerationCase
-            };
-
-            private static object[] _simpleCodeGenerationCase => new object[]
-            {
-                GetTransformationContext(),
-                new Progress<Diagnostic>(_ => { })
-            };
-
-            private static object[] _throwsArgumentNullForProgress => new object[]
-            {
-                GetTransformationContext(),
-                null,
-                "progress"
-            };
-#endif
-
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
             private static Compilation CreateCompilation(string source) => CSharpCompilation.Create(
@@ -155,12 +101,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     comp,
                     out var generatorDiags,
                     instance);
-
-#if OLDCGR
-                var resultAsString = result.ToFullString();
-                Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
-                this._logger.LogInformation(result.ToFullString());
-#endif
             }
 
             [Fact]
@@ -181,75 +121,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     comp,
                     out var generatorDiags,
                     instance);
-
-#if OLDCGR
-                var resultAsString = result.ToFullString();
-                Assert.StartsWith("#error Failed to detect a generation model from attribute indicating the model type.", resultAsString, StringComparison.OrdinalIgnoreCase);
-                this._logger.LogInformation(result.ToFullString());
-#endif
             }
-
-            #if OLDCGR
-            private static Project CreateProject(params string[] sources)
-            {
-                var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
-                var solution = new AdhocWorkspace()
-                    .CurrentSolution
-                    .AddProject(projectId, TestProjectName, TestProjectName, LanguageNames.CSharp)
-                    .WithProjectCompilationOptions(
-                        projectId,
-                        new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
-                    .WithProjectParseOptions(
-                        projectId,
-                        new CSharpParseOptions(preprocessorSymbols: new[] { "SOMETHING_ACTIVE" }))
-                    .AddMetadataReferences(projectId, MetadataReferences);
-
-                int count = 0;
-                foreach (var source in sources)
-                {
-                    var newFileName = DefaultFilePathPrefix + count + "." + CSharpDefaultFileExt;
-                    var documentId = DocumentId.CreateNewId(projectId, debugName: newFileName);
-                    solution = solution.AddDocument(documentId, newFileName, SourceText.From(source));
-                    count++;
-                }
-                return solution.GetProject(projectId);
-            }
-
-            private static object GetTransformationContext()
-            {
-                var document = CreateProject(string.Empty).Documents.Single();
-
-                var inputDocument = document.GetSyntaxTreeAsync().GetAwaiter().GetResult();
-
-                var compilation = (CSharpCompilation)document.Project.GetCompilationAsync().GetAwaiter().GetResult();
-
-
-                var inputSemanticModel = compilation.GetSemanticModel(inputDocument);
-                var inputCompilationUnit = inputDocument.GetCompilationUnitRoot();
-
-                var compilationUnitExterns = inputCompilationUnit
-
-                    .Externs
-
-                    .Select(x => x.WithoutTrivia())
-
-                    .ToImmutableArray();
-
-                var processingNode = inputDocument
-                    .GetRoot()
-                    .DescendantNodesAndSelf(n => n is CompilationUnitSyntax || n is NamespaceDeclarationSyntax || n is TypeDeclarationSyntax)
-                    .OfType<CSharpSyntaxNode>().First();
-
-                var compilationUnitUsings = inputCompilationUnit
-                    .Usings
-                    .Select(x => x.WithoutTrivia())
-                    .ToImmutableArray();
-
-                var transformationContext = new GeneratorExecutionContext();
-
-                return transformationContext;
-            }
-#endif
 
             protected BaseGenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

@@ -14,8 +14,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
     /// </summary>
     public class ClrBooleanPropertyInfo : PropertyInfoBase
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
         /// Constructor
@@ -61,10 +59,6 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 alternativeDatabaseColumnName)
         {
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
@@ -118,6 +112,5 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         //        return new System.Random().Next(1) == 1 ? "true" : "false";
         //    }
         //}
-        #endregion
     }
 }
