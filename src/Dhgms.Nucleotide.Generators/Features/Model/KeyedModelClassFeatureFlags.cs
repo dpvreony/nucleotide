@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Features.Model
+﻿namespace Dhgms.Nucleotide.Generators.Features.Model
 {
     public sealed class KeyedModelClassFeatureFlags
     {

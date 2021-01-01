@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Dhgms.Nucleotide.Features.Model;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Generators.Features.Model;
 using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;

@@ -1,7 +1,7 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.Model
+namespace Dhgms.Nucleotide.Generators.Features.Model
 {
     /// <summary>
     /// Generates models

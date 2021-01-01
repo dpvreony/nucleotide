@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Features.EntityFramework
+﻿namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelFeatureFlags
     {

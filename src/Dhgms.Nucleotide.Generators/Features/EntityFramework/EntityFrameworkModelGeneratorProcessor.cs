@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Common.PropertyInfo;
-using Dhgms.Nucleotide.Features.AttributeGenerators;
-using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Helpers;
+using Dhgms.Nucleotide.Generators.Models;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.EntityFramework
+namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
     {

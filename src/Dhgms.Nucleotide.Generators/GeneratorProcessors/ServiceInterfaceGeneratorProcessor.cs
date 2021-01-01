@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Dhgms.Nucleotide.Common.Models;
+using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors

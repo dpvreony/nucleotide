@@ -11,9 +11,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Dhgms.Nucleotide.Common.Models;
+using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     /// <summary>
     /// base class for property information types. used for defining properties

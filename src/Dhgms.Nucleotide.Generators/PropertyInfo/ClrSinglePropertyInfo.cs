@@ -1,13 +1,13 @@
-﻿using Dhgms.Nucleotide.Common.Models;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    public class Integer64PropertyInfo
-        : NumericPropertyInfo<long>
+    public sealed class ClrSinglePropertyInfo
+        : NumericPropertyInfo<float>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Integer64PropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrSinglePropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
@@ -21,13 +21,13 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public Integer64PropertyInfo(
+        public ClrSinglePropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            int minimumValue,
-            int maximumValue,
+            float minimumValue,
+            float maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -35,14 +35,14 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 name,
                 description,
                 optional,
-                "long",
-                "Int64",
+                "float",
+                "Single",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(long),
+                typeof(float),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

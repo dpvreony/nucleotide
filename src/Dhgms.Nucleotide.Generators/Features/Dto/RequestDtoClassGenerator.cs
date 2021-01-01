@@ -1,6 +1,6 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 
-namespace Dhgms.Nucleotide.Features.Dto
+namespace Dhgms.Nucleotide.Generators.Features.Dto
 {
     public abstract class RequestDtoClassGenerator : BaseClassLevelCodeGenerator<RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
     {

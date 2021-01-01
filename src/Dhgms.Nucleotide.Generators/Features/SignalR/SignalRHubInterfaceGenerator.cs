@@ -1,7 +1,6 @@
-﻿using Dhgms.Nucleotide.Generators;
-using Microsoft.CodeAnalysis;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 
-namespace Dhgms.Nucleotide.Features.SignalR
+namespace Dhgms.Nucleotide.Generators.Features.SignalR
 {
     /// <summary>
     /// Generator for SignalR Hub Interface

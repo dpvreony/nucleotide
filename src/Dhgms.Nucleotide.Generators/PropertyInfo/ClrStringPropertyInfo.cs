@@ -4,9 +4,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Dhgms.Nucleotide.Common.Models;
+using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     /// <summary>
     /// Property Information for a String

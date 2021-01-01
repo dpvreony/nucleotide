@@ -22,8 +22,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docfx_project", "docfx_proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.Generators", "Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj", "{FEAB5416-28B6-4C8B-859B-510BD33BD11D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.Common", "Dhgms.Nucleotide.Common\Dhgms.Nucleotide.Common.csproj", "{2F44127A-054E-47FD-9BB5-938E7E1986EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,10 +56,6 @@ Global
 		{FEAB5416-28B6-4C8B-859B-510BD33BD11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEAB5416-28B6-4C8B-859B-510BD33BD11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEAB5416-28B6-4C8B-859B-510BD33BD11D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F44127A-054E-47FD-9BB5-938E7E1986EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F44127A-054E-47FD-9BB5-938E7E1986EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F44127A-054E-47FD-9BB5-938E7E1986EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F44127A-054E-47FD-9BB5-938E7E1986EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

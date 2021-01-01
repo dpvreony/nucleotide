@@ -1,7 +1,7 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.EntityFramework
+namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     /// <summary>
     /// Code Generator for Entity Framework DB Context

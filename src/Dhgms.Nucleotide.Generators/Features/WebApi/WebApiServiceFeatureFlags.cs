@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Features.WebApi
+﻿namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
     public sealed class WebApiServiceFeatureFlags
     {

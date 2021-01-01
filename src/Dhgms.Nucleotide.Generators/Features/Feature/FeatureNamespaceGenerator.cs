@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.NamespaceGenerators
+﻿namespace Dhgms.Nucleotide.Generators.Features.Feature
 {
     class FeatureNamespaceGenerator
     {

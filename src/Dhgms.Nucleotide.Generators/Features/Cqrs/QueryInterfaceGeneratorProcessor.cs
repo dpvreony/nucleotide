@@ -1,11 +1,9 @@
 ﻿using System;
-using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Microsoft.CodeAnalysis;
+using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.Cqrs
+namespace Dhgms.Nucleotide.Generators.Features.Cqrs
 {
     /// <summary>
     /// Generator for Query Interface

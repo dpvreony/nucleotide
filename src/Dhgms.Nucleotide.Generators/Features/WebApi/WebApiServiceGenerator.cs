@@ -1,8 +1,7 @@
-﻿using Dhgms.Nucleotide.Generators;
-using Dhgms.Nucleotide.Generators.Features.WebApi;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.WebApi
+namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
     /// <summary>
     /// Generates the Web API service

@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Common.Models
+namespace Dhgms.Nucleotide.Generators.Models
 {
     /// <summary>
     /// Information about a configuration property

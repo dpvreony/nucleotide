@@ -4,9 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Dhgms.Nucleotide.Common.PropertyInfo;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 
-namespace Dhgms.Nucleotide.Common.Models
+namespace Dhgms.Nucleotide.Generators.Models
 {
     /// <summary>
     /// Represents the parameters for generating an data manager classes

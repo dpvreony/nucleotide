@@ -7,9 +7,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Dhgms.Nucleotide.Common.PropertyInfo;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 
-namespace Dhgms.Nucleotide.Common.Models
+namespace Dhgms.Nucleotide.Generators.Models
 {
     /// <summary>
     /// Interface for the class generation parameters.

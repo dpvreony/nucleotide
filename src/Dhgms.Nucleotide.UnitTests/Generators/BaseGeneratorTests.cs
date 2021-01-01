@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Xunit;

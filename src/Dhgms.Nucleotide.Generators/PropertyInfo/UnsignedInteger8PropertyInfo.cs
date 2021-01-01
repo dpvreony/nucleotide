@@ -1,9 +1,9 @@
-﻿using Dhgms.Nucleotide.Common.Models;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    public class ClrDecimalPropertyInfo
-        : NumericPropertyInfo<decimal>
+    public class UnsignedInteger8PropertyInfo
+        : NumericPropertyInfo<byte>
     {
 
         /// <summary>
@@ -21,13 +21,13 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDecimalPropertyInfo(
+        public UnsignedInteger8PropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            decimal minimumValue,
-            decimal maximumValue,
+            byte minimumValue,
+            byte maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -35,14 +35,14 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 name,
                 description,
                 optional,
-                "decimal",
-                "Decimal",
+                "byte",
+                "UInt8",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(decimal),
+                typeof(byte),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

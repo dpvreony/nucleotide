@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Dhgms.Nucleotide.Common.Models;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Generators.Generators
 {
     public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
         where TFeatureFlags : class

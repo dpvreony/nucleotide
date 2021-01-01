@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Common.PropertyInfo;
-using Dhgms.Nucleotide.Helpers;
+﻿using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.AttributeGenerators
+namespace Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators
 {
     public class NumericPropertyAttributeGenerator<TNumeric> : IAttributeGenerator<NumericPropertyInfo<TNumeric>>
         where TNumeric : struct

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.Cqrs
+namespace Dhgms.Nucleotide.Generators.Features.Cqrs
 {
     public sealed class CommandInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
     {

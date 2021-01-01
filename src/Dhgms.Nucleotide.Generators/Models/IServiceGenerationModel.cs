@@ -1,4 +1,4 @@
-﻿namespace Dhgms.Nucleotide.Common.Models
+﻿namespace Dhgms.Nucleotide.Generators.Models
 {
     /// <summary>
     /// Generation Model for Service Boundaries

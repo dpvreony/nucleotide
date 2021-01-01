@@ -1,15 +1,21 @@
-﻿using System;
-using Dhgms.Nucleotide.Common.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="DHGMS Solutions" file="ClrBoolean.cs">
+//   Licensed under GNU General Public License version 2 (GPLv2)
+// </copyright>
+// 
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+using Dhgms.Nucleotide.Generators.Models;
+
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     /// <summary>
-    /// Property Information for a Guid
+    /// Property Information for the Boolean Data Type
     /// </summary>
-    public class ClrGuidPropertyInfo : PropertyInfoBase
+    public class ClrBooleanPropertyInfo : PropertyInfoBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrStringPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
         /// Constructor
         /// </summary>
         /// <param name="collection">
@@ -30,11 +36,11 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrGuidPropertyInfo(
-            CollectionType collection, 
-            string name, 
-            string description, 
-            bool optional, 
+        public ClrBooleanPropertyInfo(
+            CollectionType collection,
+            string name,
+            string description,
+            bool optional,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -42,14 +48,14 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 name, 
                 description, 
                 optional, 
-                "System.Guid", 
-                "Guid", 
+                "bool", 
+                "Boolean", 
                 false, 
-                "Guid.Empty", 
+                "false", 
                 false,
                 isKey,
-                false,
-                typeof(Guid),
+                true,
+                typeof(bool),
                 alternativeDatabaseColumnName)
         {
         }
@@ -72,7 +78,7 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         //{
         //    get
         //    {
-        //        return "ToString().ToLower()";
+        //        return "ToString(System.Globalization.CultureInfo.InvariantCulture).ToLower()";
         //    }
         //}
 
@@ -97,13 +103,13 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         //}
 
         ///// <summary>
-        ///// Gets the random unit test value.
+        ///// Gets a random value for use in a unit test.
         ///// </summary>
         //public override string RandomUnitTestValue
         //{
         //    get
         //    {
-        //        return Guid.NewGuid().ToString();
+        //        return new System.Random().Next(1) == 1 ? "true" : "false";
         //    }
         //}
     }

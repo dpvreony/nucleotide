@@ -1,13 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
 
-namespace Dhgms.Nucleotide.Features.SignalR
+namespace Dhgms.Nucleotide.Generators.Features.SignalR
 {
     /// <summary>
     /// Generator for SignalR Hub Class

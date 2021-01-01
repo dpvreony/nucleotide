@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.Generators.Generators;
 using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;

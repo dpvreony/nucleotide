@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dhgms.Nucleotide.Common.Models;
-using Dhgms.Nucleotide.Common.PropertyInfo;
-using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Helpers;
+using Dhgms.Nucleotide.Generators.Models;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.WebApi
+namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
     public sealed class WebApiClientGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
     {

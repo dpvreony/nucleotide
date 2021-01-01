@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using Dhgms.Nucleotide.Features.WebApi;
 using Dhgms.Nucleotide.Generators;
+using Dhgms.Nucleotide.Generators.Features.WebApi;
 using Dhgms.Nucleotide.ModelTests;
 using Microsoft.CodeAnalysis;
 using Moq;

@@ -1,6 +1,6 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 
-namespace Dhgms.Nucleotide.Features.Mvc
+namespace Dhgms.Nucleotide.Generators.Features.Mvc
 {
     /// <summary>
     /// Generates the MVC Controllers

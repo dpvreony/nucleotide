@@ -1,13 +1,13 @@
-﻿using Dhgms.Nucleotide.Common.Models;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    public class ClrDoublePropertyInfo
-        : NumericPropertyInfo<double>
+    public class UnsignedInteger32PropertyInfo
+        : NumericPropertyInfo<uint>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrDoublePropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger32PropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
@@ -21,13 +21,13 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public ClrDoublePropertyInfo(
+        public UnsignedInteger32PropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            double minimumValue,
-            double maximumValue,
+            uint minimumValue,
+            uint maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -35,14 +35,14 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 name,
                 description,
                 optional,
-                "double",
-                "Double",
+                "uint",
+                "UInt32",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(double),
+                typeof(uint),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

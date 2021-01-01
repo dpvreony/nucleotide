@@ -1,6 +1,6 @@
 ﻿using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Generators.Generators
 {
     /// <summary>
     /// Base class for a code generator that generates code based on the Class Level of Generation Metadata.

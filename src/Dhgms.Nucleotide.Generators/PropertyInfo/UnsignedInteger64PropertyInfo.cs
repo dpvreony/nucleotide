@@ -1,13 +1,13 @@
-﻿using Dhgms.Nucleotide.Common.Models;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Common.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    public class UnsignedInteger16PropertyInfo
-        : NumericPropertyInfo<ushort>
+    public class UnsignedInteger64PropertyInfo
+        : NumericPropertyInfo<ulong>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClrDecimalPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger64PropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>
@@ -21,13 +21,13 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
         /// <param name="alternativeDatabaseColumnName">
         /// Name of the database column name, if it's different from the .NET property name.
         /// </param>
-        public UnsignedInteger16PropertyInfo(
+        public UnsignedInteger64PropertyInfo(
             CollectionType collection,
             string name,
             string description,
             bool optional,
-            ushort minimumValue,
-            ushort maximumValue,
+            ulong minimumValue,
+            ulong maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
@@ -35,14 +35,14 @@ namespace Dhgms.Nucleotide.Common.PropertyInfo
                 name,
                 description,
                 optional,
-                "ushort",
-                "UInt16",
+                "ulong",
+                "UInt64",
                 false,
                 "0",
                 false,
                 isKey,
                 true,
-                typeof(ushort),
+                typeof(ulong),
                 alternativeDatabaseColumnName,
                 minimumValue,
                 maximumValue)

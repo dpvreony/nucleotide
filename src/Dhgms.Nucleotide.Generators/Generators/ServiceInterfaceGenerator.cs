@@ -1,7 +1,6 @@
 ﻿using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Generators.Generators
 {
     /// <summary>
     /// Generator for Service Interface

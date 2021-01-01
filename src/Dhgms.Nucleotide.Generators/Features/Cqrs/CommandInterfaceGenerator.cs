@@ -1,7 +1,7 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.Cqrs
+namespace Dhgms.Nucleotide.Generators.Features.Cqrs
 {
     [Generator]
     public abstract class CommandInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandInterfaceFeatureFlags, CommandInterfaceGeneratorProcessor>
