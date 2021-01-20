@@ -1,9 +1,8 @@
-﻿namespace Dhgms.Nucleotide.PropertyInfo
+﻿using System;
+using Dhgms.Nucleotide.Generators.Models;
+
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    using System;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
     /// Property Information for a Guid
     /// </summary>

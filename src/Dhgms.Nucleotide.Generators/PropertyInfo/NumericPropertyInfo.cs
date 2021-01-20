@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     public class NumericPropertyInfo<TNumeric>
         : PropertyInfoBase

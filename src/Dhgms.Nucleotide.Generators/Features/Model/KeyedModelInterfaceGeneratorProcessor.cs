@@ -1,10 +1,10 @@
 ﻿using System;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
+using Dhgms.Nucleotide.Generators.Models;
+using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.Model
+namespace Dhgms.Nucleotide.Generators.Features.Model
 {
     public sealed class KeyedModelInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
     {

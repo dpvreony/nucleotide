@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <Sdk Name="CodeGeneration.Roslyn.Plugin.Sdk" Version="0.7.63" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp5.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="bin/$(Configuration)/**/*.dll" Pack="true" PackagePath="build" KeepDuplicates="false" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" PrivateAssets="all" />
   </ItemGroup>
 </Project>

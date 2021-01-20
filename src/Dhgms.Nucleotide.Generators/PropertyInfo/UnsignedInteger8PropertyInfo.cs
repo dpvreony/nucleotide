@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     public class UnsignedInteger8PropertyInfo
         : NumericPropertyInfo<byte>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Dhgms.Nucleotide.PropertyInfo.ClrDecimalPropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="ClrDecimalPropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>

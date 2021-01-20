@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.PropertyInfo
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     public class UnsignedInteger64PropertyInfo
         : NumericPropertyInfo<ulong>
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Dhgms.Nucleotide.PropertyInfo.UnsignedInteger64PropertyInfo"/> class. 
+        /// Initializes a new instance of the <see cref="UnsignedInteger64PropertyInfo"/> class. 
         /// </summary>
         /// <param name="collection">Whether the field is a collection</param>
         /// <param name="name">Name of the field</param>

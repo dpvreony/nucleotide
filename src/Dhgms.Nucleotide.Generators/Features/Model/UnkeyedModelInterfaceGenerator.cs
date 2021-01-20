@@ -1,20 +1,11 @@
-﻿using System.Linq;
-using Dhgms.Nucleotide.Generators;
-using Dhgms.Nucleotide.Model;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.Model
+namespace Dhgms.Nucleotide.Generators.Features.Model
 {
-    public sealed class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
+    [Generator]
+    public abstract class UnkeyedModelInterfaceGenerator : BaseInterfaceLevelCodeGenerator<UnkeyedModelInterfaceFeatureFlags, UnkeyedModelInterfaceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.
-        /// </summary>
-        public UnkeyedModelInterfaceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace()
         {
             return "Models";

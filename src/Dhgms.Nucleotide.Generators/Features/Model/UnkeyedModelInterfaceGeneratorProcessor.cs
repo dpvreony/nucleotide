@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Model;
-using Microsoft.CodeAnalysis;
+using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Dhgms.Nucleotide.Features.Model
+namespace Dhgms.Nucleotide.Generators.Features.Model
 {
     public sealed class UnkeyedModelInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
     {

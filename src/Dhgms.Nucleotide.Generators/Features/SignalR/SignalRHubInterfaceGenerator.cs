@@ -1,19 +1,12 @@
-﻿using Dhgms.Nucleotide.Generators;
-using Microsoft.CodeAnalysis;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 
-namespace Dhgms.Nucleotide.Features.SignalR
+namespace Dhgms.Nucleotide.Generators.Features.SignalR
 {
     /// <summary>
     /// Generator for SignalR Hub Interface
     /// </summary>
-    public sealed class SignalRHubInterfaceGenerator : BaseInterfaceLevelCodeGenerator<SignalRHubInterfaceFeatureFlags, SignalRHubInterfaceGeneratorProcessor>
+    public abstract class SignalRHubInterfaceGenerator : BaseInterfaceLevelCodeGenerator<SignalRHubInterfaceFeatureFlags, SignalRHubInterfaceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SignalRHubInterfaceGenerator"/> class.
-        /// </summary>
-        public SignalRHubInterfaceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
         protected override string GetNamespace()
         {
             return "Hubs";

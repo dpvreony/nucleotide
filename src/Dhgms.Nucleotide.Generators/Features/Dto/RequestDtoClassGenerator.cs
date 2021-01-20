@@ -1,18 +1,9 @@
-﻿using Dhgms.Nucleotide.Features.Model;
-using Dhgms.Nucleotide.Generators;
-using Microsoft.CodeAnalysis;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 
-namespace Dhgms.Nucleotide.Features.Dto
+namespace Dhgms.Nucleotide.Generators.Features.Dto
 {
-    public sealed class RequestDtoClassGenerator : BaseClassLevelCodeGenerator<RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
+    public abstract class RequestDtoClassGenerator : BaseClassLevelCodeGenerator<RequestDtoClassFeatureFlags, RequestDtoClassGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnkeyedModelClassGenerator"/> class.
-        /// </summary>
-        public RequestDtoClassGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace() => "RequestDtos";
     }
 }

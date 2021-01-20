@@ -1,14 +1,11 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.EntityFramework
+namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelGenerator : BaseClassLevelCodeGenerator<EntityFrameworkModelFeatureFlags, EntityFrameworkModelGeneratorProcessor>
+    [Generator]
+    public abstract class EntityFrameworkModelGenerator : BaseClassLevelCodeGenerator<EntityFrameworkModelFeatureFlags, EntityFrameworkModelGeneratorProcessor>
     {
-        public EntityFrameworkModelGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace()
         {
             return "EfModels";

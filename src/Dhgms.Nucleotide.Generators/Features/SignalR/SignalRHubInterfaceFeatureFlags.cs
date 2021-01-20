@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Features.SignalR
+﻿namespace Dhgms.Nucleotide.Generators.Features.SignalR
 {
     public sealed class SignalRHubInterfaceFeatureFlags
     {

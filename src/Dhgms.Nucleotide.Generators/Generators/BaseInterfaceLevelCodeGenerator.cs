@@ -1,21 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CodeGeneration.Roslyn;
-using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Helpers;
-using Dhgms.Nucleotide.Model;
-using Dhgms.Nucleotide.PropertyInfo;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 
-namespace Dhgms.Nucleotide.Generators
+namespace Dhgms.Nucleotide.Generators.Generators
 {
     /// <summary>
     /// Base class for a code generator that generates code based on the Interface Level of Generation Metadata.
@@ -24,13 +9,5 @@ namespace Dhgms.Nucleotide.Generators
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor, new()
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="attributeData"></param>
-        protected BaseInterfaceLevelCodeGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
     }
 }

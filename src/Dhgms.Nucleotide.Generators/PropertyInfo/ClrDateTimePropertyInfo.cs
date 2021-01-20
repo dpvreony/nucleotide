@@ -4,20 +4,16 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.PropertyInfo
+using Dhgms.Nucleotide.Generators.Models;
+
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    using System.Globalization;
-    using System.Text;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
     /// Property Information for ClrDateTime
     /// </summary>
     public class ClrDateTimePropertyInfo
         : PropertyInfoBase
     {
-        #region fields
         /// <summary>
         /// The minimum value, if any
         /// </summary>
@@ -27,7 +23,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         /// The maximum value, if any
         /// </summary>
         private readonly System.DateTime? maximumValue;
-        #endregion
 
         /// <summary>
         /// Constructor

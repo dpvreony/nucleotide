@@ -1,4 +1,4 @@
-﻿namespace Dhgms.Nucleotide.Model
+﻿namespace Dhgms.Nucleotide.Generators.Models
 {
     /// <summary>
     /// Model that Generator Attributes should be attached to

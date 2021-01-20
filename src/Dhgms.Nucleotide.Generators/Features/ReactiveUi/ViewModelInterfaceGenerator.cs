@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Features.ReactiveUi
+﻿namespace Dhgms.Nucleotide.Generators.Features.ReactiveUi
 {
     public sealed class ViewModelInterfaceGenerator
     {

@@ -5,17 +5,15 @@
 // 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.PropertyInfo
-{
-    using Dhgms.Nucleotide.Model;
+using Dhgms.Nucleotide.Generators.Models;
 
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
+{
     /// <summary>
     /// Property Information for the Boolean Data Type
     /// </summary>
     public class ClrBooleanPropertyInfo : PropertyInfoBase
     {
-        #region Constructors and Destructors
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ClrBooleanPropertyInfo"/> class. 
         /// Constructor
@@ -61,10 +59,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
                 alternativeDatabaseColumnName)
         {
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         /// Whether to generate an auto property, or a property that uses a field
@@ -118,6 +112,5 @@ namespace Dhgms.Nucleotide.PropertyInfo
         //        return new System.Random().Next(1) == 1 ? "true" : "false";
         //    }
         //}
-        #endregion
     }
 }

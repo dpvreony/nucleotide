@@ -1,17 +1,11 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 
-namespace Dhgms.Nucleotide.Features.Cqrs
+namespace Dhgms.Nucleotide.Generators.Features.Cqrs
 {
-    public sealed class CommandInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandInterfaceFeatureFlags, CommandInterfaceGeneratorProcessor>
+    [Generator]
+    public abstract class CommandInterfaceGenerator : BaseInterfaceLevelCodeGenerator<CommandInterfaceFeatureFlags, CommandInterfaceGeneratorProcessor>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QueryInterfaceGenerator"/> class.
-        /// </summary>
-        public CommandInterfaceGenerator(AttributeData attributeData) : base(attributeData)
-        {
-        }
-
         protected override string GetNamespace() => "Commands";
     }
 }

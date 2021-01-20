@@ -8,16 +8,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Dhgms.Nucleotide.PropertyInfo
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Dhgms.Nucleotide.Generators.Models;
+
+namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Text;
-
-    using Dhgms.Nucleotide.Model;
-
     /// <summary>
     /// base class for property information types. used for defining properties
     /// in information, search filter and view filter classes
@@ -510,8 +507,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
             set;
         }
 
-        #region Public Properties
-
         /// <summary>
         /// Gets or sets whether the property represents a collection
         /// </summary>
@@ -618,8 +613,6 @@ namespace Dhgms.Nucleotide.PropertyInfo
         public string AlternativeDatabaseColumnName { get; set; }
 
         public string SqlComputedColumn { get; set; }
-
-        #endregion
 
         //#region Public Methods and Operators
 

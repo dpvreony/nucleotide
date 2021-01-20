@@ -1,4 +1,4 @@
-﻿namespace Dhgms.Nucleotide.Models
+﻿namespace Dhgms.Nucleotide.Generators.Models
 {
     public interface IObjectGenerationModel
     {

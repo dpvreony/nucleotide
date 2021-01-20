@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dhgms.Nucleotide.Generators
+﻿namespace Dhgms.Nucleotide.Generators.Generators
 {
     public sealed class ServiceInterfaceFeatureFlags
     {
