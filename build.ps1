@@ -92,4 +92,4 @@ Foreach ($i in $postBuildActions)
 	}
 }
 
-xcopy src\docfx_project\_site artifacts\docfx /E /I /Y
+#xcopy src\docfx_project\_site artifacts\docfx /E /I /Y
