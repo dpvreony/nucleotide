@@ -76,7 +76,7 @@ if ($Env:GITHUB_REF -and $Env:GITHUB_REF.StartsWith("refs/heads/dependabot"))
 }
 
 $postBuildActions = (
-	('dotnet', ('pack', $solutionPath, '--configuration', 'Release', '--no-build', '/bl:artifacts\\binlog\\pack.binlog', '/p:PackageOutputPath=..\artifacts\nuget')),
+	('dotnet', ('pack', $solutionPath, '--configuration', 'Release', '--no-build', '/bl:artifacts\\binlog\\pack.binlog', '/p:PackageOutputPath=..\..\artifacts\nuget')),
 	('dotnet', ('outdated', '-o', 'artifacts\outdated\outdated.json', 'src'))
 	#('snitch', ('src', '--strict')),
 	#('generateomd.exe', ('/source=src', '/output=artifacts\omd\index.htm', '/format=html'))
