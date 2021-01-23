@@ -4,6 +4,8 @@
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <LangVersion>9</LangVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
