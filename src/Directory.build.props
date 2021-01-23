@@ -1,0 +1,65 @@
+<Project>
+  <PropertyGroup>
+    <Company>DPVreony and Contributors</Company>
+	<StartYear>2016</StartYear>
+	<Copyright>© $(StartYear)-$([System.DateTime]::Now.Year) $(Company)</Copyright>
+    <Product>Whipcords ($(TargetFramework))</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>dpvreony</Authors>
+    <Owners>dpvreony</Owners>
+    <PackageTags>NET core reusable web helpers</PackageTags>
+    <PackageReleaseNotes>https://github.com/dpvreony/Dhgms.AspNetCoreContrib/releases</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/dpvreony/Dhgms.AspNetCoreContrib</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)analyzers.ruleset</CodeAnalysisRuleSet>
+    <IsTestProject>$(MSBuildProjectName.Contains('Tests'))</IsTestProject>
+    <IsWasmProject>$(MSBuildProjectName.Contains('Wasm'))</IsWasmProject>
+    <DebugType>Embedded</DebugType>
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <!-- disable sourcelink on mono, to workaround https://github.com/dotnet/sourcelink/issues/155 -->
+    <EnableSourceLink Condition=" '$(OS)' != 'Windows_NT' AND '$(MSBuildRuntimeType)' != 'Core' ">false</EnableSourceLink>
+    <EnableSourceControlManagerQueries>$(EnableSourceLink)</EnableSourceControlManagerQueries>
+	<!--
+	<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+	<WarningsAsErrors />
+	-->
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsTestProject)">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="Xunit.StaFact" Version="1.0.37" />
+    <!--<PackageReference Include="PublicApiGenerator" Version="8.1.0" />-->
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsTestProject)">
+    <!--<Compile Include="$(MSBuildThisFileDirectory)ApiGeneratorGlobalSuppressions.cs" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\LICENSE" Pack="true" PackagePath="LICENSE" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+  
+  <ItemGroup>	
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.3.37" PrivateAssets="all" />	
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsWasmProject) == ''">
+    <PackageReference Include="Dhgms.QualityAssurancePack" Version="2.0.1" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+ </Project>
+
