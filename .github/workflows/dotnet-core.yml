@@ -43,6 +43,7 @@ jobs:
         dotnet tool install --global dotnet-outdated-tool
         dotnet tool install --global snitch
         dotnet tool install --global dotnet-sonarscanner
+        dotnet tool install --global JetBrains.ReSharper.GlobalTools
 
     - name: Prepare Artifact Directory
       run: |
@@ -80,6 +81,11 @@ jobs:
     - name: List outdated packages
       run: |
         dotnet outdated -o artifacts\outdated\outdated.json src
+
+
+    - name: Run Resharper Duplicate Code Finder
+      run: |
+        jb dupfinder ${{ env.solutionpath }} -o=artifacts\dupfinder\report.xml
 
 # only store binlog on failure      
     - name: store binlogs
@@ -119,6 +125,11 @@ jobs:
         name: snitch
         path: artifacts/snitch
 
+    - name: store resharper dupfinder
+      uses: actions/upload-artifact@v2
+      with:
+        name: dupfinder
+        path: artifacts/dupfinder
   release:
     runs-on: ubuntu-latest
     needs: build
