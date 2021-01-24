@@ -18,7 +18,7 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_GENERATE_ASPNET_CERTIFICATE: false
       solutionpath: src\Dhgms.Nucleotide.sln
-      unittestprojectpath: src\Dhgms.Nucleotide\Dhgms.Nucleotide.csproj
+      unittestprojectpath: src\Dhgms.Nucleotide.UnitTests\Dhgms.Nucleotide.UnitTests.csproj
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
