@@ -61,11 +61,11 @@ jobs:
 
     - name: Run Unit Tests
       run: |
-        dotnet test ${{ env.unittestprojectpath --configuration Release --no-build /bl:artifacts\\binlog\\unittest.binlog --nologo' --collect:"XPlat Code Coverage", -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+        dotnet test ${{ env.unittestprojectpath }} --configuration Release --no-build /bl:artifacts\\binlog\\unittest.binlog --nologo' --collect:"XPlat Code Coverage", -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
     - name: Produce Nuget Packages
       run: |
-        dotnet pack ${{ env.solutionpath --configuration Release --no-build /bl:artifacts\\binlog\\pack.binlog --nologo /p:PackageOutputPath=..\..\artifacts\nuget
+        dotnet pack ${{ env.solutionpath }} --configuration Release --no-build /bl:artifacts\\binlog\\pack.binlog --nologo /p:PackageOutputPath=..\..\artifacts\nuget
 
     - name: List outdated packages
       run: |
