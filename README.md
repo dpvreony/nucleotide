@@ -38,8 +38,10 @@ This version of Nucleotide is built upon CodeGenerators.Roslyn, this has allowed
 ### Pre-requisites
 
 You will need:
-* Visual Studio 2017
-* A project using netstandard 1.4 upward
+* Visual Studio 2019
+* A project using
+  * netcore 3.1 upward
+  * C# 8 language compiler settings or later
 
 ### Before you start
 
@@ -58,14 +60,19 @@ You want to install Nucleotide in the project where you want to place your gener
 
 **In project1.**
 
-` Install-Package Dhgms.Nucleotide `
+1. ` Install-Package Dhgms.Nucleotide `
+
+1. Add Your Code Generation Models
+
+1. Inherit the Code Generation Attributes.
 
 **In project2.**
 
 1. Reference Project1.
 
-1. ` Install-Package CodeGenerators.Roslyn.BuildTime `
+1. ` Install-Package Dhgms.Nucleotide `
 
+1. Apply the Assembly Code Generation Attributes.
 
 ### Get started with a Code Generation Model
 
