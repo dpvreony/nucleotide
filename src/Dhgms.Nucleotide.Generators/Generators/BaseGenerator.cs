@@ -59,6 +59,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 .GetResult();
 
             var parseOptions = context.ParseOptions;
+            var folderGuid = Guid.NewGuid();
 
             foreach (var memberDeclarationSyntax in result)
             {
@@ -67,6 +68,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
                 var cu = SyntaxFactory.CompilationUnit().AddMembers(memberDeclarationSyntax).NormalizeWhitespace();
 
+
                 // TODO: hint name per generator, or per class?
                 var feature = "feature";
                 var guid = Guid.NewGuid();
@@ -74,10 +76,10 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
 
                 // https://github.com/dotnet/roslyn-sdk/pull/553/files
-                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
+                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath(folderGuid);
                 context.AddSource(
                     generatedSourceOutputPath,
-                    $"nucleotide.{feature}.{guid}",
+                    $"nucleotide.{feature}.{guid}.g.cs",
                     sourceText);
             }
         }
