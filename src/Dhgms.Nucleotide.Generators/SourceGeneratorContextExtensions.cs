@@ -9,7 +9,7 @@ namespace Dhgms.Nucleotide.Generators
 {
     internal static class SourceGeneratorContextExtensions
     {
-        public static string TryCreateGeneratedSourceOutputPath(this GeneratorExecutionContext context)
+        public static string TryCreateGeneratedSourceOutputPath(this GeneratorExecutionContext context, Guid folderGuid)
         {
             string generatedSourceOutputPath = null;
             if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.SaveSourceGeneratorOutput", out string saveSourceGeneratorOutputValue)
@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.Generators
                 && saveSourceGeneratorOutput
                 && context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.IntermediateOutputPath", out string intermediateOutputPath))
             {
-                generatedSourceOutputPath = Path.Combine(intermediateOutputPath, "Generated");
+                generatedSourceOutputPath = Path.Combine(intermediateOutputPath, "Generated", folderGuid.ToString());
                 Directory.CreateDirectory(generatedSourceOutputPath);
             }
 
