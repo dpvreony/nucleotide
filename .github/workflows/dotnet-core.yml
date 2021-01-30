@@ -81,7 +81,7 @@ jobs:
 
     - name: Produce Nuget Packages
       run: |
-        dotnet pack ${{ env.solutionpath }} --configuration Release --no-build /bl:artifacts\\binlog\\pack.binlog --nologo /p:PackageOutputPath=..\..\artifacts\nuget
+        dotnet pack ${{ env.solutionpath }} --configuration Release --no-build /bl:artifacts\\binlog\\pack.binlog --nologo /p:PackageOutputPath=..\..\artifacts\nuget /p:ContinuousIntegrationBuild=true
 
     - name: List outdated packages
       run: |
