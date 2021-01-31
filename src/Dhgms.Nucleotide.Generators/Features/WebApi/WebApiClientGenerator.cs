@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
-    [Generator]
     public abstract class WebApiClientGenerator : BaseClassLevelCodeGenerator<WebApiClientFeatureFlags, WebApiClientGeneratorProcessor>
     {
         protected override string GetNamespace()

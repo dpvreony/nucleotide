@@ -50,7 +50,6 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var compilation = context.Compilation;
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
             // TODO: this is running async code inside non-async
@@ -59,7 +58,6 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 .GetResult();
 
             var parseOptions = context.ParseOptions;
-            var folderGuid = Guid.NewGuid();
 
             foreach (var memberDeclarationSyntax in result)
             {
@@ -76,7 +74,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
 
                 // https://github.com/dotnet/roslyn-sdk/pull/553/files
-                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath(folderGuid);
+                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
                 context.AddSource(
                     generatedSourceOutputPath,
                     $"nucleotide.{feature}.{guid}.g.cs",
