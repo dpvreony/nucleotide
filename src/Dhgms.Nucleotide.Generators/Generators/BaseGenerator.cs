@@ -50,7 +50,6 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var compilation = context.Compilation;
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
             // TODO: this is running async code inside non-async
