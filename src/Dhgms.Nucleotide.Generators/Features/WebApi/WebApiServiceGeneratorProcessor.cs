@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
-    public class WebApiServiceGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
+    public class WebApiServiceGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         /// <inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)

@@ -37,7 +37,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string SubNamespace => null;
     }
 
-    public class ModelGenerationDetails : INucleotideGenerationModel
+    public class ModelGenerationDetails : INucleotideGenerationModel<IEntityGenerationModel>
     {
         public IEntityGenerationModel[] EntityGenerationModel => new[]
         {

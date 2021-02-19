@@ -37,10 +37,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
             where TFeatureFlags : class
-            where TGeneratorProcessor : BaseGeneratorProcessor, new()
+            where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
+            where TGenerationModel : IClassName
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
@@ -59,10 +60,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor> : Foundatio.Logging.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor>
+        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Logging.Xunit.TestWithLoggingBase
+            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
             where TFeatureFlags : class
-            where TGeneratorProcessor : BaseGeneratorProcessor, new()
+            where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
+            where TGenerationModel : IClassName
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";

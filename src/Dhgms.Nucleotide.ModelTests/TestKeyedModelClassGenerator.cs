@@ -7,6 +7,6 @@ namespace Dhgms.Nucleotide.ModelTests
     [Generator]
     public class TestKeyedModelClassGenerator : KeyedModelClassGenerator
     {
-        protected override INucleotideGenerationModel NucleotideGenerationModel => new ModelGenerationDetails();
+        protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
     }
 }

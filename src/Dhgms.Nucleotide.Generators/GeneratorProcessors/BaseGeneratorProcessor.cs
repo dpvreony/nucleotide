@@ -11,11 +11,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 {
-    public abstract class BaseGeneratorProcessor
+    public abstract class BaseGeneratorProcessor<TGenerationModel>
+        where TGenerationModel : IClassName
     {
         public abstract Task<NamespaceDeclarationSyntax> GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel nucleotideGenerationModel);
+            INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel);
 
         protected abstract string[] GetClassPrefixes();
 

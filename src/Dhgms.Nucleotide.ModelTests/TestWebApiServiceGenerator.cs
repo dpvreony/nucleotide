@@ -10,6 +10,6 @@ namespace Dhgms.Nucleotide.ModelTests
     [Generator]
     public sealed class TestWebApiServiceGenerator : WebApiServiceGenerator
     {
-        protected override INucleotideGenerationModel NucleotideGenerationModel => new ModelGenerationDetails();
+        protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
     }
 }

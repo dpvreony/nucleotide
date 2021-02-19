@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Dto
 {
-    public sealed class ResponseDtoClassGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
+    public sealed class ResponseDtoClassGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
@@ -75,7 +75,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel nucleotideGenerationModel)
+            INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
         {
             var generationModelEntityGenerationModel = nucleotideGenerationModel.EntityGenerationModel;
 

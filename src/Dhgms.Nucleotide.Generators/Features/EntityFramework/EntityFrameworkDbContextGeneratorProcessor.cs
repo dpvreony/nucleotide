@@ -14,11 +14,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     /// <summary>
     /// Code Generator for Entity Framework DB Context
     /// </summary>
-    public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor
+    public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<IEntityGenerationModel>
     {
         public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel nucleotideGenerationModel)
+            INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
         {
             var generationModelEntityGenerationModel = nucleotideGenerationModel.EntityGenerationModel;
 

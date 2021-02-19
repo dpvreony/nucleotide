@@ -3,12 +3,12 @@
     /// <summary>
     /// Model that Generator Attributes should be attached to
     /// </summary>
-    public interface INucleotideGenerationModel
+    public interface INucleotideGenerationModel<out TGenerationModel>
     {
         /// <summary>
         /// Gets a collection of Class Generation Parameters.
         /// </summary>
-        IEntityGenerationModel[] EntityGenerationModel { get; }
+        TGenerationModel[] EntityGenerationModel { get; }
 
         string RootNamespace { get; }
     }

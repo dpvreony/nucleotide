@@ -10,11 +10,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel> : ISourceGenerator
         where TFeatureFlags : class
-        where TGeneratorProcessor : BaseGeneratorProcessor, new()
+        where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
+        where TGenerationModel : IClassName
     {
-        protected abstract INucleotideGenerationModel NucleotideGenerationModel { get; }
+        protected abstract INucleotideGenerationModel<TGenerationModel> NucleotideGenerationModel { get; }
 
         protected TFeatureFlags FeatureFlags { get; }
 

@@ -1,6 +1,8 @@
-﻿namespace Dhgms.Nucleotide.Generators.Models
+﻿using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+
+namespace Dhgms.Nucleotide.Generators.Models
 {
-    public interface IObjectGenerationModel
+    public interface IObjectGenerationModel : IClassName
     {
         /// <summary>
         /// Gets the main namespace.

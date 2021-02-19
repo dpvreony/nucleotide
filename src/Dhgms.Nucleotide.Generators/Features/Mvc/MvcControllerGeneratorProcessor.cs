@@ -12,7 +12,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
     /// <summary>
     /// Generates the MVC Controllers
     /// </summary>
-    public sealed class MvcControllerGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
+    public sealed class MvcControllerGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         /// <inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)

@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
     /// <summary>
     /// Generator for Command Factory Interface
     /// </summary>
-    public sealed class CommandFactoryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public sealed class CommandFactoryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string GetClassSuffix()
         {
