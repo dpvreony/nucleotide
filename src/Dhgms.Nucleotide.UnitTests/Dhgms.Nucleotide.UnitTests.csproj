@@ -15,7 +15,7 @@
     <PackageReference Include="Foundatio.Logging.Xunit" Version="9.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
     <PackageReference Include="Moq" Version="4.16.0" />
     <PackageReference Include="NetTestRegimentation" Version="1.4.0" />
     <PackageReference Include="OpenCover" Version="4.7.922" />
