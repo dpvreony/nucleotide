@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Dhgms.Nucleotide.Generators.Generators;
+using Dhgms.Nucleotide.Generators.Models;
 
 namespace Dhgms.Nucleotide.Generators.Features.Database
 {
-    public sealed class ReferencedByEntityGenerator
+    public abstract class ReferencedByEntityGenerator : BaseGenerator<ReferencedByEntityFeatureFlags, ReferencedByEntityGeneratorProcessor, IEntityGenerationModel>
     {
+        /// <inheritdoc />
+        protected override string GetNamespace()
+        {
+            return "Database";
+        }
     }
 }
