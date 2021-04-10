@@ -16,12 +16,7 @@ namespace Dhgms.Nucleotide.Generators.Models
         /// <summary>
         /// Gets the main namespace.
         /// </summary>
-        public abstract string MainNamespaceName { get; }
-
-        /// <summary>
-        /// Gets the sub namespace, if any
-        /// </summary>
-        public abstract string SubNamespace { get; }
+        public abstract string NamespaceName { get; }
 
         /// <summary>
         /// Gets the name of the information class.
@@ -31,6 +26,7 @@ namespace Dhgms.Nucleotide.Generators.Models
         public abstract KeyType KeyType { get; }
 
         public abstract IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
+
         public abstract IInterfaceGenerationModel[] InterfaceGenerationModels { get; }
 
         /// <summary>
