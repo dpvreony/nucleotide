@@ -14,11 +14,6 @@ namespace Dhgms.Nucleotide.Generators.Models
     public abstract class EntityGenerationModel : IEntityGenerationModel
     {
         /// <summary>
-        /// Gets the main namespace.
-        /// </summary>
-        public abstract string NamespaceName { get; }
-
-        /// <summary>
         /// Gets the name of the information class.
         /// </summary>
         public abstract string ClassName { get; }
