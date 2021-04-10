@@ -67,9 +67,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
                 var cu = SyntaxFactory.CompilationUnit().AddMembers(memberDeclarationSyntax).NormalizeWhitespace();
 
-
-                // TODO: hint name per generator, or per class?
-                var feature = "feature";
+                var feature = typeof(TGeneratorProcessor).ToString();
                 var guid = Guid.NewGuid();
 
                 var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
@@ -78,7 +76,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
                 context.AddSource(
                     generatedSourceOutputPath,
-                    $"nucleotide.{feature}.{guid}.g.cs",
+                    $"{feature}.{guid}.g.cs",
                     sourceText);
             }
         }
