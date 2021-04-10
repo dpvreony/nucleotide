@@ -7,12 +7,7 @@ namespace Dhgms.Nucleotide.Generators.Models
         /// <summary>
         /// Gets the main namespace.
         /// </summary>
-        string MainNamespaceName { get; }
-
-        /// <summary>
-        /// Gets the sub namespace, if any.
-        /// </summary>
-        string SubNamespace { get; }
+        string NamespaceName { get; }
 
         /// <summary>
         /// Gets the name of the information class.
