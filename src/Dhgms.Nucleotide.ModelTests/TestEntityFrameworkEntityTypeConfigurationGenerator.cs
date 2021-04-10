@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis;
 namespace Dhgms.Nucleotide.ModelTests
 {
     [Generator]
-    public sealed class TestEntityFrameworkDbContextGenerator : EntityFrameworkDbContextGenerator
+    public sealed class TestEntityFrameworkEntityTypeConfigurationGenerator : EntityFrameworkEntityTypeConfigurationGenerator
     {
         protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
     }

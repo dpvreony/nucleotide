@@ -72,11 +72,10 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
                 var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
 
-                // https://github.com/dotnet/roslyn-sdk/pull/553/files
-                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
+                var hintName = $"{feature}.{guid}.g.cs";
+
                 context.AddSource(
-                    generatedSourceOutputPath,
-                    $"{feature}.{guid}.g.cs",
+                    hintName,
                     sourceText);
             }
         }
