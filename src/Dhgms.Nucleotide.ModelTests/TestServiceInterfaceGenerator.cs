@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Dhgms.Nucleotide.Generators;
-using Dhgms.Nucleotide.Generators.Generators;
+﻿using Dhgms.Nucleotide.Generators.Generators;
 using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis;
 

@@ -1,11 +1,9 @@
-﻿using Dhgms.Nucleotide.Generators.Features.Model;
+﻿using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Models;
-using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.ModelTests
 {
-    [Generator]
-    public sealed class TestUnkeyedModelInterfaceGenerator : UnkeyedModelInterfaceGenerator
+    public sealed class TestForiegnKeyInterfaceGenerator : ForiegnKeyInterfaceGenerator
     {
         protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
     }
