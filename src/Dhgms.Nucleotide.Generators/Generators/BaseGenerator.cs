@@ -10,11 +10,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor> : ISourceGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel> : ISourceGenerator
         where TFeatureFlags : class
-        where TGeneratorProcessor : BaseGeneratorProcessor, new()
+        where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
+        where TGenerationModel : IClassName
     {
-        protected abstract INucleotideGenerationModel NucleotideGenerationModel { get; }
+        protected abstract INucleotideGenerationModel<TGenerationModel> NucleotideGenerationModel { get; }
 
         protected TFeatureFlags FeatureFlags { get; }
 
@@ -53,33 +54,33 @@ namespace Dhgms.Nucleotide.Generators.Generators
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
             // TODO: this is running async code inside non-async
-            var result = GenerateAsync(context, CancellationToken.None)
+            var memberDeclarationSyntax = GenerateAsync(context, CancellationToken.None)
                 .GetAwaiter()
                 .GetResult();
 
             var parseOptions = context.ParseOptions;
 
-            foreach (var memberDeclarationSyntax in result)
-            {
-                // TODO: need to review this might be better way than generate, loop, copy.
-                // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
+            // TODO: need to review this might be better way than generate, loop, copy.
+            // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
 
-                var cu = SyntaxFactory.CompilationUnit().AddMembers(memberDeclarationSyntax).NormalizeWhitespace();
+            var cu = SyntaxFactory.CompilationUnit()
+                .AddMembers(memberDeclarationSyntax)
+                .NormalizeWhitespace();
 
+            var feature = typeof(TGeneratorProcessor).ToString();
+            var guid = Guid.NewGuid();
 
-                // TODO: hint name per generator, or per class?
-                var feature = "feature";
-                var guid = Guid.NewGuid();
+            var sourceText = SyntaxFactory.SyntaxTree(
+                cu,
+                parseOptions,
+                encoding: Encoding.UTF8)
+                .GetText();
 
-                var sourceText = SyntaxFactory.SyntaxTree(cu, parseOptions, encoding: Encoding.UTF8).GetText();
+            var hintName = $"{feature}.{guid}.g.cs";
 
-                // https://github.com/dotnet/roslyn-sdk/pull/553/files
-                var generatedSourceOutputPath = context.TryCreateGeneratedSourceOutputPath();
-                context.AddSource(
-                    generatedSourceOutputPath,
-                    $"nucleotide.{feature}.{guid}.g.cs",
-                    sourceText);
-            }
+            context.AddSource(
+                hintName,
+                sourceText);
         }
 
         protected abstract string GetNamespace();
@@ -91,7 +92,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
         /// <param name="progress">A way to report diagnostic messages.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
-        private async Task<SyntaxList<MemberDeclarationSyntax>> GenerateAsync(
+        private async Task<MemberDeclarationSyntax> GenerateAsync(
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
@@ -107,40 +108,8 @@ namespace Dhgms.Nucleotide.Generators.Generators
             var result = await generatorProcessor.GenerateObjects(namespaceDeclaration, generationModel)
                 .ConfigureAwait(false);
 
-            return await GetSyntaxList(result).ConfigureAwait(false);
-        }
-
-        private async Task<SyntaxList<MemberDeclarationSyntax>> ReportErrorInNamespace(
-            GeneratorExecutionContext progress,
-            string namespaceName,
-            string comment)
-        {
-            var errorDiagnostic = Diagnostic.Create(
-                "NUC0001",
-                "Nucleotide Generation",
-                "Problem working out the model to be used for generation",
-                DiagnosticSeverity.Error,
-                DiagnosticSeverity.Error,
-                true,
-                0,
-                "Model load error");
-
-            progress.ReportDiagnostic(errorDiagnostic);
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName(namespaceName))
-                .WithLeadingTrivia(SyntaxFactory.Comment(comment));
-
-            return await GetSyntaxList(namespaceDeclaration);
-        }
-
-        private async Task<SyntaxList<MemberDeclarationSyntax>> GetSyntaxList(NamespaceDeclarationSyntax namespaceDeclaration)
-        {
-            var nodes = new MemberDeclarationSyntax[]
-            {
-                namespaceDeclaration
-            };
-
-            var results = SyntaxFactory.List(nodes);
-            return await Task.FromResult(results);
+            return await Task.FromResult(result)
+                .ConfigureAwait(false);
         }
     }
 }

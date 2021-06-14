@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 {
-    public class ServiceInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public class ServiceInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string[] GetClassPrefixes() => null;
 

@@ -8,7 +8,7 @@ namespace Dhgms.Nucleotide.Generators.Features.SignalR
     /// <summary>
     /// Generator for SignalR Hub Interface
     /// </summary>
-    public sealed class SignalRHubInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public sealed class SignalRHubInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string[] GetClassPrefixes() => null;
 

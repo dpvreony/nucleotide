@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Model
 {
-    public sealed class UnkeyedModelInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public sealed class UnkeyedModelInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string GetClassSuffix()
         {

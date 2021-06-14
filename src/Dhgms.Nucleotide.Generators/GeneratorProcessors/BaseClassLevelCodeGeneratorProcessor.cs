@@ -11,11 +11,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 {
-    public abstract class BaseClassLevelCodeGeneratorProcessor : BaseGeneratorProcessor
+    public abstract class BaseClassLevelCodeGeneratorProcessor<TGenerationModel> : BaseGeneratorProcessor<TGenerationModel>
+        where TGenerationModel : IClassName
     {
         public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel nucleotideGenerationModel)
+            INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel)
         {
             var generationModelEntityGenerationModel = nucleotideGenerationModel.EntityGenerationModel;
 
@@ -67,7 +68,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         }
 
         protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
-            IEntityGenerationModel entityDeclaration,
+            TGenerationModel entityDeclaration,
             string prefix,
             string suffix)
         {
@@ -158,9 +159,9 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
         protected abstract string[] GetClassLevelCommentRemarks(string entityName);
 
-        protected abstract IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration);
+        protected abstract IList<Tuple<string, IList<string>>> GetClassAttributes(TGenerationModel entityDeclaration);
 
-        protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel entityGenerationModel)
+        protected MemberDeclarationSyntax[] GetMembers(string className, string entityName, TGenerationModel entityGenerationModel)
         {
             var result = new List<MemberDeclarationSyntax>();
 
@@ -253,13 +254,13 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel);
+        protected abstract MethodDeclarationSyntax[] GetMethodDeclarations(TGenerationModel entityGenerationModel);
 
         /// <summary>
         /// Gets the property declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel);
+        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(TGenerationModel entityGenerationModel);
 
         private ConstructorDeclarationSyntax GenerateConstructor(
             string className,

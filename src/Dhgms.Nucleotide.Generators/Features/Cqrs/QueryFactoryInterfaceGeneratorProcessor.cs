@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
     /// <summary>
     /// Generator for Query Factory Interface
     /// </summary>
-    public sealed class QueryFactoryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public sealed class QueryFactoryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string[] GetClassPrefixes() => Array.Empty<string>();
 

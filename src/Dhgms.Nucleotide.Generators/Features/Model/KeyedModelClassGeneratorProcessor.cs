@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
     /// <summary>
     /// Generates models
     /// </summary>
-    public class KeyedModelClassGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor
+    public class KeyedModelClassGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
 
         protected override bool GetWhetherClassShouldBePartialClass() => false;

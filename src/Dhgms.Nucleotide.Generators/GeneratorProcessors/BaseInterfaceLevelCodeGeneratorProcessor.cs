@@ -11,11 +11,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 {
-    public abstract class BaseInterfaceLevelCodeGeneratorProcessor : BaseGeneratorProcessor
+    public abstract class BaseInterfaceLevelCodeGeneratorProcessor<TGenerationModel> : BaseGeneratorProcessor<TGenerationModel>
+        where TGenerationModel : IClassName
     {
         public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel nucleotideGenerationModel)
+            INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel)
         {
             var generationModelEntityGenerationModel = nucleotideGenerationModel.EntityGenerationModel;
 
@@ -48,7 +49,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
         protected abstract string GetClassSuffix();
 
-        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(IEntityGenerationModel entityDeclaration, string prefix, string suffix)
+        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(TGenerationModel entityDeclaration, string prefix, string suffix)
         {
             var className = $"I{prefix}{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(entityDeclaration, prefix);
@@ -68,9 +69,9 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             return await Task.FromResult(declaration);
         }
 
-        protected abstract string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration);
+        protected abstract string[] GetInterfaceSummary(TGenerationModel entityDeclaration);
 
-        protected MemberDeclarationSyntax[] GetMembers(IEntityGenerationModel entityGenerationModel, string prefix)
+        protected MemberDeclarationSyntax[] GetMembers(TGenerationModel entityGenerationModel, string prefix)
         {
             var result = new List<MemberDeclarationSyntax>();
 
@@ -84,7 +85,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         }
 
         protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(
-            IEntityGenerationModel entityGenerationModel, string prefix);
+            TGenerationModel entityGenerationModel, string prefix);
 
         /// <summary>
         /// Gets the method declarations to be generated
@@ -96,7 +97,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix);
+        protected abstract string[] GetBaseInterfaces(TGenerationModel entityGenerationModel, string prefix);
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo)
         {
@@ -140,7 +141,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             return result;
         }
 
-        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(IEntityGenerationModel entityDeclaration)
+        private IEnumerable<SyntaxTrivia> GetInterfaceLeadingTrivia(TGenerationModel entityDeclaration)
         {
             var interfaceSummary = GetInterfaceSummary(entityDeclaration);
 

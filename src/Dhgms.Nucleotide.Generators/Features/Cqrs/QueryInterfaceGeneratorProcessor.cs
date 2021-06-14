@@ -8,7 +8,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
     /// <summary>
     /// Generator for Query Interface
     /// </summary>
-    public sealed class QueryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor
+    public sealed class QueryInterfaceGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         protected override string[] GetClassPrefixes() => new []{ "List", "View" };
 
