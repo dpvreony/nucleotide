@@ -9,6 +9,7 @@
     <Owners>dpvreony</Owners>
     <PackageTags>Source Generation</PackageTags>
     <PackageReleaseNotes>https://github.com/dpvreony/nucleotide/releases</PackageReleaseNotes>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/dpvreony/nucleotide</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -32,7 +33,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$(IsTestProject)">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
     <PackageReference Include="Xunit.StaFact" Version="1.0.37" />
@@ -52,7 +53,7 @@
   </ItemGroup>
   
   <ItemGroup>	
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.194" PrivateAssets="all" />	
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.205" PrivateAssets="all" />	
   </ItemGroup>
 
   <ItemGroup Condition="$(IsWasmProject) == ''">
@@ -61,5 +62,9 @@
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
   </ItemGroup>
- </Project>
+
+  <ItemGroup>
+    <None Include="..\..\readme.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+</Project>
 
