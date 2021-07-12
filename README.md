@@ -6,6 +6,10 @@
 
 To provide a tool that automatically generates repeditive .NET code to allow better use of developers time.
 
+## Current Status
+
+This project is in a beta phase and tied to work being done in https://github.com/dpvreony/whipstaff, development is slow due to COVID workload.
+
 ## Introduction
 
 Nucleotide is a library to aid in the generation of .NET code for manipulation the following types of objects:
