@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" />
-    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
