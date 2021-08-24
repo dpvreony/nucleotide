@@ -8,21 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Whipstaff.AspNetCore" Version="5.0.12" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="$(ProjectDir)..\Dhgms.Nucleotide.ModelTests\bin\$(Configuration)\netstandard2.0\Dhgms.Nucleotide.SampleGenerator.dll" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
-  </PropertyGroup>
-
-  <Target Name="GetDependencyTargetPaths">
-    <ItemGroup>
-      <TargetPathWithTargetPlatformMoniker Include="$(Outdir)Dhgms.Nucleotide.Generators.dll" IncludeRuntimeDependency="false" />
-    </ItemGroup>
-  </Target>
 </Project>
