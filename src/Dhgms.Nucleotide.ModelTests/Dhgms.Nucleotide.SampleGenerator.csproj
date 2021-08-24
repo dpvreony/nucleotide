@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" PrivateAssets="all"  ReferenceOutputAssembly="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="$(ProjectDir)..\Dhgms.Nucleotide.Generators\bin\$(Configuration)\netstandard2.0\Dhgms.Nucleotide.Generators.dll" />
+  </ItemGroup>
+
+  <!--<PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PKGDhgms_Nucleotide_Generators)\lib\netstandard2.0\Dhgms.Nucleotide.Generators.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>-->
+</Project>

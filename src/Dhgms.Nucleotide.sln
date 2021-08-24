@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide", "Dhgms.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.UnitTests", "Dhgms.Nucleotide.UnitTests\Dhgms.Nucleotide.UnitTests.csproj", "{46CF8EB7-1526-44BC-BB6E-DAF6F0A33155}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.ModelTests", "Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.ModelTests.csproj", "{8B50F266-A8FC-4766-B953-88C29BDC93D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.SampleGenerator", "Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj", "{8B50F266-A8FC-4766-B953-88C29BDC93D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.Analyzers", "Dhgms.Nucleotide.Analyzers\Dhgms.Nucleotide.Analyzers.csproj", "{DA9882C5-9A73-4CB5-8AE2-18ABA0854DE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.GenerationTests", "Dhgms.Nucleotide.GenerationTests\Dhgms.Nucleotide.GenerationTests.csproj", "{91B35FF3-3B4A-4F63-B437-302756C4EF71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dhgms.Nucleotide.SampleApp", "Dhgms.Nucleotide.GenerationTests\Dhgms.Nucleotide.SampleApp.csproj", "{91B35FF3-3B4A-4F63-B437-302756C4EF71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3B51307A-81A9-485E-841F-A023FDE3B148}"
 	ProjectSection(SolutionItems) = preProject

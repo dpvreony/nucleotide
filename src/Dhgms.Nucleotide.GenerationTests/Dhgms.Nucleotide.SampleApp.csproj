@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <LangVersion>9</LangVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Whipstaff.AspNetCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" PrivateAssets="all" ReferenceOutputAssembly="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="$(ProjectDir)..\Dhgms.Nucleotide.ModelTests\bin\$(Configuration)\netstandard2.0\Dhgms.Nucleotide.SampleGenerator.dll" />
+  </ItemGroup>
+
+</Project>
