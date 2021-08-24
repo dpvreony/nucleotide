@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
 
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName) =>
-            $"Dhgms.AspNetCoreContrib.Controllers.CrudController<{entityName}Controller, Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto>";
+            $"Whipstaff.AspNetCore.CrudController<{entityName}Controller, Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto>";
 
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {

@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             var className = entityGenerationModel.ClassName;
             return new []
             {
-                $"Dhgms.AspNetCoreContrib.Abstractions.IAuditableQueryFactory<Queries.IList{className}Query, RequestDtos.List{className}RequestDto, ResponseDtos.List{className}ResponseDto, Queries.IView{className}Query, ResponseDtos.View{className}ResponseDto>"
+                $"Whipstaff.Core.IAuditableQueryFactory<Queries.IList{className}Query, RequestDtos.List{className}RequestDto, ResponseDtos.List{className}ResponseDto, Queries.IView{className}Query, ResponseDtos.View{className}ResponseDto>"
             };
         }
 
