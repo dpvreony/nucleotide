@@ -53,7 +53,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return new List<string>()
             {
                 "Microsoft.EntityFrameworkCore",
-                "Dhgms.EfCoreContrib"
             };
         }
 
