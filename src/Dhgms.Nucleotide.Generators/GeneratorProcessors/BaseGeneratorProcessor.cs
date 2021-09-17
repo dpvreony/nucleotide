@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
     public abstract class BaseGeneratorProcessor<TGenerationModel>
         where TGenerationModel : IClassName
     {
-        public abstract Task<NamespaceDeclarationSyntax> GenerateObjects(
+        public abstract NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel);
 

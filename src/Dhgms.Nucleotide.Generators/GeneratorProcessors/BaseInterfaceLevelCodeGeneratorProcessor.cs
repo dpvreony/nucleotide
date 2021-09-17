@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
     public abstract class BaseInterfaceLevelCodeGeneratorProcessor<TGenerationModel> : BaseGeneratorProcessor<TGenerationModel>
         where TGenerationModel : IClassName
     {
-        public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
+        public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel)
         {
@@ -39,17 +39,17 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             {
                 foreach (var prefix in prefixes)
                 {
-                    classDeclarations.Add(await GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                    classDeclarations.Add(GetInterfaceDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
                 }
 
             }
 
-            return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
+            return namespaceDeclaration.AddMembers(classDeclarations.ToArray());
         }
 
         protected abstract string GetClassSuffix();
 
-        protected virtual async Task<MemberDeclarationSyntax> GetInterfaceDeclarationSyntax(TGenerationModel entityDeclaration, string prefix, string suffix)
+        protected virtual MemberDeclarationSyntax GetInterfaceDeclarationSyntax(TGenerationModel entityDeclaration, string prefix, string suffix)
         {
             var className = $"I{prefix}{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(entityDeclaration, prefix);
@@ -66,7 +66,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
         protected abstract string[] GetInterfaceSummary(TGenerationModel entityDeclaration);

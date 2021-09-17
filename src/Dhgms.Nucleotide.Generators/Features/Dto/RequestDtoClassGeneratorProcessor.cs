@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
             return Array.Empty<Tuple<string, IList<string>>>();
         }
 
-        public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
+        public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
         {
@@ -66,17 +66,17 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
             var suffix = GetClassSuffix();
             foreach (var generationModelClassGenerationParameter in generationModelEntityGenerationModel)
             {
-                classDeclarations.Add(await GetAddClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
-                classDeclarations.Add(await GetDeleteClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
-                classDeclarations.Add(await GetListClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
-                classDeclarations.Add(await GetViewClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
-                classDeclarations.Add(await GetUpdateClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(GetAddClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(GetDeleteClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(GetListClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(GetViewClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
+                classDeclarations.Add(GetUpdateClassDeclarationSyntax(generationModelClassGenerationParameter, suffix));
             }
 
-            return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
+            return namespaceDeclaration.AddMembers(classDeclarations.ToArray());
         }
 
-        private async Task<MemberDeclarationSyntax> GetAddClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        private MemberDeclarationSyntax GetAddClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"Add{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
@@ -91,10 +91,10 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
-        private async Task<MemberDeclarationSyntax> GetDeleteClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        private MemberDeclarationSyntax GetDeleteClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"Delete{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
@@ -109,10 +109,10 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
-        private async Task<MemberDeclarationSyntax> GetListClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        private MemberDeclarationSyntax GetListClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"List{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
@@ -127,10 +127,10 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
-        private async Task<MemberDeclarationSyntax> GetViewClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        private MemberDeclarationSyntax GetViewClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"View{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
@@ -145,10 +145,10 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
-        private async Task<MemberDeclarationSyntax> GetUpdateClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
+        private MemberDeclarationSyntax GetUpdateClassDeclarationSyntax(IEntityGenerationModel entityDeclaration, string suffix)
         {
             var className = $"Update{entityDeclaration.ClassName}{suffix}";
             var members = GetMembers(className, entityDeclaration.ClassName, entityDeclaration);
@@ -163,7 +163,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)

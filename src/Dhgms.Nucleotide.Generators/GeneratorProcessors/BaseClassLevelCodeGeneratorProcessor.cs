@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
     public abstract class BaseClassLevelCodeGeneratorProcessor<TGenerationModel> : BaseGeneratorProcessor<TGenerationModel>
         where TGenerationModel : IClassName
     {
-        public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
+        public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<TGenerationModel> nucleotideGenerationModel)
         {
@@ -39,14 +39,14 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             {
                 foreach (var prefix in prefixes)
                 {
-                    classDeclarations.Add(await GetClassDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
+                    classDeclarations.Add(GetClassDeclarationSyntax(generationModelClassGenerationParameter, prefix, suffix));
                 }
             }
 
             var usings = GetUsingDirectives();
             namespaceDeclaration = namespaceDeclaration.AddUsings(usings);
 
-            return await Task.FromResult(namespaceDeclaration.AddMembers(classDeclarations.ToArray()));
+            return namespaceDeclaration.AddMembers(classDeclarations.ToArray());
         }
 
         protected abstract string GetClassSuffix();
@@ -67,7 +67,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             return directives;
         }
 
-        protected virtual async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(
+        protected virtual MemberDeclarationSyntax GetClassDeclarationSyntax(
             TGenerationModel entityDeclaration,
             string prefix,
             string suffix)
@@ -127,7 +127,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             var remarks = GetClassLevelCommentRemarks(entityName);
             declaration = DoCommentSection(declaration, remarks);
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
         protected abstract bool GetWhetherClassShouldBePartialClass();
