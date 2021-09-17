@@ -54,9 +54,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
             context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
             // TODO: this is running async code inside non-async
-            var memberDeclarationSyntax = GenerateAsync(context, CancellationToken.None)
-                .GetAwaiter()
-                .GetResult();
+            var memberDeclarationSyntax = Generate(context, CancellationToken.None);
 
             var parseOptions = context.ParseOptions;
 
@@ -92,7 +90,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
         /// <param name="progress">A way to report diagnostic messages.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
-        private async Task<MemberDeclarationSyntax> GenerateAsync(
+        private MemberDeclarationSyntax Generate(
             GeneratorExecutionContext context,
             CancellationToken cancellationToken)
         {
@@ -105,11 +103,11 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
             var generatorProcessor = new TGeneratorProcessor();
 
-            var result = await generatorProcessor.GenerateObjects(namespaceDeclaration, generationModel)
-                .ConfigureAwait(false);
+            var result = generatorProcessor.GenerateObjects(
+                namespaceDeclaration,
+                generationModel);
 
-            return await Task.FromResult(result)
-                .ConfigureAwait(false);
+            return result;
         }
     }
 }

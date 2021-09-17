@@ -16,7 +16,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     /// </summary>
     public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<IEntityGenerationModel>
     {
-        public override async Task<NamespaceDeclarationSyntax> GenerateObjects(
+        public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
         {
@@ -31,14 +31,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
             var suffix = GetClassSuffix();
-            classDeclarations.Add(await GetClassDeclarationSyntax(generationModelEntityGenerationModel, suffix));
+            classDeclarations.Add(GetClassDeclarationSyntax(generationModelEntityGenerationModel, suffix));
 
             var usings = GetUsingDirectives();
             namespaceDeclaration = namespaceDeclaration.AddUsings(usings);
 
             namespaceDeclaration = namespaceDeclaration.AddMembers(classDeclarations.ToArray());
 
-            return await Task.FromResult(namespaceDeclaration);
+            return namespaceDeclaration;
         }
 
         private MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel[] generationModelEntityGenerationModel)
@@ -192,7 +192,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         //    return result.ToArray();
         //}
 
-        private async Task<MemberDeclarationSyntax> GetClassDeclarationSyntax(IEntityGenerationModel[] generationModelEntityGenerationModel, string suffix)
+        private MemberDeclarationSyntax GetClassDeclarationSyntax(IEntityGenerationModel[] generationModelEntityGenerationModel, string suffix)
         {
             // TODO : our model needs a parent name.
             var entityName = "Test";
@@ -241,7 +241,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var remarks = GetClassLevelCommentRemarks(entityName);
             declaration = DoCommentSection(declaration, remarks);
 
-            return await Task.FromResult(declaration);
+            return declaration;
         }
 
         private string[] GetClassLevelCommentSummary(string entityName)
