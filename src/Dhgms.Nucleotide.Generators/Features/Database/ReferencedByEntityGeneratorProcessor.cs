@@ -31,19 +31,19 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         /// <inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <inheritdoc />
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
