@@ -10,6 +10,7 @@ using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -104,6 +105,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     comp,
                     out var generatorDiags,
                     instance);
+
+                foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
+                {
+                    this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
+                }
             }
 
             [Fact]
@@ -124,6 +130,11 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     comp,
                     out var generatorDiags,
                     instance);
+
+                foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
+                {
+                    this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
+                }
             }
 
             protected BaseGenerateAsyncMethod(ITestOutputHelper output) : base(output)
