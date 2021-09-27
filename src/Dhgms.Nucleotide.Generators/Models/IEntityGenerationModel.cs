@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IEntityGenerationModel.cs" company="DHGMS Solutions">
-//   Licensed under GNU General Public License version 2 (GPLv2)
-// </copyright>
-// <summary>
-//   Interface for the class generation parameters
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using Dhgms.Nucleotide.Generators.PropertyInfo;
+﻿using Dhgms.Nucleotide.Generators.PropertyInfo;
 
 namespace Dhgms.Nucleotide.Generators.Models
 {
