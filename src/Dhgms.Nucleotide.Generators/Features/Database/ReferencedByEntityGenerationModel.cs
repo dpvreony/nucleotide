@@ -14,16 +14,19 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         /// <param name="entityName">The name of the entity.</param>
         /// <param name="entityType">The type for the entity</param>
         /// <param name="propertyName">The name of the navigation property</param>
+        /// <param name="keyType">The type for the foreign key.</param>
         public ReferencedByEntityGenerationModel(
             string namespaceForInterface,
             string entityName,
             string entityType,
-            string propertyName)
+            string propertyName,
+            string keyType)
         {
             NamespaceForInterface = namespaceForInterface;
             ClassName = entityName;
             EntityType = entityType;
             PropertyName = propertyName;
+            KeyType = keyType;
         }
 
         /// <summary>
@@ -46,5 +49,9 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         /// </summary>
         public string PropertyName { get; }
 
+        /// <summary>
+        /// Gets the type for the foreign key.
+        /// </summary>
+        public string KeyType { get; }
     }
 }

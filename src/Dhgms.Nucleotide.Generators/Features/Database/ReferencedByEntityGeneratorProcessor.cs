@@ -40,22 +40,34 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
             };
 
-            var summary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
+            var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
-            var type = SyntaxFactory.ParseTypeName(entityGenerationModel.EntityType);
-            var identifier = entityGenerationModel.PropertyName;
+            var pocoType = SyntaxFactory.ParseTypeName(entityGenerationModel.EntityType);
+            var pocoIdentifier = entityGenerationModel.PropertyName;
 
-            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+            var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(
                     SyntaxFactory.AccessorList(
                         SyntaxFactory.List(accessorList)
                     ))
-                .WithLeadingTrivia(summary);
+                .WithLeadingTrivia(pocoSummary);
+
+            var foreignKeySummary = GetSummary(new[] { $"Gets or Sets the Foreign Key for {entityGenerationModel.ClassName}" });
+            var foreignKeyType = SyntaxFactory.ParseTypeName(entityGenerationModel.KeyType);
+            var foreignKeyIdentifier = $"{entityGenerationModel.PropertyName}Id";
+            var foreignKey = SyntaxFactory.PropertyDeclaration(foreignKeyType, foreignKeyIdentifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(foreignKeySummary);
 
             return new []
             {
-                result,
+                foreignKey,
+                pocoObject,
             };
         }
 
