@@ -24,7 +24,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
 
             var attributes = GetAttributesForProperty(propertyInfo);

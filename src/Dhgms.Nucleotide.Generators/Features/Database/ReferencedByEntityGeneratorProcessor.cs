@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
 
             var summary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
-            var type = SyntaxFactory.ParseName(entityGenerationModel.EntityType);
+            var type = SyntaxFactory.ParseTypeName(entityGenerationModel.EntityType);
             var identifier = entityGenerationModel.PropertyName;
 
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
