@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
+    public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
@@ -20,7 +19,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         ///<inheritdoc />
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
@@ -57,7 +56,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -87,7 +86,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(EntityFrameworkModelEntityGenerationModel entityDeclaration)
         {
             return null;
         }

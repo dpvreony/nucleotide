@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 
@@ -31,5 +32,36 @@ namespace Dhgms.Nucleotide.ModelTests
         };
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
+    public static class SampleEntityFrameworkModelGenerationModel
+    {
+        public static EntityFrameworkModelEntityGenerationModel[] EntityFrameworkModelEntityGenerationModels => new[]
+        {
+            new EntityFrameworkModelEntityGenerationModel
+            {
+                ClassName = "Salutation",
+            },
+
+            new EntityFrameworkModelEntityGenerationModel
+            {
+                ClassName = "Person",
+            },
+
+            new EntityFrameworkModelEntityGenerationModel
+            {
+                ClassName = "Gender",
+            },
+
+            new EntityFrameworkModelEntityGenerationModel
+            {
+                ClassName = "User",
+            },
+
+            new EntityFrameworkModelEntityGenerationModel
+            {
+                ClassName = "Address",
+            },
+        };
     }
 }
