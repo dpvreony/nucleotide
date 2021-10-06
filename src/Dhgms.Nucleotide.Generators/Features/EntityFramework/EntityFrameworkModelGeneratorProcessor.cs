@@ -13,15 +13,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
+        ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
+        ///<inheritdoc />
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
+        ///<inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
 
+        ///<inheritdoc />
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
             var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
@@ -46,16 +50,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return result;
         }
 
+        ///<inheritdoc />
         protected override string GetClassSuffix()
         {
             return "EfModel";
         }
 
+        ///<inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override IList<string> GetUsings()
         {
             return new List<string>
@@ -64,6 +71,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             };
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]
@@ -72,35 +80,43 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             };
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassLevelCommentRemarks(string entityName)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override IList<string> GetBaseConstructorArguments() => null;
 
+        ///<inheritdoc />
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override string GetBaseClass(string entityName)
         {
             return $"Models.{entityName}Model";
         }
 
+        ///<inheritdoc />
         protected override IList<string> GetImplementedInterfaces(string entityName)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassPrefixes() => null;
 
+        ///<inheritdoc />
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
         {
             var nodes = new List<AttributeSyntax>();

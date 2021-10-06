@@ -25,7 +25,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         {
             return new[]
             {
-                "Represents a one to many relationship where this is the one (principal) side.",
+                $"Represents a one to many relationship for the {entityDeclaration.ClassName} entity where this is the one (principal) side.",
             };
         }
 

@@ -16,6 +16,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     /// </summary>
     public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<IEntityGenerationModel>
     {
+        ///<inheritdoc />
         public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
