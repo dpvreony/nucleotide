@@ -94,25 +94,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
 
             [Fact]
-            public async Task GeneratesErrorForNonNucleotideGenerationModel()
-            {
-                var comp = CreateCompilation(string.Empty);
-
-                var factory = GetFactory();
-                var attributeData = new MockAttributeData(new TypedConstant());
-                var instance = factory(attributeData);
-                var newComp = RunGenerators(
-                    comp,
-                    out var generatorDiags,
-                    instance);
-
-                foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
-                {
-                    this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
-                }
-            }
-
-            [Fact]
             //[MemberData(nameof(GeneratesCodeMemberData))]
             public async Task GeneratesCodeForSimpleNucleotideGenerationModel()
             {
