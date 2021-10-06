@@ -25,7 +25,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         {
             return new[]
             {
-                "Represents a entity that is referencing this entity as the principal entity (one) in a one to many relationship.",
+                "Represents a one to many relationship where this is the one (principal) side.",
             };
         }
 
@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
 
             var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
-            var pocoType = SyntaxFactory.ParseTypeName(entityGenerationModel.EntityType);
+            var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.ICollection<{entityGenerationModel.EntityType}>");
             var pocoIdentifier = entityGenerationModel.PropertyName;
 
             var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
