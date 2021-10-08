@@ -1,4 +1,5 @@
-﻿using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+﻿using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -32,26 +33,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         /// <inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(ReferencedByEntityGenerationModel entityGenerationModel, string prefix)
         {
-            var accessorList = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-            };
-
             var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
             var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<{entityGenerationModel.EntityType}>");
-            var pocoIdentifier = entityGenerationModel.PropertyName;
+            var pocoIdentifier = entityGenerationModel.SingularPropertyName;
 
-            var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .WithAccessorList(
-                    SyntaxFactory.AccessorList(
-                        SyntaxFactory.List(accessorList)
-                    ))
-                .WithLeadingTrivia(pocoSummary);
+            var pocoObject = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, pocoIdentifier, pocoSummary);
 
             return new []
             {

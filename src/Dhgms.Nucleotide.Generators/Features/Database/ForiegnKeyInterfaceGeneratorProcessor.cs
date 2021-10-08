@@ -44,7 +44,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
             var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
             var pocoType = SyntaxFactory.ParseTypeName(entityGenerationModel.EntityType);
-            var pocoIdentifier = entityGenerationModel.PropertyName;
+            var pocoIdentifier = entityGenerationModel.SingularPropertyName;
 
             var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
@@ -56,7 +56,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
 
             var foreignKeySummary = GetSummary(new[] { $"Gets or Sets the Foreign Key for {entityGenerationModel.ClassName}" });
             var foreignKeyType = SyntaxFactory.ParseTypeName(entityGenerationModel.KeyType);
-            var foreignKeyIdentifier = $"{entityGenerationModel.PropertyName}Id";
+            var foreignKeyIdentifier = $"{entityGenerationModel.SingularPropertyName}Id";
             var foreignKey = SyntaxFactory.PropertyDeclaration(foreignKeyType, foreignKeyIdentifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(

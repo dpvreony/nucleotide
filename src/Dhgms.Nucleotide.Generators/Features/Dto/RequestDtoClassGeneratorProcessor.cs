@@ -26,7 +26,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<MethodDeclarationSyntax>();
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<PropertyDeclarationSyntax>();
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel) => Array.Empty<PropertyDeclarationSyntax>();
 
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         protected override string GetBaseClass(string entityName) => null;
 
-        protected override IList<string> GetImplementedInterfaces(string entityName) => Array.Empty<string>();
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel) => Array.Empty<string>();
 
         protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {

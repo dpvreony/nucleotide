@@ -19,13 +19,15 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
             string namespaceForInterface,
             string entityName,
             string entityType,
-            string propertyName,
+            string singularPropertyName,
+            string pluralPropertyName,
             string keyType)
         {
             NamespaceForInterface = namespaceForInterface;
             ClassName = entityName;
             EntityType = entityType;
-            PropertyName = propertyName;
+            SingularPropertyName = singularPropertyName;
+            PluralPropertyName = pluralPropertyName;
             KeyType = keyType;
         }
 
@@ -45,9 +47,14 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         public string EntityType { get; }
 
         /// <summary>
-        /// Gets the name of the navigation property.
+        /// Gets the singular name of the navigation property.
         /// </summary>
-        public string PropertyName { get; }
+        public string SingularPropertyName { get; }
+
+        /// <summary>
+        /// Gets the plural name of the navigation property.
+        /// </summary>
+        public string PluralPropertyName { get; }
 
         /// <summary>
         /// Gets the type for the foreign key.

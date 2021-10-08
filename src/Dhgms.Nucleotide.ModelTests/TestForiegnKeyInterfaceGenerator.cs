@@ -16,6 +16,7 @@ namespace Dhgms.Nucleotide.ModelTests
                     "SomeEntityName",
                     "global::Dhgms.Nucleotide.GenerationTests.EfModels.UserEfModel",
                     "PropertyName",
+                    "PropertyNames",
                     "int")
             });
     }

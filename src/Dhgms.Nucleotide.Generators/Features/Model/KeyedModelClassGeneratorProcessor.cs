@@ -52,7 +52,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return null;
         }
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             var idColumn = GetIdColumn(entityGenerationModel.KeyType);
 
@@ -109,11 +109,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return $"Unkeyed{entityName}Model";
         }
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return new List<string>
             {
-                $"I{entityName}Model"
+                $"I{entityGenerationModel.ClassName}Model"
             };
         }
 

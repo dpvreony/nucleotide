@@ -16,6 +16,7 @@ namespace Dhgms.Nucleotide.ModelTests
                     "User",
                     "global::Dhgms.Nucleotide.GenerationTests.EfModels.UserEfModel",
                     "User",
+                    "Users",
                     "int"),
 
                 new ReferencedByEntityGenerationModel(
@@ -23,6 +24,7 @@ namespace Dhgms.Nucleotide.ModelTests
                     "Address",
                     "global::Dhgms.Nucleotide.GenerationTests.EfModels.AddressEfModel",
                     "Address",
+                    "Addresses",
                     "int")
             });
     }

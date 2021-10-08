@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         ///<inheritdoc />
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return Array.Empty<PropertyDeclarationSyntax>();
         }
@@ -100,11 +100,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel generationModel)
         {
             return new List<string>
             {
-                $"IEntityTypeConfiguration<EfModels.{entityName}EfModel>"
+                $"IEntityTypeConfiguration<EfModels.{generationModel.ClassName}EfModel>"
             };
         }
 

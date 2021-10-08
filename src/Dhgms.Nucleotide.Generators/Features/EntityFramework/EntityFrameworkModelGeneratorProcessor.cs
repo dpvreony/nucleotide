@@ -19,9 +19,36 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         ///<inheritdoc />
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            if (entityGenerationModel?.ParentEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+                {
+                    var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
+
+                    var pocoType = SyntaxFactory.ParseTypeName($"{referencedByEntityGenerationModel.NamespaceForInterface}.{referencedByEntityGenerationModel.EntityType}");
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        pocoType,
+                        referencedByEntityGenerationModel.SingularPropertyName,
+                        inheritDocSyntaxTrivia);
+                }
+            }
+
+            if (entityGenerationModel?.ChildEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
+                {
+                    var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<{referencedByEntityGenerationModel.NamespaceForInterface}.{referencedByEntityGenerationModel.EntityType}>");
+                    var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        pocoType,
+                        referencedByEntityGenerationModel.PluralPropertyName,
+                        inheritDocSyntaxTrivia);
+                }
+            }
         }
 
         ///<inheritdoc />
@@ -107,9 +134,23 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            return null;
+            if (entityGenerationModel?.ParentEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+                {
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ReferencedByEntity";
+                }
+            }
+
+            if (entityGenerationModel?.ChildEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
+                {
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ForeignKey";
+                }
+            }
         }
 
         ///<inheritdoc />

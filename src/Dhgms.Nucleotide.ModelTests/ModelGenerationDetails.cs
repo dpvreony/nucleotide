@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -36,21 +37,64 @@ namespace Dhgms.Nucleotide.ModelTests
 
     public static class SampleEntityFrameworkModelGenerationModel
     {
+        public static string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+        public static string DatabaseRootNamespace => $"{RootNamespace}.Database";
+
+        public static ReferencedByEntityGenerationModel SalutationEntityRelationship =>
+            new ReferencedByEntityGenerationModel(
+                DatabaseRootNamespace,
+                "Salutation",
+                "Salutation",
+                "Salutation",
+                "Salutations",
+                "int");
+
+        public static ReferencedByEntityGenerationModel GenderEntityRelationship =>
+            new ReferencedByEntityGenerationModel(
+                DatabaseRootNamespace,
+                "Gender",
+                "Gender",
+                "Gender",
+                "Genders",
+                "int");
+
+        public static ReferencedByEntityGenerationModel PersonEntityRelationship =>
+            new ReferencedByEntityGenerationModel(
+                DatabaseRootNamespace,
+                "Person",
+                "Person",
+                "Person",
+                "Persons",
+                "int");
+
         public static EntityFrameworkModelEntityGenerationModel[] EntityFrameworkModelEntityGenerationModels => new[]
         {
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Salutation",
+                ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
+                {
+                    PersonEntityRelationship
+                },
             },
 
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Person",
+                ParentEntityRelationships = new List<ReferencedByEntityGenerationModel>
+                {
+                    SalutationEntityRelationship,
+                    GenderEntityRelationship,
+                },
             },
 
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Gender",
+                ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
+                {
+                    PersonEntityRelationship
+                },
             },
 
             new EntityFrameworkModelEntityGenerationModel
