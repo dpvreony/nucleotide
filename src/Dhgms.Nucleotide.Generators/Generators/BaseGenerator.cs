@@ -66,7 +66,6 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 .NormalizeWhitespace();
 
             var feature = typeof(TGeneratorProcessor).ToString();
-            var guid = Guid.NewGuid();
 
             var sourceText = SyntaxFactory.SyntaxTree(
                 cu,
@@ -74,7 +73,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 encoding: Encoding.UTF8)
                 .GetText();
 
-            var hintName = $"{feature}.{guid}.g.cs";
+            var hintName = $"{feature}.g.cs";
 
             context.AddSource(
                 hintName,

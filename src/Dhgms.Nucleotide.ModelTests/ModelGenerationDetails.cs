@@ -8,6 +8,68 @@ using Dhgms.Nucleotide.Generators.PropertyInfo;
 
 namespace Dhgms.Nucleotide.ModelTests
 {
+    public class AddressEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "Address";
+
+        public override KeyType KeyType => KeyType.Int32;
+        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents an Address";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+        };
+    }
+
+    public class GenderEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "Gender";
+
+        public override KeyType KeyType => KeyType.Int32;
+        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents a Gender";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+            new ClrStringPropertyInfo(CollectionType.None, "Name", "Name of the gender", false, 3, 255, false, false, null),
+        };
+    }
+
+    public class PersonEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "Person";
+
+        public override KeyType KeyType => KeyType.Int32;
+        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents a Person";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+        };
+    }
+
+    public class SalutationEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "Salutation";
+
+        public override KeyType KeyType => KeyType.Int32;
+        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents a Salutation";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+            new ClrStringPropertyInfo(CollectionType.None, "Name", "Name of the salutation", false, 3, 255, false, false, null),
+        };
+    }
+
     public class UserEntityGenerationModel : EntityGenerationModel
     {
         public override string ClassName => "User";
@@ -27,9 +89,25 @@ namespace Dhgms.Nucleotide.ModelTests
 
     public class ModelGenerationDetails : INucleotideGenerationModel<IEntityGenerationModel>
     {
-        public IEntityGenerationModel[] EntityGenerationModel => new[]
+        public IEntityGenerationModel[] EntityGenerationModel => new IEntityGenerationModel[]
         {
+            new AddressEntityGenerationModel(),
+            new GenderEntityGenerationModel(),
+            new PersonEntityGenerationModel(),
+            new SalutationEntityGenerationModel(),
             new UserEntityGenerationModel()
+        };
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
+    public class ReferencedByEntityGenerationModelGenerationDetails : INucleotideGenerationModel<ReferencedByEntityGenerationModel>
+    {
+        public ReferencedByEntityGenerationModel[] EntityGenerationModel => new ReferencedByEntityGenerationModel[]
+        {
+            SampleEntityFrameworkModelGenerationModel.GenderEntityRelationship,
+            SampleEntityFrameworkModelGenerationModel.PersonEntityRelationship,
+            SampleEntityFrameworkModelGenerationModel.SalutationEntityRelationship,
         };
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";

@@ -7,25 +7,7 @@ namespace Dhgms.Nucleotide.ModelTests
     [Generator]
     public sealed class TestReferencedByEntityGenerator : ReferencedByEntityGenerator
     {
-        protected override INucleotideGenerationModel<ReferencedByEntityGenerationModel> NucleotideGenerationModel => new NucleotideGenerationModel<ReferencedByEntityGenerationModel>(
-            "Company.RootNameSpace",
-            new []
-            {
-                new ReferencedByEntityGenerationModel(
-                    "SomeNamespace",
-                    "User",
-                    "global::Dhgms.Nucleotide.GenerationTests.EfModels.UserEfModel",
-                    "User",
-                    "Users",
-                    "int"),
-
-                new ReferencedByEntityGenerationModel(
-                    "SomeNamespace",
-                    "Address",
-                    "global::Dhgms.Nucleotide.GenerationTests.EfModels.AddressEfModel",
-                    "Address",
-                    "Addresses",
-                    "int")
-            });
+        protected override INucleotideGenerationModel<ReferencedByEntityGenerationModel> NucleotideGenerationModel =>
+            new ReferencedByEntityGenerationModelGenerationDetails();
     }
 }

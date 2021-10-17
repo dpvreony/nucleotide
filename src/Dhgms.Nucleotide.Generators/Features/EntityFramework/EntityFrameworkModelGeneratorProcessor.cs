@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 {
                     var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
 
-                    var pocoType = SyntaxFactory.ParseTypeName($"{referencedByEntityGenerationModel.NamespaceForInterface}.{referencedByEntityGenerationModel.EntityType}");
+                    var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
 
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
@@ -40,7 +40,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
                 {
-                    var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<{referencedByEntityGenerationModel.NamespaceForInterface}.{referencedByEntityGenerationModel.EntityType}>");
+                    var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{referencedByEntityGenerationModel.EntityType}EfModel>");
                     var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
 
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
