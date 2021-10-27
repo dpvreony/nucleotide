@@ -247,11 +247,31 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private ExpressionSyntax CheckHasMinimumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string minimumValueAsString)
         {
+#if TBC
+            if (!string.IsNullOrWhiteSpace(minimumValueAsString))
+            {
+                return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                    fluentApiInvocation,
+                    "HasMinValue",
+                    new[] { minimumValueAsString });
+            }
+#endif
+
             return fluentApiInvocation;
         }
 
         private ExpressionSyntax CheckHasMaximumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string maximumValueAsString)
         {
+#if TBC
+            if (!string.IsNullOrWhiteSpace(maximumValueAsString))
+            {
+                return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                    fluentApiInvocation,
+                    "HasMaxValue",
+                    new[] { maximumValueAsString });
+            }
+#endif
+
             return fluentApiInvocation;
         }
 
