@@ -4,7 +4,7 @@ using Dhgms.Nucleotide.Generators.Models;
 namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     public class NumericPropertyInfo<TNumeric>
-        : PropertyInfoBase
+        : PropertyInfoBase, IPropertyWithRange<TNumeric>
         where TNumeric : struct
     {
         public NumericPropertyInfo(
@@ -38,5 +38,9 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
         /// The maximum allowed value, if any
         /// </summary>
         public TNumeric MaximumValue { get; }
+
+        public string MinimumValueAsString => MinimumValue.ToString();
+
+        public string MaximumValueAsString => MaximumValue.ToString();
     }
 }

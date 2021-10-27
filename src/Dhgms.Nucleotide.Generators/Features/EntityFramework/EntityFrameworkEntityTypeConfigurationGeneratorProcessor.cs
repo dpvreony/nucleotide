@@ -214,16 +214,45 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 false);
 
             fluentApiInvocation = CheckRequiredMethodDeclaration(fluentApiInvocation, propertyInfoBase.Optional);
-#if TBC
-            if (FeatureFlags?.GenerateSqlDescriptions == true)
-            {
-                fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
-            }
-#endif
+            fluentApiInvocation = CheckDescriptionMethodDeclaration(fluentApiInvocation, propertyInfoBase.Description);
             fluentApiInvocation = CheckHasSqlDefaultValueMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlDefault);
             fluentApiInvocation = CheckHasComputedColumnSqlMethodDeclaration(fluentApiInvocation, propertyInfoBase.SqlComputedColumn);
 
+            if (propertyInfoBase is ClrStringPropertyInfo stringPropertyInfo)
+            {
+                fluentApiInvocation = CheckHasMaximumLengthMethodDeclaration(fluentApiInvocation, stringPropertyInfo.MaximumLength);
+            }
+
+            if (propertyInfoBase is IPropertyWithRangeAsString propertyWithRange)
+            {
+                fluentApiInvocation = CheckHasMaximumValueMethodDeclaration(fluentApiInvocation, propertyWithRange.MaximumValueAsString);
+                fluentApiInvocation = CheckHasMinimumValueMethodDeclaration(fluentApiInvocation, propertyWithRange.MinimumValueAsString);
+            }
+
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private ExpressionSyntax CheckHasMaximumLengthMethodDeclaration(ExpressionSyntax fluentApiInvocation, int? maximumLength)
+        {
+            if (maximumLength.HasValue)
+            {
+                return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                    fluentApiInvocation,
+                    "HasMaxLength",
+                    new[] { maximumLength.ToString() });
+            }
+
+            return fluentApiInvocation;
+        }
+
+        private ExpressionSyntax CheckHasMinimumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string minimumValueAsString)
+        {
+            return fluentApiInvocation;
+        }
+
+        private ExpressionSyntax CheckHasMaximumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string maximumValueAsString)
+        {
+            return fluentApiInvocation;
         }
 
         private StatementSyntax GetEfTableInvocation(IEntityGenerationModel entityGenerationModel)
@@ -285,7 +314,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
             return RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
                 fluentApiInvocation,
-                "HasDescriptionSql",
+                "HasComment",
                 new[] { $"\"{description}\"" });
         }
 
