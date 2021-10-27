@@ -46,17 +46,23 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
             var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{entityGenerationModel.EntityType}EfModel");
             var pocoIdentifier = entityGenerationModel.SingularPropertyName;
 
-            var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
+            var pocoObject = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, pocoIdentifier, pocoSummary);
+
+            var foreignKeySummary = GetSummary(new[] { $"Gets or Sets the Foreign Key for {entityGenerationModel.ClassName}" });
+            var foreignKeyType = SyntaxFactory.ParseTypeName(entityGenerationModel.KeyType);
+            var foreignKeyIdentifier = $"{entityGenerationModel.SingularPropertyName}Id";
+            var foreignKey = SyntaxFactory.PropertyDeclaration(foreignKeyType, foreignKeyIdentifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(
                     SyntaxFactory.AccessorList(
                         SyntaxFactory.List(accessorList)
                     ))
-                .WithLeadingTrivia(pocoSummary);
+                .WithLeadingTrivia(foreignKeySummary);
 
 
             return new []
             {
+                foreignKey,
                 pocoObject,
             };
         }

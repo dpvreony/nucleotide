@@ -21,11 +21,18 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
+            var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
             if (entityGenerationModel?.ParentEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
                 {
-                    var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
+
+                    var foriegnKeyType = SyntaxFactory.ParseTypeName(referencedByEntityGenerationModel.KeyType);
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        foriegnKeyType,
+                        $"{referencedByEntityGenerationModel.SingularPropertyName}Id",
+                        inheritDocSyntaxTrivia);
 
                     var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
 
@@ -41,7 +48,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
                 {
                     var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{referencedByEntityGenerationModel.EntityType}EfModel>");
-                    var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
 
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
@@ -140,7 +146,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
                 {
-                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ReferencedByEntity";
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ForeignKey";
                 }
             }
 
@@ -148,7 +154,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
                 {
-                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ForeignKey";
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ReferencedByEntity";
                 }
             }
         }
