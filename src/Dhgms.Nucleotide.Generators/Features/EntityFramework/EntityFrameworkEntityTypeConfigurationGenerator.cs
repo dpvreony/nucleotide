@@ -1,10 +1,8 @@
 ﻿using Dhgms.Nucleotide.Generators.Generators;
-using Dhgms.Nucleotide.Generators.Models;
-using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public abstract class EntityFrameworkEntityTypeConfigurationGenerator : BaseClassLevelCodeGenerator<EntityFrameworkEntityTypeConfigurationFeatureFlags, EntityFrameworkEntityTypeConfigurationGeneratorProcessor, IEntityGenerationModel>
+    public abstract class EntityFrameworkEntityTypeConfigurationGenerator : BaseClassLevelCodeGenerator<EntityFrameworkEntityTypeConfigurationFeatureFlags, EntityFrameworkEntityTypeConfigurationGeneratorProcessor, EntityFrameworkModelEntityGenerationModel>
     {
         ///<inheritdoc />
         protected override string GetNamespace()

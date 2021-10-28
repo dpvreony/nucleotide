@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -9,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public class EntityFrameworkEntityTypeConfigurationGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
+    public class EntityFrameworkEntityTypeConfigurationGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => false;
@@ -18,7 +19,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         ///<inheritdoc />
-        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return Array.Empty<PropertyDeclarationSyntax>();
         }
@@ -36,7 +37,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             var result = new List<MethodDeclarationSyntax>()
             {
@@ -46,9 +47,28 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var entityName = entityGenerationModel.ClassName;
             result.Add(GetTableMappingMethodDeclaration(entityName, entityGenerationModel));
 
-            foreach (var propertyInfoBase in entityGenerationModel.Properties)
+            if (entityGenerationModel.Properties != null)
             {
-                result.Add(GetPropertyMappingMethodDeclaration(entityName, propertyInfoBase));
+                foreach (var propertyInfoBase in entityGenerationModel.Properties)
+                {
+                    result.Add(GetPropertyMappingMethodDeclaration(entityName, propertyInfoBase));
+                }
+            }
+
+            if (entityGenerationModel.ChildEntityRelationships != null)
+            {
+                foreach (var childEntityRelationship in entityGenerationModel.ChildEntityRelationships)
+                {
+                    result.Add(GetChildRelationshipMethodDeclaration(entityName, childEntityRelationship));
+                }
+            }
+
+            if (entityGenerationModel.ParentEntityRelationships != null)
+            {
+                foreach (var parentEntityRelationship in entityGenerationModel.ParentEntityRelationships)
+                {
+                    result.Add(GetParentRelationshipMethodDeclaration(entityName, parentEntityRelationship));
+                }
             }
 
             return result.ToArray();
@@ -79,7 +99,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(EntityFrameworkModelEntityGenerationModel entityDeclaration)
         {
             return null;
         }
@@ -100,7 +120,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel generationModel)
+        protected override IEnumerable<string> GetImplementedInterfaces(EntityFrameworkModelEntityGenerationModel generationModel)
         {
             return new List<string>
             {
@@ -117,7 +137,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return default(SeparatedSyntaxList<AttributeSyntax>);
         }
 
-        private MethodDeclarationSyntax GetConfigureMethodDeclaration(IEntityGenerationModel entityGenerationModel)
+        private MethodDeclarationSyntax GetConfigureMethodDeclaration(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             var entityName = entityGenerationModel.ClassName;
             var methodName = $"Configure";
@@ -160,6 +180,50 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return declaration;
         }
 
+        private MethodDeclarationSyntax GetParentRelationshipMethodDeclaration(
+            string entityName,
+            ReferencedByEntityGenerationModel parentEntityRelationship)
+        {
+            var methodName = $"Configure{parentEntityRelationship.SingularPropertyName}ParentRelationship";
+
+            var body = new List<StatementSyntax>();
+
+            // get the initial property method invoke to use as the basis of chaining others together
+            var propertyInvocation = GetEfParentRelationshipInvocation(parentEntityRelationship);
+            body.Add(propertyInvocation);
+
+            var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+            return declaration;
+        }
+
+        private MethodDeclarationSyntax GetChildRelationshipMethodDeclaration(
+            string entityName,
+            ReferencedByEntityGenerationModel childEntityRelationship)
+        {
+            var methodName = $"Configure{childEntityRelationship.SingularPropertyName}ChildRelationship";
+
+            var body = new List<StatementSyntax>();
+
+            // get the initial property method invoke to use as the basis of chaining others together
+            var propertyInvocation = GetEfChildRelationshipInvocation(childEntityRelationship);
+            body.Add(propertyInvocation);
+
+            var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+            return declaration;
+        }
+
         private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
             string entityName,
             PropertyInfoBase propertyInfoBase)
@@ -186,7 +250,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private MethodDeclarationSyntax GetTableMappingMethodDeclaration(
             string entityName,
-            IEntityGenerationModel entityGenerationModel)
+            EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             var methodName = $"ConfigureTable";
 
@@ -203,6 +267,43 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
+        }
+
+        private StatementSyntax GetEfChildRelationshipInvocation(ReferencedByEntityGenerationModel childEntityRelationship)
+        {
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "HasMany",
+                new[] {$"table => table.{childEntityRelationship.PluralPropertyName}"},
+                false);
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "WithOne",
+                new [] {"one => one.Id"});
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasForeignKey",
+                new [] {"fk => fk.Id"});
+
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private StatementSyntax GetEfParentRelationshipInvocation(ReferencedByEntityGenerationModel parentEntityRelationship)
+        {
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "HasOne",
+                new[] {$"table => table.{parentEntityRelationship.PluralPropertyName}"},
+                false);
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "WithMany",
+                new [] {$"many => many.{parentEntityRelationship.PluralPropertyName}"});
+
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
 
         private StatementSyntax GetEfPropertyInvocation(PropertyInfoBase propertyInfoBase)

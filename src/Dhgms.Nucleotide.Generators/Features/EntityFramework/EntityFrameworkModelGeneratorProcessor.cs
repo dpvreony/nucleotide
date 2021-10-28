@@ -26,7 +26,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
                 {
-
                     var foriegnKeyType = SyntaxFactory.ParseTypeName(referencedByEntityGenerationModel.KeyType);
 
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(

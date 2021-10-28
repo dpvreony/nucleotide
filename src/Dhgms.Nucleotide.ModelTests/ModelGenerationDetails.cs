@@ -101,6 +101,14 @@ namespace Dhgms.Nucleotide.ModelTests
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
 
+    public class EfModelGenerationDetails : INucleotideGenerationModel<EntityFrameworkModelEntityGenerationModel>
+    {
+        public EntityFrameworkModelEntityGenerationModel[] EntityGenerationModel =>
+            SampleEntityFrameworkModelGenerationModel.EntityFrameworkModelEntityGenerationModels;
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
     public class ReferencedByEntityGenerationModelGenerationDetails : INucleotideGenerationModel<ReferencedByEntityGenerationModel>
     {
         public ReferencedByEntityGenerationModel[] EntityGenerationModel => new ReferencedByEntityGenerationModel[]
