@@ -1,19 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Logging;
-
-namespace Dhgms.Nucleotide.GenerationTests
+﻿namespace Dhgms.Nucleotide.GenerationTests
 {
     public static class NumericEventIds
     {
-        public const int UserControllerAddId = 1;
-        public const int UserControllerOnAddNotifySignalRId = 2;
-        public const int UserControllerDeleteId = 3;
-        public const int UserControllerOnDeleteNotifySignalRId = 4;
-        public const int UserControllerListId = 5;
-        public const int UserControllerUpdateId = 6;
-        public const int UserControllerOnUpdateNotifySignalRId = 7;
-        public const int UserControllerViewId = 8;
+        public const int UserControllerAddId = 1,
+            UserControllerOnAddNotifySignalRId = 2,
+            UserControllerDeleteId = 3,
+            UserControllerOnDeleteNotifySignalRId = 4,
+            UserControllerListId = 5,
+            UserControllerUpdateId = 6,
+            UserControllerOnUpdateNotifySignalRId = 7,
+            UserControllerViewId = 8,
+            AddressControllerAddId = 9,
+            AddressControllerDeleteId = 10,
+            AddressControllerListId = 11,
+            AddressControllerUpdateId = 12,
+            AddressControllerViewId = 13,
+            GenderControllerAddId = 14,
+            GenderControllerDeleteId = 15,
+            GenderControllerListId = 16,
+            GenderControllerUpdateId= 17,
+            GenderControllerViewId = 18,
+            PersonControllerAddId = 19,
+            PersonControllerDeleteId = 20,
+            PersonControllerListId = 21,
+            PersonControllerUpdateId = 22,
+            PersonControllerViewId = 23,
+            SalutationControllerAddId = 24,
+            SalutationControllerDeleteId = 25,
+            SalutationControllerListId = 26,
+            SalutationControllerUpdateId = 27,
+            SalutationControllerViewId= 28;
     }
 }
