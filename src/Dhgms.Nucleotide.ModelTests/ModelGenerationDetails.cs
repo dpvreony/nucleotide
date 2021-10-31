@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Models;

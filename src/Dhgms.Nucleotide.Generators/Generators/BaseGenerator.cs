@@ -51,33 +51,41 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
         public void Execute(GeneratorExecutionContext context)
         {
-            context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
+            try
+            {
+                context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
-            // TODO: this is running async code inside non-async
-            var memberDeclarationSyntax = Generate(context, CancellationToken.None);
+                // TODO: this is running async code inside non-async
+                var memberDeclarationSyntax = Generate(context, CancellationToken.None);
 
-            var parseOptions = context.ParseOptions;
+                var parseOptions = context.ParseOptions;
 
-            // TODO: need to review this might be better way than generate, loop, copy.
-            // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
+                // TODO: need to review this might be better way than generate, loop, copy.
+                // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
 
-            var cu = SyntaxFactory.CompilationUnit()
-                .AddMembers(memberDeclarationSyntax)
-                .NormalizeWhitespace();
+                var cu = SyntaxFactory.CompilationUnit()
+                    .AddMembers(memberDeclarationSyntax)
+                    .NormalizeWhitespace();
 
-            var feature = typeof(TGeneratorProcessor).ToString();
+                var feature = typeof(TGeneratorProcessor).ToString();
 
-            var sourceText = SyntaxFactory.SyntaxTree(
-                cu,
-                parseOptions,
-                encoding: Encoding.UTF8)
-                .GetText();
+                var sourceText = SyntaxFactory.SyntaxTree(
+                        cu,
+                        parseOptions,
+                        encoding: Encoding.UTF8)
+                    .GetText();
 
-            var hintName = $"{feature}.g.cs";
+                var hintName = $"{feature}.g.cs";
 
-            context.AddSource(
-                hintName,
-                sourceText);
+                context.AddSource(
+                    hintName,
+                    sourceText);
+            }
+            catch (Exception e)
+            {
+                var diagnostic = ErrorDiagnostic(e.ToString());
+                context.ReportDiagnostic(diagnostic);
+            }
         }
 
         protected abstract string GetNamespace();

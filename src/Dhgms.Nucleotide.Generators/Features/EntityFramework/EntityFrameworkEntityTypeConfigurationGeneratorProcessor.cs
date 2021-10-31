@@ -160,16 +160,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             }
 
             // do column level operations
-            foreach (var propertyInfo in entityGenerationModel.Properties)
+            if (entityGenerationModel.Properties != null)
             {
-                var configureColumnMethodName = $"Configure{propertyInfo.Name}Column";
-                var expression =
-                    RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
-                        configureColumnMethodName,
-                        subMethodParams,
-                        false);
-                var statement = SyntaxFactory.ExpressionStatement(expression);
-                body.Add(statement);
+                foreach (var propertyInfo in entityGenerationModel.Properties)
+                {
+                    var configureColumnMethodName = $"Configure{propertyInfo.Name}Column";
+                    var expression =
+                        RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
+                            configureColumnMethodName,
+                            subMethodParams,
+                            false);
+                    var statement = SyntaxFactory.ExpressionStatement(expression);
+                    body.Add(statement);
+                }
             }
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});

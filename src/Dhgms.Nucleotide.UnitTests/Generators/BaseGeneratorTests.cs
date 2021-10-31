@@ -112,6 +112,13 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     out var generatorDiags,
                     instance);
 
+                foreach (var generatorDiag in generatorDiags)
+                {
+                    this._logger.LogInformation(generatorDiag.ToString());
+                }
+
+                Assert.False(generatorDiags.Any(x => x.Severity == DiagnosticSeverity.Error));
+
                 foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
                 {
                     this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
