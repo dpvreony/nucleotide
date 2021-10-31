@@ -19,6 +19,8 @@ Nucleotide is a library to aid in the generation of .NET code for manipulation t
 * Command Factory (Interfaces and Classes)
 * Entity Framework DbSet (Classes)
 * Entity Framework Models (Classes)
+* Entity Framework Entity Type Configuration (Classes)
+* Entity Framework Parent and Child Foreign Keys Representation (Interfaces)
 * Models (Interfaces and Classes)
 * Queries (Interfaces and Classes)
 * Query Factories (Interfaces and Classes)
