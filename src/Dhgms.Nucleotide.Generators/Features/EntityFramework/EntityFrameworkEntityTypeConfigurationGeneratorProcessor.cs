@@ -69,7 +69,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             {
                 foreach (var parentEntityRelationship in entityGenerationModel.ParentEntityRelationships)
                 {
-                    result.Add(GetParentRelationshipMethodDeclaration(entityName, parentEntityRelationship));
+                    result.Add(GetParentRelationshipMethodDeclaration(entityName, parentEntityRelationship, entityGenerationModel.ClassPluralName));
                 }
             }
 
@@ -160,18 +160,33 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             }
 
             // do column level operations
+            GenerateConfigurePropertyColumnInvocation("Id", subMethodParams, body);
             if (entityGenerationModel.Properties != null)
             {
                 foreach (var propertyInfo in entityGenerationModel.Properties)
                 {
-                    var configureColumnMethodName = $"Configure{propertyInfo.Name}Column";
-                    var expression =
-                        RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
-                            configureColumnMethodName,
-                            subMethodParams,
-                            false);
-                    var statement = SyntaxFactory.ExpressionStatement(expression);
-                    body.Add(statement);
+                    var propertyName = propertyInfo.Name;
+                    GenerateConfigurePropertyColumnInvocation(propertyName, subMethodParams, body);
+                }
+            }
+
+            if (entityGenerationModel.ChildEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
+                {
+                    GenerateEfConfigureInvocation(
+                        $"Configure{referencedByEntityGenerationModel.ClassName}ChildRelationship", subMethodParams,
+                        body);
+                }
+            }
+
+            if (entityGenerationModel.ParentEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+                {
+                    GenerateEfConfigureInvocation(
+                        $"Configure{referencedByEntityGenerationModel.ClassName}ParentRelationship", subMethodParams,
+                        body);
                 }
             }
 
@@ -185,16 +200,36 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return declaration;
         }
 
+        private static void GenerateConfigurePropertyColumnInvocation(string propertyName, string[] subMethodParams, List<StatementSyntax> body)
+        {
+            var configureColumnMethodName = $"Configure{propertyName}Column";
+            GenerateEfConfigureInvocation(configureColumnMethodName, subMethodParams, body);
+        }
+
+        private static void GenerateEfConfigureInvocation(string methodName, string[] subMethodParams, List<StatementSyntax> body)
+        {
+            var expression =
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax(
+                    methodName,
+                    subMethodParams,
+                    false);
+            var statement = SyntaxFactory.ExpressionStatement(expression);
+            body.Add(statement);
+        }
+
         private MethodDeclarationSyntax GetParentRelationshipMethodDeclaration(
             string entityName,
-            ReferencedByEntityGenerationModel parentEntityRelationship)
+            ReferencedByEntityGenerationModel parentEntityRelationship,
+            string entityPluralName)
         {
             var methodName = $"Configure{parentEntityRelationship.SingularPropertyName}ParentRelationship";
 
             var body = new List<StatementSyntax>();
 
             // get the initial property method invoke to use as the basis of chaining others together
-            var propertyInvocation = GetEfParentRelationshipInvocation(parentEntityRelationship);
+            var propertyInvocation = GetEfParentRelationshipInvocation(
+                parentEntityRelationship,
+                entityPluralName);
             body.Add(propertyInvocation);
 
             var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
@@ -202,7 +237,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -216,7 +251,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var body = new List<StatementSyntax>();
 
             // get the initial property method invoke to use as the basis of chaining others together
-            var propertyInvocation = GetEfChildRelationshipInvocation(childEntityRelationship);
+            var propertyInvocation = GetEfChildRelationshipInvocation(childEntityRelationship, entityName);
             body.Add(propertyInvocation);
 
             var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
@@ -224,7 +259,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -241,7 +276,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -264,7 +299,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -285,12 +320,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
 
-        private StatementSyntax GetEfChildRelationshipInvocation(ReferencedByEntityGenerationModel childEntityRelationship)
+        private StatementSyntax GetEfChildRelationshipInvocation(
+            ReferencedByEntityGenerationModel childEntityRelationship,
+            string entitySingularName)
         {
             var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
                 "builder",
@@ -301,28 +338,30 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
                 fluentApiInvocation,
                 "WithOne",
-                new [] {"one => one.Id"});
+                new [] { $"one => one.{entitySingularName}"});
 
             fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
                 fluentApiInvocation,
                 "HasForeignKey",
-                new [] {"fk => fk.Id"});
+                new [] { $"fk => fk.Id"});
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
 
-        private StatementSyntax GetEfParentRelationshipInvocation(ReferencedByEntityGenerationModel parentEntityRelationship)
+        private StatementSyntax GetEfParentRelationshipInvocation(
+            ReferencedByEntityGenerationModel parentEntityRelationship,
+            string entityPluralName)
         {
             var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
                 "builder",
                 "HasOne",
-                new[] {$"table => table.{parentEntityRelationship.PluralPropertyName}"},
+                new[] {$"table => table.{parentEntityRelationship.SingularPropertyName}"},
                 false);
 
             fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
                 fluentApiInvocation,
                 "WithMany",
-                new [] {$"many => many.{parentEntityRelationship.PluralPropertyName}"});
+                new [] {$"many => many.{entityPluralName}"});
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }

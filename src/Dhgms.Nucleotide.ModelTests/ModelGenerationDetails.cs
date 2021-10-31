@@ -156,6 +156,7 @@ namespace Dhgms.Nucleotide.ModelTests
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Salutation",
+                ClassPluralName = "Salutations",
                 ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
                 {
                     PersonEntityRelationship
@@ -165,6 +166,7 @@ namespace Dhgms.Nucleotide.ModelTests
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Person",
+                ClassPluralName = "Persons",
                 ParentEntityRelationships = new List<ReferencedByEntityGenerationModel>
                 {
                     SalutationEntityRelationship,
@@ -175,6 +177,7 @@ namespace Dhgms.Nucleotide.ModelTests
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Gender",
+                ClassPluralName= "Genders",
                 ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
                 {
                     PersonEntityRelationship
@@ -184,11 +187,13 @@ namespace Dhgms.Nucleotide.ModelTests
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "User",
+                ClassPluralName = "Users",
             },
 
             new EntityFrameworkModelEntityGenerationModel
             {
                 ClassName = "Address",
+                ClassPluralName = "Addresses",
             },
         };
     }

@@ -9,6 +9,8 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     {
         public string ClassName { get; set; }
 
+        public string ClassPluralName { get; set; }
+
         public IList<PropertyInfoBase> Properties { get; set; }
 
         public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; set; }
