@@ -47,6 +47,8 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var entityName = entityGenerationModel.ClassName;
             result.Add(GetTableMappingMethodDeclaration(entityName, entityGenerationModel));
 
+            result.Add(GetIdMethodDeclaration(entityName));
+
             if (entityGenerationModel.Properties != null)
             {
                 foreach (var propertyInfoBase in entityGenerationModel.Properties)
@@ -224,6 +226,23 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return declaration;
         }
 
+        private MethodDeclarationSyntax GetIdMethodDeclaration(string entityName)
+        {
+            var methodName = $"ConfigureIdColumn";
+
+            var body = new List<StatementSyntax>();
+            DoPrimaryKeyMethodDeclaration(body);
+
+            var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
+
+            var returnType = SyntaxFactory.ParseTypeName("void");
+            var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
+                .WithParameterList(parameters)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .AddBodyStatements(body.ToArray());
+            return declaration;
+        }
+
         private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
             string entityName,
             PropertyInfoBase propertyInfoBase)
@@ -231,7 +250,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var methodName = $"Configure{propertyInfoBase.Name}Column";
 
             var body = new List<StatementSyntax>();
-            CheckPrimaryKeyMethodDeclaration(body, propertyInfoBase);
 
             // get the initial property method invoke to use as the basis of chaining others together
             var propertyInvocation = GetEfPropertyInvocation(propertyInfoBase);
@@ -452,18 +470,13 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 null);
         }
 
-        private void CheckPrimaryKeyMethodDeclaration(List<StatementSyntax> body, PropertyInfoBase propertyInfoBase)
+        private void DoPrimaryKeyMethodDeclaration(List<StatementSyntax> body)
         {
-            if (!propertyInfoBase.IsKey)
-            {
-                return;
-            }
-
             var statement =
                 RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
                     "builder",
                     "HasKey",
-                    new[] {$"x => x.{propertyInfoBase.Name}"}, false);
+                    new[] {$"x => x.Id"}, false);
             body.Add(statement);
         }
     }
