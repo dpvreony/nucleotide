@@ -237,7 +237,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -259,7 +259,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -276,7 +276,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -299,7 +299,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
@@ -320,7 +320,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword))
                 .AddBodyStatements(body.ToArray());
             return declaration;
         }
