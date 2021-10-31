@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,20 +10,56 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
+    public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
+        ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
+        ///<inheritdoc />
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        ///<inheritdoc />
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
+            if (entityGenerationModel?.ParentEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+                {
+                    var foriegnKeyType = SyntaxFactory.ParseTypeName(referencedByEntityGenerationModel.KeyType);
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        foriegnKeyType,
+                        $"{referencedByEntityGenerationModel.SingularPropertyName}Id",
+                        inheritDocSyntaxTrivia);
+
+                    var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        pocoType,
+                        referencedByEntityGenerationModel.SingularPropertyName,
+                        inheritDocSyntaxTrivia);
+                }
+            }
+
+            if (entityGenerationModel?.ChildEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
+                {
+                    var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{referencedByEntityGenerationModel.EntityType}EfModel>");
+
+                    yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                        pocoType,
+                        referencedByEntityGenerationModel.PluralPropertyName,
+                        inheritDocSyntaxTrivia);
+                }
+            }
         }
 
+        ///<inheritdoc />
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
 
             var attributes = GetAttributesForProperty(propertyInfo);
@@ -46,16 +81,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return result;
         }
 
+        ///<inheritdoc />
         protected override string GetClassSuffix()
         {
             return "EfModel";
         }
 
-        protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
+        ///<inheritdoc />
+        protected override MethodDeclarationSyntax[] GetMethodDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override IList<string> GetUsings()
         {
             return new List<string>
@@ -64,6 +102,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             };
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassLevelCommentSummary(string entityName)
         {
             return new[]
@@ -72,35 +111,57 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             };
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassLevelCommentRemarks(string entityName)
         {
             return null;
         }
 
-        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
+        ///<inheritdoc />
+        protected override IList<Tuple<string, IList<string>>> GetClassAttributes(EntityFrameworkModelEntityGenerationModel entityDeclaration)
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override IList<string> GetBaseConstructorArguments() => null;
 
+        ///<inheritdoc />
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
             return null;
         }
 
+        ///<inheritdoc />
         protected override string GetBaseClass(string entityName)
         {
             return $"Models.{entityName}Model";
         }
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        ///<inheritdoc />
+        protected override IEnumerable<string> GetImplementedInterfaces(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            return null;
+            if (entityGenerationModel?.ParentEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+                {
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ForeignKey";
+                }
+            }
+
+            if (entityGenerationModel?.ChildEntityRelationships != null)
+            {
+                foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
+                {
+                    yield return $"{referencedByEntityGenerationModel.NamespaceForInterface}.I{referencedByEntityGenerationModel.ClassName}ReferencedByEntity";
+                }
+            }
         }
 
+        ///<inheritdoc />
         protected override string[] GetClassPrefixes() => null;
 
+        ///<inheritdoc />
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
         {
             var nodes = new List<AttributeSyntax>();

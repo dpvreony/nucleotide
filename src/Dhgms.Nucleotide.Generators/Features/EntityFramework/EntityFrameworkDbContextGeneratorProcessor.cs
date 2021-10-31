@@ -16,6 +16,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     /// </summary>
     public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<IEntityGenerationModel>
     {
+        ///<inheritdoc />
         public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
             INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
@@ -151,7 +152,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
             var summary = GetSummary(new[] { $"Gets or Sets the DBSet for {generationModelEntityGenerationModel.ClassName}" });
 
-            var type = SyntaxFactory.ParseName($"DbSet<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
+            var type = SyntaxFactory.ParseTypeName($"DbSet<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
             var identifier = generationModelEntityGenerationModel.ClassName;
 
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)

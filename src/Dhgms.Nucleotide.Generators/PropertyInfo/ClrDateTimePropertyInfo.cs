@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using Dhgms.Nucleotide.Generators.Models;
 
 namespace Dhgms.Nucleotide.Generators.PropertyInfo
@@ -12,18 +13,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
     /// Property Information for ClrDateTime
     /// </summary>
     public class ClrDateTimePropertyInfo
-        : PropertyInfoBase
+        : PropertyInfoBase, IPropertyWithRange<System.DateTime?>
     {
-        /// <summary>
-        /// The minimum value, if any
-        /// </summary>
-        private readonly System.DateTime? minimumValue;
-
-        /// <summary>
-        /// The maximum value, if any
-        /// </summary>
-        private readonly System.DateTime? maximumValue;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -63,8 +54,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
                 typeof(System.DateTime),
                 alternativeDatabaseColumnName)
         {
-            this.minimumValue = minimumValue;
-            this.maximumValue = maximumValue;
+            this.MinimumValue = minimumValue;
+            this.MaximumValue = maximumValue;
         }
 
         ///// <summary>
@@ -174,5 +165,11 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
         //        return string.Format(CultureInfo.InvariantCulture, "new System.DateTime({0})", randomTicks);
         //    }
         //}
+        public DateTime? MaximumValue { get; }
+        public DateTime? MinimumValue { get; }
+
+        public string MinimumValueAsString => MinimumValue.ToString();
+
+        public string MaximumValueAsString => MaximumValue.ToString();
     }
 }

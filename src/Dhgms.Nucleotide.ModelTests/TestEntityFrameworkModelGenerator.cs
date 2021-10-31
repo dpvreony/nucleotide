@@ -7,6 +7,8 @@ namespace Dhgms.Nucleotide.ModelTests
     [Generator]
     public sealed class TestEntityFrameworkModelGenerator : EntityFrameworkModelGenerator
     {
-        protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
+        protected override INucleotideGenerationModel<EntityFrameworkModelEntityGenerationModel> NucleotideGenerationModel => new NucleotideGenerationModel<EntityFrameworkModelEntityGenerationModel>(
+            "Dhgms.Nucleotide.GenerationTests",
+            SampleEntityFrameworkModelGenerationModel.EntityFrameworkModelEntityGenerationModels);
     }
 }

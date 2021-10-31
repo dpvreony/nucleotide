@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Database
     [ExcludeFromCodeCoverage]
     public static class ForiegnKeyInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ForiegnKeyInterfaceGenerator, ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ForiegnKeyInterfaceGenerator, ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, ReferencedByEntityGenerationModel>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -23,7 +23,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Database
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ForiegnKeyInterfaceGenerator, ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ForiegnKeyInterfaceGenerator, ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, ReferencedByEntityGenerationModel>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

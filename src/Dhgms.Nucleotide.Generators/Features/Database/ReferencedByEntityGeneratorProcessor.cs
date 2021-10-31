@@ -1,11 +1,13 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Database
 {
-    public sealed class ReferencedByEntityGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<IEntityGenerationModel>
+    public sealed class ReferencedByEntityGeneratorProcessor : BaseInterfaceLevelCodeGeneratorProcessor<ReferencedByEntityGenerationModel>
     {
         /// <inheritdoc />
         protected override string[] GetClassPrefixes()
@@ -20,30 +22,48 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         }
 
         /// <inheritdoc />
-        protected override string[] GetInterfaceSummary(IEntityGenerationModel entityDeclaration)
+        protected override string[] GetInterfaceSummary(ReferencedByEntityGenerationModel entityDeclaration)
         {
             return new[]
             {
-                "Represents a entity",
+                $"Represents a one to many relationship for the {entityDeclaration.ClassName} entity where this is the one (principal) side.",
             };
         }
 
         /// <inheritdoc />
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel, string prefix)
+        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(ReferencedByEntityGenerationModel entityGenerationModel, string prefix)
         {
-            throw new NotImplementedException();
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            };
+
+            var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
+
+            var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{entityGenerationModel.EntityType}EfModel>");
+            var pocoIdentifier = entityGenerationModel.PluralPropertyName;
+
+            var pocoObject = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, pocoIdentifier, pocoSummary);
+
+            return new []
+            {
+                pocoObject,
+            };
         }
 
         /// <inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <inheritdoc />
-        protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
+        protected override string[] GetBaseInterfaces(ReferencedByEntityGenerationModel entityGenerationModel, string prefix)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

@@ -10,6 +10,7 @@ using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -93,20 +94,6 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
 
             [Fact]
-            public async Task GeneratesErrorForNonNucleotideGenerationModel()
-            {
-                var comp = CreateCompilation(string.Empty);
-
-                var factory = GetFactory();
-                var attributeData = new MockAttributeData(new TypedConstant());
-                var instance = factory(attributeData);
-                var newComp = RunGenerators(
-                    comp,
-                    out var generatorDiags,
-                    instance);
-            }
-
-            [Fact]
             //[MemberData(nameof(GeneratesCodeMemberData))]
             public async Task GeneratesCodeForSimpleNucleotideGenerationModel()
             {
@@ -124,6 +111,18 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                     comp,
                     out var generatorDiags,
                     instance);
+
+                foreach (var generatorDiag in generatorDiags)
+                {
+                    this._logger.LogInformation(generatorDiag.ToString());
+                }
+
+                Assert.False(generatorDiags.Any(x => x.Severity == DiagnosticSeverity.Error));
+
+                foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
+                {
+                    this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
+                }
             }
 
             protected BaseGenerateAsyncMethod(ITestOutputHelper output) : base(output)

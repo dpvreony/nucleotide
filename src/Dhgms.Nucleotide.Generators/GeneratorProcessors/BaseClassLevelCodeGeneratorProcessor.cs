@@ -111,7 +111,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                 declaration = declaration.AddBaseListTypes(b);
             }
 
-            var implementedInterfaces = GetImplementedInterfaces(entityName);
+            var implementedInterfaces = GetImplementedInterfaces(entityDeclaration);
             if (implementedInterfaces != null)
             {
                 foreach (var implementedInterface in implementedInterfaces)
@@ -180,7 +180,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             }
 
             var properties = GetPropertyDeclarations(entityGenerationModel);
-            if (properties != null && properties.Length > 0)
+            if (properties != null)
             {
                 result.AddRange(properties);
             }
@@ -260,7 +260,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         /// Gets the property declarations to be generated
         /// </summary>
         /// <returns></returns>
-        protected abstract PropertyDeclarationSyntax[] GetPropertyDeclarations(TGenerationModel entityGenerationModel);
+        protected abstract IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(TGenerationModel entityGenerationModel);
 
         private ConstructorDeclarationSyntax GenerateConstructor(
             string className,
@@ -385,7 +385,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         /// Gets the implemented interfaces, if any
         /// </summary>
         /// <returns>List of implemented interfaces</returns>
-        protected abstract IList<string> GetImplementedInterfaces(string entityName);
+        protected abstract IEnumerable<string> GetImplementedInterfaces(TGenerationModel generationModel);
 
         protected abstract SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo);
 
@@ -419,7 +419,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
 
             var attributes = GetAttributesForProperty(propertyInfo);

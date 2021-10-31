@@ -1,9 +1,8 @@
 ﻿using Dhgms.Nucleotide.Generators.Generators;
-using Dhgms.Nucleotide.Generators.Models;
 
 namespace Dhgms.Nucleotide.Generators.Features.Database
 {
-    public abstract class ForiegnKeyInterfaceGenerator : BaseGenerator<ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, IEntityGenerationModel>
+    public abstract class ForiegnKeyInterfaceGenerator : BaseGenerator<ForiegnKeyInterfaceFeatureFlags, ForiegnKeyInterfaceGeneratorProcessor, ReferencedByEntityGenerationModel>
     {
         /// <inheritdoc />
         protected override string GetNamespace()

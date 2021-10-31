@@ -21,7 +21,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override IList<string> GetBaseConstructorArguments() => null;
 
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
         }
@@ -115,11 +115,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return null;
         }
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return new List<string>
             {
-                $"IUnkeyed{entityName}Model"
+                $"IUnkeyed{entityGenerationModel.ClassName}Model"
             };
         }
 

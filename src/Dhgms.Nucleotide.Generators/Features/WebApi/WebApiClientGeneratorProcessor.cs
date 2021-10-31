@@ -11,7 +11,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
 {
     public sealed class WebApiClientGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -41,11 +41,11 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
             return null;
         }
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return new List<string>
             {
-                $"Services.I{entityName}Service"
+                $"Services.I{entityGenerationModel.ClassName}Service"
             };
         }
 

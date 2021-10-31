@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
     public sealed class MvcControllerGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<IEntityGenerationModel>
     {
         /// <inheritdoc />
-        protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
+        protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
@@ -46,7 +46,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
         protected override string GetBaseClass(string entityName) =>
             $"Whipstaff.AspNetCore.QueryOnlyController<{entityName}Controller, Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto>";
 
-        protected override IList<string> GetImplementedInterfaces(string entityName)
+        protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
             return null;
 

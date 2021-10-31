@@ -11,6 +11,48 @@ namespace Dhgms.Nucleotide.Generators
     /// </summary>
     public static class RoslynGenerationHelpers
     {
+        public static IEnumerable<SyntaxTrivia> GetInheritDocSyntaxTrivia()
+        {
+            var result = new List<SyntaxTrivia>
+            {
+                SyntaxFactory.Comment($"/// <inheritdoc />")
+            };
+
+            return result;
+        }
+
+        public static PropertyDeclarationSyntax GetPropertyDeclarationSyntax(
+            TypeSyntax pocoType,
+            string pocoIdentifier,
+            IEnumerable<SyntaxTrivia> pocoSummary)
+        {
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            };
+
+            return GetPropertyDeclarationSyntax(pocoType, pocoIdentifier, accessorList, pocoSummary);
+        }
+
+        public static PropertyDeclarationSyntax GetPropertyDeclarationSyntax(
+            TypeSyntax pocoType,
+            string pocoIdentifier,
+            AccessorDeclarationSyntax[] accessorList,
+            IEnumerable<SyntaxTrivia> pocoSummary)
+        {
+            var pocoObject = SyntaxFactory.PropertyDeclaration(pocoType, pocoIdentifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(pocoSummary);
+            return pocoObject;
+        }
+
         public static AttributeArgumentListSyntax GetAttributeArgumentListSyntax(IList<string> attributeArguments)
         {
             if (attributeArguments == null || attributeArguments.Count < 1)
