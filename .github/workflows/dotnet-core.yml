@@ -49,6 +49,7 @@ jobs:
         dotnet tool install --global snitch
         dotnet tool install --global dotnet-sonarscanner
         dotnet tool install --global JetBrains.ReSharper.GlobalTools
+        dotnet tool install --global dotnet-sonarscanner
 
     - name: Prepare Artifact Directory
       run: |
@@ -63,9 +64,25 @@ jobs:
       run: |
         dotnet restore ${{ env.solutionpath }} /bl:artifacts\\binlog\\restore.binlog
 
+    - name: Run Sonar Scanner begin
+      if: env.SONAR_TOKEN != ''
+      run: |
+        dotnet sonarscanner begin /k:"project-key" /d:sonar.login="${{ env.SONAR_TOKEN }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
     - name: Run Build
       run: |
         dotnet build ${{ env.solutionpath }} --configuration Release --no-restore /bl:artifacts\\binlog\\build.binlog /p:ContinuousIntegrationBuild=true 
+
+    - name: Run Sonar Scanner end
+      if: env.SONAR_TOKEN != ''
+      run: |
+        dotnet sonarscanner end /d:sonar.login="${{ env.SONAR_TOKEN }}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Run Unit Tests
       run: |
