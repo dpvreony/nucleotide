@@ -73,7 +73,7 @@ jobs:
     - name: Run Sonar Scanner begin
       if: env.SONAR_TOKEN != '' && env.SONAR_PROJECT_KEY != '' && env.SONAR_ORGANISATION_KEY != ''
       run: |
-        dotnet sonarscanner begin /k:"${{ env.SONAR_PROJECT_KEY }}" /d:sonar.login="${{ env.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /o:"${{ env.SONAR_ORGANISATION_KEY }}"
+        dotnet sonarscanner begin /k:"${{ env.SONAR_PROJECT_KEY }}" /d:sonar.login="${{ env.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /o:"${{ env.SONAR_ORGANISATION_KEY }}" /d:sonar.cs.opencover.reportsPaths="artifacts\opencover\"
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
