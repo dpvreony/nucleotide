@@ -69,6 +69,7 @@ jobs:
         dotnet sonarscanner begin /k:"${{ env.SONAR_PROJECT_KEY }}" /d:sonar.login="${{ env.SONAR_TOKEN }}"
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
 
     - name: Run Build
       run: |
@@ -79,8 +80,8 @@ jobs:
       run: |
         dotnet sonarscanner end /d:sonar.login="${{ env.SONAR_TOKEN }}"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
 
     - name: Run Unit Tests
       run: |
