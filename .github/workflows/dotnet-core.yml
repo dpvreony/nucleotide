@@ -49,7 +49,6 @@ jobs:
         dotnet tool install --global snitch
         dotnet tool install --global dotnet-sonarscanner
         dotnet tool install --global JetBrains.ReSharper.GlobalTools
-        dotnet tool install --global dotnet-sonarscanner
 
     - name: Prepare Artifact Directory
       run: |
