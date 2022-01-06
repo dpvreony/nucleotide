@@ -142,25 +142,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         private PropertyDeclarationSyntax GetPropertyDeclaration(
             IEntityGenerationModel generationModelEntityGenerationModel)
         {
-            var accessorList = new[]
-            {
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-            };
+            var setType = SyntaxFactory.ParseTypeName($"Set<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
+            var setCreation = SyntaxFactory.InvocationExpression(setType);
+            var arrowExpression = SyntaxFactory.ArrowExpressionClause(setCreation);
 
-            var summary = GetSummary(new[] { $"Gets or Sets the DBSet for {generationModelEntityGenerationModel.ClassName}" });
+            var summary = GetSummary(new[] { $"Gets the DBSet for {generationModelEntityGenerationModel.ClassName}" });
 
             var type = SyntaxFactory.ParseTypeName($"DbSet<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
             var identifier = generationModelEntityGenerationModel.ClassName;
 
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .WithAccessorList(
-                    SyntaxFactory.AccessorList(
-                        SyntaxFactory.List(accessorList)
-                    ))
+                .WithExpressionBody(arrowExpression)
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
                 .WithLeadingTrivia(summary);
 
             return result;
