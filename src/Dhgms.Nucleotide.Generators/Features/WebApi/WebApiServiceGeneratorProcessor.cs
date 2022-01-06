@@ -137,11 +137,13 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
                 GetPolicyMethodDeclaration(entityName, "Update"),
                 GetPolicyMethodDeclaration(entityName, "View"),
 
+                /*
                 GetEventIdMethodDeclaration(entityName, "Add"),
                 GetEventIdMethodDeclaration(entityName, "Delete"),
                 GetEventIdMethodDeclaration(entityName, "List"),
                 GetEventIdMethodDeclaration(entityName, "Update"),
                 GetEventIdMethodDeclaration(entityName, "View"),
+                */
 
                 GetQueryMethodDeclaration(entityName,"List", $"RequestDtos.List{entityName}RequestDto"),
                 GetQueryMethodDeclaration(entityName,"View", "long"),
