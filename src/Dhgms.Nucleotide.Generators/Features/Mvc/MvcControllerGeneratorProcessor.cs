@@ -126,8 +126,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
                 GetPolicyMethodDeclaration(entityName, "View"),
                 GetQueryMethodDeclaration(entityName, "List", $"RequestDtos.List{entityName}RequestDto"),
                 GetQueryMethodDeclaration(entityName, "View", "long"),
-                GetEventIdMethodDeclaration(entityName, "List"),
-                GetEventIdMethodDeclaration(entityName, "View"),
+                //GetEventIdMethodDeclaration(entityName, "List"),
+                //GetEventIdMethodDeclaration(entityName, "View"),
             };
 
 
