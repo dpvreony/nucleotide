@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override string[] GetClassPrefixes()
         {
-            return null;
+            return Array.Empty<string>();
         }
 
         /// <inheritdoc />
@@ -57,25 +57,25 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override string[] GetClassLevelCommentRemarks(string entityName)
         {
-            return null;
+            return Array.Empty<string>();
         }
 
         /// <inheritdoc />
         protected override IList<Tuple<string, IList<string>>> GetClassAttributes(IEntityGenerationModel entityDeclaration)
         {
-            return null;
+            return new List<Tuple<string, IList<string>>>();
         }
 
         /// <inheritdoc />
         protected override IList<string> GetBaseConstructorArguments()
         {
-            return null;
+            return new List<string>();
         }
 
         /// <inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return null;
+            return Array.Empty<MethodDeclarationSyntax>();
         }
 
         /// <inheritdoc />
@@ -111,7 +111,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments()
         {
-            return null;
+            return new List<Tuple<Func<string, string>, string, Accessibility>>();
         }
 
         /// <inheritdoc />
