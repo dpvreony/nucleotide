@@ -5,6 +5,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
 {
     public abstract class CrudControllerLoggerMessageActionGenerator : BaseClassLevelCodeGenerator<CrudControllerLoggerMessageActionFeatureFlags, CrudControllerLoggerMessageActionGeneratorProcessor, IEntityGenerationModel>
     {
+        /// <inheritdoc />
         protected override string GetNamespace()
         {
             return "LogMessageActions";
