@@ -8,7 +8,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override string GetNamespace()
         {
-            return "LogMessageActions";
+            return "LoggerMessageActions";
         }
     }
 }

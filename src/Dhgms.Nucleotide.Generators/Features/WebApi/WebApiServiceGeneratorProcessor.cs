@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
 
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName) =>
-            $"Whipstaff.AspNetCore.CrudController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto>";
+            $"Whipstaff.AspNetCore.CrudController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>>";
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
@@ -66,7 +66,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"MediatR.IMediator", "mediator", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"CommandFactories.I{entityName}CommandFactory", "commandFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"LogMessageActions.{entityName}LogMessageActions", "logMessageActions", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"LoggerMessageActions.{entityName}LoggerMessageActions", "logMessageActions", Accessibility.Private),
             };
 
             return result;
