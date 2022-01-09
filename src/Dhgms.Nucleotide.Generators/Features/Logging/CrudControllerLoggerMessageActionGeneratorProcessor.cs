@@ -4,6 +4,7 @@ using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Logging
@@ -80,7 +81,31 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return null;
+            var pocoSummary = GetSummary(new[] { $"Gets the Logger Message Action {entityGenerationModel.ClassName}." });
+
+            var pocoType = SyntaxFactory.ParseTypeName("global::System.Action<global::Microsoft.Extensions.Logging.ILogger, string, global::System.Exception?>");
+            var accessorList = new[]
+            {
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.InitAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            };
+
+            var addLongerMessageAction = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, "AddEventLogMessageAction", accessorList, pocoSummary);
+            var deleteLongerMessageAction = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, "DeleteEventLogMessageAction", accessorList, pocoSummary);
+            var listLongerMessageAction = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, "ListEventLogMessageAction", accessorList, pocoSummary);
+            var updateLongerMessageAction = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, "UpdateEventLogMessageAction", accessorList, pocoSummary);
+            var viewLongerMessageAction = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, "ViewEventLogMessageAction", accessorList, pocoSummary);
+
+            return new []
+            {
+                addLongerMessageAction,
+                deleteLongerMessageAction,
+                listLongerMessageAction,
+                updateLongerMessageAction,
+                viewLongerMessageAction,
+            };
         }
 
         /// <inheritdoc />
