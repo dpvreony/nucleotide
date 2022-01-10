@@ -44,7 +44,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
 
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName) =>
-            $"Whipstaff.AspNetCore.QueryOnlyController<{entityName}Controller, Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto>";
+            $"Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
@@ -67,6 +67,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.Extensions.Logging.ILogger<{entityName}Controller>", "logger", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"MediatR.IMediator", "mediator", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"LoggerMessageActions.{entityName}LoggerMessageActions", "logMessageActions", Accessibility.Private),
             };
 
             return result;
@@ -80,6 +81,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
                 "logger",
                 "mediator",
                 "queryFactory",
+                "logMessageActions",
             };
 
             return result;
