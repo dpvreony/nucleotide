@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Features.EntityFramework;
+using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 
@@ -201,4 +202,15 @@ namespace Dhgms.Nucleotide.ModelTests
             },
         };
     }
+
+    public class ReactiveUIViewForViewModel : INucleotideGenerationModel<ReactiveWindowGenerationModel>
+    {
+        public ReactiveWindowGenerationModel[] EntityGenerationModel => new []
+        {
+            new ReactiveWindowGenerationModel("Address", "global::Dhgms.Nucleotide.GenerationTests.ViewModels.IAddressViewModel")
+        };
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
 }
