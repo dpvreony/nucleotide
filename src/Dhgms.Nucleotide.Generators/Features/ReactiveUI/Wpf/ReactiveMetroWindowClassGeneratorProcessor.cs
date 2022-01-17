@@ -19,7 +19,13 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf
 
         protected override string GetBaseClass(string entityName)
         {
-            return "global::Whipstaff.Wpf.Mahapps.ReactiveMetroWindow";
+            return $"global::Whipstaff.Wpf.Mahapps.ReactiveMetroWindow<{entityName}>";
+        }
+
+        ///<inheritdoc />
+        protected override string GetClassSuffix()
+        {
+            return "ReactiveMetroWindow";
         }
     }
 }

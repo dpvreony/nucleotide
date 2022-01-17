@@ -19,7 +19,13 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
 
         protected override string GetBaseClass(string entityName)
         {
-            return "global::ReactiveUI.ReactiveWindow";
+            return $"global::ReactiveUI.ReactiveWindow<{entityName}>";
+        }
+        
+        ///<inheritdoc />
+        protected override string GetClassSuffix()
+        {
+            return "ReactiveWindow";
         }
     }
 }

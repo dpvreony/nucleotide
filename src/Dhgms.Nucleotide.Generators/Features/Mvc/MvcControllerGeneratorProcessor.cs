@@ -48,7 +48,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
 
         /// <inheritdoc />
         protected override string GetBaseClass(string entityName) =>
-            $"Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+            $"global::Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {

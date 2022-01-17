@@ -129,7 +129,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         {
             return new []
             {
-                "Whipstaff.AspNetCore.Features.Logging.ICrudControllerLogMessageActions"
+                "global::Whipstaff.AspNetCore.Features.Logging.ICrudControllerLogMessageActions"
             };
         }
 

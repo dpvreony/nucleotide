@@ -33,12 +33,6 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
         }
 
         ///<inheritdoc />
-        protected override string GetClassSuffix()
-        {
-            return "View";
-        }
-
-        ///<inheritdoc />
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(ReactiveWindowGenerationModel entityGenerationModel)
         {
             return null;

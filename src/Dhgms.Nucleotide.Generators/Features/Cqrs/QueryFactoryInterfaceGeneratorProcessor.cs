@@ -53,7 +53,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             var className = entityGenerationModel.ClassName;
             return new []
             {
-                $"Whipstaff.Core.IAuditableQueryFactory<Queries.IList{className}Query, RequestDtos.List{className}RequestDto, ResponseDtos.List{className}ResponseDto, Queries.IView{className}Query, ResponseDtos.View{className}ResponseDto>"
+                $"global::Whipstaff.Core.IAuditableQueryFactory<Queries.IList{className}Query, RequestDtos.List{className}RequestDto, ResponseDtos.List{className}ResponseDto, Queries.IView{className}Query, ResponseDtos.View{className}ResponseDto>"
             };
         }
 
