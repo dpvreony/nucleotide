@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
         {
             return new[]
             {
-                $"Reactive Metro Window wrapper for {entityName}. This is done to remove a build and compile time issue with using generic base classes in WPF controls.",
+                $"ReactiveUI Window wrapper for {entityName}. This is done to remove a build and compile time issue with using generic base classes in WPF controls.",
                 "While support has improved you can end up with build chain failures which are vague and actually because the resolution of generics in XAML and the binary code are blocking each other",
                 "from building. You can reduce the risks of this by removing EVERYTHING but the direct xaml code and code-behind logic. But you can end up with an extra library",
                 "project in your build chain. Alternatively you can use these wrappers to remove the generics from the xaml file."
