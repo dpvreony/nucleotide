@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright (c) 2020 DHGMS Solutions and Contributors. All rights reserved.
+// DHGMS Solutions and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
@@ -50,7 +54,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             var className = entityGenerationModel.ClassName;
             return new []
             {
-                $"Whipstaff.Core.IAuditableCommandFactory<Commands.IAdd{className}Command, RequestDtos.Add{className}RequestDto, ResponseDtos.Add{className}ResponseDto, Commands.IDelete{className}Command, ResponseDtos.Delete{className}ResponseDto, Commands.IUpdate{className}Command, RequestDtos.Update{className}RequestDto, ResponseDtos.Update{className}ResponseDto>"
+                $"global::Whipstaff.Core.IAuditableCommandFactory<Commands.IAdd{className}Command, RequestDtos.Add{className}RequestDto, ResponseDtos.Add{className}ResponseDto, Commands.IDelete{className}Command, ResponseDtos.Delete{className}ResponseDto, Commands.IUpdate{className}Command, RequestDtos.Update{className}RequestDto, ResponseDtos.Update{className}ResponseDto>"
             };
         }
 

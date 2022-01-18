@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright (c) 2020 DHGMS Solutions and Contributors. All rights reserved.
+// DHGMS Solutions and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+using System;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,13 +50,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             {
                 return new[]
                 {
-                    $"Whipstaff.Core.IAuditableRequest<long, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
+                    $"global::Whipstaff.Core.IAuditableRequest<long, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
                 };
             }
 
             return new[]
             {
-                $"Whipstaff.Core.IAuditableRequest<RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
+                $"global::Whipstaff.Core.IAuditableRequest<RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
             };
         }
     }
