@@ -10,27 +10,27 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI.WPF
     [ExcludeFromCodeCoverage]
     public static class ReactiveSimpleChildWindowClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveMetroWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveMetroWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveSimpleChildWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveSimpleChildWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
 
-            protected override Func<AttributeData, ReactiveMetroWindowClassGenerator> GetFactory()
+            protected override Func<AttributeData, ReactiveSimpleChildWindowClassGenerator> GetFactory()
             {
-                return data => new TestReactiveMetroWindowClassGenerator();
+                return data => new TestReactiveSimpleChildWindowClassGenerator();
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveMetroWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveMetroWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveSimpleChildWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveSimpleChildWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
             }
 
-            protected override Func<AttributeData, ReactiveMetroWindowClassGenerator> GetFactory()
+            protected override Func<AttributeData, ReactiveSimpleChildWindowClassGenerator> GetFactory()
             {
-                return data => new TestReactiveMetroWindowClassGenerator();
+                return data => new TestReactiveSimpleChildWindowClassGenerator();
             }
         }
     }
