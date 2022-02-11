@@ -2,6 +2,8 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
+
 namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
 {
     public sealed class ReactiveWindowClassGeneratorProcessor : AbstractReactiveWindowClassGeneratorProcessor
@@ -17,9 +19,9 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
             };
         }
 
-        protected override string GetBaseClass(string entityName)
+        protected override string GetBaseClass(ReactiveWindowGenerationModel entityGenerationModel)
         {
-            return $"global::ReactiveUI.ReactiveWindow<{entityName}>";
+            return $"global::ReactiveUI.ReactiveWindow<{entityGenerationModel.ViewModelType}>";
         }
         
         ///<inheritdoc />

@@ -43,7 +43,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         protected override IList<Tuple<Func<string, string>, string, Accessibility>> GetConstructorArguments() => Array.Empty<Tuple<Func<string, string>, string, Accessibility>>();
 
-        protected override string GetBaseClass(string entityName) => null;
+        protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel) => null;
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel) => Array.Empty<string>();
 

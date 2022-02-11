@@ -47,8 +47,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         /// <inheritdoc />
-        protected override string GetBaseClass(string entityName) =>
-            $"global::Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+        protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel)
+        {
+            var entityName = entityGenerationModel.ClassName;
+            return $"global::Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+        }
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {

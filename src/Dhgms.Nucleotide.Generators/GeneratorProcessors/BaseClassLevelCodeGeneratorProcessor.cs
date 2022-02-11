@@ -106,7 +106,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                 declaration = declaration.AddAttributeLists(attributeListSyntax);
             }
 
-            var baseClass = GetBaseClass(entityName);
+            var baseClass = GetBaseClass(entityDeclaration);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -381,7 +381,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
         /// Gets the base class, if any
         /// </summary>
         /// <returns>Base class</returns>
-        protected abstract string GetBaseClass(string entityName);
+        protected abstract string GetBaseClass(TGenerationModel entityGenerationModel);
 
         /// <summary>
         /// Gets the implemented interfaces, if any

@@ -136,8 +136,9 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         ///<inheritdoc />
-        protected override string GetBaseClass(string entityName)
+        protected override string GetBaseClass(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
+            var entityName = entityGenerationModel.ClassName;
             return $"Models.{entityName}Model";
         }
 

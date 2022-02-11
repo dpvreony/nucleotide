@@ -17,9 +17,9 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf
             };
         }
 
-        protected override string GetBaseClass(string entityName)
+        protected override string GetBaseClass(ReactiveWindowGenerationModel entityGenerationModel)
         {
-            return $"global::Whipstaff.Wpf.Mahapps.ReactiveSimpleChildWindow<{entityName}>";
+            return $"global::Whipstaff.Wpf.Mahapps.ReactiveSimpleChildWindow<{entityGenerationModel.ViewModelType}>";
         }
 
         ///<inheritdoc />
