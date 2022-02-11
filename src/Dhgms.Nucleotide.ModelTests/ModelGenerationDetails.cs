@@ -207,7 +207,7 @@ namespace Dhgms.Nucleotide.ModelTests
     {
         public ReactiveWindowGenerationModel[] EntityGenerationModel => new []
         {
-            new ReactiveWindowGenerationModel("Address", "global::Dhgms.Nucleotide.GenerationTests.ViewModels.IAddressViewModel")
+            new ReactiveWindowGenerationModel("Address", "global::Dhgms.Nucleotide.SampleApp.ViewModels.IAddressViewModel")
         };
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";

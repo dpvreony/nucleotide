@@ -19,5 +19,8 @@
   <ItemGroup>
     <Analyzer Include="$(ProjectDir)..\Dhgms.Nucleotide.ModelTests\bin\$(Configuration)\netstandard2.0\Dhgms.Nucleotide.SampleGenerator.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
 
 </Project>
