@@ -1,5 +1,24 @@
 {
-  "extends": [
-    "config:base"
-  ]
+    "extends": [
+        "config:base"
+    ],
+    "assigneesFromCodeOwners": true,
+    "packageRules": [{
+            "matchPackagePatterns": ["Microsoft.*"],
+            "groupName": "all microsoft dependencies",
+            "groupSlug": "all-microsoft",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["ReactiveUI.*"],
+            "groupName": "all reactiveui dependencies",
+            "groupSlug": "all-reactiveui",
+            "labels": ["dependencies"]
+        },
+        {
+            "matchPackagePatterns": ["Xamarin.*"],
+            "groupName": "all xamarin dependencies",
+            "groupSlug": "all-xamarin",
+            "labels": ["dependencies"]
+        }]
 }
