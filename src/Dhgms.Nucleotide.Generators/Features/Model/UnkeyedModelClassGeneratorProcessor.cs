@@ -114,7 +114,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return null;
         }
 
-        protected override string GetBaseClass(string entityName)
+        protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel)
         {
             return null;
         }

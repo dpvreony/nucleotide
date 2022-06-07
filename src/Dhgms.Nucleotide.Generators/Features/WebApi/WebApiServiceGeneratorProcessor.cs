@@ -44,8 +44,11 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
         /// <inheritdoc />
-        protected override string GetBaseClass(string entityName) =>
-            $"global::Whipstaff.AspNetCore.CrudController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+        protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel)
+        {
+            var entityName = entityGenerationModel.ClassName;
+            return $"global::Whipstaff.AspNetCore.CrudController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+        }
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
