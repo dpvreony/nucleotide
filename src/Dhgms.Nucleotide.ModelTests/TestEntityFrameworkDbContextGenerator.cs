@@ -11,6 +11,6 @@ namespace Dhgms.Nucleotide.ModelTests
     [Generator]
     public sealed class TestEntityFrameworkDbContextGenerator : EntityFrameworkDbContextGenerator
     {
-        protected override INucleotideGenerationModel<IEntityGenerationModel> NucleotideGenerationModel => new ModelGenerationDetails();
+        protected override INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel> NucleotideGenerationModel => new EntityFrameworkGenerationModelDetails();
     }
 }
