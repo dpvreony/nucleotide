@@ -92,7 +92,18 @@ namespace Dhgms.Nucleotide.ModelTests
 
     public class EntityFrameworkGenerationModelDetails : INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel>
     {
-        public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel { get; }
+        public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel =>
+            new EntityFrameworkDbContextGenerationModel[]
+            {
+                new EntityFrameworkDbContextGenerationModel
+                {
+                    ClassName = "SomeProduct",
+                    DbSetEntities = new EntityGenerationModel[]
+                    {
+                        new UserEntityGenerationModel(),
+                    }
+                }
+            };
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }

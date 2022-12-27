@@ -1,17 +1,22 @@
 ﻿using System;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkDbContextGenerationModel : IClassName
     {
-        public PropertyInfoBase[] Properties
+        public EntityGenerationModel[] DbSetEntities
         {
             get;
             set;
         }
 
-        public string ClassName => throw new NotImplementedException();
+        public string ClassName
+        {
+            get;
+            set;
+        }
     }
 }
