@@ -17,12 +17,12 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
     /// <summary>
     /// Code Generator for Entity Framework DB Context
     /// </summary>
-    public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<IEntityGenerationModel>
+    public sealed class EntityFrameworkDbContextGeneratorProcessor : BaseGeneratorProcessor<EntityFrameworkDbContextGenerationModel>
     {
         ///<inheritdoc />
         public override NamespaceDeclarationSyntax GenerateObjects(
             NamespaceDeclarationSyntax namespaceDeclaration,
-            INucleotideGenerationModel<IEntityGenerationModel> nucleotideGenerationModel)
+            INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel> nucleotideGenerationModel)
         {
             var generationModelEntityGenerationModel = nucleotideGenerationModel.EntityGenerationModel;
 
@@ -35,7 +35,12 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var classDeclarations = new List<MemberDeclarationSyntax>();
 
             var suffix = GetClassSuffix();
-            classDeclarations.Add(GetClassDeclarationSyntax(generationModelEntityGenerationModel, suffix));
+
+            foreach (var entityFrameworkDbContextGenerationModel in generationModelEntityGenerationModel)
+            {
+                classDeclarations.Add(GetClassDeclarationSyntax(entityFrameworkDbContextGenerationModel, suffix));
+            }
+
 
             var usings = GetUsingDirectives();
             namespaceDeclaration = namespaceDeclaration.AddUsings(usings);
@@ -45,7 +50,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return namespaceDeclaration;
         }
 
-        private MemberDeclarationSyntax[] GetMembers(string className, string entityName, IEntityGenerationModel[] generationModelEntityGenerationModel)
+        private MemberDeclarationSyntax[] GetMembers(string className, EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             var result = new List<MemberDeclarationSyntax>();
 
@@ -123,7 +128,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         /// Gets the method declarations to be generated
         /// </summary>
         /// <returns></returns>
-        private MemberDeclarationSyntax[] GetMethodDeclarations(IEntityGenerationModel[] generationModelEntityGenerationModel)
+        private MemberDeclarationSyntax[] GetMethodDeclarations(EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             var results = new[]
             {
@@ -137,13 +142,13 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         /// Gets the property declarations to be generated
         /// </summary>
         /// <returns></returns>
-        private PropertyDeclarationSyntax[] GetPropertyDeclarations(IEntityGenerationModel[] generationModelEntityGenerationModel)
+        private PropertyDeclarationSyntax[] GetPropertyDeclarations(EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             return generationModelEntityGenerationModel?.Select(GetPropertyDeclaration).ToArray();
         }
 
         private PropertyDeclarationSyntax GetPropertyDeclaration(
-            IEntityGenerationModel generationModelEntityGenerationModel)
+            EntityGenerationModel generationModelEntityGenerationModel)
         {
             var setType = SyntaxFactory.ParseTypeName($"Set<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
             var setCreation = SyntaxFactory.InvocationExpression(setType);
@@ -190,12 +195,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         //    return result.ToArray();
         //}
 
-        private MemberDeclarationSyntax GetClassDeclarationSyntax(IEntityGenerationModel[] generationModelEntityGenerationModel, string suffix)
+        private MemberDeclarationSyntax GetClassDeclarationSyntax(EntityFrameworkDbContextGenerationModel generationModelEntityGenerationModel, string suffix)
         {
             // TODO : our model needs a parent name.
-            var entityName = "Test";
+            var entityName = generationModelEntityGenerationModel.ClassName;
             var className = $"{entityName}{suffix}";
-            var members = GetMembers(className, entityName, generationModelEntityGenerationModel);
+            var members = GetMembers(
+                className,
+                generationModelEntityGenerationModel.DbSetEntities);
 
             // SyntaxFactory.Token(SyntaxKind.SealedKeyword)
 
@@ -331,7 +338,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return null;
         }
 
-        private MemberDeclarationSyntax GetOnModelCreatingMethodDeclaration(IEntityGenerationModel[] generationModelEntityGenerationModel)
+        private MemberDeclarationSyntax GetOnModelCreatingMethodDeclaration(EntityGenerationModel[] generationModelEntityGenerationModel)
         {
             var methodName = $"OnModelCreating";
 
@@ -347,7 +354,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return declaration;
         }
 
-        private StatementSyntax GetApplyConfigurationInvocationDeclaration(IEntityGenerationModel entityGenerationModel)
+        private StatementSyntax GetApplyConfigurationInvocationDeclaration(EntityGenerationModel entityGenerationModel)
         {
             var invokeExpression = RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax("modelBuilder",
                 "ApplyConfiguration",

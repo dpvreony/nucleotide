@@ -90,6 +90,24 @@ namespace Dhgms.Nucleotide.ModelTests
         };
     }
 
+    public class EntityFrameworkGenerationModelDetails : INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel>
+    {
+        public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel =>
+            new EntityFrameworkDbContextGenerationModel[]
+            {
+                new EntityFrameworkDbContextGenerationModel
+                {
+                    ClassName = "SomeProduct",
+                    DbSetEntities = new EntityGenerationModel[]
+                    {
+                        new UserEntityGenerationModel(),
+                    }
+                }
+            };
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
     public class ModelGenerationDetails : INucleotideGenerationModel<IEntityGenerationModel>
     {
         public IEntityGenerationModel[] EntityGenerationModel => new IEntityGenerationModel[]
