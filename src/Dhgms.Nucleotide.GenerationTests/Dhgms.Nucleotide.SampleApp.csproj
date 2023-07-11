@@ -10,7 +10,7 @@
     <PackageReference Include="Whipstaff.AspNetCore" Version="6.1.51" />
     <PackageReference Include="Whipstaff.Wpf" Version="6.1.51" />
     <PackageReference Include="Whipstaff.Wpf.Mahapps" Version="6.1.51" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
