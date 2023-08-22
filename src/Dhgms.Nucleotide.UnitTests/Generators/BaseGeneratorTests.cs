@@ -41,7 +41,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
         }
 
-        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Logging.Xunit.TestWithLoggingBase
+        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Xunit.TestWithLoggingBase
             where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
@@ -64,7 +64,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Logging.Xunit.TestWithLoggingBase
+        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Xunit.TestWithLoggingBase
             where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
             where TFeatureFlags : class
             where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()

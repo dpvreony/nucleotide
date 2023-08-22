@@ -29,7 +29,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
         public static Diagnostic InfoDiagnostic(string message)
         {
             return Diagnostic.Create(
-                "NUC-I0001",
+                "NUCI0001",
                 "Nucleotide Generation",
                 message,
                 DiagnosticSeverity.Info,
@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
         public static Diagnostic ErrorDiagnostic(string message)
         {
             return Diagnostic.Create(
-                "NUC-E0001",
+                "NUCE0001",
                 "Nucleotide Generation",
                 message,
                 DiagnosticSeverity.Error,
