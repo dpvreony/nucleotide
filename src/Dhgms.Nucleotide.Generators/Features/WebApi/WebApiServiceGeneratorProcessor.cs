@@ -47,7 +47,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
         protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel)
         {
             var entityName = entityGenerationModel.ClassName;
-            return $"global::Whipstaff.AspNetCore.CrudController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+            return $"global::Whipstaff.AspNetCore.CrudApiController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, Commands.IAdd{entityName}Command, RequestDtos.Add{entityName}RequestDto, ResponseDtos.Add{entityName}ResponseDto, Commands.IDelete{entityName}Command, ResponseDtos.Delete{entityName}ResponseDto, Commands.IUpdate{entityName}Command, RequestDtos.Update{entityName}RequestDto, ResponseDtos.Update{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
         }
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
@@ -111,7 +111,6 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
             return new List<Tuple<string, IList<string>>>
             {
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new[]{ $"\"api/{entityDeclaration.ClassName.ToLower()}\"" })
             };
         }
 

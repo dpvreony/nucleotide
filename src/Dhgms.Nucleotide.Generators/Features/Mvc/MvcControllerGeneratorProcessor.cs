@@ -50,7 +50,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
         protected override string GetBaseClass(IEntityGenerationModel entityGenerationModel)
         {
             var entityName = entityGenerationModel.ClassName;
-            return $"global::Whipstaff.AspNetCore.QueryOnlyController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
+            return $"global::Whipstaff.AspNetCore.QueryOnlyMvcController<Queries.IList{entityName}Query, RequestDtos.List{entityName}RequestDto, ResponseDtos.List{entityName}ResponseDto, Queries.IView{entityName}Query, ResponseDtos.View{entityName}ResponseDto, LoggerMessageActions.{entityName}LoggerMessageActions>";
         }
 
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
@@ -113,7 +113,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
             {
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.AutoValidateAntiforgeryToken", null),
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new[]{ $"\"{entityDeclaration.ClassName}\"" })
             };
         }
 
