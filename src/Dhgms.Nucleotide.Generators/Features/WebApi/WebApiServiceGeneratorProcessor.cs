@@ -112,7 +112,7 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
             {
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Authorization.Authorize", null),
                 new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.ApiController", null),
-                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new List<string> { $"{entityDeclaration.ClassName.ToLowerInvariant()}" }),
+                new Tuple<string, IList<string>>("Microsoft.AspNetCore.Mvc.Route", new List<string> { $"\"{entityDeclaration.ClassName.ToLowerInvariant()}\"" }),
             };
         }
 
