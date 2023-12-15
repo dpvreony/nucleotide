@@ -66,8 +66,13 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 // TODO: need to review this might be better way than generate, loop, copy.
                 // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
 
+                var nullableSyntaxDirective = SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true);
+                var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
+                var triviaList = SyntaxFactory.TriviaList(trivia);
+
                 var cu = SyntaxFactory.CompilationUnit()
                     .AddMembers(memberDeclarationSyntax)
+                    .WithLeadingTrivia(triviaList)
                     .NormalizeWhitespace();
 
                 var feature = typeof(TGeneratorProcessor).ToString();
