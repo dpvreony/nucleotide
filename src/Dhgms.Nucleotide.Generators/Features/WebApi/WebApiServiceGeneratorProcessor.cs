@@ -289,9 +289,10 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
                 returnStatement
             };
 
-            var parameters = GetParams(new []{ $"ResponseDtos.{camelAction}{entityName}ResponseDto {lowerAction}Response"});
+            var responseDtoType = $"ResponseDtos.{camelAction}{entityName}ResponseDto";
+            var parameters = GetParams(new []{ $"{responseDtoType} {lowerAction}Response"});
 
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<IActionResult>");
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<ActionResult<{responseDtoType}>>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
