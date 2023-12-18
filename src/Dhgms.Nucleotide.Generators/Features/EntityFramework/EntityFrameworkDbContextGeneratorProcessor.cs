@@ -86,7 +86,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private ConstructorDeclarationSyntax GetConstructorWithDbOptions(string className)
         {
-            var parameters = GetParams(new []{ "DbContextOptions dbContextOptions"});
+            var parameters = GetParams(new []{ $"DbContextOptions<{className}> dbContextOptions"});
 
             var seperatedSyntaxList = new SeparatedSyntaxList<ArgumentSyntax>();
 
