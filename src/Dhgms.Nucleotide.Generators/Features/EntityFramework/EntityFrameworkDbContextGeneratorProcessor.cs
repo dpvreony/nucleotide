@@ -67,7 +67,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             //{
             //    result.Add(GenerateConstructor(className, constructorArguments, entityName, baseArguments));
             //}
-            result.Add(GetDefaultConstructor(className));
             result.Add(GetConstructorWithDbOptions(className));
 
             var properties = GetPropertyDeclarations(generationModelEntityGenerationModel);
@@ -83,17 +82,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             }
 
             return result.ToArray();
-        }
-
-        private ConstructorDeclarationSyntax GetDefaultConstructor(string className)
-        {
-            var body = new List<StatementSyntax>();
-
-            var declaration = SyntaxFactory.ConstructorDeclaration(className)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body.ToArray());
-
-            return declaration;
         }
 
         private ConstructorDeclarationSyntax GetConstructorWithDbOptions(string className)
