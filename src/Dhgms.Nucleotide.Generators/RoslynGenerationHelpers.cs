@@ -350,6 +350,46 @@ namespace Dhgms.Nucleotide.Generators
         }
 
         /// <summary>
+        /// Gets syntax to create and assign a variable from invoking another variable that is a Func
+        /// </summary>
+        /// <param name="variableToCreate"></param>
+        /// <param name="variableToReference"></param>
+        /// <param name="arguments"></param>
+        /// <param name="isAsync"></param>
+        /// <returns></returns>
+        public static StatementSyntax GetVariableAssignmentFromFuncVariableInvocationSyntax(
+            string variableToCreate,
+            string variableToReference,
+            string[] arguments,
+            bool isAsync)
+        {
+            var argsList = new SeparatedSyntaxList<ArgumentSyntax>();
+            if (arguments != null && arguments.Length > 0)
+            {
+
+                foreach (var s in arguments)
+                {
+                    argsList = argsList.Add(SyntaxFactory.Argument(SyntaxFactory.ParseName(s)));
+                }
+            }
+
+            var argListSyntax = SyntaxFactory.ArgumentList(argsList);
+
+            ExpressionSyntax getCommandInvocation = SyntaxFactory.InvocationExpression(SyntaxFactory.IdentifierName(variableToReference), argListSyntax);
+
+            getCommandInvocation = GetAwaitedExpressionSyntax(isAsync, getCommandInvocation);
+
+            var equalsValueClause = SyntaxFactory.EqualsValueClause(
+                SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                getCommandInvocation);
+            var variableSyntax = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
+            variableSyntax = variableSyntax.Add(SyntaxFactory.VariableDeclarator(variableToCreate).WithInitializer(equalsValueClause));
+            var variableDeclaration =
+                SyntaxFactory.VariableDeclaration(SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("var")), variableSyntax);
+            return SyntaxFactory.LocalDeclarationStatement(variableDeclaration);
+        }
+
+        /// <summary>
         /// Gets the syntax for invoking a method on a field and passing in a value
         /// </summary>
         /// <param name="methodName"></param>
