@@ -330,7 +330,16 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             var methodName = $"OnModelCreating";
 
-            var body = generationModelEntityGenerationModel.Select(GetApplyConfigurationInvocationDeclaration).ToArray();
+            var body = new List<StatementSyntax>
+            {
+                RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
+                    "base",
+                    methodName,
+                    new [] { "modelBuilder" },
+                    false)
+            };
+
+            body.AddRange(generationModelEntityGenerationModel.Select(GetApplyConfigurationInvocationDeclaration));
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder"});
 
