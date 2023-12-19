@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -24,7 +25,25 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
+            var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia().ToArray();
+            var datetimeOffSetType = SyntaxFactory.ParseTypeName("System.DateTimeOffSet");
+            var ulongType = SyntaxFactory.ParseTypeName("ulong");
+
+            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                datetimeOffSetType,
+                $"Created",
+                inheritDocSyntaxTrivia);
+
+            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                datetimeOffSetType,
+                $"Modified",
+                inheritDocSyntaxTrivia);
+
+            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                ulongType,
+                $"RowVersion",
+                inheritDocSyntaxTrivia);
+
             if (entityGenerationModel?.ParentEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
@@ -145,6 +164,9 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override IEnumerable<string> GetImplementedInterfaces(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
+            yield return $"global::Whipstaff.Core.Entities.ILongRowVersion";
+            yield return $"global::Whipstaff.Core.Entities.IModifiable";
+
             if (entityGenerationModel?.ParentEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
