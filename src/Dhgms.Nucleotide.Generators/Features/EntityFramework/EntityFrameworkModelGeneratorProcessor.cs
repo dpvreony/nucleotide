@@ -26,7 +26,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia().ToArray();
-            var datetimeOffSetType = SyntaxFactory.ParseTypeName("System.DateTimeOffSet");
+            var datetimeOffSetType = SyntaxFactory.ParseTypeName("System.DateTimeOffset");
             var ulongType = SyntaxFactory.ParseTypeName("ulong");
 
             yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
