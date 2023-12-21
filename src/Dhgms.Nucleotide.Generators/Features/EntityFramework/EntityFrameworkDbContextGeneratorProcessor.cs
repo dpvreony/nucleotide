@@ -364,8 +364,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                     false),
             };
 
-            // body.AddRange(generationModelEntityGenerationModel.Select(GetApplyConfigurationInvocationDeclaration));
-
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder"});
 
             var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
@@ -376,16 +374,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 .AddBodyStatements(body.ToArray())
                 .WithLeadingTrivia(inheritDocSyntaxTrivia);
             return declaration;
-        }
-
-        private StatementSyntax GetApplyConfigurationInvocationDeclaration(EntityGenerationModel entityGenerationModel)
-        {
-            var invokeExpression = RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax("modelBuilder",
-                "ApplyConfiguration",
-                new[] {$"new EntityTypeConfigurations.{entityGenerationModel.ClassName}EntityTypeConfiguration()"},
-                false);
-
-            return invokeExpression;
         }
     }
 }

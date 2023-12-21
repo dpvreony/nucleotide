@@ -157,7 +157,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             return new []
             {
-                "global::Whipstaff.EntityFramework.ModelCreation.IModelCreator"
+                $"global::Whipstaff.EntityFramework.ModelCreation.IModelCreator<{entityName}DbContext>"
             };
         }
 
@@ -226,7 +226,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddBodyStatements(body.ToArray())
                 .WithLeadingTrivia(inheritDocSyntaxTrivia);
             return declaration;
