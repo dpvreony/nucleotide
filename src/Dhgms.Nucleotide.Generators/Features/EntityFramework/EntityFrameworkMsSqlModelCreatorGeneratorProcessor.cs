@@ -157,7 +157,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             return new []
             {
-                $"global::Whipstaff.EntityFramework.ModelCreation.IModelCreator<{entityName}DbContext>"
+                $"global::Whipstaff.EntityFramework.ModelCreation.IModelCreator<EfModels.{entityName}DbContext>"
             };
         }
 
