@@ -57,17 +57,16 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             //var constructorArguments = GetConstructorArguments();
             //var baseArguments = GetBaseConstructorArguments();
 
-            //var fields = GetFieldDeclarations(constructorArguments, entityName);
-            //if (fields != null && fields.Length > 0)
-            //{
-            //    result.AddRange(fields);
-            //}
+            var fields = GetFieldDeclarations(className);
+            if (fields != null && fields.Length > 0)
+            {
+                result.AddRange(fields);
+            }
 
             //if (constructorArguments != null && constructorArguments.Count > 0)
             //{
             //    result.Add(GenerateConstructor(className, constructorArguments, entityName, baseArguments));
             //}
-            result.Add(GetDefaultConstructor(className));
             result.Add(GetConstructorWithDbOptions(className));
 
             var properties = GetPropertyDeclarations(generationModelEntityGenerationModel);
@@ -85,20 +84,13 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return result.ToArray();
         }
 
-        private ConstructorDeclarationSyntax GetDefaultConstructor(string className)
-        {
-            var body = new List<StatementSyntax>();
-
-            var declaration = SyntaxFactory.ConstructorDeclaration(className)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body.ToArray());
-
-            return declaration;
-        }
-
         private ConstructorDeclarationSyntax GetConstructorWithDbOptions(string className)
         {
-            var parameters = GetParams(new []{ "DbContextOptions dbContextOptions"});
+            var parameters = GetParams(new []
+            {
+                $"DbContextOptions<{className}> dbContextOptions",
+                $"Func<Whipstaff.EntityFramework.ModelCreation.IModelCreator<{className}>> modelCreatorFunc"
+            });
 
             var seperatedSyntaxList = new SeparatedSyntaxList<ArgumentSyntax>();
 
@@ -112,7 +104,29 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 SyntaxKind.BaseConstructorInitializer,
                 baseInitializerArgumentList);
 
-            var body = new List<StatementSyntax>();
+            var body = new List<StatementSyntax>
+            {
+                RoslynGenerationHelpers.GetNullGuardCheckSyntax("modelCreatorFunc"),
+            };
+
+            var left = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                SyntaxFactory.ThisExpression(),
+                SyntaxFactory.Token(SyntaxKind.DotToken),
+                SyntaxFactory.IdentifierName(SyntaxFactory.Identifier($"_modelCreatorFunc")));
+
+            var right = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("modelCreatorFunc"));
+
+            var assignment = SyntaxFactory.ExpressionStatement(
+                SyntaxFactory.AssignmentExpression(
+                    SyntaxKind.SimpleAssignmentExpression,
+                    left,
+                    SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                    right),
+                SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+            );
+
+            body.Add(assignment);
 
             var declaration = SyntaxFactory.ConstructorDeclaration(className)
                 .WithParameterList(parameters)
@@ -168,32 +182,21 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return result;
         }
 
-        //private MemberDeclarationSyntax[] GetFieldDeclarations(
-        //    IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
-        //    string entityName)
-        //{
-        //    if (constructorArguments == null || constructorArguments.Count < 1)
-        //    {
-        //        return null;
-        //    }
+        private MemberDeclarationSyntax[] GetFieldDeclarations(string className)
+        {
 
-        //    var result = new List<MemberDeclarationSyntax>();
+            var result = new List<MemberDeclarationSyntax>();
 
-        //    foreach (var constructorArgument in constructorArguments)
-        //    {
-        //        var fieldType = constructorArgument.Item1(entityName);
+            var fieldDeclaration = SyntaxFactory.FieldDeclaration(
+                    SyntaxFactory.VariableDeclaration(
+                        SyntaxFactory.ParseTypeName($"Func<Whipstaff.EntityFramework.ModelCreation.IModelCreator<{className}>>"),
+                        SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_modelCreatorFunc")) })
+                    ))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+            result.Add(fieldDeclaration);
 
-        //        var fieldDeclaration = SyntaxFactory.FieldDeclaration(
-        //                SyntaxFactory.VariableDeclaration(
-        //                    SyntaxFactory.ParseTypeName(fieldType),
-        //                    SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{constructorArgument.Item2}")) })
-        //                ))
-        //            .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
-        //        result.Add(fieldDeclaration);
-        //    }
-
-        //    return result.ToArray();
-        //}
+            return result.ToArray();
+        }
 
         private MemberDeclarationSyntax GetClassDeclarationSyntax(EntityFrameworkDbContextGenerationModel generationModelEntityGenerationModel, string suffix)
         {
@@ -342,26 +345,35 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             var methodName = $"OnModelCreating";
 
-            var body = generationModelEntityGenerationModel.Select(GetApplyConfigurationInvocationDeclaration).ToArray();
+            var body = new List<StatementSyntax>
+            {
+                RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
+                    "base",
+                    methodName,
+                    new [] { "modelBuilder" },
+                    false),
+                RoslynGenerationHelpers.GetVariableAssignmentFromFuncVariableInvocationSyntax(
+                    "modelCreator",
+                    "_modelCreatorFunc",
+                    Array.Empty<string>(),
+                    false),
+                RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
+                    "modelCreator",
+                    "CreateModel",
+                    new [] { "modelBuilder" },
+                    false),
+            };
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.ModelBuilder modelBuilder"});
 
+            var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia();
             var returnType = SyntaxFactory.ParseTypeName("void");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
-                .AddBodyStatements(body.ToArray());
+                .AddBodyStatements(body.ToArray())
+                .WithLeadingTrivia(inheritDocSyntaxTrivia);
             return declaration;
-        }
-
-        private StatementSyntax GetApplyConfigurationInvocationDeclaration(EntityGenerationModel entityGenerationModel)
-        {
-            var invokeExpression = RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax("modelBuilder",
-                "ApplyConfiguration",
-                new[] {$"new EntityTypeConfigurations.{entityGenerationModel.ClassName}EntityTypeConfiguration()"},
-                false);
-
-            return invokeExpression;
         }
     }
 }

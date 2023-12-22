@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -30,49 +31,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(
             IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            var idColumn = GetIdColumn(entityGenerationModel.KeyType);
-
-            return new []
-            {
-                GetReadOnlyPropertyDeclaration(idColumn)
-            };
-        }
-
-        private static PropertyInfoBase GetIdColumn(KeyType keyType)
-        {
-            switch (keyType)
-            {
-                case KeyType.Guid:
-                    return new ClrGuidPropertyInfo(
-                        CollectionType.None,
-                        "Id",
-                        "Unique Identifier for the object",
-                        false,
-                        true,
-                        null);
-                case KeyType.Int32:
-                    return new Integer32PropertyInfo(
-                        CollectionType.None,
-                        "Id",
-                        "Unique Identifier for the object",
-                        false,
-                        1,
-                        int.MaxValue,
-                        true,
-                        null);
-                case KeyType.Int64:
-                    return new Integer64PropertyInfo(
-                        CollectionType.None,
-                        "Id",
-                        "Unique Identifier for the object",
-                        false,
-                        1,
-                        int.MaxValue,
-                        true,
-                        null);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(keyType));
-            }
+            return Array.Empty<PropertyDeclarationSyntax>();
         }
 
         protected override MethodDeclarationSyntax[] GetMethodDeclarations(string className, string prefix)
@@ -82,10 +41,27 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return new []
+            var result = new List<string>
             {
                 $"IUnkeyed{entityGenerationModel.ClassName}Model"
             };
+
+            switch (entityGenerationModel.KeyType)
+            {
+                case KeyType.Guid:
+                    result.Add("global::Whipstaff.Core.Entities.IGuidId");
+                    break;
+                case KeyType.Int32:
+                    result.Add("global::Whipstaff.Core.Entities.IIntId");
+                    break;
+                case KeyType.Int64:
+                    result.Add("global::Whipstaff.Core.Entities.ILongId");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(entityGenerationModel.KeyType));
+            }
+
+            return result.ToArray();
         }
     }
 }

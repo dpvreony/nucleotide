@@ -518,11 +518,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private void DoPrimaryKeyMethodDeclaration(List<StatementSyntax> body)
         {
-            var statement =
-                RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
+            var statement = RoslynGenerationHelpers.GetMethodOnVariableInvocationSyntax(
                     "builder",
                     "HasKey",
-                    new[] {$"x => x.Id"}, false);
+                    new[] {$"x => x.Id"},
+                    false);
             body.Add(statement);
         }
     }
