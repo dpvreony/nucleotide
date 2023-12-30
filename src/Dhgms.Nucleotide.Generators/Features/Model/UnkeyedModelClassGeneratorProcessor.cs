@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -27,7 +28,85 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            var result = new List<PropertyDeclarationSyntax>();
+
+            var properties = entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            if (properties != null)
+            {
+                result.AddRange(properties);
+            }
+
+            if (entityGenerationModel.InterfaceGenerationModels != null)
+            {
+                foreach (var interfaceGenerationModel in entityGenerationModel.InterfaceGenerationModels)
+                {
+                    if (interfaceGenerationModel.BaseInterfaces == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (var baseInterface in interfaceGenerationModel.BaseInterfaces)
+                    {
+                        properties = baseInterface.Properties?.Select(GetPropertyDeclaration).ToArray();
+                        if (properties != null)
+                        {
+                            result.AddRange(properties);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private PropertyDeclarationSyntax GetPropertyDeclaration(IPropertyGenerationModel propertyGenerationModel)
+        {
+            var type = SyntaxFactory.ParseName(propertyGenerationModel.Type);
+            var identifier = propertyGenerationModel.Name;
+
+            var summary = new[]
+            {
+                SyntaxFactory.Comment($"/// <inheritdoc />"),
+            };
+
+            var accessorList = GetPropertyAccessorDeclarationSyntaxCollection(propertyGenerationModel.PropertyAccessorFlags);
+
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(summary);
+            return result;
+        }
+
+        private static AccessorDeclarationSyntax[] GetPropertyAccessorDeclarationSyntaxCollection(
+            PropertyAccessorFlags propertyAccessorFlags)
+        {
+            return propertyAccessorFlags switch
+            {
+                PropertyAccessorFlags.Get => new[]
+                                {
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                },
+                PropertyAccessorFlags.GetInit => new[]
+                {
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.InitAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                },
+                PropertyAccessorFlags.GetSet => new[]
+                {
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                },
+                _ => throw new ArgumentOutOfRangeException(nameof(propertyAccessorFlags), propertyAccessorFlags, null)
+            };
         }
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
