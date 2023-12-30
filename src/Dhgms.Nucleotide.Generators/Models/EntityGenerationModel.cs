@@ -20,7 +20,7 @@ namespace Dhgms.Nucleotide.Generators.Models
 
         public abstract IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
 
-        public abstract IInterfaceGenerationModel[] InterfaceGenerationModels { get; }
+        public abstract InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 
         /// <summary>
         /// Gets the name of the information class.

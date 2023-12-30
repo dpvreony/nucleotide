@@ -23,7 +23,7 @@ namespace Dhgms.Nucleotide.Generators.Models
 
         IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
 
-        IInterfaceGenerationModel[] InterfaceGenerationModels { get; }
+        InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 
         /// <summary>
         /// Gets the class remarks.

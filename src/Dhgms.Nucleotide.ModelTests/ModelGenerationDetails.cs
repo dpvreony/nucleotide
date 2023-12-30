@@ -17,7 +17,7 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents an Address";
 
@@ -32,7 +32,7 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a Gender";
 
@@ -48,7 +48,7 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a Person";
 
@@ -63,7 +63,7 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a Salutation";
 
@@ -79,7 +79,7 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override IInterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a User";
 
