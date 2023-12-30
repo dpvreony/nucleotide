@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -114,12 +115,21 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return $"Unkeyed{entityName}Model";
         }
 
+        /// <inheritdoc/>
         protected override IEnumerable<string> GetImplementedInterfaces(IEntityGenerationModel entityGenerationModel)
         {
-            return new List<string>
+            var result =new List<string>
             {
                 $"I{entityGenerationModel.ClassName}Model"
             };
+
+            var entityInterfaces = entityGenerationModel.InterfaceGenerationModels.Select(model => model.ClassName).ToArray();
+            if (entityInterfaces.Any())
+            {
+                result.AddRange(entityInterfaces);
+            }
+
+            return result;
         }
 
         protected override SeparatedSyntaxList<AttributeSyntax> GetAttributesForProperty(PropertyInfoBase propertyInfo)
