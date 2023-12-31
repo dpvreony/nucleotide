@@ -2,10 +2,12 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
+using Dhgms.Nucleotide.Generators.InterfaceGenerationModels.Whipstaff.Entities;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 
@@ -63,14 +65,14 @@ namespace Dhgms.Nucleotide.ModelTests
 
         public override KeyType KeyType => KeyType.Int32;
         public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => new InterfaceGenerationModel[]
+        {
+            new NameableInterfaceGenerationModel()
+        };
 
         public override string ClassRemarks => "Represents a Salutation";
 
-        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
-        {
-            new ClrStringPropertyInfo(CollectionType.None, "Name", "Name of the salutation", false, 3, 255, false, false, null),
-        };
+        public override PropertyInfoBase[] Properties => Array.Empty<PropertyInfoBase>();
     }
 
     public class UserEntityGenerationModel : EntityGenerationModel

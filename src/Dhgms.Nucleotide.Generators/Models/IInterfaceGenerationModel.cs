@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Generators.Models
     /// <param name="Properties">Properties directly defined on the interface.</param>
     /// <param name="Methods">Methods directly defined on the interface.</param>
     /// <param name="BaseInterfaces">Interfaces that this interface inherits from.</param>
-    public sealed record InterfaceGenerationModel(string ClassName, IList<IPropertyGenerationModel> Properties, IList<IInterfaceMethodGenerationModel> Methods, IList<InterfaceGenerationModel> BaseInterfaces) : IObjectGenerationModel
+    public record InterfaceGenerationModel(string ClassName, IList<PropertyGenerationModel> Properties, IList<IInterfaceMethodGenerationModel> Methods, IList<InterfaceGenerationModel> BaseInterfaces) : IObjectGenerationModel
     {
     }
 }

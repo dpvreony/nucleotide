@@ -59,9 +59,9 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return result;
         }
 
-        private PropertyDeclarationSyntax GetPropertyDeclaration(IPropertyGenerationModel propertyGenerationModel)
+        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyGenerationModel propertyGenerationModel)
         {
-            var type = SyntaxFactory.ParseName(propertyGenerationModel.Type);
+            var type = SyntaxFactory.ParseName(propertyGenerationModel.TypeName);
             var identifier = propertyGenerationModel.Name;
 
             var summary = new[]
