@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -27,7 +28,85 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            return entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            var result = new List<PropertyDeclarationSyntax>();
+
+            return GetPropertyDeclarations(entityGenerationModel, result);
+        }
+
+        private IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel, List<PropertyDeclarationSyntax> result)
+        {
+            var properties = entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+            if (properties != null)
+            {
+                result.AddRange(properties);
+            }
+
+            if (entityGenerationModel.InterfaceGenerationModels != null)
+            {
+                foreach (var interfaceGenerationModel in entityGenerationModel.InterfaceGenerationModels)
+                {
+                    DoPropertyDeclarations(interfaceGenerationModel, result);
+                }
+            }
+
+            return result;
+        }
+
+        private void DoPropertyDeclarations(InterfaceGenerationModel interfaceGenerationModel, List<PropertyDeclarationSyntax> result)
+        {
+            PropertyDeclarationSyntax[] properties;
+            if (interfaceGenerationModel.Properties != null)
+            {
+                properties = interfaceGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+                if (properties != null)
+                {
+                    result.AddRange(properties);
+                }
+            }
+
+            if (interfaceGenerationModel.BaseInterfaces == null)
+            {
+                return;
+            }
+
+            foreach (var baseInterface in interfaceGenerationModel.BaseInterfaces)
+            {
+                DoPropertyDeclarations(baseInterface, result);
+            }
+        }
+
+        private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyGenerationModel propertyGenerationModel)
+        {
+            var type = SyntaxFactory.ParseName(propertyGenerationModel.TypeName);
+            var identifier = propertyGenerationModel.Name;
+
+            var summary = new[]
+            {
+                SyntaxFactory.Comment($"/// <inheritdoc />"),
+            };
+
+            var accessorList = GetPropertyAccessorDeclarationSyntaxCollection(propertyGenerationModel.PropertyAccessorFlags);
+
+            var result = SyntaxFactory.PropertyDeclaration(type, identifier)
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                .WithAccessorList(
+                    SyntaxFactory.AccessorList(
+                        SyntaxFactory.List(accessorList)
+                    ))
+                .WithLeadingTrivia(summary);
+            return result;
+        }
+
+        private static AccessorDeclarationSyntax[] GetPropertyAccessorDeclarationSyntaxCollection(
+            PropertyAccessorFlags propertyAccessorFlags)
+        {
+            return
+            [
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            ];
         }
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
@@ -37,7 +116,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
             var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.VirtualKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(
                     SyntaxFactory.AccessorList(
                         SyntaxFactory.List(accessorList)
@@ -57,29 +136,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
         protected override IList<string> GetUsings()
         {
             return null;
-        }
-
-        private MemberDeclarationSyntax[] GetUnkeyedClasses()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Represents the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .WithLeadingTrivia(leadingTrivia)
-            };
         }
 
         protected override string[] GetClassPrefixes() => new [] {"Unkeyed"};

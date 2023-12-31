@@ -6,12 +6,18 @@ using System.Collections.Generic;
 
 namespace Dhgms.Nucleotide.Generators.Models
 {
-    public interface IInterfaceGenerationModel : IObjectGenerationModel
+    /// <summary>
+    /// Represents the model for an interface.
+    /// </summary>
+    /// <param name="ClassName">Name of the interface.</param>
+    /// <param name="Properties">Properties directly defined on the interface.</param>
+    /// <param name="Methods">Methods directly defined on the interface.</param>
+    /// <param name="BaseInterfaces">Interfaces that this interface inherits from.</param>
+    public record InterfaceGenerationModel(
+        string ClassName,
+        IList<PropertyGenerationModel> Properties,
+        IList<IInterfaceMethodGenerationModel> Methods,
+        IList<InterfaceGenerationModel> BaseInterfaces) : IObjectGenerationModel
     {
-        IList<IPropertyGenerationModel> Properties { get; }
-
-        IList<IInterfaceMethodGenerationModel> Methods { get; }
-
-        IList<IInterfaceGenerationModel> BaseInterfaces { get; }
     }
 }

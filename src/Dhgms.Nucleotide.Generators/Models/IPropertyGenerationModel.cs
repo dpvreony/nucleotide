@@ -4,10 +4,14 @@
 
 namespace Dhgms.Nucleotide.Generators.Models
 {
-    public interface IPropertyGenerationModel : INameable
-    {
-        string Type { get; }
-
-        PropertyAccessorFlags PropertyAccessorFlags { get; }
-    }
+    /// <summary>
+    /// Represents a property on an object.
+    /// </summary>
+    /// <param name="TypeName">The fully qualified name of the type.</param>
+    /// <param name="PropertyAccessorFlags">Accessor flags for the property.</param>
+    public record PropertyGenerationModel(
+        string TypeName,
+        string Name,
+        PropertyAccessorFlags PropertyAccessorFlags)
+        : INameable;
 }

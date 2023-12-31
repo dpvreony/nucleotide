@@ -42,7 +42,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override string[] GetBaseInterfaces(IEntityGenerationModel entityGenerationModel, string prefix)
         {
-            return null;
+            return entityGenerationModel.InterfaceGenerationModels?.Select(x => x.ClassName)
+                .ToArray();
         }
     }
 }
