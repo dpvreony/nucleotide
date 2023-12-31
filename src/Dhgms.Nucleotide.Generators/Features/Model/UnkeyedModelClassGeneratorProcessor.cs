@@ -30,6 +30,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
         {
             var result = new List<PropertyDeclarationSyntax>();
 
+            return GetPropertyDeclarations(entityGenerationModel, result);
+        }
+
+        private IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel, List<PropertyDeclarationSyntax> result)
+        {
             var properties = entityGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
             if (properties != null)
             {
@@ -40,23 +45,34 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             {
                 foreach (var interfaceGenerationModel in entityGenerationModel.InterfaceGenerationModels)
                 {
-                    if (interfaceGenerationModel.BaseInterfaces == null)
-                    {
-                        continue;
-                    }
-
-                    foreach (var baseInterface in interfaceGenerationModel.BaseInterfaces)
-                    {
-                        properties = baseInterface.Properties?.Select(GetPropertyDeclaration).ToArray();
-                        if (properties != null)
-                        {
-                            result.AddRange(properties);
-                        }
-                    }
+                    DoPropertyDeclarations(interfaceGenerationModel, result);
                 }
             }
 
             return result;
+        }
+
+        private void DoPropertyDeclarations(InterfaceGenerationModel interfaceGenerationModel, List<PropertyDeclarationSyntax> result)
+        {
+            PropertyDeclarationSyntax[] properties;
+            if (interfaceGenerationModel.Properties != null)
+            {
+                properties = interfaceGenerationModel.Properties?.Select(GetPropertyDeclaration).ToArray();
+                if (properties != null)
+                {
+                    result.AddRange(properties);
+                }
+            }
+
+            if (interfaceGenerationModel.BaseInterfaces == null)
+            {
+                return;
+            }
+
+            foreach (var baseInterface in interfaceGenerationModel.BaseInterfaces)
+            {
+                DoPropertyDeclarations(baseInterface, result);
+            }
         }
 
         private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyGenerationModel propertyGenerationModel)
@@ -116,7 +132,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
             var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.VirtualKeyword))
+                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .WithAccessorList(
                     SyntaxFactory.AccessorList(
                         SyntaxFactory.List(accessorList)

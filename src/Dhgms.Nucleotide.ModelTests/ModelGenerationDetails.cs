@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
-using Dhgms.Nucleotide.Generators.InterfaceGenerationModels.Whipstaff.Entities;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
+using Dhgms.Nucleotide.SampleGenerator.InterfaceGenerationModels.Whipstaff.Entities;
 
 namespace Dhgms.Nucleotide.ModelTests
 {

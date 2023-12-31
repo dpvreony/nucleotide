@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Models;
 
-namespace Dhgms.Nucleotide.Generators.InterfaceGenerationModels.Whipstaff.Entities
+namespace Dhgms.Nucleotide.SampleGenerator.InterfaceGenerationModels.Whipstaff.Entities
 {
     public sealed record NameableInterfaceGenerationModel() : InterfaceGenerationModel(
-        "Whipstaff.Entities.INameable",
+        "Whipstaff.Core.Entities.INameable",
         new List<PropertyGenerationModel>
         {
             new ("string", "Name", PropertyAccessorFlags.Get)
