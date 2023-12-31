@@ -154,29 +154,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
             return null;
         }
 
-        private MemberDeclarationSyntax[] GetUnkeyedClasses()
-        {
-            var name = "Test";
-
-            var leadingTrivia = new[]
-            {
-                SyntaxFactory.Comment($"/// <summary>Represents the Unkeyed {name} model. Typically used for adding a new record.</summary>"),
-            };
-
-            var baseTypes = new BaseTypeSyntax[]
-            {
-                SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"IUnkeyed{name}Model"))
-            };
-
-            return new MemberDeclarationSyntax[]
-            {
-                SyntaxFactory.ClassDeclaration($"Unkeyed{name}Model")
-                .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBaseListTypes(baseTypes)
-                .WithLeadingTrivia(leadingTrivia)
-            };
-        }
-
         protected override string[] GetClassPrefixes() => new [] {"Unkeyed"};
 
         protected override string GetClassSuffix() => "Model";
