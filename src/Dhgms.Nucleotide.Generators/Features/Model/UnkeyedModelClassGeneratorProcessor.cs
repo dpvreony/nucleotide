@@ -100,28 +100,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
         private static AccessorDeclarationSyntax[] GetPropertyAccessorDeclarationSyntaxCollection(
             PropertyAccessorFlags propertyAccessorFlags)
         {
-            return propertyAccessorFlags switch
+            return
             {
-                PropertyAccessorFlags.Get => new[]
-                                {
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                },
-                PropertyAccessorFlags.GetInit => new[]
-                {
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.InitAccessorDeclaration)
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                },
-                PropertyAccessorFlags.GetSet => new[]
-                {
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                },
-                _ => throw new ArgumentOutOfRangeException(nameof(propertyAccessorFlags), propertyAccessorFlags, null)
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
             };
         }
 
