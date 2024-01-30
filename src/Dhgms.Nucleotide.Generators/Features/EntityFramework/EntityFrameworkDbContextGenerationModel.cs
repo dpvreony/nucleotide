@@ -1,7 +1,6 @@
 ﻿using System;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
-using Dhgms.Nucleotide.Generators.PropertyInfo;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
@@ -14,6 +13,12 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         }
 
         public string ClassName
+        {
+            get;
+            set;
+        }
+
+        public Type OverrideBaseDbContextType
         {
             get;
             set;
