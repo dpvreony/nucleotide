@@ -9,6 +9,7 @@ namespace Dhgms.Nucleotide.Generators.Models
         Unknown,
         Guid,
         Int32,
-        Int64
+        Int64,
+        Inherited
     }
 }

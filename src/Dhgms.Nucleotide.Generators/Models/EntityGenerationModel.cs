@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Generators.Models
 
         public abstract KeyType KeyType { get; }
 
-        public abstract IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
+        public abstract BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; }
 
         public abstract InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 

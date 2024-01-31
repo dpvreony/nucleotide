@@ -60,6 +60,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
         {
             var idColumn = GetIdColumn(entityGenerationModel.KeyType);
 
+            if (idColumn == null)
+            {
+                return Array.Empty<PropertyDeclarationSyntax>();
+            }
+
             return new[]
             {
                 GetReadOnlyPropertyDeclaration(idColumn)
@@ -98,6 +103,9 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
                         int.MaxValue,
                         true,
                         null);
+                case KeyType.Inherited:
+                    // TODO: this need validation that the base class has a key
+                    return null;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(keyType));
             }

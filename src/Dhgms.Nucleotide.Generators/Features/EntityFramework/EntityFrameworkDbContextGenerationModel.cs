@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             set;
         }
 
-        public Type OverrideBaseDbContextType
+        public string OverrideBaseDbContextType
         {
             get;
             set;

@@ -20,5 +20,9 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; set; }
 
         public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; set; }
+
+#error need to inherit from EntityGenerationModel and remove the abstract design from it? this will allow the EF logic to work, and the model generators to work off the base class
+#error we need an overload to not generate the default properties on the EF class? (created, modified, rowversion)
+#error we need to allow overriding the base class on the generated EF class, so it doesn'ty have to point to a keyed model. Example of this is MsIdentity tables which are already designed for EF.
     }
 }

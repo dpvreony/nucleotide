@@ -13,4 +13,11 @@ namespace Dhgms.Nucleotide.ModelTests
     {
         protected override INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel> NucleotideGenerationModel => new EntityFrameworkGenerationModelDetails();
     }
+
+    [Generator]
+    public sealed class MsIdentityTestEntityFrameworkDbContextGenerator : EntityFrameworkDbContextGenerator
+    {
+        protected override INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel> NucleotideGenerationModel => new MsIdentityEntityFrameworkGenerationModelDetails();
+    }
+    
 }

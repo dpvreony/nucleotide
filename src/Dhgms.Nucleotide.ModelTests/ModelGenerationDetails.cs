@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string ClassName => "Address";
 
         public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => null;
         public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents an Address";
@@ -33,7 +33,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string ClassName => "Gender";
 
         public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => null;
         public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a Gender";
@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string ClassName => "Person";
 
         public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => null;
         public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a Person";
@@ -64,7 +64,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string ClassName => "Salutation";
 
         public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => null;
         public override InterfaceGenerationModel[] InterfaceGenerationModels => new InterfaceGenerationModel[]
         {
             new NameableInterfaceGenerationModel()
@@ -80,7 +80,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public override string ClassName => "User";
 
         public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => null;
         public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
 
         public override string ClassRemarks => "Represents a User";
@@ -89,6 +89,36 @@ namespace Dhgms.Nucleotide.ModelTests
         {
             new ClrStringPropertyInfo(CollectionType.None, "Username", "Username for the user", false, 3, 255, false, false, null),
             new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", false, 0, 1024, false, false, null)
+        };
+    }
+
+    public class IdentityRoleEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "SomeRole";
+
+        public override KeyType KeyType => KeyType.Inherited;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => new ("Microsoft.AspNetCore.Identity.IdentityRole<int>");
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents a Role";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
+        };
+    }
+
+    public class IdentityUserEntityGenerationModel : EntityGenerationModel
+    {
+        public override string ClassName => "SomeUser";
+
+        public override KeyType KeyType => KeyType.Inherited;
+        public override BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel => new("Microsoft.AspNetCore.Identity.IdentityUser<int>");
+        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
+
+        public override string ClassRemarks => "Represents a User";
+
+        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
+        {
         };
     }
 
@@ -110,16 +140,32 @@ namespace Dhgms.Nucleotide.ModelTests
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
 
+    public class MsIdentityEntityFrameworkGenerationModelDetails : INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel>
+    {
+        public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel =>
+            new EntityFrameworkDbContextGenerationModel[]
+            {
+                new EntityFrameworkDbContextGenerationModel
+                {
+                    ClassName = "SomeProductWithIdentity",
+                    DbSetEntities = Array.Empty<EntityGenerationModel>(),
+                    OverrideBaseDbContextType = "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<EfModels.SomeUserEfModel, EfModels.SomeRoleEfModel, int>",
+                }
+            };
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
     public class ModelGenerationDetails : INucleotideGenerationModel<IEntityGenerationModel>
     {
-        public IEntityGenerationModel[] EntityGenerationModel => new IEntityGenerationModel[]
-        {
+        public IEntityGenerationModel[] EntityGenerationModel =>
+        [
             new AddressEntityGenerationModel(),
             new GenderEntityGenerationModel(),
             new PersonEntityGenerationModel(),
             new SalutationEntityGenerationModel(),
-            new UserEntityGenerationModel()
-        };
+            new UserEntityGenerationModel(),
+        ];
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }

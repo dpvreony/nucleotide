@@ -288,17 +288,19 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return null;
         }
 
-        private string GetBaseClass(Type overrideBaseDbContextType)
+        private string GetBaseClass(string overrideBaseDbContextType)
         {
             const string baseDbContextType = "Microsoft.EntityFrameworkCore.DbContext";
             if (overrideBaseDbContextType != null)
             {
+                /*
                 if (!overrideBaseDbContextType.IsSubclassOf(Type.GetType(baseDbContextType)))
                 {
                     throw new ArgumentException($"The {nameof(overrideBaseDbContextType)} type \"{overrideBaseDbContextType.FullName}\" does not inherit from {baseDbContextType}");
                 };
+                */
 
-                return overrideBaseDbContextType.FullName;
+                return overrideBaseDbContextType;
             }
 
             return baseDbContextType;

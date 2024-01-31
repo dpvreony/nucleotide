@@ -57,6 +57,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
                 case KeyType.Int64:
                     result.Add("global::Whipstaff.Core.Entities.ILongId");
                     break;
+                case KeyType.Inherited:
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(entityGenerationModel.KeyType));
             }
