@@ -4,25 +4,25 @@
 
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
-using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Generators.PropertyInfo;
+using Dhgms.Nucleotide.Generators.Models;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelEntityGenerationModel : IClassName
+    public sealed class EntityFrameworkModelEntityGenerationModel : EntityGenerationModel
     {
-        public string ClassName { get; set; }
+        public string ClassPluralName { get; }
 
-        public string ClassPluralName { get; set; }
+        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; }
 
-        public IList<PropertyInfoBase> Properties { get; set; }
+        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; }
 
-        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; set; }
+        public bool GenerateCreatedColumn { get; }
 
-        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; set; }
+#error need to merge Created and Modified into a single property as they dictate the interface to inherit.
+        public bool GenerateModifiedColumn { get; }
 
-#error need to inherit from EntityGenerationModel and remove the abstract design from it? this will allow the EF logic to work, and the model generators to work off the base class
-#error we need an overload to not generate the default properties on the EF class? (created, modified, rowversion)
-#error we need to allow overriding the base class on the generated EF class, so it doesn'ty have to point to a keyed model. Example of this is MsIdentity tables which are already designed for EF.
+        public bool GenerateRowVersionColumn { get; }
+
+#error change EntityGenerationModel to use a record to make it easier to use?
     }
 }

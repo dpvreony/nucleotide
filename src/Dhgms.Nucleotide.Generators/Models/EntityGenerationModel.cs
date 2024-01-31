@@ -9,27 +9,27 @@ namespace Dhgms.Nucleotide.Generators.Models
     /// <summary>
     /// Represents the parameters for generating an data manager classes
     /// </summary>
-    public abstract class EntityGenerationModel : IEntityGenerationModel
+    public class EntityGenerationModel : IEntityGenerationModel
     {
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
-        public abstract string ClassName { get; }
+        public string ClassName { get; }
 
-        public abstract KeyType KeyType { get; }
+        public KeyType KeyType { get; }
 
-        public abstract BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; }
+        public BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; }
 
-        public abstract InterfaceGenerationModel[] InterfaceGenerationModels { get; }
+        public InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
-        public abstract string ClassRemarks { get; }
+        public string ClassRemarks { get; }
 
         /// <summary>
         /// Gets the collection of properties for the class.
         /// </summary>
-        public abstract PropertyInfoBase[] Properties { get; }
+        public PropertyInfoBase[] Properties { get; }
     }
 }
