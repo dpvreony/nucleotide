@@ -27,24 +27,33 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia().ToArray();
             var datetimeOffSetType = SyntaxFactory.ParseTypeName("System.DateTimeOffset");
-            var ulongType = SyntaxFactory.ParseTypeName("ulong");
 
-            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
-                datetimeOffSetType,
-                $"Created",
-                inheritDocSyntaxTrivia);
+            if (entityGenerationModel.GenerateCreatedAndModifiedColumns is GenerateCreatedAndModifiedColumns.CreatedOnly or GenerateCreatedAndModifiedColumns.CreatedAndModified)
+            {
+                yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                    datetimeOffSetType,
+                    $"Created",
+                    inheritDocSyntaxTrivia);
+            }
 
-            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
-                datetimeOffSetType,
-                $"Modified",
-                inheritDocSyntaxTrivia);
+            if (entityGenerationModel.GenerateCreatedAndModifiedColumns == GenerateCreatedAndModifiedColumns.CreatedAndModified)
+            {
+                yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                    datetimeOffSetType,
+                    $"Modified",
+                    inheritDocSyntaxTrivia);
+            }
 
-            yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
-                ulongType,
-                $"RowVersion",
-                inheritDocSyntaxTrivia);
+            if (entityGenerationModel.GenerateRowVersionColumn)
+            {
+                var ulongType = SyntaxFactory.ParseTypeName("ulong");
+                yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
+                    ulongType,
+                    $"RowVersion",
+                    inheritDocSyntaxTrivia);
+            }
 
-            if (entityGenerationModel?.ParentEntityRelationships != null)
+            if (entityGenerationModel.ParentEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
                 {
@@ -64,7 +73,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 }
             }
 
-            if (entityGenerationModel?.ChildEntityRelationships != null)
+            if (entityGenerationModel.ChildEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
                 {
@@ -157,6 +166,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override string GetBaseClass(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
+            if (entityGenerationModel.BaseTypeEntityGenerationModel != null)
+            {
+                return entityGenerationModel.BaseTypeEntityGenerationModel.FullyQualifiedClassName;
+            }
+
             var entityName = entityGenerationModel.ClassName;
             return $"Models.{entityName}Model";
         }
@@ -164,8 +178,20 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override IEnumerable<string> GetImplementedInterfaces(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
-            yield return $"global::Whipstaff.Core.Entities.ILongRowVersion";
-            yield return $"global::Whipstaff.Core.Entities.IModifiable";
+            if (entityGenerationModel.GenerateRowVersionColumn)
+            {
+                yield return $"global::Whipstaff.Core.Entities.ILongRowVersion";
+            }
+
+            switch (entityGenerationModel.GenerateCreatedAndModifiedColumns)
+            {
+                case GenerateCreatedAndModifiedColumns.CreatedOnly:
+                    yield return $"global::Whipstaff.Core.Entities.ICreatable";
+                    break;
+                case GenerateCreatedAndModifiedColumns.CreatedAndModified:
+                    yield return $"global::Whipstaff.Core.Entities.IModifiable";
+                    break;
+            }
 
             if (entityGenerationModel?.ParentEntityRelationships != null)
             {

@@ -13,113 +13,49 @@ using Dhgms.Nucleotide.SampleGenerator.InterfaceGenerationModels.Whipstaff.Entit
 
 namespace Dhgms.Nucleotide.ModelTests
 {
-    public class AddressEntityGenerationModel : EntityGenerationModel
-    {
-        public override string ClassName => "Address";
-
-        public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
-
-        public override string ClassRemarks => "Represents an Address";
-
-        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
-        {
-        };
-    }
-
-    public class GenderEntityGenerationModel : EntityGenerationModel
-    {
-        public override string ClassName => "Gender";
-
-        public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
-
-        public override string ClassRemarks => "Represents a Gender";
-
-        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
-        {
-            new ClrStringPropertyInfo(CollectionType.None, "Name", "Name of the gender", false, 3, 255, false, false, null),
-        };
-    }
-
-    public class PersonEntityGenerationModel : EntityGenerationModel
-    {
-        public override string ClassName => "Person";
-
-        public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
-
-        public override string ClassRemarks => "Represents a Person";
-
-        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
-        {
-        };
-    }
-
-    public class SalutationEntityGenerationModel : EntityGenerationModel
-    {
-        public override string ClassName => "Salutation";
-
-        public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => new InterfaceGenerationModel[]
-        {
-            new NameableInterfaceGenerationModel()
-        };
-
-        public override string ClassRemarks => "Represents a Salutation";
-
-        public override PropertyInfoBase[] Properties => Array.Empty<PropertyInfoBase>();
-    }
-
-    public class UserEntityGenerationModel : EntityGenerationModel
-    {
-        public override string ClassName => "User";
-
-        public override KeyType KeyType => KeyType.Int32;
-        public override IEntityGenerationModel BaseTypeEntityGenerationModel => null;
-        public override InterfaceGenerationModel[] InterfaceGenerationModels => null;
-
-        public override string ClassRemarks => "Represents a User";
-
-        public override PropertyInfoBase[] Properties => new PropertyInfoBase[]
-        {
-            new ClrStringPropertyInfo(CollectionType.None, "Username", "Username for the user", false, 3, 255, false, false, null),
-            new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", false, 0, 1024, false, false, null)
-        };
-    }
-
     public class EntityFrameworkGenerationModelDetails : INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel>
     {
         public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel =>
-            new EntityFrameworkDbContextGenerationModel[]
+        [
+            new EntityFrameworkDbContextGenerationModel
             {
-                new EntityFrameworkDbContextGenerationModel
-                {
-                    ClassName = "SomeProduct",
-                    DbSetEntities = new EntityGenerationModel[]
-                    {
-                        new UserEntityGenerationModel(),
-                    }
-                }
-            };
+                ClassName = "SomeProduct",
+                DbSetEntities =
+                [
+                    SampleEntityFrameworkModelGenerationModel.UserEntityFrameworkModelEntityGenerationModel
+                ]
+            }
+        ];
+
+        public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
+    }
+
+    public class MsIdentityEntityFrameworkGenerationModelDetails : INucleotideGenerationModel<EntityFrameworkDbContextGenerationModel>
+    {
+        public EntityFrameworkDbContextGenerationModel[] EntityGenerationModel =>
+        [
+            new EntityFrameworkDbContextGenerationModel
+            {
+                ClassName = "SomeProductWithIdentity",
+                DbSetEntities = Array.Empty<EntityGenerationModel>(),
+                OverrideBaseDbContextType =
+                    "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<EfModels.SomeUserEfModel, EfModels.SomeRoleEfModel, int>",
+            }
+        ];
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
 
     public class ModelGenerationDetails : INucleotideGenerationModel<IEntityGenerationModel>
     {
-        public IEntityGenerationModel[] EntityGenerationModel => new IEntityGenerationModel[]
-        {
-            new AddressEntityGenerationModel(),
-            new GenderEntityGenerationModel(),
-            new PersonEntityGenerationModel(),
-            new SalutationEntityGenerationModel(),
-            new UserEntityGenerationModel()
-        };
+        public IEntityGenerationModel[] EntityGenerationModel =>
+        [
+            SampleEntityFrameworkModelGenerationModel.AddressEntityFrameworkModelEntityGenerationModel,
+            SampleEntityFrameworkModelGenerationModel.GenderEntityFrameworkModelEntityGenerationModel,
+            SampleEntityFrameworkModelGenerationModel.PersonEntityFrameworkModelEntityGenerationModel,
+            SampleEntityFrameworkModelGenerationModel.SalutationEntityFrameworkModelEntityGenerationModel,
+            SampleEntityFrameworkModelGenerationModel.UserEntityFrameworkModelEntityGenerationModel
+        ];
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
@@ -134,12 +70,12 @@ namespace Dhgms.Nucleotide.ModelTests
 
     public class ReferencedByEntityGenerationModelGenerationDetails : INucleotideGenerationModel<ReferencedByEntityGenerationModel>
     {
-        public ReferencedByEntityGenerationModel[] EntityGenerationModel => new ReferencedByEntityGenerationModel[]
-        {
+        public ReferencedByEntityGenerationModel[] EntityGenerationModel =>
+        [
             SampleEntityFrameworkModelGenerationModel.GenderEntityRelationship,
             SampleEntityFrameworkModelGenerationModel.PersonEntityRelationship,
             SampleEntityFrameworkModelGenerationModel.SalutationEntityRelationship,
-        };
+        ];
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }
@@ -149,8 +85,7 @@ namespace Dhgms.Nucleotide.ModelTests
         public static string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
         public static string DatabaseRootNamespace => $"{RootNamespace}.Database";
 
-        public static ReferencedByEntityGenerationModel SalutationEntityRelationship =>
-            new ReferencedByEntityGenerationModel(
+        public static ReferencedByEntityGenerationModel SalutationEntityRelationship => new (
                 DatabaseRootNamespace,
                 "Salutation",
                 "Salutation",
@@ -158,8 +93,7 @@ namespace Dhgms.Nucleotide.ModelTests
                 "Salutations",
                 "int");
 
-        public static ReferencedByEntityGenerationModel GenderEntityRelationship =>
-            new ReferencedByEntityGenerationModel(
+        public static ReferencedByEntityGenerationModel GenderEntityRelationship => new (
                 DatabaseRootNamespace,
                 "Gender",
                 "Gender",
@@ -167,8 +101,7 @@ namespace Dhgms.Nucleotide.ModelTests
                 "Genders",
                 "int");
 
-        public static ReferencedByEntityGenerationModel PersonEntityRelationship =>
-            new ReferencedByEntityGenerationModel(
+        public static ReferencedByEntityGenerationModel PersonEntityRelationship => new (
                 DatabaseRootNamespace,
                 "Person",
                 "Person",
@@ -176,59 +109,112 @@ namespace Dhgms.Nucleotide.ModelTests
                 "Persons",
                 "int");
 
-        public static EntityFrameworkModelEntityGenerationModel[] EntityFrameworkModelEntityGenerationModels => new[]
+        public static EntityFrameworkModelEntityGenerationModel SalutationEntityFrameworkModelEntityGenerationModel => new()
         {
-            new EntityFrameworkModelEntityGenerationModel
+            ClassName = "Salutation",
+            ClassPluralName = "Salutations",
+            KeyType = KeyType.Int32,
+            ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
             {
-                ClassName = "Salutation",
-                ClassPluralName = "Salutations",
-                ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
-                {
-                    PersonEntityRelationship
-                },
+                PersonEntityRelationship
             },
+            InterfaceGenerationModels =
+            [
+                new NameableInterfaceGenerationModel()
+            ]
+        };
 
-            new EntityFrameworkModelEntityGenerationModel
+        public static EntityFrameworkModelEntityGenerationModel PersonEntityFrameworkModelEntityGenerationModel => new()
+        {
+            ClassName = "Person",
+            ClassPluralName = "Persons",
+            KeyType = KeyType.Int32,
+            ParentEntityRelationships = new List<ReferencedByEntityGenerationModel>
             {
-                ClassName = "Person",
-                ClassPluralName = "Persons",
-                ParentEntityRelationships = new List<ReferencedByEntityGenerationModel>
-                {
-                    SalutationEntityRelationship,
-                    GenderEntityRelationship,
-                },
-            },
-
-            new EntityFrameworkModelEntityGenerationModel
-            {
-                ClassName = "Gender",
-                ClassPluralName= "Genders",
-                ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
-                {
-                    PersonEntityRelationship
-                },
-            },
-
-            new EntityFrameworkModelEntityGenerationModel
-            {
-                ClassName = "User",
-                ClassPluralName = "Users",
-            },
-
-            new EntityFrameworkModelEntityGenerationModel
-            {
-                ClassName = "Address",
-                ClassPluralName = "Addresses",
+                SalutationEntityRelationship,
+                GenderEntityRelationship,
             },
         };
+
+        public static EntityFrameworkModelEntityGenerationModel GenderEntityFrameworkModelEntityGenerationModel => new()
+        {
+            ClassName = "Gender",
+            ClassPluralName = "Genders",
+            KeyType = KeyType.Int32,
+            ChildEntityRelationships = new List<ReferencedByEntityGenerationModel>
+            {
+                PersonEntityRelationship
+            },
+            InterfaceGenerationModels =
+            [
+                new NameableInterfaceGenerationModel()
+            ]
+        };
+
+        public static EntityFrameworkModelEntityGenerationModel UserEntityFrameworkModelEntityGenerationModel => new()
+        {
+            ClassName = "User",
+            ClassPluralName = "Users",
+            KeyType = KeyType.Int32,
+            BaseTypeEntityGenerationModel = null,
+            InterfaceGenerationModels = null,
+            ClassRemarks = "Represents a User",
+            Properties = [
+                new ClrStringPropertyInfo(CollectionType.None, "Username", "Username for the user", false, 3, 255, false, false, null),
+                new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", false, 0, 1024, false, false, null)
+            ]
+        };
+
+        public static EntityFrameworkModelEntityGenerationModel AddressEntityFrameworkModelEntityGenerationModel => new()
+        {
+            KeyType = KeyType.Int32,
+            ClassName = "Address",
+            ClassPluralName = "Addresses",
+        };
+
+        public static EntityFrameworkModelEntityGenerationModel SomeRoleEntityFrameworkModelEntityGenerationModel => new()
+        {
+            ClassName = "SomeRole",
+            ClassPluralName = "SomeRoles",
+            KeyType = KeyType.Inherited,
+            BaseTypeEntityGenerationModel = new("Microsoft.AspNetCore.Identity.IdentityRole<int>"),
+            InterfaceGenerationModels = null,
+            ClassRemarks = "Represents a Role",
+            Properties = [],
+            GenerateRowVersionColumn = false,
+            GenerateCreatedAndModifiedColumns = GenerateCreatedAndModifiedColumns.None,
+        };
+
+        public static EntityFrameworkModelEntityGenerationModel SomeUserEntityFrameworkModelEntityGenerationModel => new()
+        {
+            ClassName = "SomeUser",
+            ClassPluralName = "SomeUsers",
+            KeyType = KeyType.Inherited,
+            BaseTypeEntityGenerationModel = new("Microsoft.AspNetCore.Identity.IdentityUser<int>"),
+            InterfaceGenerationModels = null,
+            ClassRemarks = "Represents a User",
+            Properties = [],
+            GenerateRowVersionColumn = false,
+            GenerateCreatedAndModifiedColumns = GenerateCreatedAndModifiedColumns.None,
+        };
+
+        public static EntityFrameworkModelEntityGenerationModel[] EntityFrameworkModelEntityGenerationModels =>
+        [
+            SalutationEntityFrameworkModelEntityGenerationModel,
+            PersonEntityFrameworkModelEntityGenerationModel,
+            GenderEntityFrameworkModelEntityGenerationModel,
+            UserEntityFrameworkModelEntityGenerationModel,
+            AddressEntityFrameworkModelEntityGenerationModel,
+            SomeRoleEntityFrameworkModelEntityGenerationModel,
+            SomeUserEntityFrameworkModelEntityGenerationModel,
+        ];
     }
 
     public class ReactiveUIViewForViewModel : INucleotideGenerationModel<ReactiveWindowGenerationModel>
     {
-        public ReactiveWindowGenerationModel[] EntityGenerationModel => new []
-        {
+        public ReactiveWindowGenerationModel[] EntityGenerationModel => [
             new ReactiveWindowGenerationModel("Address", "global::Dhgms.Nucleotide.SampleApp.ViewModels.IAddressViewModel")
-        };
+        ];
 
         public string RootNamespace => "Dhgms.Nucleotide.GenerationTests";
     }

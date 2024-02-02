@@ -21,7 +21,7 @@ namespace Dhgms.Nucleotide.Generators.Models
         /// </summary>
         PropertyInfoBase[] Properties { get; }
 
-        IEntityGenerationModel BaseTypeEntityGenerationModel { get; }
+        BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; }
 
         InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 

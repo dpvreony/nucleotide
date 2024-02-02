@@ -226,7 +226,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             //    declaration = declaration.AddAttributeLists(attributeListSyntax);
             //}
 
-            var baseClass = GetBaseClass(entityName);
+            var baseClass = GetBaseClass(generationModelEntityGenerationModel.OverrideBaseDbContextType);
             if (!string.IsNullOrWhiteSpace(baseClass))
             {
                 var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(baseClass));
@@ -288,9 +288,22 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return null;
         }
 
-        private string GetBaseClass(string entityName)
+        private string GetBaseClass(string overrideBaseDbContextType)
         {
-            return "Microsoft.EntityFrameworkCore.DbContext";
+            const string baseDbContextType = "Microsoft.EntityFrameworkCore.DbContext";
+            if (overrideBaseDbContextType != null)
+            {
+                /*
+                if (!overrideBaseDbContextType.IsSubclassOf(Type.GetType(baseDbContextType)))
+                {
+                    throw new ArgumentException($"The {nameof(overrideBaseDbContextType)} type \"{overrideBaseDbContextType.FullName}\" does not inherit from {baseDbContextType}");
+                };
+                */
+
+                return overrideBaseDbContextType;
+            }
+
+            return baseDbContextType;
         }
 
         private UsingDirectiveSyntax[] GetUsingDirectives()

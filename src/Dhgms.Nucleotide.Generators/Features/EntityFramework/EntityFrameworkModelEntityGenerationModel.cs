@@ -4,21 +4,20 @@
 
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Database;
-using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Generators.PropertyInfo;
+using Dhgms.Nucleotide.Generators.Models;
 
 namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
-    public sealed class EntityFrameworkModelEntityGenerationModel : IClassName
+    public sealed class EntityFrameworkModelEntityGenerationModel : EntityGenerationModel
     {
-        public string ClassName { get; set; }
+        public string ClassPluralName { get; init; }
 
-        public string ClassPluralName { get; set; }
+        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; init; }
 
-        public IList<PropertyInfoBase> Properties { get; set; }
+        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; init; }
 
-        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; set; }
+        public GenerateCreatedAndModifiedColumns GenerateCreatedAndModifiedColumns { get; init; } = GenerateCreatedAndModifiedColumns.CreatedAndModified;
 
-        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; set; }
+        public bool GenerateRowVersionColumn { get; init; } = true;
     }
 }
