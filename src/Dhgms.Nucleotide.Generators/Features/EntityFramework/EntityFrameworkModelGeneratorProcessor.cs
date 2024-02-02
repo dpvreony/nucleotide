@@ -28,7 +28,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var inheritDocSyntaxTrivia = RoslynGenerationHelpers.GetInheritDocSyntaxTrivia().ToArray();
             var datetimeOffSetType = SyntaxFactory.ParseTypeName("System.DateTimeOffset");
 
-            if (entityGenerationModel.GenerateCreatedColumn)
+            if (entityGenerationModel.GenerateCreatedAndModifiedColumns is GenerateCreatedAndModifiedColumns.CreatedOnly or GenerateCreatedAndModifiedColumns.CreatedAndModified)
             {
                 yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                     datetimeOffSetType,
@@ -36,7 +36,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                     inheritDocSyntaxTrivia);
             }
 
-            if (entityGenerationModel.GenerateModifiedColumn)
+            if (entityGenerationModel.GenerateCreatedAndModifiedColumns == GenerateCreatedAndModifiedColumns.CreatedAndModified)
             {
                 yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                     datetimeOffSetType,
@@ -183,9 +183,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 yield return $"global::Whipstaff.Core.Entities.ILongRowVersion";
             }
 
-            if (entityGenerationModel.GenerateModifiedColumn)
+            switch (entityGenerationModel.GenerateCreatedAndModifiedColumns)
             {
-                yield return $"global::Whipstaff.Core.Entities.IModifiable";
+                case GenerateCreatedAndModifiedColumns.CreatedOnly:
+                    yield return $"global::Whipstaff.Core.Entities.ICreatable";
+                    break;
+                case GenerateCreatedAndModifiedColumns.CreatedAndModified:
+                    yield return $"global::Whipstaff.Core.Entities.IModifiable";
+                    break;
             }
 
             if (entityGenerationModel?.ParentEntityRelationships != null)

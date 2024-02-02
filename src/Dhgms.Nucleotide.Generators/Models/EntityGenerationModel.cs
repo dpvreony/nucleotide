@@ -14,22 +14,22 @@ namespace Dhgms.Nucleotide.Generators.Models
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
-        public string ClassName { get; }
+        public string ClassName { get; init; }
 
-        public KeyType KeyType { get; }
+        public KeyType KeyType { get; init; }
 
-        public BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; }
+        public BaseEntityTypeGenerationModel BaseTypeEntityGenerationModel { get; init; }
 
-        public InterfaceGenerationModel[] InterfaceGenerationModels { get; }
+        public InterfaceGenerationModel[] InterfaceGenerationModels { get; init; }
 
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
-        public string ClassRemarks { get; }
+        public string ClassRemarks { get; init; }
 
         /// <summary>
         /// Gets the collection of properties for the class.
         /// </summary>
-        public PropertyInfoBase[] Properties { get; }
+        public PropertyInfoBase[] Properties { get; init; }
     }
 }

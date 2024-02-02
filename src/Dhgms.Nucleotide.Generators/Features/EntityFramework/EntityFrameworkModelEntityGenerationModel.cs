@@ -10,19 +10,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelEntityGenerationModel : EntityGenerationModel
     {
-        public string ClassPluralName { get; }
+        public string ClassPluralName { get; init; }
 
-        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; }
+        public IList<ReferencedByEntityGenerationModel> ParentEntityRelationships { get; init; }
 
-        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; }
+        public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; init; }
 
-        public bool GenerateCreatedColumn { get; }
+        public GenerateCreatedAndModifiedColumns GenerateCreatedAndModifiedColumns { get; init; }
 
-#error need to merge Created and Modified into a single property as they dictate the interface to inherit.
-        public bool GenerateModifiedColumn { get; }
-
-        public bool GenerateRowVersionColumn { get; }
-
-#error change EntityGenerationModel to use a record to make it easier to use?
+        public bool GenerateRowVersionColumn { get; init; }
     }
 }
