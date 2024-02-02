@@ -180,7 +180,9 @@ namespace Dhgms.Nucleotide.ModelTests
             BaseTypeEntityGenerationModel = new("Microsoft.AspNetCore.Identity.IdentityRole<int>"),
             InterfaceGenerationModels = null,
             ClassRemarks = "Represents a Role",
-            Properties = []
+            Properties = [],
+            GenerateRowVersionColumn = false,
+            GenerateCreatedAndModifiedColumns = GenerateCreatedAndModifiedColumns.None,
         };
 
         public static EntityFrameworkModelEntityGenerationModel SomeUserEntityFrameworkModelEntityGenerationModel => new()
@@ -191,7 +193,9 @@ namespace Dhgms.Nucleotide.ModelTests
             BaseTypeEntityGenerationModel = new("Microsoft.AspNetCore.Identity.IdentityUser<int>"),
             InterfaceGenerationModels = null,
             ClassRemarks = "Represents a User",
-            Properties = []
+            Properties = [],
+            GenerateRowVersionColumn = false,
+            GenerateCreatedAndModifiedColumns = GenerateCreatedAndModifiedColumns.None,
         };
 
         public static EntityFrameworkModelEntityGenerationModel[] EntityFrameworkModelEntityGenerationModels =>

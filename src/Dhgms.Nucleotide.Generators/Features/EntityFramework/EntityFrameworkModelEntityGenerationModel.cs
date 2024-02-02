@@ -16,8 +16,8 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         public IList<ReferencedByEntityGenerationModel> ChildEntityRelationships { get; init; }
 
-        public GenerateCreatedAndModifiedColumns GenerateCreatedAndModifiedColumns { get; init; }
+        public GenerateCreatedAndModifiedColumns GenerateCreatedAndModifiedColumns { get; init; } = GenerateCreatedAndModifiedColumns.CreatedAndModified;
 
-        public bool GenerateRowVersionColumn { get; init; }
+        public bool GenerateRowVersionColumn { get; init; } = true;
     }
 }
