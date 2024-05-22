@@ -54,7 +54,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             var className = entityGenerationModel.ClassName;
             return new []
             {
-                $"global::Whipstaff.Core.IAuditableCommandFactory<Commands.IAdd{className}Command, RequestDtos.Add{className}RequestDto, ResponseDtos.Add{className}ResponseDto, Commands.IDelete{className}Command, ResponseDtos.Delete{className}ResponseDto, Commands.IUpdate{className}Command, RequestDtos.Update{className}RequestDto, ResponseDtos.Update{className}ResponseDto>"
+                $"global::Whipstaff.MediatR.IAuditableCommandFactory<Commands.IAdd{className}Command, RequestDtos.Add{className}RequestDto, ResponseDtos.Add{className}ResponseDto, Commands.IDelete{className}Command, ResponseDtos.Delete{className}ResponseDto, Commands.IUpdate{className}Command, RequestDtos.Update{className}RequestDto, ResponseDtos.Update{className}ResponseDto>"
             };
         }
 
