@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
     <PackageReference Include="NetTestRegimentation" Version="1.7.48" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
-    <PackageReference Include="ReportGenerator" Version="5.3.5" />
+    <PackageReference Include="ReportGenerator" Version="5.3.6" />
   </ItemGroup>
 
   <ItemGroup>
