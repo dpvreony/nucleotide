@@ -433,6 +433,11 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                     ))
                 .WithLeadingTrivia(summary);
 
+            if (!propertyInfo.Optional)
+            {
+                result = result.AddModifiers(SyntaxFactory.Token(SyntaxKind.RequiredKeyword));
+            }
+
             if (attributes.Count > 0)
             {
                 var attributeLists = SyntaxFactory.AttributeList(attributes);
