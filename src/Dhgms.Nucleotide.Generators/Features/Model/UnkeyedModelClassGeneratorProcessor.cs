@@ -77,7 +77,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         private PropertyDeclarationSyntax GetPropertyDeclaration(PropertyGenerationModel propertyGenerationModel)
         {
-            var type = SyntaxFactory.ParseName(propertyGenerationModel.TypeName);
+            var type = SyntaxFactory.ParseTypeName(propertyGenerationModel.TypeName);
+            if (propertyGenerationModel.Optional)
+            {
+                type = SyntaxFactory.NullableType(type);
+            }
+
             var identifier = propertyGenerationModel.Name;
 
             var summary = new[]
@@ -116,8 +121,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
-            var type = SyntaxFactory.ParseName(propertyInfo.NetDataType);
+            var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
+
+            if (propertyInfo.Optional)
+            {
+                type = SyntaxFactory.NullableType(type);
+            }
 
             var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
