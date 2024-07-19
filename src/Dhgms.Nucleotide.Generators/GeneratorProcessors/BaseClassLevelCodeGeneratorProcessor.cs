@@ -433,7 +433,8 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                     ))
                 .WithLeadingTrivia(summary);
 
-            if (!propertyInfo.Optional)
+            // HACK: will rewrite this once I replace the type with ISymbol
+            if (!propertyInfo.Optional && propertyInfo.NetDataType.Equals("string"))
             {
                 result = result.AddModifiers(SyntaxFactory.Token(SyntaxKind.RequiredKeyword));
             }
