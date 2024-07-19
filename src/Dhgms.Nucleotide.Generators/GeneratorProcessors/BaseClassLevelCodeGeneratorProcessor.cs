@@ -424,6 +424,11 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
 
+            if (propertyInfo.Optional)
+            {
+                type = SyntaxFactory.NullableType(type);
+            }
+
             var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
