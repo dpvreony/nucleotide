@@ -67,7 +67,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
             return new[]
             {
-                GetReadOnlyPropertyDeclaration(idColumn)
+                GetPropertyDeclaration(idColumn)
             };
         }
 

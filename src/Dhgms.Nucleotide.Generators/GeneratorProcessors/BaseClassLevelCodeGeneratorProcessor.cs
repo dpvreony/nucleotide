@@ -424,6 +424,11 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             var type = SyntaxFactory.ParseTypeName(propertyInfo.NetDataType);
             var identifier = propertyInfo.Name;
 
+            if (propertyInfo.Optional)
+            {
+                type = SyntaxFactory.NullableType(type);
+            }
+
             var attributes = GetAttributesForProperty(propertyInfo);
             var result = SyntaxFactory.PropertyDeclaration(type, identifier)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
@@ -432,6 +437,12 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                         SyntaxFactory.List(accessorList)
                     ))
                 .WithLeadingTrivia(summary);
+
+            // HACK: will rewrite this once I replace the type with ISymbol
+            if (!propertyInfo.Optional && propertyInfo.NetDataType.Equals("string"))
+            {
+                result = result.AddModifiers(SyntaxFactory.Token(SyntaxKind.RequiredKeyword));
+            }
 
             if (attributes.Count > 0)
             {
