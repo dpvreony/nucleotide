@@ -12,6 +12,7 @@ namespace Dhgms.Nucleotide.Generators.Models
     public record PropertyGenerationModel(
         string TypeName,
         string Name,
-        PropertyAccessorFlags PropertyAccessorFlags)
+        PropertyAccessorFlags PropertyAccessorFlags,
+        bool Optional)
         : INameable;
 }

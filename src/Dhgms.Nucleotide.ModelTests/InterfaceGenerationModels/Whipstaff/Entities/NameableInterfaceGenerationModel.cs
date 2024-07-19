@@ -7,7 +7,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.InterfaceGenerationModels.Whipstaff.E
         "Whipstaff.Core.Entities.INameable",
         new List<PropertyGenerationModel>
         {
-            new ("string", "Name", PropertyAccessorFlags.Get)
+            new ("string", "Name", PropertyAccessorFlags.Get, false)
         },
         new List<IInterfaceMethodGenerationModel>(),
         new List<InterfaceGenerationModel>());

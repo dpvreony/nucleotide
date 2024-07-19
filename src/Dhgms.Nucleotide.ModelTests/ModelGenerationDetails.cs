@@ -161,7 +161,7 @@ namespace Dhgms.Nucleotide.ModelTests
             ClassRemarks = "Represents a User",
             Properties = [
                 new ClrStringPropertyInfo(CollectionType.None, "Username", "Username for the user", false, 3, 255, false, false, null),
-                new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", false, 0, 1024, false, false, null)
+                new ClrStringPropertyInfo(CollectionType.None, "PasswordHash", "Hash of the user password", true, 0, 1024, false, false, null)
             ]
         };
 

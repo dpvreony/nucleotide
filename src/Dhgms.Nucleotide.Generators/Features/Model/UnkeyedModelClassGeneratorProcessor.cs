@@ -94,6 +94,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
                         SyntaxFactory.List(accessorList)
                     ))
                 .WithLeadingTrivia(summary);
+            // HACK: will rewrite this once I replace the type with ISymbol
+            if (!propertyGenerationModel.Optional && propertyGenerationModel.TypeName.Equals("string"))
+            {
+                result = result.AddModifiers(SyntaxFactory.Token(SyntaxKind.RequiredKeyword));
+            }
             return result;
         }
 
@@ -122,6 +127,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
                         SyntaxFactory.List(accessorList)
                     ))
                 .WithLeadingTrivia(summary);
+
+            // HACK: will rewrite this once I replace the type with ISymbol
+            if (!propertyInfo.Optional && propertyInfo.NetDataType.Equals("string"))
+            {
+                result = result.AddModifiers(SyntaxFactory.Token(SyntaxKind.RequiredKeyword));
+            }
 
             if (attributes.Count > 0)
             {
