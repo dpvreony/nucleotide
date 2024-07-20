@@ -66,10 +66,17 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
                     var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
 
+                    var suppress = SyntaxFactory.PostfixUnaryExpression(SyntaxKind.SuppressNullableWarningExpression,
+                        SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+                    var initializer = SyntaxFactory.EqualsValueClause(
+                        SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                        suppress);
+
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
                         referencedByEntityGenerationModel.SingularPropertyName,
-                        inheritDocSyntaxTrivia);
+                        inheritDocSyntaxTrivia).WithInitializer(initializer).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
                 }
             }
 
@@ -79,10 +86,17 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 {
                     var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{referencedByEntityGenerationModel.EntityType}EfModel>");
 
+                    var suppress = SyntaxFactory.PostfixUnaryExpression(SyntaxKind.SuppressNullableWarningExpression,
+                        SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+                    var initializer = SyntaxFactory.EqualsValueClause(
+                        SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                        suppress);
+
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
                         referencedByEntityGenerationModel.PluralPropertyName,
-                        inheritDocSyntaxTrivia);
+                        inheritDocSyntaxTrivia).WithInitializer(initializer).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
                 }
             }
         }
