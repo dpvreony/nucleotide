@@ -170,13 +170,19 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             var constructorArguments = GetConstructorArguments();
             var baseArguments = GetBaseConstructorArguments();
 
-            var fields = GetFieldDeclarations(constructorArguments, baseArguments, entityName);
-            if (fields != null && fields.Length > 0)
+            var fields = GetConstructorFieldDeclarations(constructorArguments, baseArguments, entityName);
+            if (fields is { Count: > 0 })
             {
                 result.AddRange(fields);
             }
 
-            if (constructorArguments != null && constructorArguments.Count > 0)
+            fields = GetFieldDeclarations(entityGenerationModel);
+            if (fields is { Count: > 0 })
+            {
+                result.AddRange(fields);
+            }
+
+            if (constructorArguments is { Count: > 0 })
             {
                 result.Add(GenerateConstructor(className, constructorArguments, entityName, baseArguments));
             }
@@ -195,6 +201,8 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
             return result.ToArray();
         }
+
+        protected abstract IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(TGenerationModel entityGenerationModel);
 
         protected abstract IList<string> GetBaseConstructorArguments();
 
@@ -218,7 +226,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
             return list;
         }
 
-        private MemberDeclarationSyntax[] GetFieldDeclarations(
+        private IReadOnlyCollection<FieldDeclarationSyntax> GetConstructorFieldDeclarations(
             IList<Tuple<Func<string, string>, string, Accessibility>> constructorArguments,
             IList<string> baseArguments,
             string entityName)
@@ -228,8 +236,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                 return null;
             }
 
-            var result = new List<MemberDeclarationSyntax>();
-
+            var result = new List<FieldDeclarationSyntax>();
             foreach (var constructorArgument in constructorArguments)
             {
                 if (baseArguments.Any(ba => ba.Equals(constructorArgument.Item2)))
@@ -240,16 +247,15 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
                 var fieldType = constructorArgument.Item1(entityName);
 
-                var fieldDeclaration = SyntaxFactory.FieldDeclaration(
+                result.Add(SyntaxFactory.FieldDeclaration(
                     SyntaxFactory.VariableDeclaration(
                     SyntaxFactory.ParseTypeName(fieldType),
                     SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{constructorArgument.Item2}")) })
                     ))
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
-                result.Add(fieldDeclaration);
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)));
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>

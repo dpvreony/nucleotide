@@ -16,11 +16,15 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
+        private object? test;
+
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
+
+        public object SomeProp { get => test ?? throw new InvalidOperationException("failed to access"); }
 
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
@@ -66,9 +70,32 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
                     var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
 
+                    var firstLetterLower = char.ToLower(referencedByEntityGenerationModel.SingularPropertyName[0]);
+                    var fieldName = $"_{firstLetterLower}{referencedByEntityGenerationModel.SingularPropertyName.Substring(1)}";
+
+                    var assignment = SyntaxFactory.AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        SyntaxFactory.IdentifierName(fieldName),
+                        SyntaxFactory.IdentifierName("value"));
+
+                    var exceptionArgs = SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal($"Uninitialized navigation property: {referencedByEntityGenerationModel.SingularPropertyName}"))) }));
+                    var getAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(CoalesceExpression(SyntaxFactory.IdentifierName(fieldName), SyntaxFactory.ThrowExpression(SyntaxFactory.ObjectCreationExpression(SyntaxFactory.ParseTypeName("System.InvalidOperationException"), exceptionArgs, null)))))
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+
+                    var setAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(assignment))
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+
+                    var accessorList = new[]
+                    {
+                        getAccessor,
+                        setAccessor
+                    };
+
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
                         referencedByEntityGenerationModel.SingularPropertyName,
+                        accessorList,
                         inheritDocSyntaxTrivia);
                 }
             }
@@ -79,14 +106,26 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 {
                     var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{referencedByEntityGenerationModel.EntityType}EfModel>");
 
+                    var suppress = SyntaxFactory.PostfixUnaryExpression(SyntaxKind.SuppressNullableWarningExpression,
+                        SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+
+                    var initializer = SyntaxFactory.EqualsValueClause(
+                        SyntaxFactory.Token(SyntaxKind.EqualsToken),
+                        suppress);
+
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
                         referencedByEntityGenerationModel.PluralPropertyName,
-                        inheritDocSyntaxTrivia);
+                        inheritDocSyntaxTrivia).WithInitializer(initializer).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
                 }
             }
         }
 
+        private static BinaryExpressionSyntax CoalesceExpression(ExpressionSyntax left, ExpressionSyntax right)
+        {
+            return SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, left, right);
+        }
+        
         ///<inheritdoc />
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
@@ -152,6 +191,33 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override IList<Tuple<string, IList<string>>> GetClassAttributes(EntityFrameworkModelEntityGenerationModel entityDeclaration)
         {
             return null;
+        }
+
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
+        {
+            if (entityGenerationModel.ParentEntityRelationships == null)
+            {
+                return null;
+            }
+
+            var result = new List<FieldDeclarationSyntax>();
+            foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+            {
+                var fieldType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel?");
+
+                var firstLetterLower = char.ToLower(referencedByEntityGenerationModel.SingularPropertyName[0]);
+                var fieldName = $"_{firstLetterLower}{referencedByEntityGenerationModel.SingularPropertyName.Substring(1)}";
+
+                var declaration = SyntaxFactory.FieldDeclaration(
+                        SyntaxFactory.VariableDeclaration(
+                            fieldType,
+                            SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fieldName)) })
+                        ))
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+                result.Add(declaration);
+            }
+
+            return result.ToArray();
         }
 
         ///<inheritdoc />

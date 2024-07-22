@@ -80,6 +80,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
             return result;
         }
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override IList<string> GetBaseConstructorArguments()
         {
             var result = new List<string>

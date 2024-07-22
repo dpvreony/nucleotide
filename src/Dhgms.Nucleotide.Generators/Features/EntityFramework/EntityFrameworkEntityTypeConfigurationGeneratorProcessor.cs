@@ -22,7 +22,6 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
-        ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return Array.Empty<PropertyDeclarationSyntax>();
@@ -106,6 +105,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         ///<inheritdoc />
         protected override IList<Tuple<string, IList<string>>> GetClassAttributes(EntityFrameworkModelEntityGenerationModel entityDeclaration)
+        {
+            return null;
+        }
+
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
             return null;
         }
