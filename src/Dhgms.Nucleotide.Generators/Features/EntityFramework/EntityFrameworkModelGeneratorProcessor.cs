@@ -66,17 +66,30 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
                     var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
 
-                    var suppress = SyntaxFactory.PostfixUnaryExpression(SyntaxKind.SuppressNullableWarningExpression,
-                        SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
+                    var firstLetterLower = char.ToLower(referencedByEntityGenerationModel.SingularPropertyName[0]);
+                    var fieldName = $"_{firstLetterLower}{referencedByEntityGenerationModel.SingularPropertyName.Substring(1)}";
 
-                    var initializer = SyntaxFactory.EqualsValueClause(
-                        SyntaxFactory.Token(SyntaxKind.EqualsToken),
-                        suppress);
+                    var assignment = SyntaxFactory.AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        SyntaxFactory.IdentifierName(fieldName),
+                        SyntaxFactory.IdentifierName("value"));
+
+                    var getAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression))).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+
+                    var setAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(assignment))
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+
+                    var accessorList = new[]
+                    {
+                        getAccessor,
+                        setAccessor
+                    };
 
                     yield return RoslynGenerationHelpers.GetPropertyDeclarationSyntax(
                         pocoType,
                         referencedByEntityGenerationModel.SingularPropertyName,
-                        inheritDocSyntaxTrivia).WithInitializer(initializer).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                        accessorList,
+                        inheritDocSyntaxTrivia).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
                 }
             }
 
@@ -188,7 +201,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                             fieldType,
                             SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fieldName)) })
                         ))
-                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
                 result.Add(declaration);
             }
 
