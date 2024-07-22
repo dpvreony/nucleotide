@@ -96,7 +96,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                         pocoType,
                         referencedByEntityGenerationModel.SingularPropertyName,
                         accessorList,
-                        inheritDocSyntaxTrivia).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                        inheritDocSyntaxTrivia);
                 }
             }
 
