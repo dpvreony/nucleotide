@@ -24,6 +24,11 @@ namespace Dhgms.Nucleotide.Generators.Features.WebApi
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override IList<string> GetBaseConstructorArguments() => null;
 
         /// <inheritdoc />

@@ -70,6 +70,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
             return new List<Tuple<string, IList<string>>>();
         }
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         /// <inheritdoc />
         protected override IList<string> GetBaseConstructorArguments()
         {

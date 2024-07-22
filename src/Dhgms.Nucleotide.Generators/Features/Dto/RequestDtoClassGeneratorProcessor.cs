@@ -19,6 +19,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override IList<string> GetBaseConstructorArguments() => Array.Empty<string>();
 
         protected override IList<string> GetUsings() => Array.Empty<string>();

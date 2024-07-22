@@ -21,6 +21,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Dto
 
         protected override IList<string> GetBaseConstructorArguments() => null;
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
             return null;

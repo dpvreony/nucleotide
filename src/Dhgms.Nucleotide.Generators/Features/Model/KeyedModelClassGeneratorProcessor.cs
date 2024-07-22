@@ -26,6 +26,11 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override string GetClassSuffix() => "Model";
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
+        {
+            return null;
+        }
+
         protected override IList<string> GetBaseConstructorArguments() => null;
 
         protected override IList<string> GetUsings()

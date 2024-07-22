@@ -168,6 +168,30 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return null;
         }
 
+        protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
+        {
+            if (entityGenerationModel.ParentEntityRelationships == null)
+            {
+                return null;
+            }
+
+            var result = new List<FieldDeclarationSyntax>();
+            foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
+            {
+                var fieldType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
+
+                var declaration = SyntaxFactory.FieldDeclaration(
+                        SyntaxFactory.VariableDeclaration(
+                            fieldType,
+                            SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{referencedByEntityGenerationModel.SingularPropertyName}")) })
+                        ))
+                    .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+                result.Add(declaration);
+            }
+
+            return result.ToArray();
+        }
+
         ///<inheritdoc />
         protected override IList<string> GetBaseConstructorArguments() => null;
 
