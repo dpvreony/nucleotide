@@ -16,11 +16,15 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
+        private object? test;
+
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBeSealedClass() => true;
+
+        public object SomeProp { get => test ?? throw new InvalidOperationException("failed to access"); }
 
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
@@ -74,7 +78,10 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                         SyntaxFactory.IdentifierName(fieldName),
                         SyntaxFactory.IdentifierName("value"));
 
-                    var getAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression))).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                    var exceptionArgs = SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal($"Uninitialized navigation property: {referencedByEntityGenerationModel.SingularPropertyName}"))) }));
+                    var getAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(CoalesceExpression(SyntaxFactory.IdentifierName(fieldName), SyntaxFactory.ThrowExpression(SyntaxFactory.ObjectCreationExpression(SyntaxFactory.ParseTypeName("System.InvalidOperationException"), exceptionArgs, null)))))
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
                     var setAccessor = SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithExpressionBody(SyntaxFactory.ArrowExpressionClause(assignment))
                         .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
@@ -114,6 +121,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             }
         }
 
+        private static BinaryExpressionSyntax CoalesceExpression(ExpressionSyntax left, ExpressionSyntax right)
+        {
+            return SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression, left, right);
+        }
+        
         ///<inheritdoc />
         protected override PropertyDeclarationSyntax GetPropertyDeclaration(PropertyInfoBase propertyInfo, AccessorDeclarationSyntax[] accessorList, IEnumerable<SyntaxTrivia> summary)
         {
