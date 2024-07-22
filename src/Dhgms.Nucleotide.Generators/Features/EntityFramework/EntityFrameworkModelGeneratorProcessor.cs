@@ -178,12 +178,15 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var result = new List<FieldDeclarationSyntax>();
             foreach (var referencedByEntityGenerationModel in entityGenerationModel.ParentEntityRelationships)
             {
-                var fieldType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel");
+                var fieldType = SyntaxFactory.ParseTypeName($"EfModels.{referencedByEntityGenerationModel.EntityType}EfModel?");
+
+                var firstLetterLower = char.ToLower(referencedByEntityGenerationModel.SingularPropertyName[0]);
+                var fieldName = $"_{firstLetterLower}{referencedByEntityGenerationModel.SingularPropertyName.Substring(1)}";
 
                 var declaration = SyntaxFactory.FieldDeclaration(
                         SyntaxFactory.VariableDeclaration(
                             fieldType,
-                            SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier($"_{referencedByEntityGenerationModel.SingularPropertyName}")) })
+                            SyntaxFactory.SeparatedList(new[] { SyntaxFactory.VariableDeclarator(SyntaxFactory.Identifier(fieldName)) })
                         ))
                     .AddModifiers(SyntaxFactory.Token(SyntaxKind.PrivateKeyword), SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
                 result.Add(declaration);
