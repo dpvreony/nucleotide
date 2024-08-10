@@ -351,7 +351,12 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
                 fluentApiInvocation,
                 "HasForeignKey",
-                new [] { $"fk => fk.Id"});
+                new [] { $"foreign => foreign.{entitySingularName}Id"});
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasPrincipalKey",
+                new[] { $"principal => principal.Id" });
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
@@ -370,6 +375,16 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 fluentApiInvocation,
                 "WithMany",
                 new [] {$"many => many.{entityPluralName}"});
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasForeignKey",
+                new[] { $"foreign => foreign.{parentEntityRelationship.SingularPropertyName}Id" });
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasPrincipalKey",
+                new[] { $"principal => principal.Id" });
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
