@@ -25,6 +25,7 @@ namespace Dhgms.Nucleotide.ModelTests
                     SampleEntityFrameworkModelGenerationModel.AddressEntityFrameworkModelEntityGenerationModel,
                     SampleEntityFrameworkModelGenerationModel.GenderEntityFrameworkModelEntityGenerationModel,
                     SampleEntityFrameworkModelGenerationModel.PersonEntityFrameworkModelEntityGenerationModel,
+                    SampleEntityFrameworkModelGenerationModel.PersonAddressEntityFrameworkModelEntityGenerationModel,
                     SampleEntityFrameworkModelGenerationModel.SalutationEntityFrameworkModelEntityGenerationModel
                 ]
             }
@@ -56,6 +57,7 @@ namespace Dhgms.Nucleotide.ModelTests
             SampleEntityFrameworkModelGenerationModel.AddressEntityFrameworkModelEntityGenerationModel,
             SampleEntityFrameworkModelGenerationModel.GenderEntityFrameworkModelEntityGenerationModel,
             SampleEntityFrameworkModelGenerationModel.PersonEntityFrameworkModelEntityGenerationModel,
+            SampleEntityFrameworkModelGenerationModel.PersonAddressEntityFrameworkModelEntityGenerationModel,
             SampleEntityFrameworkModelGenerationModel.SalutationEntityFrameworkModelEntityGenerationModel
         ];
 
@@ -77,6 +79,7 @@ namespace Dhgms.Nucleotide.ModelTests
             SampleEntityFrameworkModelGenerationModel.AddressEntityRelationship,
             SampleEntityFrameworkModelGenerationModel.GenderEntityRelationship,
             SampleEntityFrameworkModelGenerationModel.PersonEntityRelationship,
+            SampleEntityFrameworkModelGenerationModel.PersonAddressEntityRelationship,
             SampleEntityFrameworkModelGenerationModel.SalutationEntityRelationship,
         ];
 
@@ -120,6 +123,14 @@ namespace Dhgms.Nucleotide.ModelTests
                 "Persons",
                 "int");
 
+        public static ReferencedByEntityGenerationModel PersonAddressEntityRelationship => new(
+            DatabaseRootNamespace,
+            "PersonAddress",
+            "PersonAddress",
+            "PersonAddress",
+            "PersonAddresses",
+            "int");
+
         public static EntityFrameworkModelEntityGenerationModel SalutationEntityFrameworkModelEntityGenerationModel => new()
         {
             ClassName = "Salutation",
@@ -143,8 +154,12 @@ namespace Dhgms.Nucleotide.ModelTests
             ParentEntityRelationships = new List<ReferencedByEntityGenerationModel>
             {
                 SalutationEntityRelationship,
-                GenderEntityRelationship,
+                GenderEntityRelationship
             },
+            ChildEntityRelationships =
+            [
+                PersonAddressEntityRelationship
+            ]
         };
 
         public static EntityFrameworkModelEntityGenerationModel GenderEntityFrameworkModelEntityGenerationModel => new()
@@ -167,6 +182,10 @@ namespace Dhgms.Nucleotide.ModelTests
             KeyType = KeyType.Int32,
             ClassName = "Address",
             ClassPluralName = "Addresses",
+            ChildEntityRelationships =
+            [
+                PersonAddressEntityRelationship
+            ]
         };
 
         public static EntityFrameworkModelEntityGenerationModel PersonAddressEntityFrameworkModelEntityGenerationModel => new()
@@ -174,12 +193,13 @@ namespace Dhgms.Nucleotide.ModelTests
             KeyType = KeyType.Int32,
             ClassName = "PersonAddress",
             ClassPluralName = "PersonAddresses",
-            ChildEntityRelationships =
+            ParentEntityRelationships =
             [
                 PersonEntityRelationship,
                 AddressEntityRelationship
             ],
-            Indexes = [
+            Indexes =
+            [
                 new IndexGenerationModel(
                     [
                         PersonEntityRelationship.SingularPropertyName,
@@ -223,6 +243,7 @@ namespace Dhgms.Nucleotide.ModelTests
             AddressEntityFrameworkModelEntityGenerationModel,
             SomeRoleEntityFrameworkModelEntityGenerationModel,
             SomeUserEntityFrameworkModelEntityGenerationModel,
+            PersonAddressEntityFrameworkModelEntityGenerationModel
         ];
     }
 
