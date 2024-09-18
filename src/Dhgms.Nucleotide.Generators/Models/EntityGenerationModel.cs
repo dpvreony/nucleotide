@@ -22,6 +22,8 @@ namespace Dhgms.Nucleotide.Generators.Models
 
         public InterfaceGenerationModel[] InterfaceGenerationModels { get; init; }
 
+        public IndexGenerationModel[] Indexes { get; init;  }
+
         /// <summary>
         /// Gets the name of the information class.
         /// </summary>
