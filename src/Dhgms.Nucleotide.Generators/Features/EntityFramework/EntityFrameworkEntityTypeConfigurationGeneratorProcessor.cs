@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Database;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
@@ -183,6 +184,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 }
             }
 
+            if (entityGenerationModel.GenerateRowVersionColumn)
+            {
+                GenerateConfigurePropertyColumnInvocation("RowVersion", subMethodParams, body);
+            }
+
             if (entityGenerationModel.ChildEntityRelationships != null)
             {
                 foreach (var referencedByEntityGenerationModel in entityGenerationModel.ChildEntityRelationships)
@@ -202,6 +208,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                         body);
                 }
             }
+
 
             var parameters = GetParams(new []{ $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder"});
 
@@ -343,10 +350,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         {
             var methodName = $"ConfigureTable";
 
-            var body = new List<StatementSyntax>();
-
-            //var tableInvocation = GetEfTableInvocation(entityGenerationModel);
-            //body.Add(tableInvocation);
+            var body = GetTableMappingBodyDeclaration(entityGenerationModel);
 
             var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
 
@@ -500,9 +504,13 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return fluentApiInvocation;
         }
 
-        private StatementSyntax GetEfTableInvocation(IEntityGenerationModel entityGenerationModel)
+        private List<StatementSyntax> GetTableMappingBodyDeclaration(IEntityGenerationModel entityGenerationModel)
         {
-            throw new NotImplementedException();
+            var body = new List<StatementSyntax>();
+            GenerateIndexDeclarations(entityGenerationModel, body);
+
+            return body;
+
             /*
             var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
                 "builder",
@@ -520,6 +528,48 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             // could add SQL triggers here.
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
             */
+        }
+
+        private static void GenerateIndexDeclarations(IEntityGenerationModel entityGenerationModel, List<StatementSyntax> body)
+        {
+            var indexes = entityGenerationModel.Indexes;
+            if (indexes == null)
+            {
+                return;
+            }
+
+            foreach (var index in indexes)
+            {
+                var statement = GetIndexDeclarationExpressionStatementSyntax(index);
+                body.Add(statement);
+            }
+        }
+
+        private static ExpressionStatementSyntax GetIndexDeclarationExpressionStatementSyntax(IndexGenerationModel index)
+        {
+            var propertyNames = index.Properties.Select(prop => prop.Name)
+                .ToArray();
+
+            var flattedPropertyNames = string.Join(", ", propertyNames);
+
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "HasIndex",
+                [ $"t => new {{ {flattedPropertyNames} }}" ],
+                false);
+
+
+            if (index.IsUnique)
+            {
+                fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                    fluentApiInvocation,
+                    "IsUnique",
+                    []);
+
+            }
+
+            var statement = SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+            return statement;
         }
 
         private ExpressionSyntax CheckHasComputedColumnSqlMethodDeclaration(ExpressionSyntax fluentApiInvocation, string sqlComputedColumn)

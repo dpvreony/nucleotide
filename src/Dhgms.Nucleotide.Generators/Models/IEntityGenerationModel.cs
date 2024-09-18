@@ -25,6 +25,8 @@ namespace Dhgms.Nucleotide.Generators.Models
 
         InterfaceGenerationModel[] InterfaceGenerationModels { get; }
 
+        IndexGenerationModel[] Indexes { get; }
+
         /// <summary>
         /// Gets the class remarks.
         /// </summary>
