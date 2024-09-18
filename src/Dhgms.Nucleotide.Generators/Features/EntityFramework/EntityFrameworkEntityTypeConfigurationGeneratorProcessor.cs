@@ -547,10 +547,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private static ExpressionStatementSyntax GetIndexDeclarationExpressionStatementSyntax(IndexGenerationModel index)
         {
-            var propertyNames = index.Properties.Select(prop => prop.Name)
-                .ToArray();
-
-            var flattedPropertyNames = string.Join(", ", propertyNames);
+            var flattedPropertyNames = string.Join(", ", index.Names);
 
             var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
                 "builder",

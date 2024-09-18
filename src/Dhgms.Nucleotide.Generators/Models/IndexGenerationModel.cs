@@ -5,5 +5,5 @@ using System.Text;
 
 namespace Dhgms.Nucleotide.Generators.Models
 {
-    public sealed record IndexGenerationModel(PropertyInfoBase[] Properties, bool IsUnique);
+    public sealed record IndexGenerationModel(string[] Names, bool IsUnique);
 }
