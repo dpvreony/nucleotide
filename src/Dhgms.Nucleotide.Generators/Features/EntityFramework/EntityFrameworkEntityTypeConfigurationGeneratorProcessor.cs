@@ -60,6 +60,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 }
             }
 
+            if (entityGenerationModel.GenerateRowVersionColumn)
+            {
+                result.Add(GetRowVersionMappingMethodDeclaration(entityName));
+            }
+
             if (entityGenerationModel.ChildEntityRelationships != null)
             {
                 foreach (var childEntityRelationship in entityGenerationModel.ChildEntityRelationships)
@@ -289,17 +294,37 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return declaration;
         }
 
+        private MethodDeclarationSyntax GetRowVersionMappingMethodDeclaration(string entityName)
+        {
+            var propertyInvocation = GetRowVersionEfPropertyInvocation();
+            return GetPropertyMappingMethodDeclaration(
+                entityName,
+                "RowVersion",
+                propertyInvocation);
+        }
+
         private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
             string entityName,
             PropertyInfoBase propertyInfoBase)
         {
-            var methodName = $"Configure{propertyInfoBase.Name}Column";
+            var propertyInvocation = GetEfPropertyInvocation(propertyInfoBase);
+            return GetPropertyMappingMethodDeclaration(
+                entityName,
+                propertyInfoBase.Name,
+                propertyInvocation);
+        }
 
-            var body = new List<StatementSyntax>();
+        private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
+            string entityName,
+            string propertyName,
+            StatementSyntax efPropertyInvocationStatementSyntax)
+        {
+            var methodName = $"Configure{propertyName}Column";
 
             // get the initial property method invoke to use as the basis of chaining others together
-            var propertyInvocation = GetEfPropertyInvocation(propertyInfoBase);
-            body.Add(propertyInvocation);
+            var body = new List<StatementSyntax> {
+                efPropertyInvocationStatementSyntax
+            };
 
 
             var parameters = GetParams(new[] { $"Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<EfModels.{entityName}EfModel> builder" });
@@ -385,6 +410,22 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 fluentApiInvocation,
                 "HasPrincipalKey",
                 new[] { $"principal => principal.Id" });
+
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private StatementSyntax GetRowVersionEfPropertyInvocation()
+        {
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "Property",
+                new[] { $"table => table.RowVersion" },
+                false);
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "IsRowVersion",
+                null);
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
