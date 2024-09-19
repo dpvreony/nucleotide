@@ -547,7 +547,16 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
         private static ExpressionStatementSyntax GetIndexDeclarationExpressionStatementSyntax(IndexGenerationModel index)
         {
-            var args = index.Names.Select(n => $"t.{n}");
+            var names = index.Names;
+
+            if (names == null || names.Length == 0)
+            {
+                throw new ArgumentException("Index must have at least one column name", nameof(index));
+            }
+
+
+
+            var args = GetIndexColumnNames(names);
 
             var flattedPropertyNames = string.Join(", ", args);
 
@@ -569,6 +578,20 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 
             var statement = SyntaxFactory.ExpressionStatement(fluentApiInvocation);
             return statement;
+        }
+
+        private static IEnumerable<string> GetIndexColumnNames(string[] names)
+        {
+            for (var index = 0; index < names.Length; index++)
+            {
+                var name = names[index];
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new ArgumentException($"Index at position {index} has a column name that is null or whitespace.", nameof(names));
+                }
+
+                yield return $"t.{name.Trim()}Id";
+            }
         }
 
         private ExpressionSyntax CheckHasComputedColumnSqlMethodDeclaration(ExpressionSyntax fluentApiInvocation, string sqlComputedColumn)
