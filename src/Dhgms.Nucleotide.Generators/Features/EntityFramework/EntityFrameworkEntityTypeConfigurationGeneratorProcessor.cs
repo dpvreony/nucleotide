@@ -590,7 +590,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                     throw new ArgumentException($"Index at position {index} has a column name that is null or whitespace.", nameof(names));
                 }
 
-                yield return $"t.{name.Trim()}Id";
+                yield return $"t.{name.Trim()}";
             }
         }
 
