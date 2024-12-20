@@ -387,6 +387,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 "HasPrincipalKey",
                 new[] { $"principal => principal.Id" });
 
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "OnDelete",
+                new[] { $"global::Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction" });
+
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
 
@@ -414,6 +419,11 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 fluentApiInvocation,
                 "HasPrincipalKey",
                 new[] { $"principal => principal.Id" });
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "OnDelete",
+                new[] { $"global::Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction" });
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
