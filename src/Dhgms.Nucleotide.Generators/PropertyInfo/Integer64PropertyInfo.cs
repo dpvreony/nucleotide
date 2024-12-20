@@ -30,8 +30,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             string name,
             string description,
             bool optional,
-            int minimumValue,
-            int maximumValue,
+            long minimumValue,
+            long maximumValue,
             bool isKey,
             string alternativeDatabaseColumnName)
             : base(
