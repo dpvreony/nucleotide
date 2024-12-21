@@ -66,6 +66,12 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 result.Add(GetRowVersionMappingMethodDeclaration(entityName));
             }
 
+            if (entityGenerationModel.GenerateCreatedAndModifiedColumns != GenerateCreatedAndModifiedColumns.None)
+            {
+                result.Add(GetDateTimeOffsetColumnMappingMethodDeclaration(entityName, "CreatedDate"));
+                result.Add(GetDateTimeOffsetColumnMappingMethodDeclaration(entityName, "ModifiedDate"));
+            }
+
             if (entityGenerationModel.ChildEntityRelationships != null)
             {
                 foreach (var childEntityRelationship in entityGenerationModel.ChildEntityRelationships)
@@ -310,6 +316,15 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 propertyInvocation);
         }
 
+        private MethodDeclarationSyntax GetDateTimeOffsetColumnMappingMethodDeclaration(string entityName, string propertyName)
+        {
+            var propertyInvocation = GetSysDatetimeOffsetEfPropertyInvocation();
+            return GetPropertyMappingMethodDeclaration(
+                entityName,
+                propertyName,
+                propertyInvocation);
+        }
+
         private MethodDeclarationSyntax GetPropertyMappingMethodDeclaration(
             string entityName,
             PropertyInfoBase propertyInfoBase)
@@ -440,6 +455,22 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 fluentApiInvocation,
                 "IsRowVersion",
                 null);
+
+            return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
+        }
+
+        private StatementSyntax GetSysDatetimeOffsetEfPropertyInvocation()
+        {
+            var fluentApiInvocation = RoslynGenerationHelpers.GetMethodOnVariableInvocationExpression(
+                "builder",
+                "Property",
+                new[] { $"table => table.RowVersion" },
+                false);
+
+            fluentApiInvocation = RoslynGenerationHelpers.GetFluentApiChainedInvocationExpression(
+                fluentApiInvocation,
+                "HasDefaultValueSql",
+                new[] { $"\"SYSDATETIMEOFFSET()\"" });
 
             return SyntaxFactory.ExpressionStatement(fluentApiInvocation);
         }
