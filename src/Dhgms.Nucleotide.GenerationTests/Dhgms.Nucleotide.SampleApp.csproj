@@ -8,13 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.12" />
     <PackageReference Include="Whipstaff.AspNetCore" Version="8.1.52" />
     <PackageReference Include="Whipstaff.Core" Version="8.1.52" />
     <PackageReference Include="Whipstaff.EntityFramework" Version="8.1.52" />
     <PackageReference Include="Whipstaff.Wpf" Version="8.1.52" />
     <PackageReference Include="Whipstaff.Wpf.Mahapps" Version="8.0.36" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.12" />
   </ItemGroup>
 
   <ItemGroup>
