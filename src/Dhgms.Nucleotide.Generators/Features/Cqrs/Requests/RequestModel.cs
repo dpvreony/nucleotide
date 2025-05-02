@@ -8,39 +8,42 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
         string ContainingNamespace,
         string Name,
         string[] Properties,
-        Func<BaseTypeSyntax> BaseTypeSyntaxFunc) : NamedTypeModel(ContainingNamespace, Name)
+        Func<BaseTypeSyntax> BaseTypeSyntaxFunc)
+        : NamedTypeModel(
+            ContainingNamespace,
+            Name)
     {
         public static RequestModel WhipstaffQuery(
             string ContainingNamespace,
             string Name,
             string[] Properties,
-            NamedTypeModel responseModel)
+            NamedTypeParameterModel responseModel)
         {
             return new RequestModel(
                 ContainingNamespace,
                 Name,
                 Properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::{responseModel.ContainingNamespace}.{responseModel.Name}")));
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.IQuery<{responseModel.GetFullyQualifiedName()}>")));
         }
 
         public static RequestModel WhipstaffCommand(
             string containingNamespace,
             string name,
             string[] properties,
-            NamedTypeModel responseModel)
+            NamedTypeParameterModel responseModel)
         {
             return new RequestModel(
                 containingNamespace,
                 name,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.ICommand<global::{responseModel.ContainingNamespace}.{responseModel.Name}>")));
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.ICommand<{responseModel.GetFullyQualifiedName()}>")));
         }
 
 
         public static RequestModel WhipstaffAuditableRequest(
             string containingNamespace,
             string name,
-            NamedTypeModel responseModel)
+            NamedTypeParameterModel responseModel)
         {
             var properties = new[]
             {
@@ -52,7 +55,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 containingNamespace,
                 name,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.IAuditableRequest<global::{responseModel.ContainingNamespace}.{responseModel.Name}>")));
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.IAuditableRequest<{responseModel.GetFullyQualifiedName()}>")));
         }
     }
 }
