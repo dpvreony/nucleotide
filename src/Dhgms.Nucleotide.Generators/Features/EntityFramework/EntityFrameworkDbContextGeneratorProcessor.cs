@@ -239,7 +239,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 foreach (var implementedInterface in implementedInterfaces)
                 {
                     var b = SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(implementedInterface));
-                    declaration = declaration.AddBaseListTypes().AddBaseListTypes(b);
+                    declaration = declaration.AddBaseListTypes(b);
                 }
             }
 
