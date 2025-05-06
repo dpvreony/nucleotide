@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class UnkeyedModelClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<UnkeyedModelClassGenerator, UnkeyedModelClassFeatureFlags, UnkeyedModelClassGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<UnkeyedModelClassGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<UnkeyedModelClassGenerator, UnkeyedModelClassFeatureFlags, UnkeyedModelClassGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<UnkeyedModelClassGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

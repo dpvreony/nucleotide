@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.Logging
     [ExcludeFromCodeCoverage]
     public static class CrudControllerLoggerMessageActionGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<CrudControllerLoggerMessageActionGenerator, CrudControllerLoggerMessageActionFeatureFlags, CrudControllerLoggerMessageActionGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<CrudControllerLoggerMessageActionGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.Logging
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<CrudControllerLoggerMessageActionGenerator, CrudControllerLoggerMessageActionFeatureFlags, CrudControllerLoggerMessageActionGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<CrudControllerLoggerMessageActionGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

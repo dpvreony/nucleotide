@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class QueryInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<QueryInterfaceGenerator, QueryInterfaceFeatureFlag, QueryInterfaceGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<QueryInterfaceGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<QueryInterfaceGenerator, QueryInterfaceFeatureFlag, QueryInterfaceGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<QueryInterfaceGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

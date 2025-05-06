@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Mvc
     [ExcludeFromCodeCoverage]
     public static class MvcControllerGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<MvcControllerGenerator, MvcControllerFeatureFlags, MvcControllerGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<MvcControllerGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Mvc
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<MvcControllerGenerator, MvcControllerFeatureFlags, MvcControllerGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<MvcControllerGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

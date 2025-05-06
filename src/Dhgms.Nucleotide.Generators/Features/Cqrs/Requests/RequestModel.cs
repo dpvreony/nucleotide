@@ -13,7 +13,20 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             ContainingNamespace,
             Name)
     {
-        public static RequestModel WhipstaffQuery(
+        public static RequestModel MediatRRequest(
+            string ContainingNamespace,
+            string Name,
+            string[] Properties,
+            NamedTypeParameterModel responseModel)
+        {
+            return new RequestModel(
+                ContainingNamespace,
+                Name,
+                Properties,
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"MediatR.IRequest<{responseModel.GetFullyQualifiedName()}>")));
+        }
+
+        public static RequestModel WhipstaffMediatRQuery(
             string ContainingNamespace,
             string Name,
             string[] Properties,
@@ -26,7 +39,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"Whipstaff.MediatR.IQuery<{responseModel.GetFullyQualifiedName()}>")));
         }
 
-        public static RequestModel WhipstaffCommand(
+        public static RequestModel WhipstaffMediatRCommand(
             string containingNamespace,
             string name,
             string[] properties,
@@ -40,7 +53,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
         }
 
 
-        public static RequestModel WhipstaffAuditableRequest(
+        public static RequestModel WhipstaffMediatRAuditableRequest(
             string containingNamespace,
             string name,
             NamedTypeParameterModel responseModel)

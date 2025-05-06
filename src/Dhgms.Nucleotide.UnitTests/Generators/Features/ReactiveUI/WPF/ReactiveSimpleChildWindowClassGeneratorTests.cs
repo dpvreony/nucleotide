@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI.WPF
     [ExcludeFromCodeCoverage]
     public static class ReactiveSimpleChildWindowClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveSimpleChildWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveSimpleChildWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveSimpleChildWindowClassGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -22,7 +22,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI.WPF
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveSimpleChildWindowClassGenerator, ReactiveWindowClassFeatureFlags, ReactiveSimpleChildWindowClassGeneratorProcessor, ReactiveWindowGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveSimpleChildWindowClassGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {

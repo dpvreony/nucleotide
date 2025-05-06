@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features
     [ExcludeFromCodeCoverage]
     public static class EntityFrameworkEntityTypeConfigurationGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<EntityFrameworkEntityTypeConfigurationGenerator, EntityFrameworkEntityTypeConfigurationFeatureFlags, EntityFrameworkEntityTypeConfigurationGeneratorProcessor, EntityFrameworkModelEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<EntityFrameworkEntityTypeConfigurationGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
@@ -26,7 +26,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features
             }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<EntityFrameworkEntityTypeConfigurationGenerator, EntityFrameworkEntityTypeConfigurationFeatureFlags, EntityFrameworkEntityTypeConfigurationGeneratorProcessor, EntityFrameworkModelEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<EntityFrameworkEntityTypeConfigurationGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
