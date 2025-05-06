@@ -5,13 +5,14 @@
 using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Core;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 
 namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
 {
-    public sealed class TestableRequestGenerator : AbstractRequestGenerator
+    public sealed class TestableRequestGenerator : AbstractTestGenerator<RequestMemberDeclarationSyntaxFactory, RequestModel>
     {
-        protected override IEnumerable<RequestModel> GetRequestModels()
+        protected override IReadOnlyCollection<RequestModel> GetGenerationModel()
         {
             const string containingNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
             const string responseNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";

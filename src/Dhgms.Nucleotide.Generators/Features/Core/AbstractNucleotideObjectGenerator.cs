@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Copyright (c) 2020 DHGMS Solutions and Contributors. All rights reserved.
+// DHGMS Solutions and Contributors licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -108,7 +112,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {
-            DoFeatureGeneration<ResponseMemberDeclarationSyntaxFactory, ResponseModel>(
+            RoslynGenerationHelpers.DoFeatureGeneration<ResponseMemberDeclarationSyntaxFactory, ResponseModel>(
                 responses,
                 productionContext,
                 parseOptionsProvider,
@@ -120,7 +124,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {
-            DoFeatureGeneration<RequestMemberDeclarationSyntaxFactory, RequestModel>(
+            RoslynGenerationHelpers.DoFeatureGeneration<RequestMemberDeclarationSyntaxFactory, RequestModel>(
                 requests,
                 productionContext,
                 parseOptionsProvider,
@@ -132,7 +136,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {
-            DoFeatureGeneration<RequestFactoryInterfaceMemberDeclarationSyntaxFactory, RequestFactoryModel>(
+            RoslynGenerationHelpers.DoFeatureGeneration<RequestFactoryInterfaceMemberDeclarationSyntaxFactory, RequestFactoryModel>(
                 requestFactoryInterfaces,
                 productionContext,
                 parseOptionsProvider,
@@ -144,78 +148,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {
-            DoFeatureGeneration<RequestFactoryClassMemberDeclarationSyntaxFactory, RequestFactoryModel>(
+            RoslynGenerationHelpers.DoFeatureGeneration<RequestFactoryClassMemberDeclarationSyntaxFactory, RequestFactoryModel>(
                 requestFactoryClasses,
                 productionContext,
                 parseOptionsProvider,
                 "Cqrs.RequestFactoryClasses");
         }
 
-        private void DoFeatureGeneration<TMemberDeclarationSyntaxFactory, TFeatureModel>(
-            IReadOnlyCollection<TFeatureModel>? featureModelCollection,
-            SourceProductionContext productionContext,
-            ParseOptions parseOptionsProvider,
-            string featureName)
-            where TMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<TFeatureModel>, new()
-        {
-            if (featureModelCollection == null || featureModelCollection.Count < 1)
-            {
-                return;
-            }
-
-            var nullableSyntaxDirective = SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true);
-            var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
-            var triviaList = SyntaxFactory.TriviaList(trivia);
-
-            var memberDeclarationSyntaxCollection = TryGetMemberDeclarationSyntaxCollection<TMemberDeclarationSyntaxFactory, TFeatureModel>(featureModelCollection);
-            var cu = SyntaxFactory.CompilationUnit()
-                .WithMembers(memberDeclarationSyntaxCollection)
-                .WithLeadingTrivia(triviaList)
-                .NormalizeWhitespace();
-
-            var sourceText = SyntaxFactory.SyntaxTree(
-                    cu,
-                    parseOptionsProvider,
-                    encoding: Encoding.UTF8)
-                .GetText();
-
-            var hintName = $"Nucelotide.{featureName}.g.cs";
-
-            productionContext.AddSource(
-                hintName,
-                sourceText);
-
-        }
-
-        private SyntaxList<MemberDeclarationSyntax> TryGetMemberDeclarationSyntaxCollection<TMemberDeclarationSyntaxFactory, TFeatureModel>(IReadOnlyCollection<TFeatureModel> featureModelCollection)
-            where TMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<TFeatureModel>, new()
-        {
-            try
-            {
-                var memberDeclarationSyntaxFactory = new TMemberDeclarationSyntaxFactory();
-                return memberDeclarationSyntaxFactory.GetMemberDeclarationSyntaxCollection(featureModelCollection);
-            }
-            catch (Exception e)
-            {
-                var errorDirective = SyntaxFactory.Trivia(
-                    SyntaxFactory.ErrorDirectiveTrivia(true)
-                        .WithErrorKeyword(SyntaxFactory.Token(SyntaxKind.ErrorKeyword))
-                        .WithEndOfDirectiveToken(
-                            SyntaxFactory.Token(
-                                SyntaxFactory.TriviaList(
-                                    SyntaxFactory.PreprocessingMessage(e.ToString())
-                                    ),
-                                    SyntaxKind.EndOfDirectiveToken,
-                                    SyntaxFactory.TriviaList()
-                            )));
-
-                var emptyStatement = SyntaxFactory.EmptyStatement()
-                    .WithLeadingTrivia(errorDirective);
-
-                var global = SyntaxFactory.GlobalStatement(emptyStatement);
-                return SyntaxFactory.List<MemberDeclarationSyntax>([global]);
-            }
-        }
 
         protected abstract NucleotideGenerationModel GetGenerationModel();
     }

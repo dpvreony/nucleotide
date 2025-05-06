@@ -42,7 +42,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
         }
 
         public abstract class BaseConstructorMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
-            where TGenerator : ISourceGenerator
+            where TGenerator : IIncrementalGenerator
         {
             protected abstract Func<AttributeData, TGenerator> GetFactory();
 
@@ -62,7 +62,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
         }
 
         public abstract class BaseGenerateAsyncMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
-            where TGenerator : ISourceGenerator
+            where TGenerator : IIncrementalGenerator
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";
@@ -107,7 +107,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
                 var newComp = RunGenerators(
                     comp,
                     out var generatorDiags,
-                    instance);
+                    instance.AsSourceGenerator());
 
                 foreach (var generatorDiag in generatorDiags)
                 {
