@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
@@ -407,7 +408,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
             };
 
-            var summary = GetSummary(new[] { $"Gets or sets {propertyInfo.Name}" });
+            var summary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets or sets {propertyInfo.Name}" });
 
             return GetPropertyDeclaration(propertyInfo, accessorList, summary);
         }
@@ -420,7 +421,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
             };
 
-            var summary = GetSummary(new[] { $"Gets {propertyInfo.Name}" });
+            var summary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets {propertyInfo.Name}" });
 
             return GetPropertyDeclaration(propertyInfo, accessorList, summary);
         }

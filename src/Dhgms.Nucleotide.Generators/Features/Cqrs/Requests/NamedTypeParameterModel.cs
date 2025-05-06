@@ -6,12 +6,9 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
 {
     public record NamedTypeParameterModel(
         string ContainingNamespace,
-        string Name,
-        bool Nullable) : NamedTypeModel(ContainingNamespace, Name)
+        string TypeName,
+        bool Nullable,
+        string ParameterName) : NamedTypeModel(ContainingNamespace, TypeName, Nullable)
     {
-        public string GetFullyQualifiedName()
-        {
-            return $"{ContainingNamespace}.{Name}{(Nullable ? "?" : string.Empty)}";
-        }
     }
 }

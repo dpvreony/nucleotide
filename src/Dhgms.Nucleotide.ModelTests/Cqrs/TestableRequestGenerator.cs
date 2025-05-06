@@ -14,8 +14,14 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
         {
             const string containingNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
             const string responseNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
-            var simpleResponseModel = new NamedTypeParameterModel(responseNamespace, "SomeSimpleListResponse", false);
-            var viewResponseModel = new NamedTypeParameterModel(responseNamespace, "SomeSimpleViewResponse", true);
+
+            var rawRequestDto = new NamedTypeModel(
+                containingNamespace,
+                "SomeSimpleRequestDto",
+                false);
+
+            var simpleResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleListResponse", false);
+            var viewResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleViewResponse", true);
 
             return new[]
             {
@@ -23,35 +29,41 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
-                    Array.Empty<string>(),
-                    simpleResponseModel),
+                    Array.Empty<NamedTypeParameterModel>(),
+                    simpleResponseModel,
+                    [ "Represents a simple MediatR request."]),
 
                 RequestModel.WhipstaffMediatRAuditableRequest(
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
-                    simpleResponseModel),
+                    rawRequestDto,
+                    simpleResponseModel,
+                    [ "Represents an auditable request."]),
 
                 RequestModel.WhipstaffMediatRCommand(
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
-                    Array.Empty<string>(),
-                    simpleResponseModel),
+                    Array.Empty<NamedTypeParameterModel>(),
+                    simpleResponseModel,
+                    [ "Represents a Simple Command request."]),
 
                 RequestModel.WhipstaffMediatRQuery(
                     containingNamespace,
                     "ListSomeEntitiesRequest",
                     true,
-                    Array.Empty<string>(),
-                    simpleResponseModel),
+                    Array.Empty<NamedTypeParameterModel>(),
+                    simpleResponseModel,
+                    [ "Represents a Simple List query."]),
 
                 RequestModel.WhipstaffMediatRQuery(
                     containingNamespace,
                     "ViewSomeEntitiesRequest",
                     true,
-                    Array.Empty<string>(),
-                    viewResponseModel),
+                    Array.Empty<NamedTypeParameterModel>(),
+                    viewResponseModel,
+                    [ "Represents a Simple View query."]),
             };
         }
     }

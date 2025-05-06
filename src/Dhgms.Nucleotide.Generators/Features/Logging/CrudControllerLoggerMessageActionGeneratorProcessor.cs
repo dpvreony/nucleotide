@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -90,7 +91,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Logging
         /// <inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(IEntityGenerationModel entityGenerationModel)
         {
-            var pocoSummary = GetSummary(new[] { $"Gets the Logger Message Action {entityGenerationModel.ClassName}." });
+            var pocoSummary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets the Logger Message Action {entityGenerationModel.ClassName}." });
 
             var pocoType = SyntaxFactory.ParseTypeName("global::System.Action<global::Microsoft.Extensions.Logging.ILogger, string, global::System.Exception?>");
             var accessorList = new[]

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -168,7 +169,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var setCreation = SyntaxFactory.InvocationExpression(setType);
             var arrowExpression = SyntaxFactory.ArrowExpressionClause(setCreation);
 
-            var summary = GetSummary(new[] { $"Gets the DBSet for {generationModelEntityGenerationModel.ClassName}" });
+            var summary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets the DBSet for {generationModelEntityGenerationModel.ClassName}" });
 
             var type = SyntaxFactory.ParseTypeName($"DbSet<EfModels.{generationModelEntityGenerationModel.ClassName}EfModel>");
             var identifier = generationModelEntityGenerationModel.ClassName;

@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -85,8 +86,35 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 record = record.AddModifiers(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
             }
 
+            if (requestModel.Properties.Length > 0)
+            {
+                var properties = requestModel.Properties
+                    .Select(static p => SyntaxFactory.Parameter(
+                        SyntaxFactory.List<AttributeListSyntax>(),
+                        SyntaxFactory.TokenList(),
+                        SyntaxFactory.ParseTypeName(p.ContainingNamespace),
+                        SyntaxFactory.Identifier(p.Name),
+                        null))
+                    .ToArray();
+
+                var parameters = properties;
+
+                record = record.AddParameterListParameters(parameters);
+            }
+
+            var xmlDoc = SyntaxTriviaFactory.GetXmlDocumentation(
+                requestModel.xmlDocSummary,
+                [
+                    $"var request = new {requestModel.Name}({string.Join(", ", requestModel.Properties.Select(p => p.Name))});",
+                    "var response = await mediator.Send(request).ConfigureAwait(false);"
+                ]);
+
+            var leadingTrivia = SyntaxTriviaFactory.GetSummary(["Represents a request model."]);
+
             return record.WithBaseList(SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList(requestModel.BaseTypeSyntaxFunc())))
-                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                .WithLeadingTrivia(leadingTrivia)
+                .WithLeadingTrivia(xmlDoc);
         }
     }
 }
