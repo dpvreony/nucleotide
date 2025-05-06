@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,12 +15,43 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
     {
         public void Execute(GeneratorExecutionContext context)
         {
-            var requestModels = GetRequestModels().GroupBy(rm => rm.ContainingNamespace);
+            var rawModels = GetRequestModels();
+            var rawModelsHashCode = rawModels.Select(rm => rm.GetHashCode()).GetHashCode();
 
+            var requestModels = rawModels.GroupBy(rm => rm.ContainingNamespace);
+
+            var namespaceDeclarations = new List<MemberDeclarationSyntax>();
             foreach (var groupedRequestModel in requestModels)
             {
-                var namespaceDeclaration = GetNamespaceDeclaration(groupedRequestModel);
+                namespaceDeclarations.Add(GetNamespaceDeclaration(groupedRequestModel));
             }
+
+            var parseOptions = context.ParseOptions;
+
+            // TODO: need to review this might be better way than generate, loop, copy.
+            // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
+
+            var nullableSyntaxDirective = SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true);
+            var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
+            var triviaList = SyntaxFactory.TriviaList(trivia);
+
+            var cu = SyntaxFactory.CompilationUnit()
+                .AddMembers(namespaceDeclarations.ToArray())
+                .WithLeadingTrivia(triviaList)
+                .NormalizeWhitespace();
+
+            var sourceText = SyntaxFactory.SyntaxTree(
+                    cu,
+                    parseOptions,
+                    encoding: Encoding.UTF8)
+                .GetText();
+
+            var hintName = $"Nucelotide.Cqrs.Requests.g.cs";
+
+            context.AddSource(
+                hintName,
+                sourceText);
+
         }
 
         public void Initialize(GeneratorInitializationContext context)
@@ -43,11 +75,18 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
 
         private RecordDeclarationSyntax GetRecordDeclaration(RequestModel requestModel)
         {
-            return SyntaxFactory.RecordDeclaration(
-                SyntaxFactory.Token(SyntaxKind.RecordDeclaration),
-                requestModel.Name)
-                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
-                .WithBaseList(SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList(requestModel.BaseTypeSyntaxFunc())));
+            var record = SyntaxFactory.RecordDeclaration(
+                    SyntaxFactory.Token(SyntaxKind.RecordKeyword),
+                    requestModel.Name)
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
+
+            if (requestModel.IsSealed)
+            {
+                record = record.AddModifiers(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
+            }
+
+            return record.WithBaseList(SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList(requestModel.BaseTypeSyntaxFunc())))
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
         }
     }
 }
