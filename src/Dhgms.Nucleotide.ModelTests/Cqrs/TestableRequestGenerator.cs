@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 
 namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
@@ -15,13 +16,13 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
             const string containingNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
             const string responseNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
 
-            var rawRequestDto = new NamedTypeModel(
+            var rawRequestDto = new NamedTypeArgumentModel(
                 containingNamespace,
                 "SomeSimpleRequestDto",
                 false);
 
-            var simpleResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleListResponse", false);
-            var viewResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleViewResponse", true);
+            var simpleResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleListResponse");
+            var viewResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleViewResponse");
 
             return new[]
             {

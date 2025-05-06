@@ -17,8 +17,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
         public void Execute(GeneratorExecutionContext context)
         {
             var rawModels = GetRequestModels();
-            var rawModelsHashCode = rawModels.Select(rm => rm.GetHashCode()).GetHashCode();
-
             var requestModels = rawModels.GroupBy(rm => rm.ContainingNamespace);
 
             var namespaceDeclarations = new List<MemberDeclarationSyntax>();
@@ -28,9 +26,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             }
 
             var parseOptions = context.ParseOptions;
-
-            // TODO: need to review this might be better way than generate, loop, copy.
-            // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
 
             var nullableSyntaxDirective = SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true);
             var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
@@ -103,7 +98,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             }
 
             var xmlDoc = SyntaxTriviaFactory.GetXmlDocumentation(
-                requestModel.xmlDocSummary,
+                requestModel.XmlDocSummary,
                 [
                     $"var request = new {requestModel.Name}({string.Join(", ", requestModel.Properties.Select(p => p.Name))});",
                     "var response = await mediator.Send(request).ConfigureAwait(false);"
