@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
+using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;

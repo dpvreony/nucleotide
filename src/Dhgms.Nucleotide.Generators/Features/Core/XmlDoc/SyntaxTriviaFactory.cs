@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc
+namespace Dhgms.Nucleotide.Generators.Features.Core.XmlDoc
 {
     public static class SyntaxTriviaFactory
     {

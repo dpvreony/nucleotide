@@ -1,23 +1,20 @@
-﻿// Copyright (c) 2020 DHGMS Solutions and Contributors. All rights reserved.
-// DHGMS Solutions and Contributors licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for full license information.
-
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Dhgms.Nucleotide.Generators.Features.Cqrs.XmlDoc;
+using Dhgms.Nucleotide.Generators.Features.Core;
+using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
 {
-    public abstract class AbstractRequestGenerator : ISourceGenerator
+    public sealed class RequestMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<RequestModel>
     {
-        public void Execute(GeneratorExecutionContext context)
+        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<RequestModel> featureModels)
         {
-            var rawModels = GetRequestModels();
-            var requestModels = rawModels.GroupBy(rm => rm.ContainingNamespace);
+            var requestModels = featureModels.GroupBy(rm => rm.ContainingNamespace);
 
             var namespaceDeclarations = new List<MemberDeclarationSyntax>();
             foreach (var groupedRequestModel in requestModels)
@@ -25,36 +22,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 namespaceDeclarations.Add(GetNamespaceDeclaration(groupedRequestModel));
             }
 
-            var parseOptions = context.ParseOptions;
-
-            var nullableSyntaxDirective = SyntaxFactory.NullableDirectiveTrivia(SyntaxFactory.Token(SyntaxKind.EnableKeyword), true);
-            var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
-            var triviaList = SyntaxFactory.TriviaList(trivia);
-
-            var cu = SyntaxFactory.CompilationUnit()
-                .AddMembers(namespaceDeclarations.ToArray())
-                .WithLeadingTrivia(triviaList)
-                .NormalizeWhitespace();
-
-            var sourceText = SyntaxFactory.SyntaxTree(
-                    cu,
-                    parseOptions,
-                    encoding: Encoding.UTF8)
-                .GetText();
-
-            var hintName = $"Nucelotide.Cqrs.Requests.g.cs";
-
-            context.AddSource(
-                hintName,
-                sourceText);
-
+            return new SyntaxList<MemberDeclarationSyntax>(namespaceDeclarations);
         }
-
-        public void Initialize(GeneratorInitializationContext context)
-        {
-        }
-
-        protected abstract IEnumerable<RequestModel> GetRequestModels();
 
         private NamespaceDeclarationSyntax GetNamespaceDeclaration(IGrouping<string, RequestModel> groupedRequestModel)
         {
