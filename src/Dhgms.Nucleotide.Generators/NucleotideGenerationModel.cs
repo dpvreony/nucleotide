@@ -8,9 +8,9 @@ namespace Dhgms.Nucleotide.Generators
 {
     public sealed class NucleotideGenerationModel
     {
-        public AspNetCoreGenerationModel AspNetCore { get; set; } = new ();
+        public AspNetCoreGenerationModel AspNetCore { get; init; } = new ();
 
-        public CqrsGenerationModel Cqrs { get; set; } = new ();
+        public CqrsGenerationModel Cqrs { get; init; } = new ();
 
 #if TBC
         public EntityFrameworkCoreGenerationModel EntityFrameworkCore { get; set; } = new();

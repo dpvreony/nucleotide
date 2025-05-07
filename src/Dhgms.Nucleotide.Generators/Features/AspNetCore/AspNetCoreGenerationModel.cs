@@ -5,6 +5,6 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore
 {
     public sealed class AspNetCoreGenerationModel
     {
-        public IReadOnlyCollection<MvcControllerModel>? MvcControllers { get; set; }
+        public IList<MvcControllerModel> MvcControllers { get; init; } = new List<MvcControllerModel>();
     }
 }
