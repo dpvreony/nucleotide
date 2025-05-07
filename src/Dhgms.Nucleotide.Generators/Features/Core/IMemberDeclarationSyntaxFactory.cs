@@ -6,8 +6,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Dhgms.Nucleotide.Generators.Features.Core
 {
-    public interface IMemberDeclarationSyntaxFactory<in TFeatureModel>
+    public interface IMemberDeclarationSyntaxFactory<TFeatureModel>
     {
-        SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<TFeatureModel> featureModels);
+        SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IList<TFeatureModel> featureModels);
     }
 }

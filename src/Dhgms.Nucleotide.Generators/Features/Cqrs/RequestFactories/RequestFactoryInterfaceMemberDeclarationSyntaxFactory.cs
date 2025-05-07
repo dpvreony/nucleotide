@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
 {
     public sealed class RequestFactoryInterfaceMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<RequestFactoryModel>
     {
-        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<RequestFactoryModel> featureModels)
+        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IList<RequestFactoryModel> featureModels)
         {
             throw new NotImplementedException();
         }

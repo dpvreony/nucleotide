@@ -8,7 +8,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
 {
     public sealed class TestableResponseGenerator : AbstractTestGenerator<ResponseMemberDeclarationSyntaxFactory, ResponseModel>
     {
-        protected override IReadOnlyCollection<ResponseModel> GetGenerationModel()
+        protected override IList<ResponseModel> GetGenerationModel()
         {
             const string containingNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
             const string responseNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";

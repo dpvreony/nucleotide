@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
 {
     public sealed class RequestMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<RequestModel>
     {
-        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<RequestModel> featureModels)
+        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IList<RequestModel> featureModels)
         {
             var requestModels = featureModels.GroupBy(rm => rm.ContainingNamespace);
 

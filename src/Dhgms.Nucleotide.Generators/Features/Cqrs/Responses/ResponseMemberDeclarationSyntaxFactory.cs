@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
 {
     public sealed class ResponseMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<ResponseModel>
     {
-        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<ResponseModel> featureModels)
+        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IList<ResponseModel> featureModels)
         {
             var responseModels = featureModels.GroupBy(rm => rm.ContainingNamespace);
 

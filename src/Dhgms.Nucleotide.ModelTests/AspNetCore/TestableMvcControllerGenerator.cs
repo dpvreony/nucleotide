@@ -10,7 +10,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
 {
     public sealed class TestableMvcControllerGenerator : AbstractTestGenerator<MvcControllersMemberDeclarationSyntaxFactory, MvcControllerModel>
     {
-        protected override IReadOnlyCollection<MvcControllerModel> GetGenerationModel()
+        protected override IList<MvcControllerModel> GetGenerationModel()
         {
             const string containingNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";
             const string responseNamespace = "Dhgms.Nucleotide.SampleGenerator.Cqrs.TestableRequestGenerator";

@@ -13,7 +13,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
 {
     public sealed class MvcControllersMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<MvcControllerModel>
     {
-        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IReadOnlyCollection<MvcControllerModel> featureModels)
+        public SyntaxList<MemberDeclarationSyntax> GetMemberDeclarationSyntaxCollection(IList<MvcControllerModel> featureModels)
         {
             var groupedModels = featureModels.GroupBy(rm => rm.ContainingNamespace);
 

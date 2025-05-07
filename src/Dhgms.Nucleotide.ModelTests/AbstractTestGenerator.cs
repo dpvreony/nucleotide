@@ -43,7 +43,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
         }
 
 
-        protected abstract IReadOnlyCollection<TFeatureModel> GetGenerationModel();
+        protected abstract IList<TFeatureModel> GetGenerationModel();
 
         private void Execute(
             SourceProductionContext productionContext,
@@ -61,7 +61,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
         }
 
         private void DoGeneration(
-            IReadOnlyCollection<TFeatureModel> generationModel,
+            IList<TFeatureModel> generationModel,
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {

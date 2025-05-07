@@ -5,13 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
 
 namespace Dhgms.Nucleotide.Generators.Features.Core
 {
     public static class RoslynGenerationHelpers
     {
         public static void DoFeatureGeneration<TMemberDeclarationSyntaxFactory, TFeatureModel>(
-            IReadOnlyCollection<TFeatureModel>? featureModelCollection,
+            IList<TFeatureModel> featureModelCollection,
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider,
             string featureName)
