@@ -54,6 +54,11 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 classDeclaration = classDeclaration.AddMembers(constructorDeclaration);
             }
 
+            if (mvcControllerModel.MethodDeclarations is { Length: > 0 })
+            {
+                classDeclaration = classDeclaration.AddMembers(mvcControllerModel.MethodDeclarations.Cast<MemberDeclarationSyntax>().ToArray());
+            }
+
             var baseType = mvcControllerModel.BaseTypeSyntaxFunc.Invoke();
             classDeclaration = classDeclaration.AddBaseListTypes(baseType);
             var xmlDoc = SyntaxTriviaFactory.GetSummary(mvcControllerModel.XmlDocSummary);
