@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Dhgms.Nucleotide.Generators.Features.Core
@@ -25,11 +26,42 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             var trivia = SyntaxFactory.Trivia(nullableSyntaxDirective);
             var triviaList = SyntaxFactory.TriviaList(trivia);
 
-            var memberDeclarationSyntaxCollection = TryGetMemberDeclarationSyntaxCollection<TMemberDeclarationSyntaxFactory, TFeatureModel>(featureModelCollection);
-            var cu = SyntaxFactory.CompilationUnit()
-                .WithMembers(memberDeclarationSyntaxCollection)
-                .WithLeadingTrivia(triviaList)
-                .NormalizeWhitespace();
+            var cu = SyntaxFactory.CompilationUnit();
+            try
+            {
+                var memberDeclarationSyntaxFactory = new TMemberDeclarationSyntaxFactory();
+                var memberDeclarationSyntaxCollection = memberDeclarationSyntaxFactory.GetMemberDeclarationSyntaxCollection(featureModelCollection);
+                cu = cu
+                    .WithMembers(memberDeclarationSyntaxCollection)
+                    .WithLeadingTrivia(triviaList)
+                    .NormalizeWhitespace();
+            }
+            catch (Exception e)
+            {
+                var errorDirective = SyntaxFactory.Trivia(
+                    SyntaxFactory.ErrorDirectiveTrivia(true)
+                        .WithErrorKeyword(SyntaxFactory.Token(SyntaxKind.ErrorKeyword))
+                        .WithEndOfDirectiveToken(
+                            SyntaxFactory.Token(
+                                SyntaxFactory.TriviaList(
+                                    SyntaxFactory.PreprocessingMessage($"Failed to generate code in: {typeof(TMemberDeclarationSyntaxFactory)}")
+                                ),
+                                SyntaxKind.EndOfDirectiveToken,
+                                SyntaxFactory.TriviaList()
+                            )));
+
+                var splitString = new[] { "\r\n", "\n" };
+                var text = e.ToString()
+                    .Split(splitString, StringSplitOptions.None)
+                    .Select(line => line.Trim())
+                    .Aggregate(string.Empty, (current, line) => current + $"/// {line}\r\n");
+                var errorCommentTrivia = SyntaxFactory.Comment(text);
+
+                cu = cu
+                    .WithLeadingTrivia(trivia, errorCommentTrivia, errorDirective)
+                    .NormalizeWhitespace();
+            }
+
 
             var sourceText = SyntaxFactory.SyntaxTree(
                     cu,
@@ -42,36 +74,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             productionContext.AddSource(
                 hintName,
                 sourceText);
-        }
-
-        public static SyntaxList<MemberDeclarationSyntax> TryGetMemberDeclarationSyntaxCollection<TMemberDeclarationSyntaxFactory, TFeatureModel>(IReadOnlyCollection<TFeatureModel> featureModelCollection)
-            where TMemberDeclarationSyntaxFactory : IMemberDeclarationSyntaxFactory<TFeatureModel>, new()
-        {
-            try
-            {
-                var memberDeclarationSyntaxFactory = new TMemberDeclarationSyntaxFactory();
-                return memberDeclarationSyntaxFactory.GetMemberDeclarationSyntaxCollection(featureModelCollection);
-            }
-            catch (Exception e)
-            {
-                var errorDirective = SyntaxFactory.Trivia(
-                    SyntaxFactory.ErrorDirectiveTrivia(true)
-                        .WithErrorKeyword(SyntaxFactory.Token(SyntaxKind.ErrorKeyword))
-                        .WithEndOfDirectiveToken(
-                            SyntaxFactory.Token(
-                                SyntaxFactory.TriviaList(
-                                    SyntaxFactory.PreprocessingMessage(e.ToString())
-                                    ),
-                                    SyntaxKind.EndOfDirectiveToken,
-                                    SyntaxFactory.TriviaList()
-                            )));
-
-                var emptyStatement = SyntaxFactory.EmptyStatement()
-                    .WithLeadingTrivia(errorDirective);
-
-                var global = SyntaxFactory.GlobalStatement(emptyStatement);
-                return SyntaxFactory.List<MemberDeclarationSyntax>([global]);
-            }
         }
     }
 }
