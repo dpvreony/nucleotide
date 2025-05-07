@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Dhgms.Nucleotide.Generators.Features.AspNetCore;
 using Dhgms.Nucleotide.Generators.Features.Cqrs;
 
 namespace Dhgms.Nucleotide.Generators
