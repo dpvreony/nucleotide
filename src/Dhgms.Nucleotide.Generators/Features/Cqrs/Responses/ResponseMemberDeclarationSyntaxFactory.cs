@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Core;
+using Dhgms.Nucleotide.Generators.Features.Core.Roslyn;
 using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -21,23 +22,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
             var namespaceDeclarations = new List<MemberDeclarationSyntax>();
             foreach (var groupedResponseModel in responseModels)
             {
-                namespaceDeclarations.Add(GetNamespaceDeclaration(groupedResponseModel));
+                namespaceDeclarations.Add(NamespaceDeclarationFactory.GetNamespaceDeclaration(
+                    groupedResponseModel, 
+                    model => GetRecordDeclaration(model)));
             }
 
             return new SyntaxList<MemberDeclarationSyntax>(namespaceDeclarations);
-        }
-
-        private NamespaceDeclarationSyntax GetNamespaceDeclaration(IGrouping<string, ResponseModel> groupedResponseModel)
-        {
-            var namespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(groupedResponseModel.Key));
-
-            foreach (var responseModel in groupedResponseModel)
-            {
-                var recordDeclaration = GetRecordDeclaration(responseModel);
-                namespaceDeclaration = namespaceDeclaration.AddMembers(recordDeclaration);
-            }
-
-            return namespaceDeclaration;
         }
 
         private RecordDeclarationSyntax GetRecordDeclaration(ResponseModel responseModel)
