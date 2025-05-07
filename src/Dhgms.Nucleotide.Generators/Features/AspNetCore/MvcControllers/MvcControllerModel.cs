@@ -127,7 +127,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 returnStatement
             };
 
-            var returnType = SyntaxFactory.ParseTypeName($"Task<Queries.I{camelAction}{entityName}Query>");
+            var returnType = SyntaxFactory.ParseTypeName($"global::System.Threading.Tasks.Task<Queries.I{camelAction}{entityName}Query>");
 
             var claimsPrincipalParameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel("System.Security.Claims", "ClaimsPrincipal", false, "claimsPrincipal"));
             var cancellationTokenParameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel("System.Threading", "CancellationToken", false, "cancellationToken"));
@@ -154,7 +154,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 returnStatement
             };
 
-            var returnType = SyntaxFactory.ParseTypeName("Task<string>");
+            var returnType = SyntaxFactory.ParseTypeName("global::System.Threading.Tasks.Task<string>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword))
                 .AddBodyStatements(body);
@@ -172,7 +172,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { $"{lowerAction}Response" }, false);
 
             var taskFromResult =
-                RoslynGenerationHelpers.GetStaticMethodInvocationSyntax("Task", "FromResult",
+                RoslynGenerationHelpers.GetStaticMethodInvocationSyntax("global::System.Threading.Tasks.Task", "FromResult",
                     baseMethodInvocationSyntax, true);
             var returnStatement = SyntaxFactory.ReturnStatement(taskFromResult);
 

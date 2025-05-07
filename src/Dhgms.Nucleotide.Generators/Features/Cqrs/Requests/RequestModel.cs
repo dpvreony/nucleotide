@@ -101,7 +101,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<{responseModel.GetFullyQualifiedTypeName()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<global::{containingNamespace}.{name},{responseModel.GetFullyQualifiedTypeName()}>")),
                 xmlDocSummary,
                 responseModel);
         }

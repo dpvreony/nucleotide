@@ -3,6 +3,7 @@ using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
 using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.SampleGenerator
@@ -25,7 +26,13 @@ namespace Dhgms.Nucleotide.SampleGenerator
 
             var listRawRequestDto = new NamedTypeArgumentModel(containingNamespace, "ListFeatureRequest", false);
 
-            var listResponseModel = new NamedTypeModel(containingNamespace, "ListFeatureResponse");
+            var listResponseModel = ResponseModel.ResponseWithNoInheritance(
+                containingNamespace,
+                "ListResponse",
+                true,
+                [],
+                ["Some list response model."]);
+            model.Cqrs.Responses.Add(listResponseModel);
 
             var listRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
                 containingNamespace,
@@ -34,18 +41,26 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 listRawRequestDto,
                 listResponseModel,
                 []);
+            model.Cqrs.Requests.Add(listRequestModel);
 
             var viewRawRequestDto = new NamedTypeArgumentModel(containingNamespace, "ListFeatureRequest", false);
 
-            var viewResponseModel = new NamedTypeModel(containingNamespace, "ViewFeatureResponse");
+            var viewResponseModel = ResponseModel.ResponseWithNoInheritance(
+                containingNamespace,
+                "ViewResponse",
+                true,
+                [],
+                ["Some view response model."]);
+            model.Cqrs.Responses.Add(viewResponseModel);
 
             var viewRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
                 containingNamespace,
-                "ListFirstFeature",
+                "ViewFirstFeature",
                 true,
                 viewRawRequestDto,
                 viewResponseModel,
                 []);
+            model.Cqrs.Requests.Add(viewRequestModel);
 
             var queryFactoryModel = RequestFactoryModel.QueryFactory(
                 containingNamespace,

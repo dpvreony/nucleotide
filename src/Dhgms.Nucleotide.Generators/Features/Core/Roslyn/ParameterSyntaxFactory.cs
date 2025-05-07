@@ -14,7 +14,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Core.Roslyn
             return SyntaxFactory.Parameter(
                 SyntaxFactory.List<AttributeListSyntax>(),
                 SyntaxFactory.TokenList(),
-                SyntaxFactory.ParseTypeName(namedTypeParameterModel.ContainingNamespace),
+                SyntaxFactory.ParseTypeName($"{namedTypeParameterModel.ContainingNamespace}.{namedTypeParameterModel.TypeName}"),
                 SyntaxFactory.Identifier(namedTypeParameterModel.ParameterName),
                 null);
         }
