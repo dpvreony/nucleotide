@@ -3,9 +3,11 @@ using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
+using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.SampleGenerator
 {
+    [Generator]
     public sealed class TestableNucleotideObjectGenerator : AbstractNucleotideObjectGenerator
     {
         protected override NucleotideGenerationModel GetGenerationModel()

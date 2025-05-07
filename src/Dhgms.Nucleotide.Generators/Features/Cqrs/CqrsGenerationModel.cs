@@ -11,10 +11,10 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
 {
     public sealed class CqrsGenerationModel
     {
-        public IList<RequestFactoryModel> RequestFactoryClasses { get; init; }
+        public IList<RequestFactoryModel> RequestFactoryClasses { get; init; } = new List<RequestFactoryModel>();
 
-        public IList<RequestModel> Requests { get; init; }
+        public IList<RequestModel> Requests { get; init; } = new List<RequestModel>();
 
-        public IList<ResponseModel> Responses { get; init; }
+        public IList<ResponseModel> Responses { get; init; } = new List<ResponseModel>();
     }
 }
