@@ -71,7 +71,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             ParseOptions parseOptionsProvider)
         {
             DoCqrsGeneration(
-                generationModel.CqrsGenerationModel,
+                generationModel.Cqrs,
                 productionContext,
                 parseOptionsProvider);
         }

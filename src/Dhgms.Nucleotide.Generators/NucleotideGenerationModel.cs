@@ -7,6 +7,16 @@ namespace Dhgms.Nucleotide.Generators
 {
     public sealed class NucleotideGenerationModel
     {
-        public CqrsGenerationModel CqrsGenerationModel { get; set; } = new CqrsGenerationModel();
+        public AspNetCoreGenerationModel AspNetCore { get; set; } = new ();
+
+        public CqrsGenerationModel Cqrs { get; set; } = new ();
+
+#if TBC
+        public EntityFrameworkCoreGenerationModel EntityFrameworkCore { get; set; } = new();
+
+        public ReactiveUIGenerationModel ReactiveUI { get; set; } = new ();
+
+        public WpfGenerationModel Wpf { get; set; } = new ();
+#endif
     }
 }
