@@ -1,12 +1,6 @@
-﻿using Dhgms.Nucleotide.Generators.Features.Cqrs;
-using Dhgms.Nucleotide.ModelTests;
+﻿using System;
 using Dhgms.Nucleotide.SampleGenerator.Cqrs;
 using Microsoft.CodeAnalysis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit.Abstractions;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators.Cqrs.Requests

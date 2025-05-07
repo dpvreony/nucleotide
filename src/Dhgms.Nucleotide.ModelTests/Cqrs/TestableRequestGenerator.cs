@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Core;
-using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 
 namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
