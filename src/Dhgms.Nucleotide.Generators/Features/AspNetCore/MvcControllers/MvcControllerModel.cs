@@ -1,5 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
@@ -27,18 +30,37 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 summary);
         }
 
+#if TBC
         public static MvcControllerModel WhipstaffFullCrudController(
             string containingNamespace,
             string name,
             bool isSealed,
             string entityDescription)
         {
-            var listQueryClassName = "";
-            var listRequestDtoClassName = "";
-            var listResponseDtoClassName = "";
+            return new MvcControllerModel(
+                containingNamespace,
+                name,
+                isSealed,
+                baseTypeSyntaxFunc,
+                [ $"MVC controller for querying {entityDescription}."]);
+        }
+#endif
 
-            var viewQueryClassName = "";
-            var viewResponseDtoClassName = "";
+        public static MvcControllerModel WhipstaffQueryOnlyController(
+            string containingNamespace,
+            string name,
+            bool isSealed,
+            string entityDescription,
+            RequestFactoryModel queryFactoryModel,
+            RequestModel listRequestModel,
+            RequestModel viewRequestModel)
+        {
+            var listQueryClassName = listRequestModel.GetFullyQualifiedTypeName();
+            var listRequestDtoClassName = "";
+            var listResponseDtoClassName = listRequestModel.ResponseModel.GetFullyQualifiedTypeName();
+
+            var viewQueryClassName = viewRequestModel.GetFullyQualifiedTypeName();
+            var viewResponseDtoClassName = viewRequestModel.ResponseModel.GetFullyQualifiedTypeName();
 
             var logMessageActionsWrapperClassName = "";
 
@@ -49,22 +71,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 name,
                 isSealed,
                 baseTypeSyntaxFunc,
-                [ $"MVC controller for querying {entityDescription}."]);
-        }
-
-        public static MvcControllerModel WhipstaffQueryOnlyController(
-            string containingNamespace,
-            string name,
-            bool isSealed,
-            string entityDescription)
-        {
-            var baseTypeSyntaxFunc = () => "";
-            return new MvcControllerModel(
-                containingNamespace,
-                name,
-                isSealed,
-                baseTypeSyntaxFunc,
-                entityDescription);
+                [$"MVC controller for querying {entityDescription}."]);
         }
     }
 }
