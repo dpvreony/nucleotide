@@ -184,7 +184,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             var parameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel(responseClassName.ContainingNamespace, responseClassName.Name, false, $"{lowerAction}Response"));
             var parameters = SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(parameter));
 
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<IActionResult>");
+            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))

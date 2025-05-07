@@ -24,7 +24,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
         {
             var containingNamespace = "SampleApp.Features.FirstFeature";
 
-            var listRawRequestDto = new NamedTypeArgumentModel(containingNamespace, "ListFeatureRequest", false);
+            var listRawRequestDto = RawDataTransferObject.Create(containingNamespace, "ListFeatureRawQuery", false);
 
             var listResponseModel = ResponseModel.ResponseWithNoInheritance(
                 containingNamespace,
@@ -36,14 +36,14 @@ namespace Dhgms.Nucleotide.SampleGenerator
 
             var listRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
                 containingNamespace,
-                "ListFirstFeature",
+                "ListFirstFeatureQuery",
                 true,
                 listRawRequestDto,
                 listResponseModel,
                 []);
             model.Cqrs.Requests.Add(listRequestModel);
 
-            var viewRawRequestDto = new NamedTypeArgumentModel(containingNamespace, "ListFeatureRequest", false);
+            var viewRawRequestDto = RawDataTransferObject.Create(containingNamespace, "ViewFeatureRawQuery", false);
 
             var viewResponseModel = ResponseModel.ResponseWithNoInheritance(
                 containingNamespace,
@@ -55,7 +55,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
 
             var viewRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
                 containingNamespace,
-                "ViewFirstFeature",
+                "ViewFirstFeatureQuery",
                 true,
                 viewRawRequestDto,
                 viewResponseModel,
@@ -67,6 +67,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 "MyFirstQueryFactory",
                 true,
                 listRequestModel,
+                listRawRequestDto,
                 viewRequestModel,
                 ["Query factory for my first feature"]);
             model.Cqrs.RequestFactoryClasses.Add(queryFactoryModel);

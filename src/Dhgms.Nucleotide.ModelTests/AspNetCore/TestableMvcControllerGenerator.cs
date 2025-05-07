@@ -44,6 +44,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                 "SomeQueryFactory",
                 true,
                 listRequestModel,
+                rawRequestDto,
                 viewRequestModel,
                 ["Simple Query Factory"]);
 

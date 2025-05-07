@@ -86,13 +86,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                     rawRequestDto.ContainingNamespace,
                     rawRequestDto.Name,
                     rawRequestDto.Nullable,
-                    "rawRequestDto"),
+                    "RequestDto"),
 
                 new NamedTypeParameterModel(
                     "global::System.Security.Claims",
                     "ClaimsPrincipal",
                     false,
-                    "claimsPrincipal")
+                    "ClaimsPrincipal")
                 
             };
 

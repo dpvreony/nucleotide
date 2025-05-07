@@ -21,10 +21,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
             string name,
             bool isSealed,
             RequestModel listRequestModel,
+            NamedTypeModel listRequestDto,
             RequestModel viewRequestModel,
             string[] xmlDocSummary)
         {
             var listQueryTypeName = listRequestModel.GetFullyQualifiedTypeName();
+            var listRequestDtoName = listRequestDto.GetFullyQualifiedTypeName();
             var listResponseTypeName = listRequestModel.ResponseModel.GetFullyQualifiedTypeName();
             var viewQueryName = viewRequestModel.GetFullyQualifiedTypeName();
             var viewResponseName = viewRequestModel.ResponseModel.GetFullyQualifiedTypeName();
@@ -32,7 +34,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
                 containingNamespace,
                 name,
                 isSealed,
-                    () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableQueryFactory<{listQueryTypeName}, {listResponseTypeName}, {viewQueryName}, {viewResponseName}>")),
+                    () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableQueryFactory<{listQueryTypeName}, {listRequestDtoName}, {listResponseTypeName}, {viewQueryName}, {viewResponseName}>")),
                 xmlDocSummary);
         }
 
