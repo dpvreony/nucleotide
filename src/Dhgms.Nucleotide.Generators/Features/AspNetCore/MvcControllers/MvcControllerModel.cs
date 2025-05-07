@@ -14,6 +14,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
         string ContainingNamespace,
         string Name,
         bool IsSealed,
+        bool IsPartial,
         Func<BaseTypeSyntax> BaseTypeSyntaxFunc,
         string[] XmlDocSummary,
         ConstructorModel? ConstructorModel)
@@ -25,6 +26,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             string containingNamespace,
             string name,
             bool isSealed,
+            bool isPartial,
             string[] summary)
         {
             var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Microsoft.AspNetCore.Mvc.Controller"));
@@ -33,6 +35,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 containingNamespace,
                 name,
                 isSealed,
+                isPartial,
                 baseTypeSyntaxFunc,
                 summary,
                 null);
@@ -58,6 +61,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             string containingNamespace,
             string name,
             bool isSealed,
+            bool isPartial,
             string entityDescription,
             RequestFactoryModel queryFactoryModel,
             RequestModel listRequestModel,
@@ -94,6 +98,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 containingNamespace,
                 name,
                 isSealed,
+                false,
                 baseTypeSyntaxFunc,
                 [$"MVC controller for querying {entityDescription}."],
                 constructorModel);

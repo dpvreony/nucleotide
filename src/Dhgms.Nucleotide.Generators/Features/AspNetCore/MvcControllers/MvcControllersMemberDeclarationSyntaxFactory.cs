@@ -38,10 +38,15 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 classDeclaration = classDeclaration.AddModifiers(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
             }
 
+            if (mvcControllerModel.IsPartial)
+            {
+                classDeclaration = classDeclaration.AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword));
+            }
+
             if (mvcControllerModel.ConstructorModel != null
                 &&
                 (mvcControllerModel.ConstructorModel.ArgsForBaseConstructorPassThrough is { Count: >= 1 }
-                    || mvcControllerModel.ConstructorModel.ArgsForFieldAssignments is { Count: >= 1 }))
+                 || mvcControllerModel.ConstructorModel.ArgsForFieldAssignments is { Count: >= 1 }))
             {
                 var constructorDeclaration = ConstructorMemberDeclarationSyntaxFactory.GetConstructorDeclaration(
                     mvcControllerModel.Name,

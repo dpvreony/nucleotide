@@ -53,12 +53,14 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                 MvcControllerModel.VanillaController(containingNamespace,
                     "VanillaController",
                     true,
+                    false,
                     ["Test Vanilla Controller"]),
 
                 MvcControllerModel.WhipstaffQueryOnlyController(
                     containingNamespace,
                     "QueryOnlyController",
                     true,
+                    false,
                     "Animal",
                     queryFactoryModel,
                     listRequestModel,
