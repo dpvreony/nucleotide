@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;

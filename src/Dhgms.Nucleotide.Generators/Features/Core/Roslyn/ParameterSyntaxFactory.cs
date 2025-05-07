@@ -15,18 +15,18 @@ namespace Dhgms.Nucleotide.Generators.Features.Core.Roslyn
                 SyntaxFactory.List<AttributeListSyntax>(),
                 SyntaxFactory.TokenList(),
                 SyntaxFactory.ParseTypeName(namedTypeParameterModel.ContainingNamespace),
-                SyntaxFactory.Identifier(namedTypeParameterModel.Name),
+                SyntaxFactory.Identifier(namedTypeParameterModel.ParameterName),
                 null);
         }
 
         public static void PopulateParameterSyntaxList<TModel>(
-            IList<ParameterSyntax> separatedSyntaxList,
+            IList<ParameterSyntax> list,
             IReadOnlyCollection<TModel> models)
             where TModel : NamedTypeParameterModel
         {
-            foreach (var parameterSyntax in separatedSyntaxList)
+            foreach (var model in models)
             {
-                
+                list.Add(GetParameterSyntax(model));
             }
         }
     }
