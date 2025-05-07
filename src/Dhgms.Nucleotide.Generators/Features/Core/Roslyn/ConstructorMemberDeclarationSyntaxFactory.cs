@@ -31,12 +31,9 @@ namespace Dhgms.Nucleotide.Generators.Features.Core.Roslyn
                     // Add field assignment logic here
                 }
             }
+
             if (constructorModel.ArgsForBaseConstructorPassThrough != null)
             {
-                foreach (var arg in constructorModel.ArgsForBaseConstructorPassThrough)
-                {
-                    // Add base constructor pass-through logic here
-                }
                 var seperatedSyntaxList = new SeparatedSyntaxList<ArgumentSyntax>();
 
                 foreach (var baseArgument in constructorModel.ArgsForBaseConstructorPassThrough)
@@ -58,37 +55,19 @@ namespace Dhgms.Nucleotide.Generators.Features.Core.Roslyn
 
         private static ParameterListSyntax? GetParameterList(ConstructorModel constructorModel)
         {
-            var parameters = SyntaxFactory.SeparatedList<ParameterSyntax>();
+            var parameters = new List<ParameterSyntax>();
 
             if (constructorModel.ArgsForFieldAssignments?.Count > 0)
             {
-                foreach (var p in constructorModel.ArgsForFieldAssignments)
-                {
-                    parameters = parameters.Add(
-                        SyntaxFactory.Parameter(
-                            SyntaxFactory.List<AttributeListSyntax>(),
-                            SyntaxFactory.TokenList(),
-                            SyntaxFactory.ParseTypeName(p.ContainingNamespace),
-                            SyntaxFactory.Identifier(p.Name),
-                            null));
-                }
+                ParameterSyntaxFactory.PopulateParameterSyntaxList(parameters, constructorModel.ArgsForFieldAssignments);
             }
 
             if (constructorModel.ArgsForBaseConstructorPassThrough?.Count > 0)
             {
-                foreach (var p in constructorModel.ArgsForBaseConstructorPassThrough)
-                {
-                    parameters = parameters.Add(
-                        SyntaxFactory.Parameter(
-                            SyntaxFactory.List<AttributeListSyntax>(),
-                            SyntaxFactory.TokenList(),
-                            SyntaxFactory.ParseTypeName(p.ContainingNamespace),
-                            SyntaxFactory.Identifier(p.Name),
-                            null));
-                }
+                ParameterSyntaxFactory.PopulateParameterSyntaxList(parameters, constructorModel.ArgsForBaseConstructorPassThrough);
             }
 
-            return SyntaxFactory.ParameterList(parameters);
+            return SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList<ParameterSyntax>(parameters));
         }
     }
 }
