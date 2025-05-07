@@ -1,9 +1,12 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 
 namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
 {
@@ -12,7 +15,11 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
         string Name,
         bool IsSealed,
         Func<BaseTypeSyntax> BaseTypeSyntaxFunc,
-        string[] XmlDocSummary)
+        string[] XmlDocSummary,
+        ConstructorModel? ConstructorModel)
+        : NamedTypeModel(
+            ContainingNamespace,
+            Name)
     {
         public static MvcControllerModel VanillaController(
             string containingNamespace,
@@ -27,7 +34,8 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 name,
                 isSealed,
                 baseTypeSyntaxFunc,
-                summary);
+                summary,
+                null);
         }
 
 #if TBC
@@ -53,7 +61,8 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             string entityDescription,
             RequestFactoryModel queryFactoryModel,
             RequestModel listRequestModel,
-            RequestModel viewRequestModel)
+            RequestModel viewRequestModel,
+            NamedTypeModel loggerMessageActionsModel)
         {
             var listQueryClassName = listRequestModel.GetFullyQualifiedTypeName();
             var listRequestDtoClassName = "";
@@ -66,12 +75,28 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
 
             var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.QueryOnlyMvcController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
 
+            var controllerFullName = $"global::{containingNamespace}.{name}";
+
+            var constructorBaseArgs = new List<NamedTypeParameterModel>
+            {
+                new ("global::Microsoft.AspNetCore.Authorization","IAuthorizationService", false, "authorizationService"),
+                new ("global::Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
+                new ("global::MediatR", "IMediator", false, "mediator"),
+                new (queryFactoryModel.ContainingNamespace, queryFactoryModel.Name, false, "queryFactory"),
+                new (loggerMessageActionsModel.ContainingNamespace, loggerMessageActionsModel.Name, false, "logMessageActions"),
+            };
+
+            var constructorModel = new ConstructorModel(
+                null,
+                constructorBaseArgs);
+
             return new MvcControllerModel(
                 containingNamespace,
                 name,
                 isSealed,
                 baseTypeSyntaxFunc,
-                [$"MVC controller for querying {entityDescription}."]);
+                [$"MVC controller for querying {entityDescription}."],
+                constructorModel);
         }
     }
 }

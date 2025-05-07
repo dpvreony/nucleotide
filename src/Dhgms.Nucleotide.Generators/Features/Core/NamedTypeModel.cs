@@ -4,7 +4,7 @@
     {
         public string GetFullyQualifiedTypeName()
         {
-            return $"{ContainingNamespace}.{Name}";
+            return $"global::{ContainingNamespace}.{Name}";
         }
     }
 }
