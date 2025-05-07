@@ -14,27 +14,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Database
     [ExcludeFromCodeCoverage]
     public static class ReferencedByEntityGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReferencedByEntityGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestReferencedByEntityGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, ReferencedByEntityGenerator> GetFactory()
-            {
-                return data => new TestReferencedByEntityGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReferencedByEntityGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestReferencedByEntityGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, ReferencedByEntityGenerator> GetFactory()
-            {
-                return data => new TestReferencedByEntityGenerator();
             }
         }
     }

@@ -12,22 +12,12 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Cqrs.Requests
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, TestableRequestGenerator> GetFactory()
-            {
-                return data => new TestableRequestGenerator();
-            }
         }
 
         public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestableRequestGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, TestableRequestGenerator> GetFactory()
-            {
-                return data => new TestableRequestGenerator();
             }
         }
     }

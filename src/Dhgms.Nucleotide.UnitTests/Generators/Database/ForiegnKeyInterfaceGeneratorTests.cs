@@ -14,27 +14,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Database
     [ExcludeFromCodeCoverage]
     public static class ForiegnKeyInterfaceGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ForiegnKeyInterfaceGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestForiegnKeyInterfaceGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, ForiegnKeyInterfaceGenerator> GetFactory()
-            {
-                return data => new TestForiegnKeyInterfaceGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ForiegnKeyInterfaceGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestForiegnKeyInterfaceGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, ForiegnKeyInterfaceGenerator> GetFactory()
-            {
-                return data => new TestForiegnKeyInterfaceGenerator();
             }
         }
     }

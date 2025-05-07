@@ -10,27 +10,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI.WPF
     [ExcludeFromCodeCoverage]
     public static class ReactiveMetroWindowClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveMetroWindowClassGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestReactiveMetroWindowClassGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, ReactiveMetroWindowClassGenerator> GetFactory()
-            {
-                return data => new TestReactiveMetroWindowClassGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveMetroWindowClassGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestReactiveMetroWindowClassGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, ReactiveMetroWindowClassGenerator> GetFactory()
-            {
-                return data => new TestReactiveMetroWindowClassGenerator();
             }
         }
     }

@@ -11,27 +11,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI
     [ExcludeFromCodeCoverage]
     public static class ReactiveWindowClassGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<ReactiveWindowClassGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestReactiveWindowClassGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, ReactiveWindowClassGenerator> GetFactory()
-            {
-                return data => new TestReactiveWindowClassGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<ReactiveWindowClassGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestReactiveWindowClassGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, ReactiveWindowClassGenerator> GetFactory()
-            {
-                return data => new TestReactiveWindowClassGenerator();
             }
         }
     }

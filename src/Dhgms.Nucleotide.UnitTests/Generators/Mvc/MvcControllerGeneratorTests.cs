@@ -15,27 +15,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Mvc
     [ExcludeFromCodeCoverage]
     public static class MvcControllerGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<MvcControllerGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestMvcControllerGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, MvcControllerGenerator> GetFactory()
-            {
-                return attributeData => new TestMvcControllerGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<MvcControllerGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestMvcControllerGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, MvcControllerGenerator> GetFactory()
-            {
-                return data => new TestMvcControllerGenerator();
             }
         }
     }

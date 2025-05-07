@@ -14,27 +14,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features
     [ExcludeFromCodeCoverage]
     public static class EntityFrameworkEntityTypeConfigurationGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<EntityFrameworkEntityTypeConfigurationGenerator>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestEntityFrameworkEntityTypeConfigurationGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, EntityFrameworkEntityTypeConfigurationGenerator> GetFactory()
-            {
-                return data => new TestEntityFrameworkEntityTypeConfigurationGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<EntityFrameworkEntityTypeConfigurationGenerator>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestEntityFrameworkEntityTypeConfigurationGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, EntityFrameworkEntityTypeConfigurationGenerator> GetFactory()
-            {
-                return data => new TestEntityFrameworkEntityTypeConfigurationGenerator();
             }
         }
     }
