@@ -96,13 +96,15 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 null,
                 constructorBaseArgs);
 
+            var viewDtoModel = new NamedTypeModel(string.Empty, "long");
+
             MethodDeclarationSyntax[] methodDeclarations = [
                 GetMvcViewActionResultDeclaration(listRequestModel.ResponseModel, "list"),
                 GetMvcViewActionResultDeclaration(viewRequestModel.ResponseModel, "view"),
                 GetPolicyMethodDeclaration(name, "List"),
                 GetPolicyMethodDeclaration(name, "View"),
-                GetQueryMethodDeclaration(name, "List", listResponseDtoClassName),
-                GetQueryMethodDeclaration(name, "View", "long"),
+                GetQueryMethodDeclaration(name, "List", listQueryClassName, listRequestDtoModel),
+                GetQueryMethodDeclaration(name, "View", viewQueryClassName, viewDtoModel),
             ];
 
             return new MvcControllerModel(
@@ -116,23 +118,25 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 methodDeclarations);
         }
 
-        private static MethodDeclarationSyntax GetQueryMethodDeclaration(string entityName, string action, string requestDtoType)
+        private static MethodDeclarationSyntax GetQueryMethodDeclaration(string entityName, string action, string queryType, NamedTypeModel requestDto)
         {
             var methodName = $"Get{action}QueryAsync";
 
             var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"QueryFactory.Get{camelAction}QueryAsync(query, claimsPrincipal, cancellationToken)"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"QueryFactory.Get{camelAction}QueryAsync(request, claimsPrincipal, cancellationToken)"));
 
             var body = new StatementSyntax[]
             {
                 returnStatement
             };
 
-            var returnType = SyntaxFactory.ParseTypeName($"global::System.Threading.Tasks.Task<Queries.I{camelAction}{entityName}Query>");
+            var returnType = SyntaxFactory.ParseTypeName($"global::System.Threading.Tasks.Task<{queryType}>");
 
+            var requestDtoParameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel(requestDto.ContainingNamespace, requestDto.TypeName, false, "request"));
             var claimsPrincipalParameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel("System.Security.Claims", "ClaimsPrincipal", false, "claimsPrincipal"));
             var cancellationTokenParameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel("System.Threading", "CancellationToken", false, "cancellationToken"));
             var parameters = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList([
+                requestDtoParameter,
                 claimsPrincipalParameter,
                 cancellationTokenParameter
             ]));
