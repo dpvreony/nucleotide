@@ -20,8 +20,8 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                 "SomeSimpleRequestDto",
                 false);
 
-            var simpleResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleListResponse");
-            var viewResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleViewResponse");
+            var simpleResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleListResponse", false);
+            var viewResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleViewResponse", true);
 
             var listRequestModel = RequestModel.WhipstaffMediatRQuery(
                 containingNamespace,
@@ -39,7 +39,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                 viewResponseModel,
                 ["Represents a Simple View query."]);
 
-            var queryFactoryModel = RequestFactoryModel.QueryFactory(
+            var queryFactoryModel = RequestFactoryModel.AuditableQueryFactoryWithStraightPassThrough(
                 containingNamespace,
                 "SomeQueryFactory",
                 true,

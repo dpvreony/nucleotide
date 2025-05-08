@@ -40,7 +40,8 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 "ListResponse",
                 true,
                 [],
-                ["Some list response model."]);
+                ["Some list response model."],
+                false);
             model.Cqrs.Responses.Add(listResponseModel);
 
             var listRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
@@ -59,7 +60,8 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 "ViewResponse",
                 true,
                 [],
-                ["Some view response model."]);
+                ["Some view response model."],
+                true);
             model.Cqrs.Responses.Add(viewResponseModel);
 
             var viewRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
@@ -71,7 +73,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 []);
             model.Cqrs.Requests.Add(viewRequestModel);
 
-            var queryFactoryModel = RequestFactoryModel.QueryFactory(
+            var queryFactoryModel = RequestFactoryModel.AuditableQueryFactoryWithStraightPassThrough(
                 containingNamespace,
                 "MyFirstQueryFactory",
                 true,

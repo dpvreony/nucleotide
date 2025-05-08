@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
+using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
 
 namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
 {
@@ -21,8 +22,8 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                 "SomeSimpleRequestDto",
                 false);
 
-            var simpleResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleListResponse");
-            var viewResponseModel = new NamedTypeModel(responseNamespace, "SomeSimpleViewResponse");
+            var simpleResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleListResponse", false);
+            var viewResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleViewResponse", true);
 
             return new[]
             {

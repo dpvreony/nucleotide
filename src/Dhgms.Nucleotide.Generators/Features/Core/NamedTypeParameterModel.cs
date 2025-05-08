@@ -5,7 +5,7 @@ using System.Text;
 namespace Dhgms.Nucleotide.Generators.Features.Core
 {
     public record NamedTypeParameterModel(
-        string ContainingNamespace,
+        string? ContainingNamespace,
         string TypeName,
         bool Nullable,
         string ParameterName) : NamedTypeArgumentModel(ContainingNamespace, TypeName, Nullable)

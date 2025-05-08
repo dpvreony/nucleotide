@@ -14,10 +14,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
         bool IsSealed,
         NamedTypeParameterModel[] Properties,
         Func<BaseTypeSyntax>? BaseTypeSyntaxFunc,
-        string[] XmlDocSummary)
-        : NamedTypeModel(
+        string[] XmlDocSummary,
+        bool Nullable)
+        : NamedTypeArgumentModel(
             ContainingNamespace,
-            Name)
+            Name,
+            Nullable)
     {
         public static ResponseModel ResponseWithNoInheritance(
 
@@ -25,7 +27,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
             string name,
             bool isSealed,
             NamedTypeParameterModel[] properties,
-            string[] xmlDocSummary)
+            string[] xmlDocSummary,
+            bool Nullable)
         {
             return new ResponseModel(
                 containingNamespace,
@@ -33,7 +36,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
                 isSealed,
                 properties,
                 null,
-                xmlDocSummary);
+                xmlDocSummary,
+                Nullable);
         }
     }
 }

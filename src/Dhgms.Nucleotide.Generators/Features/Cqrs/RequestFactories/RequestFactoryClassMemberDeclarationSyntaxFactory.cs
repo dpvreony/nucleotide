@@ -42,6 +42,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
             classDeclaration = classDeclaration.AddBaseListTypes(baseType);
             var xmlDoc = SyntaxTriviaFactory.GetSummary(requestFactoryModel.XmlDocSummary);
             classDeclaration = classDeclaration.WithLeadingTrivia(xmlDoc);
+
+            if (requestFactoryModel.Methods.Length > 0)
+            {
+                classDeclaration =
+                    classDeclaration.AddMembers(requestFactoryModel.Methods.Cast<MemberDeclarationSyntax>().ToArray());
+            }
+
             return classDeclaration;
         }
     }

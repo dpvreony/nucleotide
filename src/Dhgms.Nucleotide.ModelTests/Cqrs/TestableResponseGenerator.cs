@@ -28,14 +28,16 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     "SimpleResponse",
                     true,
                     Array.Empty<NamedTypeParameterModel>(),
-                    [ "Represents a simple response."]),
+                    [ "Represents a simple response."],
+                    false),
 
                 ResponseModel.ResponseWithNoInheritance(
                     containingNamespace,
                     "UnsealedSimpleResponse",
                     false,
                     Array.Empty<NamedTypeParameterModel>(),
-                    [ "Represents an unsealed response."]),
+                    [ "Represents an unsealed response."],
+                    true),
             };
         }
     }
