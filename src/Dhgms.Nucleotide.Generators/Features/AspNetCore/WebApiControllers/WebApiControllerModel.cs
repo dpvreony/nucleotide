@@ -1,15 +1,17 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
+﻿using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
+using Dhgms.Nucleotide.Generators.Features.Core.Roslyn;
 using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Generic;
-using Dhgms.Nucleotide.Generators.Features.Core.Roslyn;
+using System.Text;
 
-namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
+namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
 {
-    public sealed record MvcControllerModel(
+    public sealed record WebApiControllerModel(
         string ContainingNamespace,
         string Name,
         bool IsSealed,
@@ -29,7 +31,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             bool isPartial,
             string[] summary)
         {
-            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Microsoft.AspNetCore.Mvc.Controller"));
+            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Microsoft.AspNetCore.Mvc.ControllerBase"));
 
             return new MvcControllerModel(
                 containingNamespace,
@@ -79,7 +81,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
 
             var logMessageActionsWrapperClassName = loggerMessageActionsModel.GetFullyQualifiedTypeName();
 
-            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.QueryOnlyMvcController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
+            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.CrudApiController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
 
             var controllerFullName = $"global::{containingNamespace}.{name}";
 
@@ -152,7 +154,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
         {
             var methodName = $"Get{action}PolicyAsync";
 
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"global::System.Threading.Tasks.Task.FromResult(\"Mvc.{entityName}.{action}\")"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"Task.FromResult(\"WebApi.{entityName}.{action}\")"));
 
             var body = new StatementSyntax[]
             {

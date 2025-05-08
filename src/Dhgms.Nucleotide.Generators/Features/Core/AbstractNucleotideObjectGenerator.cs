@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
+using Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -109,6 +110,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
                 productionContext,
                 parseOptionsProvider,
                 "AspNetCore.MvcControllers");
+
+            RoslynGenerationHelpers.DoFeatureGeneration<WebApiControllersMemberDeclarationSyntaxFactory, WebApiControllerModel>(
+                generationModelAspNetCore.WebApiControllers,
+                productionContext,
+                parseOptionsProvider,
+                "AspNetCore.WebApiControllers");
         }
 
         private void DoCqrsGeneration(
