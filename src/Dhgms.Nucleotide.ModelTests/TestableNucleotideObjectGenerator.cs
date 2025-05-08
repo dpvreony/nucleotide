@@ -5,6 +5,7 @@ using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
+using Dhgms.Nucleotide.Generators.Features.Logging;
 using Dhgms.Nucleotide.SampleGenerator.DataTransferObjects;
 using Microsoft.CodeAnalysis;
 
@@ -83,7 +84,12 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 ["Query factory for my first feature"]);
             model.Cqrs.RequestFactoryClasses.Add(queryFactoryModel);
 
-            var loggerMessageActionsModel = new NamedTypeModel(containingNamespace, "FirstFeatureLoggerMessageActions");
+            var loggerMessageActionsModel = LogMessageActionModel.QueryOnlyControllerLogMessageActions(
+                containingNamespace,
+                "FirstFeatureLoggerMessageActions",
+                containingNamespace,
+                "FirstFeatureController");
+            model.Logging.LogMessageActions.Add(loggerMessageActionsModel);
 
             var queryController = MvcControllerModel.WhipstaffQueryOnlyController(
                 containingNamespace,
