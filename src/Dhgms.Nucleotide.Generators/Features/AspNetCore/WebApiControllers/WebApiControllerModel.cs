@@ -81,7 +81,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
 
             var logMessageActionsWrapperClassName = loggerMessageActionsModel.GetFullyQualifiedTypeName();
 
-            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.CrudApiController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
+            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.QueryOnlyApiController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
 
             var controllerFullName = $"global::{containingNamespace}.{name}";
 
@@ -101,8 +101,8 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
             var viewDtoModel = new NamedTypeModel(string.Empty, "long");
 
             MethodDeclarationSyntax[] methodDeclarations = [
-                GetMvcViewActionResultDeclaration(listRequestModel.ResponseModel, "list"),
-                GetMvcViewActionResultDeclaration(viewRequestModel.ResponseModel, "view"),
+                GetApiViewActionResultDeclaration(listRequestModel.ResponseModel, "list"),
+                GetApiViewActionResultDeclaration(viewRequestModel.ResponseModel, "view"),
                 GetPolicyMethodDeclaration(name, "List"),
                 GetPolicyMethodDeclaration(name, "View"),
                 GetQueryMethodDeclaration(name, "List", listQueryClassName, listRequestDtoModel),
@@ -115,7 +115,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
                 isSealed,
                 false,
                 baseTypeSyntaxFunc,
-                [$"MVC controller for querying {entityDescription}."],
+                [$"API controller for querying {entityDescription}."],
                 constructorModel,
                 methodDeclarations);
         }
@@ -154,7 +154,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
         {
             var methodName = $"Get{action}PolicyAsync";
 
-            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"Task.FromResult(\"WebApi.{entityName}.{action}\")"));
+            var returnStatement = SyntaxFactory.ReturnStatement(SyntaxFactory.ParseExpression($"global::System.Threading.Tasks.Task.FromResult(\"WebApi.{entityName}.{action}\")"));
 
             var body = new StatementSyntax[]
             {
@@ -168,7 +168,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
             return declaration;
         }
 
-        private static MethodDeclarationSyntax GetMvcViewActionResultDeclaration(NamedTypeModel responseClassName, string action)
+        private static MethodDeclarationSyntax GetApiViewActionResultDeclaration(NamedTypeModel responseClassName, string action)
         {
             var camelAction = action.Substring(0, 1).ToUpper() + action.Substring(1);
             var lowerAction = action.Substring(0, 1).ToLower() + action.Substring(1);
@@ -191,7 +191,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
             var parameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel(responseClassName.ContainingNamespace, responseClassName.TypeName, false, $"{lowerAction}Response"));
             var parameters = SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(parameter));
 
-            var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");
+            var returnType = SyntaxFactory.ParseTypeName($"System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.ActionResult<{responseClassName.GetFullyQualifiedTypeName()}>>");
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.ProtectedKeyword), SyntaxFactory.Token(SyntaxKind.AsyncKeyword), SyntaxFactory.Token(SyntaxKind.OverrideKeyword))
