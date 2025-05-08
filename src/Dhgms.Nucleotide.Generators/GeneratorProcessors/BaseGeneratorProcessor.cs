@@ -25,21 +25,6 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
         protected abstract PropertyDeclarationSyntax GetReadOnlyPropertyDeclaration(PropertyInfoBase propertyInfo);
 
-        protected IEnumerable<SyntaxTrivia> GetSummary(string[] summaryLines)
-        {
-            var result = new List<SyntaxTrivia>
-            {
-                SyntaxFactory.Comment($"/// <summary>")
-            };
-
-            var lines = summaryLines.Select(line => SyntaxFactory.Comment($"/// {line}"));
-            result.AddRange(lines);
-
-            result.Add(SyntaxFactory.Comment($"/// </summary>"));
-
-            return result;
-        }
-
         protected abstract PropertyDeclarationSyntax GetPropertyDeclaration(
             PropertyInfoBase propertyInfo,
             AccessorDeclarationSyntax[] accessorList,

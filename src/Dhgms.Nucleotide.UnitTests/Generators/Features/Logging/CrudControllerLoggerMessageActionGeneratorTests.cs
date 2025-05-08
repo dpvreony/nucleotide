@@ -15,27 +15,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators.Features.Logging
     [ExcludeFromCodeCoverage]
     public static class CrudControllerLoggerMessageActionGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<CrudControllerLoggerMessageActionGenerator, CrudControllerLoggerMessageActionFeatureFlags, CrudControllerLoggerMessageActionGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestCrudControllerLoggerMessageActionGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, CrudControllerLoggerMessageActionGenerator> GetFactory()
-            {
-                return data => new TestCrudControllerLoggerMessageActionGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<CrudControllerLoggerMessageActionGenerator, CrudControllerLoggerMessageActionFeatureFlags, CrudControllerLoggerMessageActionGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestCrudControllerLoggerMessageActionGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, CrudControllerLoggerMessageActionGenerator> GetFactory()
-            {
-                return data => new TestCrudControllerLoggerMessageActionGenerator();
             }
         }
     }

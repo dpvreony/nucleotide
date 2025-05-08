@@ -2,6 +2,7 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,7 +35,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
         /// <inheritdoc />
         protected override PropertyDeclarationSyntax[] GetPropertyDeclarations(ReferencedByEntityGenerationModel entityGenerationModel, string prefix)
         {
-            var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
+            var pocoSummary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
             var pocoType = SyntaxFactory.ParseTypeName($"global::System.Collections.Generic.ICollection<EfModels.{entityGenerationModel.EntityType}EfModel>");
             var pocoIdentifier = entityGenerationModel.PluralPropertyName;

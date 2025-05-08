@@ -15,27 +15,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class EntityFrameworkDbContextGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<EntityFrameworkDbContextGenerator, EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor, EntityFrameworkDbContextGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestEntityFrameworkDbContextGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, EntityFrameworkDbContextGenerator> GetFactory()
-            {
-                return data => new TestEntityFrameworkDbContextGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<EntityFrameworkDbContextGenerator, EntityFrameworkDbContextFeatureFlags, EntityFrameworkDbContextGeneratorProcessor, EntityFrameworkDbContextGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestEntityFrameworkDbContextGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, EntityFrameworkDbContextGenerator> GetFactory()
-            {
-                return data => new TestEntityFrameworkDbContextGenerator();
             }
         }
     }

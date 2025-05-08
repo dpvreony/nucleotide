@@ -2,6 +2,7 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -43,14 +44,14 @@ namespace Dhgms.Nucleotide.Generators.Features.Database
                     .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
             };
 
-            var pocoSummary = GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
+            var pocoSummary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets or Sets the Foreign Entity for {entityGenerationModel.ClassName}" });
 
             var pocoType = SyntaxFactory.ParseTypeName($"EfModels.{entityGenerationModel.EntityType}EfModel");
             var pocoIdentifier = entityGenerationModel.SingularPropertyName;
 
             var pocoObject = RoslynGenerationHelpers.GetPropertyDeclarationSyntax(pocoType, pocoIdentifier, pocoSummary);
 
-            var foreignKeySummary = GetSummary(new[] { $"Gets or Sets the Foreign Key for {entityGenerationModel.ClassName}" });
+            var foreignKeySummary = SyntaxTriviaFactory.GetSummary(new[] { $"Gets or Sets the Foreign Key for {entityGenerationModel.ClassName}" });
             var foreignKeyType = SyntaxFactory.ParseTypeName(entityGenerationModel.KeyType);
             var foreignKeyIdentifier = $"{entityGenerationModel.SingularPropertyName}Id";
             var foreignKey = SyntaxFactory.PropertyDeclaration(foreignKeyType, foreignKeyIdentifier)

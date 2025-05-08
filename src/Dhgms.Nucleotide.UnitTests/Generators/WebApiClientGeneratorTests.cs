@@ -15,27 +15,17 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class WebApiClientGeneratorTests
     {
-        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<WebApiClientGenerator, WebApiClientFeatureFlags, WebApiClientGeneratorProcessor, IEntityGenerationModel>
+        public sealed class ConstructorMethod : BaseGeneratorTests.BaseConstructorMethod<TestWebApiClientGenerator>
         {
             public ConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
-            {
-                return attributeData => new TestWebApiClientGenerator();
-            }
         }
 
-        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<WebApiClientGenerator, WebApiClientFeatureFlags, WebApiClientGeneratorProcessor, IEntityGenerationModel>
+        public sealed class GenerateAsyncMethod : BaseGeneratorTests.BaseGenerateAsyncMethod<TestWebApiClientGenerator>
         {
             public GenerateAsyncMethod(ITestOutputHelper output) : base(output)
             {
-            }
-
-            protected override Func<AttributeData, WebApiClientGenerator> GetFactory()
-            {
-                return data => new TestWebApiClientGenerator();
             }
         }
     }

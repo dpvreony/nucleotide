@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Immutable;
 using System.Text;
 using System.Threading;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
@@ -10,10 +11,11 @@ using Dhgms.Nucleotide.Generators.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Dhgms.Nucleotide.Generators.Generators
 {
-    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel> : ISourceGenerator
+    public abstract class BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel> : IIncrementalGenerator
         where TFeatureFlags : class
         where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
         where TGenerationModel : IClassName
@@ -22,9 +24,34 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
         protected TFeatureFlags FeatureFlags { get; }
 
-        public void Initialize(GeneratorInitializationContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
+            var trigger = context.AnalyzerConfigOptionsProvider
+                .Combine(context.ParseOptionsProvider)
+                .Combine(context.MetadataReferencesProvider.Collect())
+                .Combine(context.CompilationProvider)
+                .Select((tuple, _) =>
+                {
+                    (
+                        (
+                            (
+                                AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider,
+                                ParseOptions parseOptionsProvider),
+                            ImmutableArray<MetadataReference> metadataReferencesProvider),
+                        Compilation compilationProvider) = tuple;
+
+                    return (analyzerConfigOptionsProvider, parseOptionsProvider, metadataReferencesProvider, compilationProvider);
+                });
+
+            context.RegisterImplementationSourceOutput(
+                trigger, (productionContext, tuple) => Execute(
+                    productionContext,
+                    tuple.analyzerConfigOptionsProvider,
+                    tuple.parseOptionsProvider,
+                    tuple.metadataReferencesProvider,
+                    tuple.compilationProvider));
         }
+
 
         public static Diagnostic InfoDiagnostic(string message)
         {
@@ -52,16 +79,19 @@ namespace Dhgms.Nucleotide.Generators.Generators
                 "Model load error");
         }
 
-        public void Execute(GeneratorExecutionContext context)
+        private void Execute(
+            SourceProductionContext productionContext,
+            AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider,
+            ParseOptions parseOptionsProvider,
+            ImmutableArray<MetadataReference> metadataReferencesProvider,
+            Compilation compilationProvider)
         {
             try
             {
-                context.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
+                productionContext.ReportDiagnostic(InfoDiagnostic(typeof(TGeneratorProcessor).ToString()));
 
                 // TODO: this is running async code inside non-async
-                var memberDeclarationSyntax = Generate(context, CancellationToken.None);
-
-                var parseOptions = context.ParseOptions;
+                var memberDeclarationSyntax = Generate(productionContext, CancellationToken.None);
 
                 // TODO: need to review this might be better way than generate, loop, copy.
                 // compilationUnit = compilationUnit.AddMembers(memberDeclarationSyntax);
@@ -79,20 +109,20 @@ namespace Dhgms.Nucleotide.Generators.Generators
 
                 var sourceText = SyntaxFactory.SyntaxTree(
                         cu,
-                        parseOptions,
+                        parseOptionsProvider,
                         encoding: Encoding.UTF8)
                     .GetText();
 
                 var hintName = $"{feature}.g.cs";
 
-                context.AddSource(
+                productionContext.AddSource(
                     hintName,
                     sourceText);
             }
             catch (Exception e)
             {
                 var diagnostic = ErrorDiagnostic(e.ToString());
-                context.ReportDiagnostic(diagnostic);
+                productionContext.ReportDiagnostic(diagnostic);
             }
         }
 
@@ -106,7 +136,7 @@ namespace Dhgms.Nucleotide.Generators.Generators
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>The generated member syntax to be added to the project.</returns>
         private MemberDeclarationSyntax Generate(
-            GeneratorExecutionContext context,
+            SourceProductionContext context,
             CancellationToken cancellationToken)
         {
             var namespaceName = GetNamespace();

@@ -13,6 +13,7 @@ using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
@@ -21,60 +22,30 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 {
 
     [ExcludeFromCodeCoverage]
-    public class BaseGeneratorTests
+    public static class BaseGeneratorTests
     {
-        public class MockAttributeData : AttributeData
+        public abstract class BaseConstructorMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
+            where TGenerator : IIncrementalGenerator, new()
         {
-            public MockAttributeData()
+            protected BaseConstructorMethod(ITestOutputHelper output) : base(output)
             {
             }
-
-            public MockAttributeData(TypedConstant constructorArg)
-            {
-                this.CommonConstructorArguments = ImmutableArray.Create(constructorArg);
-            }
-
-            protected override INamedTypeSymbol CommonAttributeClass { get; }
-            protected override IMethodSymbol CommonAttributeConstructor { get; }
-            protected override SyntaxReference CommonApplicationSyntaxReference { get; }
-            protected override ImmutableArray<TypedConstant> CommonConstructorArguments { get; }
-            protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments { get; }
-        }
-
-        public abstract class BaseConstructorMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
-            where TFeatureFlags : class
-            where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
-            where TGenerationModel : IClassName
-        {
-            protected abstract Func<AttributeData, TGenerator> GetFactory();
 
             [Fact]
             public void ReturnsInstance()
             {
-                var factory = GetFactory();
-                var attributeData = new MockAttributeData(new TypedConstant());
-                var instance = factory(attributeData);
+                var instance = new TGenerator();
 
                 Assert.NotNull(instance);
             }
-
-            protected BaseConstructorMethod(ITestOutputHelper output) : base(output)
-            {
-            }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator, TFeatureFlags, TGeneratorProcessor, TGenerationModel> : Foundatio.Xunit.TestWithLoggingBase
-            where TGenerator : BaseGenerator<TFeatureFlags, TGeneratorProcessor, TGenerationModel>
-            where TFeatureFlags : class
-            where TGeneratorProcessor : BaseGeneratorProcessor<TGenerationModel>, new()
-            where TGenerationModel : IClassName
+        public abstract class BaseGenerateAsyncMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
+            where TGenerator : IIncrementalGenerator, new()
         {
             internal const string DefaultFilePathPrefix = "Test";
             internal const string CSharpDefaultFileExt = "cs";
             internal const string TestProjectName = "TestProject";
-
-            protected abstract Func<AttributeData, TGenerator> GetFactory();
 
             private static Compilation CreateCompilation(string source) => CSharpCompilation.Create(
                 assemblyName: "compilation",
@@ -100,20 +71,12 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             //[MemberData(nameof(GeneratesCodeMemberData))]
             public async Task GeneratesCodeForSimpleNucleotideGenerationModel()
             {
-                var factory = GetFactory();
-
-                // Right now this is difficult to test as the Roslyn Analysis typed constant is internal.
-                // Easiest way to test it to split off the CGR loader and the internal generator
-                // Then pass in the Nucleotide Model direct.
-                var t = new TypedConstant();
-
-                var attributeData = new MockAttributeData(t);
-                var instance = factory(attributeData);
+                var instance = new TGenerator();
                 var comp = CreateCompilation(string.Empty);
                 var newComp = RunGenerators(
                     comp,
                     out var generatorDiags,
-                    instance);
+                    instance.AsSourceGenerator());
 
                 foreach (var generatorDiag in generatorDiags)
                 {
