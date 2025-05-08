@@ -93,7 +93,6 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                     "ClaimsPrincipal",
                     false,
                     "ClaimsPrincipal")
-                
             };
 
             return new RequestModel(
@@ -101,7 +100,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<{responseModel.GetFullyQualifiedTypeArgument()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<{rawRequestDto.GetFullyQualifiedTypeArgument()}, {responseModel.GetFullyQualifiedTypeArgument()}>")),
                 xmlDocSummary,
                 responseModel);
         }

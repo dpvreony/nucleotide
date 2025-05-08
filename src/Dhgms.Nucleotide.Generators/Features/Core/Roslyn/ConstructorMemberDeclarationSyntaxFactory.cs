@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
