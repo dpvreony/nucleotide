@@ -12,6 +12,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Dhgms.Nucleotide.Generators.Features.Cqrs;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
+using Dhgms.Nucleotide.Generators.Features.DataTransferObjects;
+using Dhgms.Nucleotide.SampleGenerator.DataTransferObjects;
 
 namespace Dhgms.Nucleotide.Generators.Features.Core
 {
@@ -69,6 +71,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Core
             SourceProductionContext productionContext,
             ParseOptions parseOptionsProvider)
         {
+            RoslynGenerationHelpers.DoFeatureGeneration<DataTransferObjectMemberDeclarationSyntaxFactory, DataTransferObjectModel>(
+                generationModel.DataTransferObjects,
+                productionContext,
+                parseOptionsProvider,
+                "DataTransferObjects");
+
             DoAspNetCoreGeneration(
                 generationModel.AspNetCore,
                 productionContext,
