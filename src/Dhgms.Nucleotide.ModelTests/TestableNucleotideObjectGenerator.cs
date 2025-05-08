@@ -2,6 +2,7 @@
 using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
+using Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
@@ -103,6 +104,19 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 viewRequestModel,
                 loggerMessageActionsModel);
             model.AspNetCore.MvcControllers.Add(queryController);
+
+            var apiController = WebApiControllerModel.WhipstaffQueryOnlyController(
+                containingNamespace,
+                "FirstFeatureApiController",
+                true,
+                false,
+                "First Feature",
+                queryFactoryModel,
+                listRequestModel,
+                listRawRequestDtoType,
+                viewRequestModel,
+                loggerMessageActionsModel);
+            model.AspNetCore.WebApiControllers.Add(apiController);
         }
     }
 }

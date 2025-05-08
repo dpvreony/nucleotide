@@ -24,7 +24,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
             ContainingNamespace,
             Name)
     {
-        public static MvcControllerModel VanillaController(
+        public static WebApiControllerModel VanillaController(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -33,7 +33,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
         {
             var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Microsoft.AspNetCore.Mvc.ControllerBase"));
 
-            return new MvcControllerModel(
+            return new WebApiControllerModel(
                 containingNamespace,
                 name,
                 isSealed,
@@ -60,7 +60,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
         }
 #endif
 
-        public static MvcControllerModel WhipstaffQueryOnlyController(
+        public static WebApiControllerModel WhipstaffQueryOnlyController(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -109,7 +109,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
                 GetQueryMethodDeclaration(name, "View", viewQueryClassName, viewDtoModel),
             ];
 
-            return new MvcControllerModel(
+            return new WebApiControllerModel(
                 containingNamespace,
                 name,
                 isSealed,
