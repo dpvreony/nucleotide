@@ -85,9 +85,9 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
 
             var constructorBaseArgs = new List<NamedTypeParameterModel>
             {
-                new ("global::Microsoft.AspNetCore.Authorization","IAuthorizationService", false, "authorizationService"),
-                new ("global::Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
-                new ("global::MediatR", "IMediator", false, "mediator"),
+                new ("Microsoft.AspNetCore.Authorization","IAuthorizationService", false, "authorizationService"),
+                new ("Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
+                new ("MediatR", "IMediator", false, "mediator"),
                 new (queryFactoryModel.ContainingNamespace, queryFactoryModel.Name, false, "queryFactory"),
                 new (loggerMessageActionsModel.ContainingNamespace, loggerMessageActionsModel.TypeName, false, "logMessageActions"),
             };
