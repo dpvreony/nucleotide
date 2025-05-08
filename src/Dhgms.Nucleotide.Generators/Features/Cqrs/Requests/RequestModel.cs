@@ -89,7 +89,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                     "RequestDto"),
 
                 new NamedTypeParameterModel(
-                    "global::System.Security.Claims",
+                    "System.Security.Claims",
                     "ClaimsPrincipal",
                     false,
                     "ClaimsPrincipal")
@@ -101,7 +101,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<global::{containingNamespace}.{name},{responseModel.GetFullyQualifiedTypeName()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<{rawRequestDto.GetFullyQualifiedTypeArgument()}, {responseModel.GetFullyQualifiedTypeName()}>")),
                 xmlDocSummary,
                 responseModel);
         }

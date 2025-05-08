@@ -46,7 +46,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                     .Select(static p => SyntaxFactory.Parameter(
                         SyntaxFactory.List<AttributeListSyntax>(),
                         SyntaxFactory.TokenList(),
-                        SyntaxFactory.ParseTypeName($"{p.ContainingNamespace}.{p.TypeName}"),
+                        SyntaxFactory.ParseTypeName(p.GetFullyQualifiedTypeName()),
                         SyntaxFactory.Identifier(p.ParameterName),
                         null))
                     .ToArray();
