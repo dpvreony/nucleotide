@@ -49,7 +49,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
                         SyntaxFactory.List<AttributeListSyntax>(),
                         SyntaxFactory.TokenList(),
                         SyntaxFactory.ParseTypeName(p.ContainingNamespace),
-                        SyntaxFactory.Identifier(p.Name),
+                        SyntaxFactory.Identifier(p.TypeName),
                         null))
                     .ToArray();
 

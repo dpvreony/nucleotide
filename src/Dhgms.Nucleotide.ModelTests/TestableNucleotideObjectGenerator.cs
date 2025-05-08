@@ -1,9 +1,11 @@
-﻿using Dhgms.Nucleotide.Generators;
+﻿using System;
+using Dhgms.Nucleotide.Generators;
 using Dhgms.Nucleotide.Generators.Features.Core;
 using Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Requests;
 using Dhgms.Nucleotide.Generators.Features.Cqrs.Responses;
+using Dhgms.Nucleotide.SampleGenerator.DataTransferObjects;
 using Microsoft.CodeAnalysis;
 
 namespace Dhgms.Nucleotide.SampleGenerator
@@ -24,7 +26,14 @@ namespace Dhgms.Nucleotide.SampleGenerator
         {
             var containingNamespace = "SampleApp.Features.FirstFeature";
 
-            var listRawRequestDto = RawDataTransferObject.Create(containingNamespace, "ListFeatureRawQuery", false);
+            var listRawRequestDto = DataTransferObjectModel.PocoWithNoInheritance(
+                containingNamespace,
+                "ListFeatureRawQuery",
+                true,
+                [],
+                ["List Request DTO"]);
+            var listRawRequestDtoType = new NamedTypeArgumentModel(containingNamespace, listRawRequestDto.TypeName, false);
+            model.DataTransferObjects.Add(listRawRequestDto);
 
             var listResponseModel = ResponseModel.ResponseWithNoInheritance(
                 containingNamespace,
@@ -38,12 +47,12 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 containingNamespace,
                 "ListFirstFeatureQuery",
                 true,
-                listRawRequestDto,
+                listRawRequestDtoType,
                 listResponseModel,
                 []);
             model.Cqrs.Requests.Add(listRequestModel);
 
-            var viewRawRequestDto = RawDataTransferObject.Create(containingNamespace, "ViewFeatureRawQuery", false);
+            var viewRawRequestDto = new NamedTypeArgumentModel(string.Empty, "int", false);
 
             var viewResponseModel = ResponseModel.ResponseWithNoInheritance(
                 containingNamespace,
@@ -67,7 +76,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 "MyFirstQueryFactory",
                 true,
                 listRequestModel,
-                listRawRequestDto,
+                listRawRequestDtoType,
                 viewRequestModel,
                 ["Query factory for my first feature"]);
             model.Cqrs.RequestFactoryClasses.Add(queryFactoryModel);

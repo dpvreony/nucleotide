@@ -88,7 +88,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 new ("global::Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
                 new ("global::MediatR", "IMediator", false, "mediator"),
                 new (queryFactoryModel.ContainingNamespace, queryFactoryModel.Name, false, "queryFactory"),
-                new (loggerMessageActionsModel.ContainingNamespace, loggerMessageActionsModel.Name, false, "logMessageActions"),
+                new (loggerMessageActionsModel.ContainingNamespace, loggerMessageActionsModel.TypeName, false, "logMessageActions"),
             };
 
             var constructorModel = new ConstructorModel(
@@ -181,7 +181,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
                 returnStatement
             };
 
-            var parameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel(responseClassName.ContainingNamespace, responseClassName.Name, false, $"{lowerAction}Response"));
+            var parameter = ParameterSyntaxFactory.GetParameterSyntax(new NamedTypeParameterModel(responseClassName.ContainingNamespace, responseClassName.TypeName, false, $"{lowerAction}Response"));
             var parameters = SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList(parameter));
 
             var returnType = SyntaxFactory.ParseTypeName("System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult>");

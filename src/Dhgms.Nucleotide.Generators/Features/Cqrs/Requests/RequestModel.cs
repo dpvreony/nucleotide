@@ -7,7 +7,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
 {
     public sealed record RequestModel(
         string ContainingNamespace,
-        string Name,
+        string TypeName,
         bool IsSealed,
         NamedTypeParameterModel[] Properties,
         Func<BaseTypeSyntax> BaseTypeSyntaxFunc,
@@ -15,7 +15,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
         NamedTypeModel ResponseModel)
         : NamedTypeModel(
             ContainingNamespace,
-            Name)
+            TypeName)
     {
         public static RequestModel MediatRRequest(
             string containingNamespace,
@@ -84,7 +84,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             {
                 new NamedTypeParameterModel(
                     rawRequestDto.ContainingNamespace,
-                    rawRequestDto.Name,
+                    rawRequestDto.TypeName,
                     rawRequestDto.Nullable,
                     "RequestDto"),
 

@@ -20,6 +20,9 @@
   <ItemGroup>
     <Analyzer Include="$(ProjectDir)..\Dhgms.Nucleotide.Generators\bin\$(Configuration)\netstandard2.0\Dhgms.Nucleotide.Generators.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\" />
+  </ItemGroup>
 
   <!--<PropertyGroup>
     <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>

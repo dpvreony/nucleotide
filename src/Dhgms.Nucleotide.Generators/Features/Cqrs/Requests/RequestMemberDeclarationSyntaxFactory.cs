@@ -32,7 +32,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
         {
             var record = SyntaxFactory.RecordDeclaration(
                     SyntaxFactory.Token(SyntaxKind.RecordKeyword),
-                    requestModel.Name)
+                    requestModel.TypeName)
                 .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)));
 
             if (requestModel.IsSealed)
@@ -59,7 +59,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             var xmlDoc = SyntaxTriviaFactory.GetXmlDocumentation(
                 requestModel.XmlDocSummary,
                 [
-                    $"var request = new {requestModel.Name}({string.Join(", ", requestModel.Properties.Select(p => p.Name))});",
+                    $"var request = new {requestModel.TypeName}({string.Join(", ", requestModel.Properties.Select(p => p.ParameterName))});",
                     "var response = await mediator.Send(request).ConfigureAwait(false);"
                 ]);
 

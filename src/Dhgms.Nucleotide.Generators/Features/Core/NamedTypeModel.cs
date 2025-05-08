@@ -1,10 +1,10 @@
 ﻿namespace Dhgms.Nucleotide.Generators.Features.Core
 {
-    public record NamedTypeModel(string ContainingNamespace, string Name)
+    public record NamedTypeModel(string ContainingNamespace, string TypeName)
     {
         public string GetFullyQualifiedTypeName()
         {
-            return $"global::{ContainingNamespace}.{Name}";
+            return $"global::{ContainingNamespace}.{TypeName}";
         }
     }
 }
