@@ -53,7 +53,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 []);
             model.Cqrs.Requests.Add(listRequestModel);
 
-            var viewRawRequestDto = new NamedTypeArgumentModel(string.Empty, "int", false);
+            var viewRawRequestDto = new NamedTypeArgumentModel(string.Empty, "long", false);
 
             var viewResponseModel = ResponseModel.ResponseWithNoInheritance(
                 containingNamespace,
@@ -93,6 +93,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 "First Feature",
                 queryFactoryModel,
                 listRequestModel,
+                listRawRequestDtoType,
                 viewRequestModel,
                 loggerMessageActionsModel);
             model.AspNetCore.MvcControllers.Add(queryController);

@@ -65,6 +65,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                     "Animal",
                     queryFactoryModel,
                     listRequestModel,
+                    rawRequestDto,
                     viewRequestModel,
                     new NamedTypeModel("SomeLoggingNamespace", "LoggerActions")),
             ];

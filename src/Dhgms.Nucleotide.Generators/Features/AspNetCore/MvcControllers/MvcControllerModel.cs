@@ -66,17 +66,18 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             string entityDescription,
             RequestFactoryModel queryFactoryModel,
             RequestModel listRequestModel,
+            NamedTypeModel listRequestDtoModel,
             RequestModel viewRequestModel,
             NamedTypeModel loggerMessageActionsModel)
         {
             var listQueryClassName = listRequestModel.GetFullyQualifiedTypeName();
-            var listRequestDtoClassName = "";
+            var listRequestDtoClassName = listRequestDtoModel.GetFullyQualifiedTypeName();
             var listResponseDtoClassName = listRequestModel.ResponseModel.GetFullyQualifiedTypeName();
 
             var viewQueryClassName = viewRequestModel.GetFullyQualifiedTypeName();
             var viewResponseDtoClassName = viewRequestModel.ResponseModel.GetFullyQualifiedTypeName();
 
-            var logMessageActionsWrapperClassName = "";
+            var logMessageActionsWrapperClassName = loggerMessageActionsModel.GetFullyQualifiedTypeName();
 
             var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.QueryOnlyMvcController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
 

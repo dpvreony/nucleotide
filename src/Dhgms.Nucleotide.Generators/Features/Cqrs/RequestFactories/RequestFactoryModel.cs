@@ -30,7 +30,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
             var listRequestDtoName = listRequestDto.GetFullyQualifiedTypeName();
             var listResponseTypeName = listRequestModel.ResponseModel.GetFullyQualifiedTypeName();
             var viewQueryName = viewRequestModel.GetFullyQualifiedTypeName();
-            var viewResponseName = viewRequestModel.ResponseModel.GetFullyQualifiedTypeName();
+            var viewResponseName = viewRequestModel.ResponseModel.GetFullyQualifiedTypeArgument();
 
             var listRequestModelMethodDeclarationSyntax = GetListRequestMethodDeclarationSyntax(listQueryTypeName, listRequestDtoName);
 
