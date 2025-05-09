@@ -44,16 +44,14 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Responses
 
             if (responseModel.Properties.Length > 0)
             {
-                var properties = responseModel.Properties
+                var parameters = responseModel.Properties
                     .Select(static p => SyntaxFactory.Parameter(
                         SyntaxFactory.List<AttributeListSyntax>(),
                         SyntaxFactory.TokenList(),
-                        SyntaxFactory.ParseTypeName(p.ContainingNamespace),
-                        SyntaxFactory.Identifier(p.TypeName),
+                        SyntaxFactory.ParseTypeName(p.GetFullyQualifiedTypeArgument()),
+                        SyntaxFactory.Identifier(p.ParameterName),
                         null))
                     .ToArray();
-
-                var parameters = properties;
 
                 record = record.AddParameterListParameters(parameters);
             }

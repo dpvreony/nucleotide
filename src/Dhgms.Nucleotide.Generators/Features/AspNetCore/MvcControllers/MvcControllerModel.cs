@@ -174,7 +174,7 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.MvcControllers
             var methodName = $"Get{camelAction}ActionResultAsync";
 
             var baseMethodInvocationSyntax =
-                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { $"{lowerAction}Response" }, false);
+                RoslynGenerationHelpers.GetMethodOnClassInvocationSyntax("View", new[] { $"\"{camelAction}\"", $"{lowerAction}Response" }, false);
 
             var taskFromResult =
                 RoslynGenerationHelpers.GetStaticMethodInvocationSyntax("global::System.Threading.Tasks.Task", "FromResult",
