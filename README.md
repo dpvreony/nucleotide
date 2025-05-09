@@ -1,7 +1,5 @@
 # Nucleotide
 
-![Build status](https://ci.appveyor.com/api/projects/status/jk9v57hxjj0mi6t4?svg=true)
-
 ## Mission Statement
 
 To provide a tool that automatically generates repeditive .NET code to allow better use of developers time.
@@ -11,14 +9,15 @@ To provide a tool that automatically generates repeditive .NET code to allow bet
 Nucleotide is a library to aid in the generation of .NET code for manipulation the following types of objects:
 
 * Client\Server Services (Interfaces)
-* Commands (Interfaces and Classes)
+* Commands (Classes)
 * Command Factory (Interfaces and Classes)
 * Entity Framework DbSet (Classes)
 * Entity Framework Models (Classes)
 * Entity Framework Entity Type Configuration (Classes)
 * Entity Framework Parent and Child Foreign Keys Representation (Interfaces)
 * Models (Interfaces and Classes)
-* Queries (Interfaces and Classes)
+* MVC Controllers (Classes)
+* Queries (Classes)
 * Query Factories (Interfaces and Classes)
 * Request DTO POCO Objects (Classes)
 * Response DTO POCO Objects (Classes)
