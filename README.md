@@ -6,10 +6,6 @@
 
 To provide a tool that automatically generates repeditive .NET code to allow better use of developers time.
 
-## Current Status
-
-This project is in a beta phase and tied to work being done in https://github.com/dpvreony/whipstaff, development is slow due to COVID workload.
-
 ## Introduction
 
 Nucleotide is a library to aid in the generation of .NET code for manipulation the following types of objects:
@@ -31,29 +27,67 @@ Nucleotide is a library to aid in the generation of .NET code for manipulation t
 * Web Api Client (Classes)
 * Web Api Controllers (Classes)
 
-This project leverages Roslyn functionality to combine a simple DSL style model with the power of the compiler to give a simple way to generate code.
-
-This version of Nucleotide is built upon CodeGenerators.Roslyn, this has allowed the removal of dependency on -.tt files.
+This project leverages Roslyn functionality to combine a DSL style model with the power of the compiler to give a simple way to generate code.
 
 ## Credits
 
-* https://github.com/AArnott/CodeGeneration.Roslyn
+* https://github.com/AArnott/CodeGeneration.Roslyn : Allowed the original migration away from T4 to Roslyn
 
 ## Getting Started
 
 ### Pre-requisites
 
 You will need:
-* Visual Studio 2019
+* An IDE \ Build chain that supports Roslyn (Recent versions of VSCode, Visual Studio, Jetbrains Rider, etc.)
 * A project using
-  * netcore 3.1 upward
-  * C# 8 language compiler settings or later
+  * A supported version of .NET core (Version 8)
+  * C# 9 language compiler settings or later
 
 ### Before you start
 
 You can use the following project structure
 
-1. Your code generation model and the generated code are in the same project.
+* Your generation model sits in a project above the project where it will be generated
+
+```mermaid
+flowchart TD
+  GenProject(Generation Project) --> TargetProject(TargetProject)
+```
+
+* You can also have a common model, then sub projects used to generate specific code
+
+```mermaid
+flowchart TD
+  CommonModel(Common Model Project) --> MvcGenProject(ASP.NET Core MVC Service Generation Project)
+  MvcGenProject --> MvcSvcProject(ASP.NET Core MVC Project)
+  CommonModel --> WebApiSvcGenProject(ASP.NET Core Web API Service Generation Project)
+  CommonModel --> WebApiClientGenProject(Web API Client Generation Project)
+  CommonModel --> WpfAppGenProject(Wpf App Generation Project)
+  CommonModel --> CommonProject(Common Shared Code Project)
+  WebApiClientGenProject --> WebApiClientProject(Web API Client Project)
+  WebApiSvcGenProject --> WebApiSvcProject(Web API Service Project)
+  WpfAppGenProject --> WpfAppProject(WPF App Project)
+  CommonProject -.-> MvcSvcProject
+  CommonProject -.-> WebApiClientProject
+  CommonProject -.-> WebApiSvcProject
+  CommonProject -.-> WpfAppProject
+```
+
+NOTE: There is an intention to simplify this use case to reduce the number of proxy projects.
+
+```mermaid
+flowchart TD
+  CommonGenerationModel(Common Generation Model Project) --> MvcSvcProject(ASP.NET Core MVC Service Project)
+  CommonGenerationModel --> CommonProject(Common Shared Code Project)
+  CommonGenerationModel --> WebApiClientProject(Web API Client Project)
+  CommonGenerationModel --> WebApiSvcProject(Web API Service Project)
+  CommonGenerationModel --> WpfAppProject(WPF App Project)
+  CommonProject -.-> MvcSvcProject
+  CommonProject -.-> WebApiClientProject
+  CommonProject -.-> WebApiSvcProject
+  CommonProject -.-> WpfAppProject
+```
+
 2. Your code generation model is in Project1, while your generated code is in Project2.
 
 ### Get the package (Single Project)
