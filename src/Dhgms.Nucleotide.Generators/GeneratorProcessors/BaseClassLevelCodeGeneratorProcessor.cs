@@ -2,15 +2,16 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Dhgms.Nucleotide.Generators.Features.Core.XmlDoc;
+using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 {
@@ -86,9 +87,18 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
                 SyntaxFactory.Token(SyntaxKind.PublicKeyword)
             };
 
-            if (this.GetWhetherClassShouldBeSealedClass())
+            switch (this.GetWhetherClassShouldBeAbstractOrSealedClass(entityDeclaration))
             {
-                modifiers.Add(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
+                case AbstractOrSealed.Sealed:
+                    modifiers.Add(SyntaxFactory.Token(SyntaxKind.SealedKeyword));
+                    break;
+                case AbstractOrSealed.Abstract:
+                    modifiers.Add(SyntaxFactory.Token(SyntaxKind.AbstractKeyword));
+                    break;
+                case AbstractOrSealed.None:
+                default:
+                    // do nothing, class is neither abstract nor sealed
+                    break;
             }
 
             if (this.GetWhetherClassShouldBePartialClass())
@@ -135,7 +145,7 @@ namespace Dhgms.Nucleotide.Generators.GeneratorProcessors
 
         protected abstract bool GetWhetherClassShouldBePartialClass();
 
-        protected abstract bool GetWhetherClassShouldBeSealedClass();
+        protected abstract AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(TGenerationModel entityGenerationModel);
 
         private T DoCommentSection<T>(T declaration, string[] commentLines)
             where T : MemberDeclarationSyntax

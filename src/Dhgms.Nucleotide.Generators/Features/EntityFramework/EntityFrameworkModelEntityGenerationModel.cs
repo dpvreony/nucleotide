@@ -19,5 +19,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         public GenerateCreatedAndModifiedColumns GenerateCreatedAndModifiedColumns { get; init; } = GenerateCreatedAndModifiedColumns.CreatedAndModified;
 
         public bool GenerateRowVersionColumn { get; init; } = true;
+
+        public bool IsAbstract { get; init; } = false;
     }
 }

@@ -2,16 +2,17 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Dhgms.Nucleotide.Generators.Features.Model
 {
@@ -22,7 +23,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
     {
         protected override bool GetWhetherClassShouldBePartialClass() => false;
 
-        protected override bool GetWhetherClassShouldBeSealedClass() => false;
+        protected override AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(IEntityGenerationModel generationModel) => AbstractOrSealed.None;
 
         protected override IReadOnlyCollection<FieldDeclarationSyntax> GetFieldDeclarations(IEntityGenerationModel entityGenerationModel)
         {
