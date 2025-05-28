@@ -16,15 +16,14 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
 {
     public sealed class EntityFrameworkModelGeneratorProcessor : BaseClassLevelCodeGeneratorProcessor<EntityFrameworkModelEntityGenerationModel>
     {
-        private object? test;
-
         ///<inheritdoc />
         protected override bool GetWhetherClassShouldBePartialClass() => true;
 
         ///<inheritdoc />
-        protected override bool GetWhetherClassShouldBeSealedClass() => true;
-
-        public object SomeProp { get => test ?? throw new InvalidOperationException("failed to access"); }
+        protected override AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
+        {
+            return entityGenerationModel.IsAbstract ? AbstractOrSealed.Abstract : AbstractOrSealed.Sealed;
+        }
 
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)

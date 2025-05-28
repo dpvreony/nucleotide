@@ -2,13 +2,15 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
+using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Collections.Generic;
 
 namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
 {
@@ -18,7 +20,7 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI
         protected override bool GetWhetherClassShouldBePartialClass() => false;
 
         ///<inheritdoc />
-        protected override bool GetWhetherClassShouldBeSealedClass() => false;
+        protected override AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(ReactiveWindowGenerationModel generationModel) => AbstractOrSealed.None;
 
         ///<inheritdoc />
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(ReactiveWindowGenerationModel entityGenerationModel)

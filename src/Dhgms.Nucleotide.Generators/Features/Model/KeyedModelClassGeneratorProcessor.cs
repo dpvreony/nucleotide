@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Dhgms.Nucleotide.Generators.Features.EntityFramework;
 using Dhgms.Nucleotide.Generators.GeneratorProcessors;
 using Dhgms.Nucleotide.Generators.Models;
 using Dhgms.Nucleotide.Generators.PropertyInfo;
@@ -20,7 +21,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Model
 
         protected override bool GetWhetherClassShouldBePartialClass() => false;
 
-        protected override bool GetWhetherClassShouldBeSealedClass() => false;
+        protected override AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(IEntityGenerationModel generationModel) => AbstractOrSealed.None;
 
         protected override string[] GetClassPrefixes() => null;
 

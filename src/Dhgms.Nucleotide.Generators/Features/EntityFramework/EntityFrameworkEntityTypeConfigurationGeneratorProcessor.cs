@@ -21,7 +21,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
         protected override bool GetWhetherClassShouldBePartialClass() => false;
 
         ///<inheritdoc />
-        protected override bool GetWhetherClassShouldBeSealedClass() => true;
+        protected override AbstractOrSealed GetWhetherClassShouldBeAbstractOrSealedClass(EntityFrameworkModelEntityGenerationModel generationModel) => AbstractOrSealed.Sealed;
 
         protected override IEnumerable<PropertyDeclarationSyntax> GetPropertyDeclarations(EntityFrameworkModelEntityGenerationModel entityGenerationModel)
         {
