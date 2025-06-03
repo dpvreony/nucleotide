@@ -12,16 +12,15 @@ namespace Dhgms.Nucleotide.Generators.Features.SignalR
     /// <summary>
     /// Generator for SignalR Hub Class
     /// </summary>
-    public sealed class SignalRHubClassGenerator : ISourceGenerator
+    public sealed class SignalRHubClassGenerator : IIncrementalGenerator
     {
         private MemberDeclarationSyntax[] GetClasses()
         {
             return new MemberDeclarationSyntax[] { };
         }
 
-        public void Initialize(GeneratorInitializationContext context)
+        public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            // context.RegisterForSyntaxNotifications();
         }
 
         public void Execute(GeneratorExecutionContext context)
@@ -35,7 +34,7 @@ namespace Dhgms.Nucleotide.Generators.Features.SignalR
                 encoding: Encoding.UTF8)
                 .GetText();
 
-            context.AddSource("nucleotide.signlarhubclass.generated.cs", sourceText);
+            context.AddSource("nucleotide.signalrhubclass.generated.cs", sourceText);
         }
     }
 }
