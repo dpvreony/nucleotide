@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf
 
         protected override string GetBaseClass(ReactiveWindowGenerationModel entityGenerationModel)
         {
-            return $"global::Whipstaff.Wpf.Mahapps.ReactiveMetroWindow<{entityGenerationModel.ViewModelType}>";
+            return $"global::Whipstaff.Wpf.Mahapps.MetroWindow.ReactiveMetroWindow<{entityGenerationModel.ViewModelType}>";
         }
 
         ///<inheritdoc />
