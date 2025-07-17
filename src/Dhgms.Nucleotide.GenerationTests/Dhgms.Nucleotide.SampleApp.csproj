@@ -9,10 +9,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.15" />
-    <PackageReference Include="Whipstaff.AspNetCore" Version="8.2.105" />
-    <PackageReference Include="Whipstaff.Core" Version="8.2.105" />
-    <PackageReference Include="Whipstaff.EntityFramework" Version="8.2.105" />
-    <PackageReference Include="Whipstaff.Wpf" Version="8.2.105" />
+    <PackageReference Include="Whipstaff.AspNetCore" Version="8.2.156" />
+    <PackageReference Include="Whipstaff.Core" Version="8.2.156" />
+    <PackageReference Include="Whipstaff.EntityFramework" Version="8.2.156" />
+    <PackageReference Include="Whipstaff.Wpf" Version="8.2.156" />
     <PackageReference Include="Whipstaff.Wpf.Mahapps" Version="8.2.105-beta" />
   </ItemGroup>
 
