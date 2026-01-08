@@ -73,7 +73,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Mvc
             {
                 new Tuple<Func<string, string>, string, Accessibility>(_ => "Microsoft.AspNetCore.Authorization.IAuthorizationService", "authorizationService", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Microsoft.Extensions.Logging.ILogger<{entityName}Controller>", "logger", Accessibility.Private),
-                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"MediatR.IMediator", "mediator", Accessibility.Private),
+                new Tuple<Func<string, string>, string, Accessibility>(entityName => $"Mediator.IMediator", "mediator", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"QueryFactories.I{entityName}QueryFactory", "queryFactory", Accessibility.Private),
                 new Tuple<Func<string, string>, string, Accessibility>(entityName => $"LoggerMessageActions.{entityName}LoggerMessageActions", "logMessageActions", Accessibility.Private),
             };

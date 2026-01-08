@@ -81,17 +81,17 @@ namespace Dhgms.Nucleotide.Generators.Features.AspNetCore.WebApiControllers
 
             var logMessageActionsWrapperClassName = loggerMessageActionsModel.GetFullyQualifiedTypeName();
 
-            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.QueryOnlyApiController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
+            var baseTypeSyntaxFunc = () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.AspNetCore.AbstractQueryOnlyApiController<{listQueryClassName}, {listRequestDtoClassName}, {listResponseDtoClassName}, {viewQueryClassName}, {viewResponseDtoClassName}, {logMessageActionsWrapperClassName}>"));
 
             var controllerFullName = $"global::{containingNamespace}.{name}";
 
             var constructorBaseArgs = new List<NamedTypeParameterModel>
             {
                 new ("Microsoft.AspNetCore.Authorization","IAuthorizationService", false, "authorizationService"),
-                new ("Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
-                new ("MediatR", "IMediator", false, "mediator"),
+                new ("Mediator", "IMediator", false, "mediator"),
                 new (queryFactoryModel.ContainingNamespace, queryFactoryModel.Name, false, "queryFactory"),
                 new (loggerMessageActionsModel.ContainingNamespace, loggerMessageActionsModel.TypeName, false, "logMessageActions"),
+                new ("Microsoft.Extensions.Logging", $"ILogger<{controllerFullName}>", false, "logger"),
             };
 
             var constructorModel = new ConstructorModel(

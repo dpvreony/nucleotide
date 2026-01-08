@@ -46,7 +46,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
                 containingNamespace,
                 name,
                 isSealed,
-                    () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableQueryFactory<{listQueryTypeName}, {listRequestDtoName}, {listResponseTypeName}, {viewQueryName}, {viewResponseName}>")),
+                    () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.Mediator.IAuditableQueryFactory<{listQueryTypeName}, {listRequestDtoName}, {listResponseTypeName}, {viewQueryName}, {viewResponseName}>")),
                 xmlDocSummary,
                 methods);
         }
@@ -135,7 +135,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.RequestFactories
                 containingNamespace,
                 name,
                 isSealed,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableCommandFactory<{createInputModelName}, {createRequestModelCommandTypeName}, {createResponseTypeName},{deleteInputModelName}, {deleteRequestModelCommandTypeName}, {deleteResponseTypeName}, {updateRequestModelCommandTypeName}, {updateResponseTypeName}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.Mediator.IAuditableCommandFactory<{createInputModelName}, {createRequestModelCommandTypeName}, {createResponseTypeName},{deleteInputModelName}, {deleteRequestModelCommandTypeName}, {deleteResponseTypeName}, {updateRequestModelCommandTypeName}, {updateResponseTypeName}>")),
                 xmlDocSummary,
                 []);
         }

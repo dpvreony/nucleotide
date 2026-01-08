@@ -18,7 +18,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
             ContainingNamespace,
             TypeName)
     {
-        public static RequestModel MediatRRequest(
+        public static RequestModel MediatorRequest(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -31,12 +31,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::MediatR.IRequest<{responseModel.GetFullyQualifiedTypeArgument()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Mediator.IRequest<{responseModel.GetFullyQualifiedTypeArgument()}>")),
                 xmlDocSummary,
                 responseModel);
         }
 
-        public static RequestModel WhipstaffMediatRQuery(
+        public static RequestModel WhipstaffMediatorQuery(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -49,12 +49,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IQuery<{responseModel.GetFullyQualifiedTypeArgument()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.Mediator.IQuery<{responseModel.GetFullyQualifiedTypeArgument()}>")),
                 xmlDocSummary,
                 responseModel);
         }
 
-        public static RequestModel WhipstaffMediatRCommand(
+        public static RequestModel WhipstaffMediatorCommand(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -67,12 +67,12 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.ICommand<{responseModel.GetFullyQualifiedTypeArgument()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.Mediator.ICommand<{responseModel.GetFullyQualifiedTypeArgument()}>")),
                 xmlDocSummary,
                 responseModel);
         }
 
-        public static RequestModel WhipstaffMediatRAuditableRequest(
+        public static RequestModel WhipstaffMediatorAuditableQuery(
             string containingNamespace,
             string name,
             bool isSealed,
@@ -100,7 +100,7 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs.Requests
                 name,
                 isSealed,
                 properties,
-                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.MediatR.IAuditableRequest<{rawRequestDto.GetFullyQualifiedTypeArgument()}, {responseModel.GetFullyQualifiedTypeArgument()}>")),
+                () => SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName($"global::Whipstaff.Mediator.IAuditableQuery<{rawRequestDto.GetFullyQualifiedTypeArgument()}, {responseModel.GetFullyQualifiedTypeArgument()}>")),
                 xmlDocSummary,
                 responseModel);
         }
