@@ -46,7 +46,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 false);
             model.Cqrs.Responses.Add(listResponseModel);
 
-            var listRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
+            var listRequestModel = RequestModel.WhipstaffMediatorAuditableQuery(
                 containingNamespace,
                 "ListFirstFeatureQuery",
                 true,
@@ -66,7 +66,7 @@ namespace Dhgms.Nucleotide.SampleGenerator
                 true);
             model.Cqrs.Responses.Add(viewResponseModel);
 
-            var viewRequestModel = RequestModel.WhipstaffMediatRAuditableRequest(
+            var viewRequestModel = RequestModel.WhipstaffMediatorAuditableQuery(
                 containingNamespace,
                 "ViewFirstFeatureQuery",
                 true,

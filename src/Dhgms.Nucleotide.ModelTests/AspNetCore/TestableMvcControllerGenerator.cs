@@ -23,7 +23,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
             var simpleResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleListResponse", false);
             var viewResponseModel = new NamedTypeArgumentModel(responseNamespace, "SomeSimpleViewResponse", true);
 
-            var listRequestModel = RequestModel.WhipstaffMediatRQuery(
+            var listRequestModel = RequestModel.WhipstaffMediatorQuery(
                 containingNamespace,
                 "ListSomeEntitiesRequest",
                 true,
@@ -31,7 +31,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.AspNetCore
                 simpleResponseModel,
                 ["Represents a Simple List query."]);
 
-            var viewRequestModel = RequestModel.WhipstaffMediatRQuery(
+            var viewRequestModel = RequestModel.WhipstaffMediatorQuery(
                 containingNamespace,
                 "ViewSomeEntitiesRequest",
                 true,

@@ -27,7 +27,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
 
             return new[]
             {
-                RequestModel.MediatRRequest(
+                RequestModel.MediatorRequest(
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
@@ -35,7 +35,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     simpleResponseModel,
                     [ "Represents a simple MediatR request."]),
 
-                RequestModel.WhipstaffMediatRAuditableRequest(
+                RequestModel.WhipstaffMediatorAuditableQuery(
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
@@ -43,7 +43,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     simpleResponseModel,
                     [ "Represents an auditable request."]),
 
-                RequestModel.WhipstaffMediatRCommand(
+                RequestModel.WhipstaffMediatorCommand(
                     containingNamespace,
                     "SimpleMediatRRequest",
                     true,
@@ -51,7 +51,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     simpleResponseModel,
                     [ "Represents a Simple Command request."]),
 
-                RequestModel.WhipstaffMediatRQuery(
+                RequestModel.WhipstaffMediatorQuery(
                     containingNamespace,
                     "ListSomeEntitiesRequest",
                     true,
@@ -59,7 +59,7 @@ namespace Dhgms.Nucleotide.SampleGenerator.Cqrs
                     simpleResponseModel,
                     [ "Represents a Simple List query."]),
 
-                RequestModel.WhipstaffMediatRQuery(
+                RequestModel.WhipstaffMediatorQuery(
                     containingNamespace,
                     "ViewSomeEntitiesRequest",
                     true,
