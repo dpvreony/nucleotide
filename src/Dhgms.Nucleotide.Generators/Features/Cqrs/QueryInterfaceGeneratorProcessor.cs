@@ -50,13 +50,13 @@ namespace Dhgms.Nucleotide.Generators.Features.Cqrs
             {
                 return new[]
                 {
-                    $"global::Whipstaff.Mediator.IAuditableRequest<long, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
+                    $"global::Whipstaff.Mediator.IAuditableQuery<long, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
                 };
             }
 
             return new[]
             {
-                $"global::Whipstaff.Mediator.IAuditableRequest<RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
+                $"global::Whipstaff.Mediator.IAuditableQuery<RequestDtos.{prefix}{entityGenerationModel.ClassName}RequestDto, ResponseDtos.{prefix}{entityGenerationModel.ClassName}ResponseDto>"
             };
         }
     }
