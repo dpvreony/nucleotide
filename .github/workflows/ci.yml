@@ -23,6 +23,7 @@ jobs:
       security-events: write
     uses: dpvreony/github-action-workflows/.github/workflows/dotnet-ci.yml@1.7.1
     with:
+      buildOs: "windows"
       solutionName: "Dhgms.Nucleotide"
       runIntTestsOnPrimaryOsOnly: true
     secrets:
