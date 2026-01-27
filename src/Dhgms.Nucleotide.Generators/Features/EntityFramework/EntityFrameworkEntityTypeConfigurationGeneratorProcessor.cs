@@ -484,7 +484,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return fluentApiInvocation;
         }
 
-        private ExpressionSyntax CheckHasMinimumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string minimumValueAsString)
+        private ExpressionSyntax CheckHasMinimumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string? minimumValueAsString)
         {
 #if TBC
             if (!string.IsNullOrWhiteSpace(minimumValueAsString))
@@ -499,7 +499,7 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             return fluentApiInvocation;
         }
 
-        private ExpressionSyntax CheckHasMaximumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string maximumValueAsString)
+        private ExpressionSyntax CheckHasMaximumValueMethodDeclaration(ExpressionSyntax fluentApiInvocation, string? maximumValueAsString)
         {
 #if TBC
             if (!string.IsNullOrWhiteSpace(maximumValueAsString))

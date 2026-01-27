@@ -464,7 +464,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             bool isKey,
             bool xmlIsCdataElement,
             Type dataType,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
         {
             this.dataType = dataType;
 
@@ -604,7 +604,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
         /// Gets or sets the alternative database column name.
         /// Used where the database naming convention doesn't match the .NET naming convention
         /// </summary>
-        public string AlternativeDatabaseColumnName { get; set; }
+        public string? AlternativeDatabaseColumnName { get; set; }
 
         public string SqlComputedColumn { get; set; }
 

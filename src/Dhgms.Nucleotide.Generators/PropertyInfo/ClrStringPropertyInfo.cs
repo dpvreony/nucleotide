@@ -51,7 +51,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             int? maximumLength,
             bool isKey,
             bool xmlIsCdataElement,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
             : base(
                 collection,
                 name,

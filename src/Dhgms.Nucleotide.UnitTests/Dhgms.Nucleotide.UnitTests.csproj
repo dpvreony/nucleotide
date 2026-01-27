@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

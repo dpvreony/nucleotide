@@ -8,7 +8,7 @@ using Dhgms.Nucleotide.Generators.Models;
 namespace Dhgms.Nucleotide.Generators.PropertyInfo
 {
     public class NumericPropertyInfo<TNumeric>
-        : PropertyInfoBase, IPropertyWithRange<TNumeric>
+        : PropertyInfoBase, IPropertyWithRange<TNumeric?>
         where TNumeric : struct
     {
         public NumericPropertyInfo(
@@ -25,8 +25,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             bool xmlIsCdataElement,
             Type dataType,
             string alternativeDatabaseColumnName,
-            TNumeric minimumValue,
-            TNumeric maximumValue)
+            TNumeric? minimumValue,
+            TNumeric? maximumValue)
             : base(collection, name, description, optional, netDataType, sqlDataReaderType, requiresSqlMapping, defaultValue, nullableType, isKey, xmlIsCdataElement, dataType, alternativeDatabaseColumnName)
         {
             MinimumValue = minimumValue;
@@ -36,15 +36,15 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
         /// <summary>
         /// The minimum allowed value, if any
         /// </summary>
-        public TNumeric MinimumValue { get; }
+        public TNumeric? MinimumValue { get; }
 
         /// <summary>
         /// The maximum allowed value, if any
         /// </summary>
-        public TNumeric MaximumValue { get; }
+        public TNumeric? MaximumValue { get; }
 
-        public string MinimumValueAsString => MinimumValue.ToString();
+        public string? MinimumValueAsString => MinimumValue?.ToString();
 
-        public string MaximumValueAsString => MaximumValue.ToString();
+        public string? MaximumValueAsString => MaximumValue?.ToString();
     }
 }
