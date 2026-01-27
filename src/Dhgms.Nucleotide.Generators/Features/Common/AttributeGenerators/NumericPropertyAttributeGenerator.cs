@@ -14,11 +14,17 @@ namespace Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators
     {
         public IList<AttributeSyntax> GetAttributes(NumericPropertyInfo<TNumeric> propertyInfo)
         {
+            // Only generate Range attribute if both min and max values are specified
+            if (!propertyInfo.MinimumValue.HasValue || !propertyInfo.MaximumValue.HasValue)
+            {
+                return new List<AttributeSyntax>();
+            }
+
             // TODO: need to review this for const expressions i.e. Double.PositiveInfinity
             var argumentList = RoslynGenerationHelpers.GetAttributeArgumentListSyntax(new List<string>
             {
-                propertyInfo.MinimumValue.ToString(),
-                propertyInfo.MaximumValue.ToString()
+                propertyInfo.MinimumValue.Value.ToString()!,
+                propertyInfo.MaximumValue.Value.ToString()!
             });
 
             return new List<AttributeSyntax>

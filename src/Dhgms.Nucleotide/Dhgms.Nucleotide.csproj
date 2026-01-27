@@ -3,6 +3,7 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <NupkgAdditionalDependency Include="Dhgms.Nucleotide.Generators" IncludeAssets="all" />

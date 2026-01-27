@@ -11,8 +11,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
     /// </summary>
     public interface IPropertyWithRangeAsString
     {
-        string MaximumValueAsString { get; }
+        string? MaximumValueAsString { get; }
 
-        string MinimumValueAsString { get; }
+        string? MinimumValueAsString { get; }
     }
 }

@@ -166,8 +166,8 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
         public DateTime? MaximumValue { get; }
         public DateTime? MinimumValue { get; }
 
-        public string MinimumValueAsString => MinimumValue.ToString();
+        public string? MinimumValueAsString => MinimumValue?.ToString();
 
-        public string MaximumValueAsString => MaximumValue.ToString();
+        public string? MaximumValueAsString => MaximumValue?.ToString();
     }
 }
