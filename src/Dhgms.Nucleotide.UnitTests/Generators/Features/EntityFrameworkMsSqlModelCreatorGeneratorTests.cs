@@ -1,14 +1,6 @@
-﻿using Dhgms.Nucleotide.Generators.Features.EntityFramework;
-using Dhgms.Nucleotide.ModelTests;
-using Dhgms.Nucleotide.SampleGenerator;
-using Microsoft.CodeAnalysis;
-using System;
-using System.Collections.Generic;
+﻿using Dhgms.Nucleotide.SampleGenerator;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators.Features
 {

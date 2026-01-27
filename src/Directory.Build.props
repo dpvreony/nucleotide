@@ -30,18 +30,36 @@
 	<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
 	<WarningsAsErrors />
 	-->
+    <LangVersion>13.0</LangVersion>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <GenerateSBOM>$(IsPackable)</GenerateSBOM>
+    <NoWarn>$(NoWarn),GR0051</NoWarn>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(IsTestProject)">
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
+    <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+  </PropertyGroup>
+  
   <ItemGroup Condition="$(IsTestProject)">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageReference Include="Xunit.StaFact" Version="1.2.69" />
-    <!--<PackageReference Include="PublicApiGenerator" Version="8.1.0" />-->
     <PackageReference Include="GitHubActionsTestLogger" Version="3.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(IsTestProject)">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.3.2" />
+    <PackageReference Include="Microsoft.Testing.Platform" Version="2.0.2" />
+    <PackageReference Include="NetTestRegimentation" Version="2.0.8" />
+    <PackageReference Include="NetTestRegimentation.Xunit" Version="2.0.8" />
+    <PackageReference Include="Rocks" Version="10.0.0" PrivateAssets="all" />
+    <PackageReference Include="TestableIO.System.IO.Abstractions.TestingHelpers" Version="22.1.0" />
+    <PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
+    <PackageReference Include="xunit.analyzers" Version="1.27.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageReference Include="Xunit.StaFact" Version="3.0.13" />
+    <!--<PackageReference Include="PublicApiGenerator" Version="8.1.0" />-->
     <!--<Compile Include="$(MSBuildThisFileDirectory)ApiGeneratorGlobalSuppressions.cs" />-->
   </ItemGroup>
 
@@ -55,6 +73,7 @@
   
   <ItemGroup>	
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.9.50" PrivateAssets="all" />	
+    <PackageReference Include="Microsoft.Sbom.Targets" Version="4.1.5" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="$(IsWasmProject) == ''">
@@ -66,6 +85,28 @@
 
   <ItemGroup>
     <None Include="..\..\readme.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <!-- Net Analyzers config taken from : https://docs.microsoft.com/en-gb/visualstudio/code-quality/migrate-from-fxcop-analyzers-to-net-analyzers?view=vs-2019 -->
+  <PropertyGroup>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+  
+  <!--
+  This roslyn override is here because on the Windows agent the Visual Studio MSBuild gets invoked
+  failing to generate because it needs a newer Roslyn compiler than the one installed in VS.
+  -->
+  <PropertyGroup>
+    <!-- Force use of .NET SDK Roslyn compiler on Windows when VS MSBuild is invoked -->
+    <UseSharedCompilation>false</UseSharedCompilation>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <!-- Explicitly reference Roslyn 5.0+ compiler toolset -->
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="5.0.0" Condition="'$(MSBuildRuntimeType)' != 'Core'">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
 

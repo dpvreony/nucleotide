@@ -2,21 +2,16 @@
 // DHGMS Solutions and Contributors licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Dhgms.Nucleotide.Generators.GeneratorProcessors;
-using Dhgms.Nucleotide.Generators.Generators;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
+using NetTestRegimentation.XUnit.Logging;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {
@@ -24,7 +19,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
     [ExcludeFromCodeCoverage]
     public static class BaseGeneratorTests
     {
-        public abstract class BaseConstructorMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
+        public abstract class BaseConstructorMethod<TGenerator> : TestWithLoggingBase
             where TGenerator : IIncrementalGenerator, new()
         {
             protected BaseConstructorMethod(ITestOutputHelper output) : base(output)
@@ -40,7 +35,7 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
             }
         }
 
-        public abstract class BaseGenerateAsyncMethod<TGenerator> : Foundatio.Xunit.TestWithLoggingBase
+        public abstract class BaseGenerateAsyncMethod<TGenerator> : TestWithLoggingBase
             where TGenerator : IIncrementalGenerator, new()
         {
             internal const string DefaultFilePathPrefix = "Test";
@@ -80,14 +75,14 @@ namespace Dhgms.Nucleotide.UnitTests.Generators
 
                 foreach (var generatorDiag in generatorDiags)
                 {
-                    this._logger.LogInformation(generatorDiag.ToString());
+                    Logger.LogInformation(generatorDiag.ToString());
                 }
 
                 Assert.False(generatorDiags.Any(x => x.Severity == DiagnosticSeverity.Error));
 
                 foreach (var newCompSyntaxTree in newComp.SyntaxTrees)
                 {
-                    this._logger.LogInformation(newCompSyntaxTree.GetText().ToString());
+                    Logger.LogInformation(newCompSyntaxTree.GetText().ToString());
                 }
             }
 

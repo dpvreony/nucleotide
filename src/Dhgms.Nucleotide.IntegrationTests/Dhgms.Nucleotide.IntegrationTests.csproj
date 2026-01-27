@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<IsPackable>false</IsPackable>
+		<DebugType>full</DebugType>
+		<DebugSymbols>True</DebugSymbols>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+	</PropertyGroup>
+
+	<Target Name="GetDependencyTargetPaths">
+		<ItemGroup>
+			<TargetPathWithTargetPlatformMoniker Include="$(Outdir)Dhgms.Nucleotide.Generators.dll" IncludeRuntimeDependency="false" />
+		</ItemGroup>
+	</Target>
+</Project>
