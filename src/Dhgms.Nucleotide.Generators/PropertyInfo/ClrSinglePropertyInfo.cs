@@ -33,7 +33,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             float minimumValue,
             float maximumValue,
             bool isKey,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
             : base(
                 collection,
                 name,

@@ -33,7 +33,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             int? minimumValue,
             int? maximumValue,
             bool isKey,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
             : base(
                 collection,
                 name,

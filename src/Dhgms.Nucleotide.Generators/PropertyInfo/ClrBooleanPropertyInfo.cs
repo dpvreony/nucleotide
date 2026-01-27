@@ -39,7 +39,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             string description,
             bool optional,
             bool isKey,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
             : base(
                 collection, 
                 name, 

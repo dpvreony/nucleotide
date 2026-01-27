@@ -36,7 +36,7 @@ namespace Dhgms.Nucleotide.Generators.PropertyInfo
             System.DateTime? minimumValue,
             System.DateTime? maximumValue,
             bool isKey,
-            string alternativeDatabaseColumnName)
+            string? alternativeDatabaseColumnName)
             : base(
                 collection,
                 name,
