@@ -23,8 +23,8 @@ namespace Dhgms.Nucleotide.Generators.Features.Common.AttributeGenerators
             // TODO: need to review this for const expressions i.e. Double.PositiveInfinity
             var argumentList = RoslynGenerationHelpers.GetAttributeArgumentListSyntax(new List<string>
             {
-                propertyInfo.MinimumValue.Value.ToString()!,
-                propertyInfo.MaximumValue.Value.ToString()!
+                propertyInfo.MinimumValue.Value.ToString(),
+                propertyInfo.MaximumValue.Value.ToString()
             });
 
             return new List<AttributeSyntax>
