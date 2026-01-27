@@ -1,11 +1,5 @@
-﻿using Dhgms.Nucleotide.SampleGenerator.AspNetCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dhgms.Nucleotide.SampleGenerator;
-using Xunit.Abstractions;
+﻿using Dhgms.Nucleotide.SampleGenerator;
+using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators
 {

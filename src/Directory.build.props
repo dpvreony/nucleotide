@@ -32,19 +32,31 @@
 	-->
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(IsTestProject)">
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
+    <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+  </PropertyGroup>
+  
   <ItemGroup Condition="$(IsTestProject)">
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageReference Include="Xunit.StaFact" Version="1.2.69" />
-    <!--<PackageReference Include="PublicApiGenerator" Version="8.1.0" />-->
     <PackageReference Include="GitHubActionsTestLogger" Version="3.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(IsTestProject)">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.3.2" />
+    <PackageReference Include="Microsoft.Testing.Platform" Version="2.0.2" />
+    <PackageReference Include="NetTestRegimentation" Version="2.0.8" />
+    <PackageReference Include="NetTestRegimentation.Xunit" Version="2.0.8" />
+    <PackageReference Include="Rocks" Version="10.0.0" PrivateAssets="all" />
+    <PackageReference Include="TestableIO.System.IO.Abstractions.TestingHelpers" Version="22.1.0" />
+    <PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
+    <PackageReference Include="xunit.analyzers" Version="1.27.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageReference Include="Xunit.StaFact" Version="3.0.13" />
+    <!--<PackageReference Include="PublicApiGenerator" Version="8.1.0" />-->
     <!--<Compile Include="$(MSBuildThisFileDirectory)ApiGeneratorGlobalSuppressions.cs" />-->
   </ItemGroup>
-
+  
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\LICENSE" Pack="true" PackagePath="LICENSE" />
   </ItemGroup>

@@ -1,7 +1,5 @@
-﻿using System;
-using Dhgms.Nucleotide.SampleGenerator.Cqrs;
-using Microsoft.CodeAnalysis;
-using Xunit.Abstractions;
+﻿using Dhgms.Nucleotide.SampleGenerator.Cqrs;
+using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators.Cqrs.Requests
 {

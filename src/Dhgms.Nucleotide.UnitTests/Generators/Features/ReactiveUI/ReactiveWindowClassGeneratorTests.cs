@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Dhgms.Nucleotide.Generators.Features.ReactiveUI;
-using Dhgms.Nucleotide.Generators.Features.ReactiveUI.Wpf;
+﻿using System.Diagnostics.CodeAnalysis;
 using Dhgms.Nucleotide.SampleGenerator;
-using Microsoft.CodeAnalysis;
-using Xunit.Abstractions;
+using Xunit;
 
 namespace Dhgms.Nucleotide.UnitTests.Generators.Features.ReactiveUI
 {

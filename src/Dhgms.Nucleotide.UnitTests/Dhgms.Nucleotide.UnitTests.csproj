@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
@@ -9,25 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Foundatio.Xunit" Version="12.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" />
-    <PackageReference Include="NetTestRegimentation" Version="2.0.8" />
-    <PackageReference Include="OpenCover" Version="4.7.1221" />
-    <PackageReference Include="ReportGenerator" Version="5.5.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Dhgms.Nucleotide.Generators\Dhgms.Nucleotide.Generators.csproj" />
     <ProjectReference Include="..\Dhgms.Nucleotide.ModelTests\Dhgms.Nucleotide.SampleGenerator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
   <PropertyGroup>
