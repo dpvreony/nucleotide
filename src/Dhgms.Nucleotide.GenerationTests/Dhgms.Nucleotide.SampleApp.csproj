@@ -9,11 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.3" />
-    <PackageReference Include="Whipstaff.AspNetCore" Version="9.0.41" />
-    <PackageReference Include="Whipstaff.Core" Version="9.0.41" />
-    <PackageReference Include="Whipstaff.EntityFramework" Version="9.0.41" />
-    <PackageReference Include="Whipstaff.Wpf" Version="9.0.41" />
-    <PackageReference Include="Whipstaff.Wpf.Mahapps" Version="9.0.7-beta" />
+    <PackageReference Include="Whipstaff.AspNetCore" Version="9.0.68" />
+    <PackageReference Include="Whipstaff.Core" Version="9.0.68" />
+    <PackageReference Include="Whipstaff.EntityFramework" Version="9.0.68" />
+    <PackageReference Include="Whipstaff.Wpf" Version="9.0.68" />
+    <PackageReference Include="Whipstaff.Wpf.Mahapps" Version="9.0.68-beta" />
   </ItemGroup>
 
   <ItemGroup>
