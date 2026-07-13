@@ -6,6 +6,7 @@
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <Nullable>enable</Nullable>
+    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
