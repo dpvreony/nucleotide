@@ -39,7 +39,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$(IsTestProject)">
-    <PackageReference Include="Gripe.TestAssurancePack.XUnit" Version="2.0.148" />
+    <PackageReference Include="Gripe.TestAssurancePack.XUnit" Version="2.1.1" />
     <PackageReference Include="Microsoft.Testing.Extensions.GitHubActionsReport" Version="1.0.0-alpha.26377.5" />
     <PackageReference Include="Rocks" Version="10.3.0" PrivateAssets="all" />
   </ItemGroup>
