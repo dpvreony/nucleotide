@@ -216,7 +216,8 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
             var declaration = SyntaxFactory.MethodDeclaration(returnType, methodName)
                 .WithParameterList(parameters)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body.ToArray());
+                .AddBodyStatements(body.ToArray())
+                .WithLeadingTrivia(RoslynGenerationHelpers.GetInheritDocSyntaxTrivia());
             return declaration;
         }
 
