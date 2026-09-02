@@ -133,7 +133,15 @@ namespace Dhgms.Nucleotide.Generators.Features.EntityFramework
                 .WithParameterList(parameters)
                 .WithInitializer(initializer)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
-                .AddBodyStatements(body.ToArray());
+                .AddBodyStatements(body.ToArray())
+                .WithLeadingTrivia(SyntaxTriviaFactory.GenerateConstructorComment(
+                    className, [
+                        (
+                            "dbContextOptions",
+                            "The options for the DbContext."),
+                        (
+                            "modelCreatorFunc",
+                            "The factory function to create the model creator instance.") ]));
 
             return declaration;
 
